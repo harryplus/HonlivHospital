@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">HonlivHospital</string>
+    <string name="app_name">河南宏力医院</string>
+    <string name="bottom_layout_main">主页</string>
+    <string name="bottom_layout_message">消息</string>
+    <string name="bottom_layout_health">健康</string>
+    <string name="bottom_layout_center">个人中心</string>
 </resources>
