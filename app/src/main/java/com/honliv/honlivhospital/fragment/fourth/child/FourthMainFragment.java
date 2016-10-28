@@ -25,7 +25,7 @@ public class FourthMainFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fourthmain, container, false);
+        View view = inflater.inflate(R.layout.fragment_fourth_main, container, false);
         initView(view);
         return view;
     }

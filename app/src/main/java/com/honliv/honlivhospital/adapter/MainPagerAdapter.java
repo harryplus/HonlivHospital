@@ -6,15 +6,17 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.honliv.honlivhospital.R;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.honliv.honlivhospital.application.MyApplication;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,10 +25,10 @@ import java.util.List;
  */
 public class MainPagerAdapter extends PagerAdapter {
 
+    private static final String TAG = "MainPagerAdapter";
     private final List<String> viewpaperData;
     private final Context mContext;
     private List<View> viewList;//view数组
-    ImageLoader imageLoader = ImageLoader.getInstance(); // Get singleton instance
 
     SimpleImageLoadingListener imageListener = new SimpleImageLoadingListener() {
         @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -50,12 +52,31 @@ public class MainPagerAdapter extends PagerAdapter {
     public MainPagerAdapter(Context mContext, List<String> viewpaperData) {
         this.viewpaperData = viewpaperData;
         this.mContext = mContext;
+        viewList = new ArrayList<>();
+        for (String imageUri : viewpaperData) {
+//            String imageUri = viewpaperData.get(position);
+//            ImageView   mIcon = new ImageView(mContext);
+//            int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 64, mContext.getResources().getDisplayMetrics());
+//            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(size, size);
+//            params.gravity = Gravity.CENTER;
+//            mIcon.setImageResource(icon);
+//            mIcon.setLayoutParams(params);
+//            mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.tab_unselect));
+//            imageLoader.displayImage(imageUri, mIcon);
+//            imageLoader.loadImage(imageUri, imageListener);
+
+            View view = View.inflate(mContext, R.layout.viewpaper_item, null);
+
+
+            viewList.add(view);
+        }
     }
 
 
     @Override
     public int getCount() {
-        return viewpaperData.size();
+        Log.i(TAG, viewList.size() + "");
+        return viewList.size();
     }
 
     @Override
@@ -74,18 +95,23 @@ public class MainPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         // TODO Auto-generated method stub
-        String imageUri = viewpaperData.get(position);
-        View view = View.inflate(mContext, R.layout.viewpaper_item, null);
+        View view = viewList.get(position);
         ImageView imageView = (ImageView) view.findViewById(R.id.imageview);
+        String imageUri = viewpaperData.get(position);
+//        imageLoader.displayImage(imageUri, imageView);
+//
+//        imageLoader.loadImage(imageUri, imageListener);
+        MyApplication.imageLoader.displayImage(imageUri, imageView);
+// Load image, decode it to Bitmap and return Bitmap to callback
+        MyApplication.imageLoader.loadImage(imageUri, new SimpleImageLoadingListener() {
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                // Do whatever you want with Bitmap
+                Log.i(TAG, imageUri);
+            }
+        });
 
-        imageLoader.displayImage(imageUri, imageView);
-
-        imageLoader.loadImage(imageUri, imageListener);
-
-        viewList.add(view);
-        container.addView(viewList.get(position));
-        return viewList.get(position);
+        container.addView(view);
+        return view;
     }
-
-
 }

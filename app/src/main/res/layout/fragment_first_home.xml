@@ -1,34 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:attrs="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:attrs="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_top" />
+    <include
+        android:id="@+id/layout_top"
+        layout="@layout/layout_top" />
 
-    <RelativeLayout
-        android:id="@+id/layout_viewpaper"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_top">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content">
 
-     <com.rd.PageIndicatorView
-              android:id="@+id/pageIndicatorView"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignParentBottom="true"
-              android:layout_centerHorizontal="true"
-              android:layout_marginBottom="18dp"
-              attrs:animationDuration="1000"
-              attrs:animationType="scale"
-              attrs:viewPager="@id/viewPager" />
+            <RelativeLayout
+                android:id="@+id/layout_viewpaper"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
 
-    </RelativeLayout>
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
+                <com.rd.PageIndicatorView
+                    android:id="@+id/pageIndicatorView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="18dp"
+                    attrs:animationDuration="1000"
+                    attrs:animationType="scale"
+                    attrs:viewPager="@id/viewPager" />
 
+            </RelativeLayout>
+
+            <include layout="@layout/layout_main_body" />
+
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

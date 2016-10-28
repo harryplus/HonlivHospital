@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/layout_top"
+        layout="@layout/layout_top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@mipmap/icon_logo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/black"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hosipital_detail_short"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/hosipital_detail_layout">
+
+                <ImageView style="@style/hosipital_detail_icon" />
+
+                <TextView
+                    style="@style/hosipital_detail_text"
+                    android:text="@string/hosipital_detail_hotline" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/hosipital_detail_text_content"
+                android:text="@string/hosipital_detail_text_hotline" />
+
+            <LinearLayout style="@style/hosipital_detail_layout">
+
+                <ImageView style="@style/hosipital_detail_icon" />
+
+                <TextView
+                    style="@style/hosipital_detail_text"
+                    android:text="@string/hosipital_detail_fax" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/hosipital_detail_text_content"
+                android:text="@string/hosipital_detail_text_fax" />
+
+            <LinearLayout style="@style/hosipital_detail_layout">
+
+                <ImageView style="@style/hosipital_detail_icon" />
+
+                <TextView
+                    style="@style/hosipital_detail_text"
+                    android:text="@string/hosipital_detail_email" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/hosipital_detail_text_content"
+                android:text="@string/hosipital_detail_text_email" />
+
+            <LinearLayout style="@style/hosipital_detail_layout">
+
+                <ImageView style="@style/hosipital_detail_icon" />
+
+                <TextView
+                    style="@style/hosipital_detail_text"
+                    android:text="@string/hosipital_detail_website" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/hosipital_detail_text_content"
+                android:text="@string/hosipital_detail_text_website" />
+
+            <LinearLayout style="@style/hosipital_detail_layout">
+
+                <ImageView style="@style/hosipital_detail_icon" />
+
+                <TextView
+                    style="@style/hosipital_detail_text"
+                    android:text="@string/hosipital_detail_detail" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hosipital_detail_text_detail"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
