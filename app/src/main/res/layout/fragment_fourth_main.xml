@@ -4,11 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/background_pink"
-        android:gravity="center">
+    <RelativeLayout style="@style/layout_user_title">
 
         <ImageView
             android:id="@+id/head"

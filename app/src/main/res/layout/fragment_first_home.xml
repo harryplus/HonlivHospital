@@ -5,9 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!--  <include
+          android:id="@+id/layout_top"
+          layout="@layout/layout_top" />-->
     <include
         android:id="@+id/layout_top"
-        layout="@layout/layout_top" />
+        layout="@layout/toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"

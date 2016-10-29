@@ -4,9 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/layout_top"
-        layout="@layout/layout_top" />
+    <!-- <include
+         android:id="@+id/layout_top"
+         layout="@layout/layout_top" />-->
+    <!--<android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay"
+        app:titleTextAppearance="@style/Toolbar_TextAppearance_Green"/>-->
+    <include layout="@layout/toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,17 +33,12 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textColor="@color/black"
-                android:textSize="25sp" />
+                style="@style/text_black_title"
+                android:text="@string/app_name" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/hosipital_detail_short"
-                android:textSize="15sp" />
+                style="@style/text_gray_content"
+                android:text="@string/hosipital_detail_short" />
         </LinearLayout>
     </LinearLayout>
 
@@ -48,12 +51,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout style="@style/hosipital_detail_layout">
+            <LinearLayout style="@style/hosipital_layout_bus">
 
-                <ImageView style="@style/hosipital_detail_icon" />
+                <ImageView style="@style/hosipital_bus_icon" />
 
                 <TextView
-                    style="@style/hosipital_detail_text"
+                    style="@style/hosipital_bus_text"
                     android:text="@string/hosipital_detail_hotline" />
             </LinearLayout>
 
@@ -61,12 +64,12 @@
                 style="@style/hosipital_detail_text_content"
                 android:text="@string/hosipital_detail_text_hotline" />
 
-            <LinearLayout style="@style/hosipital_detail_layout">
+            <LinearLayout style="@style/hosipital_layout_bus">
 
-                <ImageView style="@style/hosipital_detail_icon" />
+                <ImageView style="@style/hosipital_bus_icon" />
 
                 <TextView
-                    style="@style/hosipital_detail_text"
+                    style="@style/hosipital_bus_text"
                     android:text="@string/hosipital_detail_fax" />
             </LinearLayout>
 
@@ -74,12 +77,12 @@
                 style="@style/hosipital_detail_text_content"
                 android:text="@string/hosipital_detail_text_fax" />
 
-            <LinearLayout style="@style/hosipital_detail_layout">
+            <LinearLayout style="@style/hosipital_layout_bus">
 
-                <ImageView style="@style/hosipital_detail_icon" />
+                <ImageView style="@style/hosipital_bus_icon" />
 
                 <TextView
-                    style="@style/hosipital_detail_text"
+                    style="@style/hosipital_bus_text"
                     android:text="@string/hosipital_detail_email" />
             </LinearLayout>
 
@@ -87,12 +90,12 @@
                 style="@style/hosipital_detail_text_content"
                 android:text="@string/hosipital_detail_text_email" />
 
-            <LinearLayout style="@style/hosipital_detail_layout">
+            <LinearLayout style="@style/hosipital_layout_bus">
 
-                <ImageView style="@style/hosipital_detail_icon" />
+                <ImageView style="@style/hosipital_bus_icon" />
 
                 <TextView
-                    style="@style/hosipital_detail_text"
+                    style="@style/hosipital_bus_text"
                     android:text="@string/hosipital_detail_website" />
             </LinearLayout>
 
@@ -100,12 +103,12 @@
                 style="@style/hosipital_detail_text_content"
                 android:text="@string/hosipital_detail_text_website" />
 
-            <LinearLayout style="@style/hosipital_detail_layout">
+            <LinearLayout style="@style/hosipital_layout_bus">
 
-                <ImageView style="@style/hosipital_detail_icon" />
+                <ImageView style="@style/hosipital_bus_icon" />
 
                 <TextView
-                    style="@style/hosipital_detail_text"
+                    style="@style/hosipital_bus_text"
                     android:text="@string/hosipital_detail_detail" />
             </LinearLayout>
 

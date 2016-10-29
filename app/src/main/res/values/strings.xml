@@ -34,4 +34,16 @@
     <string name="hosipital_detail_text_fax">0337-55555</string>
     <string name="hosipital_detail_detail">医院简介</string>
     <string name="hosipital_detail_text_detail">hahahahhahahahah</string>
+    <string name="hosipital_guide_traffic">医院交通</string>
+    <string name="hosipital_guide_hotline">急诊热线</string>
+    <string name="hosipital_guide_guide_doctor">就诊导航</string>
+    <string name="hosipital_guide_guide_map">地图导航</string>
+    <string name="hosipital_guide_local">周边商户</string>
+    <string name="office_select">选择科室</string>
+    <string name="text_cellphone">手机号</string>
+    <string name="hint_cellphone">请输入手机号</string>
+    <string name="hint_password">请输入密码</string>
+    <string name="text_password">密码</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
 </resources>
