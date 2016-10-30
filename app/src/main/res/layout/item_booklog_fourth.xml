@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="@color/background_green" />
+
+        <TextView
+            style="@style/text_gray_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="2016-10-24" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_gray_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/text_book_office" />
+
+        <TextView
+            android:id="@+id/tv_book_office"
+            style="@style/text_gray_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="新生婴儿科"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_gray_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/text_book_doctor" />
+
+        <TextView
+            android:id="@+id/tv_book_doctor"
+            style="@style/text_gray_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="小明"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_gray_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/text_book_time" />
+
+        <TextView
+            android:id="@+id/tv_book_time"
+            style="@style/text_gray_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="2016-10-24 上午"
+            android:textColor="@color/text_blue" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_gray_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/text_book_number" />
+
+        <TextView
+            android:id="@+id/tv_book_number"
+            style="@style/text_gray_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="4"
+            android:textColor="@color/black" />
+    </LinearLayout>
+</LinearLayout>

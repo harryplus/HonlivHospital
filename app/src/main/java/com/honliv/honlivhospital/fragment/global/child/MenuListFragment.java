@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import com.honliv.honlivhospital.R;
 import com.honliv.honlivhospital.adapter.MenuAdapter;
 import com.honliv.honlivhospital.base.BaseFragment;
+import com.honliv.honlivhospital.fragment.global.GlobalOfficeSelectFragment;
 import com.honliv.honlivhospital.listener.OnItemClickListener;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
 public class MenuListFragment extends BaseFragment {
     private static final String ARG_MENUS = "arg_menus";
     private static final String SAVE_STATE_POSITION = "save_state_position";
+    private static final String TAG = "MenuListFragment";
 
     private RecyclerView mRecy;
     private MenuAdapter mAdapter;
@@ -32,7 +35,6 @@ public class MenuListFragment extends BaseFragment {
     private int mCurrentPosition = -1;
 
     public static MenuListFragment newInstance(ArrayList<String> menus) {
-
         Bundle args = new Bundle();
         args.putStringArrayList(ARG_MENUS, menus);
 
@@ -81,7 +83,8 @@ public class MenuListFragment extends BaseFragment {
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position, View view, RecyclerView.ViewHolder vh) {
-//                showContent(position);
+                Log.i(TAG, "setOnItemClickListener--" + position);
+                showContent(position);
             }
         });
 
@@ -94,19 +97,35 @@ public class MenuListFragment extends BaseFragment {
         }
     }
 
-//    private void showContent(int position) {
-//        if (position == mCurrentPosition) {
-//            return;
-//        }
-//
-//        mCurrentPosition = position;
-//
-//        mAdapter.setItemChecked(position);
-//
-//        ContentFragment fragment = ContentFragment.newInstance(mMenus.get(position));
-//
-//        ((ShopFragment) getParentFragment()).switchContentFragment(fragment);
-//    }
+    private void showContent(int position) {
+        if (position == mCurrentPosition) {
+            return;
+        }
+
+        mCurrentPosition = position;
+
+        mAdapter.setItemChecked(position);
+        ArrayList<String> listMenus = new ArrayList<>();
+        listMenus.add("销量排行" + position);
+        listMenus.add("当季特选");
+        listMenus.add("炒菜");
+        listMenus.add("汤面类");
+        listMenus.add("煲类");
+        listMenus.add("汤");
+        listMenus.add("小菜");
+        listMenus.add("酒水饮料");
+        listMenus.add("盖浇饭类");
+        listMenus.add("炒面类");
+        listMenus.add("拉面类");
+        listMenus.add("盖浇面类");
+        listMenus.add("特色菜");
+        listMenus.add("加料");
+        listMenus.add("馄饨类");
+        listMenus.add("其他");
+        ContentFragment fragment = ContentFragment.newInstance(listMenus);
+        Log.i(TAG, "showContent--" + position);
+        ((GlobalOfficeSelectFragment) getParentFragment()).switchContentFragment(fragment);
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {

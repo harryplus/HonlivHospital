@@ -3,14 +3,20 @@ package com.honliv.honlivhospital.fragment.global.child;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.honliv.honlivhospital.R;
+import com.honliv.honlivhospital.adapter.ContentAdapter;
+import com.honliv.honlivhospital.adapter.MenuAdapter;
 import com.honliv.honlivhospital.base.BaseFragment;
+import com.honliv.honlivhospital.fragment.global.GlobalOfficeSelectFragment;
+import com.honliv.honlivhospital.listener.OnItemClickListener;
+
+import java.util.ArrayList;
 
 import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
@@ -19,17 +25,19 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * Created by YoKeyword on 16/2/9.
  */
 public class ContentFragment extends BaseFragment {
-    private static final String ARG_MENU = "arg_menu";
+    private static final String ARG_MENUS = "arg_menus";
+    private static final String SAVE_STATE_POSITION = "save_state_position";
 
-    private TextView mTvContent;
-    private Button mBtnNext;
+    private RecyclerView mRecy;
+    private ContentAdapter mAdapter;
 
-    private String mMenu;
+    private ArrayList<String> mSubMenus;
+    private int mCurrentPosition = -1;
 
-    public static ContentFragment newInstance(String menu) {
+    public static ContentFragment newInstance(ArrayList<String> menus) {
 
         Bundle args = new Bundle();
-        args.putString(ARG_MENU, menu);
+        args.putStringArrayList(ARG_MENUS, menus);
 
         ContentFragment fragment = new ContentFragment();
         fragment.setArguments(args);
@@ -42,13 +50,8 @@ public class ContentFragment extends BaseFragment {
 
         Bundle args = getArguments();
         if (args != null) {
-            mMenu = args.getString(ARG_MENU);
+            mSubMenus = args.getStringArrayList(ARG_MENUS);
         }
-    }
-
-    @Override
-    protected FragmentAnimator onCreateFragmentAnimator() {
-        return new DefaultNoAnimator();
     }
 
     @Nullable
@@ -59,26 +62,54 @@ public class ContentFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    protected FragmentAnimator onCreateFragmentAnimator() {
+        return new DefaultNoAnimator();
+    }
+
     private void initView(View view) {
-//        mTvContent = (TextView) view.findViewById(R.id.tv_content);
-//        mBtnNext = (Button) view.findViewById(R.id.btn_next);
-//
-//        mTvContent.setText("Fragment内容:\n" + mMenu);
-//
-//        mBtnNext.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // 和MsgFragment同级别的跳转 交给MsgFragment处理
-//                if (getParentFragment() instanceof ShopFragment) {
-//                    ((ShopFragment) getParentFragment()).start(CycleFragment.newInstance(1));
-//                }
-//            }
-//        });
+        mRecy = (RecyclerView) view.findViewById(R.id.recy);
     }
 
     @Override
-    public boolean onBackPressedSupport() {
-        // ContentFragment是ShopFragment的栈顶子Fragment,可以在此处理返回按键事件
-        return super.onBackPressedSupport();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        LinearLayoutManager manager = new LinearLayoutManager(_mActivity);
+        mRecy.setLayoutManager(manager);
+        mAdapter = new ContentAdapter(_mActivity);
+        mRecy.setAdapter(mAdapter);
+        mAdapter.setDatas(mSubMenus);
+
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, View view, RecyclerView.ViewHolder vh) {
+                showContent(position);
+            }
+        });
+
+        if (savedInstanceState != null) {
+            mCurrentPosition = savedInstanceState.getInt(SAVE_STATE_POSITION);
+            mAdapter.setItemChecked(mCurrentPosition);
+        } else {
+            mCurrentPosition = 0;
+            mAdapter.setItemChecked(0);
+        }
+    }
+
+    private void showContent(int position) {
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SAVE_STATE_POSITION, mCurrentPosition);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mRecy.setAdapter(null);
     }
 }

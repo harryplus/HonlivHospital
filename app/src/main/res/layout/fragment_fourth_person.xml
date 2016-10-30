@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout style="@style/layout_user_title">
+
+        <ImageView
+            android:id="@+id/head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/head"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:text="@string/disLogin"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:text="@string/text_login"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/setting_base_info"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/ic_setting_base_info"
+            style="@style/setting_image" />
+
+        <TextView
+            style="@style/setting_text"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ic_setting_base_info"
+            android:text="@string/setting_base_info" />
+
+        <ImageView style="@style/setting_go" />
+    </RelativeLayout>
+
+    <View style="@style/setting_line" />
+
+    <RelativeLayout
+        android:id="@+id/setting_change_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/ic_setting_change_pwd"
+            style="@style/setting_image" />
+
+        <TextView
+            style="@style/setting_text"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ic_setting_change_pwd"
+            android:text="@string/setting_change_pwd" />
+
+        <ImageView style="@style/setting_go" />
+    </RelativeLayout>
+
+    <View style="@style/setting_line" />
+
+    <RelativeLayout
+        android:id="@+id/setting_card"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/ic_setting_card"
+            style="@style/setting_image" />
+
+        <TextView
+            style="@style/setting_text"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ic_setting_card"
+            android:text="@string/setting_card" />
+
+        <ImageView style="@style/setting_go" />
+    </RelativeLayout>
+
+    <View style="@style/setting_line" />
+
+    <RelativeLayout
+        android:id="@+id/setting_book"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/ic_setting_book"
+            style="@style/setting_image" />
+
+        <TextView
+            style="@style/setting_text"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ic_setting_book"
+            android:text="@string/setting_book" />
+
+        <ImageView style="@style/setting_go" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/setting_about"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/ic_setting_about"
+            style="@style/setting_image" />
+
+        <TextView
+            style="@style/setting_text"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ic_setting_about"
+            android:text="@string/setting_about" />
+
+        <ImageView style="@style/setting_go" />
+    </RelativeLayout>
+
+    <View style="@style/setting_line" />
+
+    <RelativeLayout
+        android:id="@+id/setting_recommend"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/ic_setting_recommend"
+            style="@style/setting_image" />
+
+        <TextView
+            style="@style/setting_text"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ic_setting_recommend"
+            android:text="@string/setting_recommend" />
+
+        <ImageView style="@style/setting_go" />
+    </RelativeLayout>
+
+    <View style="@style/setting_line" />
+
+    <RelativeLayout
+        android:id="@+id/setting_logout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/ic_setting_logout"
+            style="@style/setting_image" />
+
+        <TextView
+            style="@style/setting_text"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ic_setting_logout"
+            android:text="@string/setting_logout" />
+
+        <ImageView style="@style/setting_go" />
+    </RelativeLayout>
+</LinearLayout>

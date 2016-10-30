@@ -15,6 +15,8 @@ import com.honliv.honlivhospital.fragment.global.child.MenuListFragment;
 
 import java.util.ArrayList;
 
+import me.yokeyword.fragmentation.SupportFragment;
+
 /**
  * Created by Rodin on 2016/10/29.
  */
@@ -63,12 +65,24 @@ public class GlobalOfficeSelectFragment extends BaseFragment implements SwipeRef
 
             MenuListFragment menuListFragment = MenuListFragment.newInstance(listMenus);
             loadRootFragment(R.id.fl_list_container, menuListFragment);
-            replaceLoadRootFragment(R.id.fl_content_container, ContentFragment.newInstance("销量排行"), false);
+            replaceLoadRootFragment(R.id.fl_content_container, ContentFragment.newInstance(listMenus), false);
         }
     }
 
     @Override
     public void onRefresh() {
 
+    }
+
+    /**
+     * 替换加载 内容Fragment
+     *
+     * @param fragment
+     */
+    public void switchContentFragment(ContentFragment fragment) {
+        SupportFragment contentFragment = findChildFragment(ContentFragment.class);
+        if (contentFragment != null) {
+            contentFragment.replaceFragment(fragment, false);
+        }
     }
 }
