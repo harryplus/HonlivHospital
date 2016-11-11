@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <RelativeLayout style="@style/layout_user_title">
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/head"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_centerHorizontal="true"
-            android:src="@mipmap/ic_launcher" />
+            fresco:placeholderImage="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/name"
@@ -170,4 +171,6 @@
 
         <ImageView style="@style/setting_go" />
     </RelativeLayout>
+
+    <View style="@style/setting_line" />
 </LinearLayout>

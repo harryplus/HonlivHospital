@@ -22,8 +22,9 @@
 
     <style name="setting_image">
         <item name="android:src">@mipmap/ic_setting</item>
-        <item name="android:layout_height">50dp</item>
-        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_centerVertical">true</item>
     </style>
 
     <style name="setting_go">
@@ -45,10 +46,10 @@
     <style name="layout_main_body_item">
         <item name="android:background">@color/white</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:orientation">vertical</item>
         <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
     <style name="hosipital_bus_icon">
@@ -163,5 +164,18 @@
 
     <style name="style_text_small">
         <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="layout_cardview" parent="layout_wrap_wrap">
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_marginRight">2dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
     </style>
 </resources>

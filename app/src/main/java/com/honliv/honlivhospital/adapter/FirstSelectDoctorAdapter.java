@@ -1,21 +1,18 @@
 package com.honliv.honlivhospital.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.honliv.honlivhospital.R;
-import com.honliv.honlivhospital.application.MyApplication;
 import com.honliv.honlivhospital.domain.DoctorTime;
 import com.honliv.honlivhospital.listener.OnItemClickListener;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +45,7 @@ public class FirstSelectDoctorAdapter extends RecyclerView.Adapter<FirstSelectDo
         DoctorTime item = mItems.get(position);
         holder.name.setText(item.getName());
         holder.skill.setText(item.getSkill());
-        MyApplication.imageLoader.displayImage(item.getHead(), holder.head);
-        MyApplication.imageLoader.loadImage(item.getHead(), new SimpleImageLoadingListener() {
-            @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-            }
-        });
+        holder.head.setImageURI(item.getHead());
         BaseAdapter adapter = new gridAdapter(item.getTime());
         holder.gridview.setAdapter(adapter);
     }
@@ -78,14 +70,14 @@ public class FirstSelectDoctorAdapter extends RecyclerView.Adapter<FirstSelectDo
 
     public class VH extends RecyclerView.ViewHolder {
         public TextView name;
-        public ImageView head;
+        public SimpleDraweeView head;
         public TextView skill;
         public GridView gridview;
 
         public VH(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
-            head = (ImageView) itemView.findViewById(R.id.head);
+            head = (SimpleDraweeView) itemView.findViewById(R.id.head);
             skill = (TextView) itemView.findViewById(R.id.skill);
             gridview = (GridView) itemView.findViewById(R.id.gridview);
         }

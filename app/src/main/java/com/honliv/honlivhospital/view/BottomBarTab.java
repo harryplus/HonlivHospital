@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -46,10 +48,12 @@ public class BottomBarTab extends FrameLayout {
         view = View.inflate(context, R.layout.layout_bottom_item, null);
         mIcon = (ImageView) view.findViewById(R.id.imageview);
         mIconText = (TextView) view.findViewById(R.id.textview);
+
 //        int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 27, getResources().getDisplayMetrics());
 //        LayoutParams params = new LayoutParams(size, size);
 //        params.gravity = Gravity.CENTER;
 //        mIcon.setLayoutParams(params);
+
         mIcon.setImageResource(icon);
         mIcon.setColorFilter(ContextCompat.getColor(context, R.color.tab_unselect));
         mIconText.setText(name);

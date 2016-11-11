@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--  <include
-          android:id="@+id/layout_top"
-          layout="@layout/layout_top" />-->
     <include
         android:id="@+id/layout_top"
         layout="@layout/toolbar" />
@@ -42,7 +39,6 @@
                     app:piv_animationDuration="1000"
                     app:piv_animationType="worm"
                     attrs:viewPager="@id/viewPager" />
-
             </RelativeLayout>
 
             <include layout="@layout/layout_main_body" />

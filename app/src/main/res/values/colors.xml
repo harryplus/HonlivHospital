@@ -11,4 +11,5 @@
     <color name="background_gray">#bfbfbf</color>
     <color name="black">#000000</color>
     <color name="text_blue">#1E3FE6</color>
+    <color name="background_white">#bbbbbb</color>
 </resources>

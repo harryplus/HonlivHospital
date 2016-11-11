@@ -1,243 +1,300 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_below="@id/layout_viewpaper"
-    android:orientation="vertical">
+    android:layout_below="@id/layout_viewpaper">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/main_body_detail"
-            style="@style/layout_main_body_item"
-            android:layout_marginRight="5dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/icon_main_detail" />
+            <android.support.v7.widget.CardView style="@style/layout_cardview">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/main_detail" />
+                <LinearLayout
+
+                    android:id="@+id/main_body_detail"
+                    style="@style/layout_main_body_item">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_main_detail" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/main_detail" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                style="@style/layout_cardview"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/main_body_professor"
+                    style="@style/layout_main_body_item"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_main_professor" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/main_professor" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                style="@style/layout_cardview"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/main_body_guide"
+                    style="@style/layout_main_body_item"
+                    android:layout_marginLeft="5dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_main_guide" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/main_guide" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/main_body_professor"
-            style="@style/layout_main_body_item"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/icon_main_professor" />
+            <android.support.v7.widget.CardView
+                style="@style/layout_cardview"
+                android:layout_weight="1">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/main_professor" />
+                <RelativeLayout
+                    android:id="@+id/main_body_registrate_day"
+                    style="@style/layout_main_body_item"
+                    android:layout_marginRight="5dp">
+
+                    <ImageView
+                        android:id="@+id/main_registrate_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/icon_main_registrate_day" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toLeftOf="@id/main_registrate_day"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/main_registrate_day" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/main_registrate_day_detail" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                style="@style/layout_cardview"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:id="@+id/main_body_registrate_recommend"
+                    style="@style/layout_main_body_item">
+
+                    <ImageView
+                        android:id="@+id/main_registrate_recommend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/icon_main_registrate_recommend" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toLeftOf="@id/main_registrate_recommend"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/main_registrate_recommend" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/main_registrate_recommend_detail" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/main_body_guide"
-            style="@style/layout_main_body_item"
-            android:layout_marginLeft="5dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/icon_main_guide" />
+            <android.support.v7.widget.CardView
+                style="@style/layout_cardview"
+                android:layout_weight="1">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/main_guide" />
+                <LinearLayout
+                    android:id="@+id/main_body_physical"
+                    style="@style/layout_main_body_item"
+                    android:layout_marginRight="5dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_main_physical" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/main_physical" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                style="@style/layout_cardview"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/main_body_report"
+                    style="@style/layout_main_body_item"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_main_report" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/main_report" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                style="@style/layout_cardview"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/main_body_cost"
+                    style="@style/layout_main_body_item"
+                    android:layout_marginLeft="5dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_main_cost" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/main_cost" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.CardView
+                style="@style/layout_cardview"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/main_body_office"
+                    style="@style/layout_main_body_item"
+                    android:layout_marginRight="5dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_main_office" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/main_office" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                style="@style/layout_cardview"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/main_body_handbook"
+                    style="@style/layout_main_body_item"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_main_handbook" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/main_handbook" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                style="@style/layout_cardview"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/main_body_question"
+                    style="@style/layout_main_body_item"
+                    android:layout_marginLeft="5dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_main_question" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/main_question" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
         </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            style="@style/layout_main_body_item"
-            android:id="@+id/main_body_registrate_day"
-            android:layout_marginRight="5dp">
-
-            <ImageView
-                android:id="@+id/main_registrate_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:src="@mipmap/icon_main_registrate_day" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toLeftOf="@id/main_registrate_day"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/main_registrate_day" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/main_registrate_day_detail" />
-            </LinearLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            style="@style/layout_main_body_item"
-            android:id="@+id/main_body_registrate_recommend"
-            android:layout_marginLeft="5dp">
-
-            <ImageView
-                android:id="@+id/main_registrate_recommend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:src="@mipmap/icon_main_registrate_recommend" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toLeftOf="@id/main_registrate_recommend"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/main_registrate_recommend" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/main_registrate_recommend_detail" />
-            </LinearLayout>
-        </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/main_body_physical"
-            style="@style/layout_main_body_item"
-            android:layout_marginRight="5dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/icon_main_physical" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/main_physical" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/main_body_report"
-            style="@style/layout_main_body_item"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/icon_main_report" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/main_report" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/main_body_cost"
-            style="@style/layout_main_body_item"
-            android:layout_marginLeft="5dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/icon_main_cost" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/main_cost" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/main_body_office"
-            style="@style/layout_main_body_item"
-            android:layout_marginRight="5dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/icon_main_office" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/main_office" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/main_body_handbook"
-            style="@style/layout_main_body_item"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/icon_main_handbook" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/main_handbook" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/main_body_question"
-            style="@style/layout_main_body_item"
-            android:layout_marginLeft="5dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/icon_main_question" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/main_question" />
-        </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+</ScrollView>

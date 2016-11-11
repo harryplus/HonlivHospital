@@ -3,11 +3,10 @@ package com.honliv.honlivhospital.application;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpRequest;
 import com.loopj.android.http.ResponseHandlerInterface;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import cz.msebera.android.httpclient.client.methods.HttpUriRequest;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
@@ -18,8 +17,7 @@ import cz.msebera.android.httpclient.protocol.HttpContext;
  */
 public class MyApplication extends Application {
     private static final String TAG = "MyApplication";
-    public static ImageLoader imageLoader;//全局图片加载器
-    public AsyncHttpClient client = new AsyncHttpClient() {//全局网络请求器
+    public static AsyncHttpClient client = new AsyncHttpClient() {//全局网络请求器
 
         @Override
         protected AsyncHttpRequest newAsyncHttpRequest(DefaultHttpClient client, HttpContext httpContext, HttpUriRequest uriRequest, String contentType, ResponseHandlerInterface responseHandler, Context context) {
@@ -30,7 +28,7 @@ public class MyApplication extends Application {
         }
     };
 
-    public AsyncHttpRequest getHttpRequest(DefaultHttpClient client, HttpContext httpContext, HttpUriRequest uriRequest, String contentType, ResponseHandlerInterface responseHandler, Context context) {
+    public static AsyncHttpRequest getHttpRequest(DefaultHttpClient client, HttpContext httpContext, HttpUriRequest uriRequest, String contentType, ResponseHandlerInterface responseHandler, Context context) {
         return null;
     }
 
@@ -38,9 +36,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
-        imageLoader = ImageLoader.getInstance();
-        imageLoader.init(config);
-
+        Fresco.initialize(this);
     }
 }
