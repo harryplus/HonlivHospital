@@ -4,24 +4,27 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.honliv.honlivhospital.R;
 import com.honliv.honlivhospital.base.BaseFragment;
+import com.honliv.honlivhospital.contract.GlobalContract;
 import com.honliv.honlivhospital.fragment.global.child.ContentFragment;
 import com.honliv.honlivhospital.fragment.global.child.MenuListFragment;
+import com.honliv.honlivhospital.model.global.GlobalOfficeSelectModel;
+import com.honliv.honlivhospital.presenter.global.GlobalOfficeSelectPresenter;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * Created by Rodin on 2016/10/29.
  */
-public class GlobalOfficeSelectFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
-    private Toolbar mToolbar;
+public class GlobalOfficeSelectFragment extends BaseFragment<GlobalOfficeSelectPresenter,GlobalOfficeSelectModel> implements SwipeRefreshLayout.OnRefreshListener , GlobalContract.GlobalOfficeSelectView{
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     public static GlobalOfficeSelectFragment newInstance() {
 
@@ -32,16 +35,13 @@ public class GlobalOfficeSelectFragment extends BaseFragment implements SwipeRef
         return fragment;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_global_office_select, container, false);
-        initView(view,savedInstanceState);
-        return view;
+    public int getLayoutId() {
+        return R.layout.fragment_global_office_select;
     }
 
-    private void initView(View view, Bundle savedInstanceState) {
-        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+    @Override
+    public void initUI(View view, @Nullable Bundle savedInstanceState) {
         mToolbar.setTitle(getString(R.string.office_select));
         initToolbarNav(mToolbar);
         if (savedInstanceState == null) {
@@ -84,5 +84,10 @@ public class GlobalOfficeSelectFragment extends BaseFragment implements SwipeRef
         if (contentFragment != null) {
             contentFragment.replaceFragment(fragment, false);
         }
+    }
+
+    @Override
+    public void showError(String msg) {
+
     }
 }

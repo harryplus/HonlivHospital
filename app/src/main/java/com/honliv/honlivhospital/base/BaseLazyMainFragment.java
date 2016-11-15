@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.honliv.honlivhospital.fragment.first.FirstFragment;
+import com.honliv.honlivhospital.model.CoreBaseModel;
+import com.honliv.honlivhospital.presenter.CoreBasePresenter;
 
 /**
  * 懒加载
  * Created by YoKeyword on 16/6/5.
  */
-public abstract class BaseLazyMainFragment extends BaseFragment {
+public abstract class BaseLazyMainFragment<T extends CoreBasePresenter, E extends CoreBaseModel> extends BaseFragment<T, E> {
     private boolean mInited = false;
     protected OnBackToFirstListener _mBackToFirstListener;
     private Bundle mSavedInstanceState;
@@ -66,11 +68,6 @@ public abstract class BaseLazyMainFragment extends BaseFragment {
     }
 
     /**
-     * 懒加载
-     */
-    protected abstract void initLazyView(@Nullable Bundle savedInstanceState);
-
-    /**
      * 处理回退事件
      *
      * @return
@@ -92,4 +89,8 @@ public abstract class BaseLazyMainFragment extends BaseFragment {
     public interface OnBackToFirstListener {
         void onBackToFirstFragment();
     }
+    /**
+     * 懒加载
+     */
+    protected abstract void initLazyView(@Nullable Bundle savedInstanceState);
 }

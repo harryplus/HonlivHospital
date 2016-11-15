@@ -3,19 +3,23 @@ package com.honliv.honlivhospital.fragment.fourth.child;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.honliv.honlivhospital.R;
 import com.honliv.honlivhospital.base.BaseFragment;
 import com.honliv.honlivhospital.base.BaseLazyMainFragment;
+import com.honliv.honlivhospital.contract.FourthContract;
+import com.honliv.honlivhospital.model.fourth.child.FourthChangePwdModel;
+import com.honliv.honlivhospital.presenter.fourth.child.FourthChangePwdPresenter;
+
+import butterknife.BindView;
 
 /**
  * Created by Rodin on 2016/10/26.
  */
-public class FourthChangePwdFragment extends BaseFragment implements BaseLazyMainFragment.OnBackToFirstListener {
-    private Toolbar mToolbar;
+public class FourthChangePwdFragment extends BaseFragment<FourthChangePwdPresenter,FourthChangePwdModel> implements BaseLazyMainFragment.OnBackToFirstListener ,FourthContract.FourthChangePwdView{
+  @BindView(R.id.toolbar)
+  Toolbar mToolbar;
 
     public static FourthChangePwdFragment newInstance() {
 
@@ -26,16 +30,13 @@ public class FourthChangePwdFragment extends BaseFragment implements BaseLazyMai
         return fragment;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fourth_change_pwd, container, false);
-        initView(view);
-        return view;
+    public int getLayoutId() {
+        return R.layout.fragment_fourth_change_pwd;
     }
 
-    private void initView(View view) {
-        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+    @Override
+    public void initUI(View view, @Nullable Bundle savedInstanceState) {
         mToolbar.setTitle(getString(R.string.text_complete_imfo));
         initToolbarNav(mToolbar);
     }
@@ -43,5 +44,10 @@ public class FourthChangePwdFragment extends BaseFragment implements BaseLazyMai
     @Override
     public void onBackToFirstFragment() {
         _mActivity.onBackPressed();
+    }
+
+    @Override
+    public void showError(String msg) {
+
     }
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import rx.Observable;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
 
@@ -12,7 +13,6 @@ import rx.subscriptions.CompositeSubscription;
  * Created by Rodin on 2016/11/14.
  */
 public class RxManager {
-
     public RxBus mRxBus = RxBus.$();
     private Map<String, Observable<?>> mObservables = new HashMap<>();// 管理观察源
     private CompositeSubscription mCompositeSubscription = new CompositeSubscription();// 管理订阅者者
@@ -21,8 +21,8 @@ public class RxManager {
     public void on(String eventName, Action1<Object> action1) {
         Observable<?> mObservable = mRxBus.register(eventName);
         mObservables.put(eventName, mObservable);
-//        mCompositeSubscription.add(mObservable.observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(action1, (e) -> e.printStackTrace()));
+        mCompositeSubscription.add(mObservable.observeOn(AndroidSchedulers.mainThread())
+                .subscribe(action1, (e) -> e.printStackTrace()));
     }
 
     public void add(Subscription m) {

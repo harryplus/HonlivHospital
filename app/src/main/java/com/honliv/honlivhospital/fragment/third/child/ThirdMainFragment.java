@@ -2,17 +2,18 @@ package com.honliv.honlivhospital.fragment.third.child;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.honliv.honlivhospital.R;
 import com.honliv.honlivhospital.base.BaseFragment;
+import com.honliv.honlivhospital.contract.ThirdContract;
+import com.honliv.honlivhospital.model.third.child.ThirdMainModel;
+import com.honliv.honlivhospital.presenter.third.child.ThirdMainPresenter;
 
 /**
  * Created by Rodin on 2016/10/26.
  */
-public class ThirdMainFragment extends BaseFragment {
+public class ThirdMainFragment extends BaseFragment<ThirdMainPresenter, ThirdMainModel> implements ThirdContract.ThirdMainView {
     public static ThirdMainFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -22,14 +23,18 @@ public class ThirdMainFragment extends BaseFragment {
         return fragment;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_third_main, container, false);
-        initView(view);
-        return view;
+    public int getLayoutId() {
+        return R.layout.fragment_third_main;
     }
 
-    private void initView(View view) {
+    @Override
+    public void initUI(View view, @Nullable Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void showError(String msg) {
+
     }
 }

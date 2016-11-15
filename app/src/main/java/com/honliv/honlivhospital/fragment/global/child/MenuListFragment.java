@@ -5,30 +5,32 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.honliv.honlivhospital.R;
 import com.honliv.honlivhospital.adapter.MenuAdapter;
 import com.honliv.honlivhospital.base.BaseFragment;
+import com.honliv.honlivhospital.contract.GlobalContract;
 import com.honliv.honlivhospital.fragment.global.GlobalOfficeSelectFragment;
 import com.honliv.honlivhospital.listener.OnItemClickListener;
+import com.honliv.honlivhospital.model.global.child.MenuListModel;
+import com.honliv.honlivhospital.presenter.global.MenuListPresenter;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 /**
  * Created by YoKeyword on 16/2/9.
  */
-public class MenuListFragment extends BaseFragment {
+public class MenuListFragment extends BaseFragment<MenuListPresenter, MenuListModel> implements GlobalContract.MenuListView {
     private static final String ARG_MENUS = "arg_menus";
     private static final String SAVE_STATE_POSITION = "save_state_position";
     private static final String TAG = "MenuListFragment";
-
-    private RecyclerView mRecy;
+    @BindView(R.id.recy)
+    RecyclerView mRecy;
     private MenuAdapter mAdapter;
 
     private ArrayList<String> mMenus;
@@ -53,23 +55,20 @@ public class MenuListFragment extends BaseFragment {
         }
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list_menu, container, false);
-        initView(view);
-        return view;
-    }
-
     @Override
     protected FragmentAnimator onCreateFragmentAnimator() {
         return new DefaultNoAnimator();
     }
 
-    private void initView(View view) {
-        mRecy = (RecyclerView) view.findViewById(R.id.recy);
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_list_menu;
     }
 
+    @Override
+    public void initUI(View view, @Nullable Bundle savedInstanceState) {
+
+    }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -137,5 +136,10 @@ public class MenuListFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         mRecy.setAdapter(null);
+    }
+
+    @Override
+    public void showError(String msg) {
+
     }
 }

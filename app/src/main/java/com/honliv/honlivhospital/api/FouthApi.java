@@ -27,4 +27,12 @@ public interface FouthApi {
     @Headers("Content-Type: application/json")
     @POST("api/user/posttest")
     Observable<BaseResult<List<UserBean>>> getVerfyVode(@Body HashMap<String, String> body);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/user/posttest")
+    Observable<BaseResult<List<UserBean>>> login(@Body HashMap<String, String> body);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/user/posttest")
+    Observable<BaseResult<UserBean>> register(@Body HashMap<String, String> body);
 }

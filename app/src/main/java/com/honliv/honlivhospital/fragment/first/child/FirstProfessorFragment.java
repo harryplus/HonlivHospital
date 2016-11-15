@@ -6,21 +6,26 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.honliv.honlivhospital.R;
 import com.honliv.honlivhospital.adapter.FirstProfessorAdapter;
 import com.honliv.honlivhospital.base.BaseFragment;
+import com.honliv.honlivhospital.contract.FirstContract;
 import com.honliv.honlivhospital.listener.OnItemClickListener;
+import com.honliv.honlivhospital.model.first.child.FirstProfessorModel;
+import com.honliv.honlivhospital.presenter.first.child.FirstProfessorPresenter;
+
+import butterknife.BindView;
 
 /**
  * Created by Rodin on 2016/10/29.
  */
-public class FirstProfessorFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
-    private Toolbar mToolbar;
-    private RecyclerView recyclerview;
+public class FirstProfessorFragment extends BaseFragment<FirstProfessorPresenter, FirstProfessorModel> implements SwipeRefreshLayout.OnRefreshListener, FirstContract.FirstProfessorView {
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.recyclerview)
+    RecyclerView recyclerview;
     private SwipeRefreshLayout mRefreshLayout;
     private FirstProfessorAdapter mAdapter;
 
@@ -33,20 +38,16 @@ public class FirstProfessorFragment extends BaseFragment implements SwipeRefresh
         return fragment;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_first_professor, container, false);
-        initView(view);
-        return view;
+    public int getLayoutId() {
+        return R.layout.fragment_first_professor;
     }
 
-    private void initView(View view) {
-        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+    @Override
+    public void initUI(View view, @Nullable Bundle savedInstanceState) {
         mToolbar.setTitle(getString(R.string.main_professor));
         initToolbarNav(mToolbar);
 
-        recyclerview = (RecyclerView) view.findViewById(R.id.recyclerview);
         mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
         mRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         mRefreshLayout.setOnRefreshListener(this);
@@ -67,5 +68,17 @@ public class FirstProfessorFragment extends BaseFragment implements SwipeRefresh
     @Override
     public void onRefresh() {
 
+    }
+
+    @Override
+    public void showError(String msg) {
+
+    }
+    @Override
+    public boolean onBackPressedSupport() {
+//        loadRootFragment(R.id.fl_first_container, FirstHomeFragment.newInstance());
+//        _mBackToFirstListener.onBackToFirstFragment();
+//        _mActivity.onBackPressed();
+        return true;
     }
 }

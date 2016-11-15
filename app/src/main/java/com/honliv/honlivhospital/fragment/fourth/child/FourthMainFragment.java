@@ -2,19 +2,23 @@ package com.honliv.honlivhospital.fragment.fourth.child;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.honliv.honlivhospital.R;
 import com.honliv.honlivhospital.base.BaseFragment;
+import com.honliv.honlivhospital.contract.FourthContract;
+import com.honliv.honlivhospital.model.fourth.child.FourthMainModel;
+import com.honliv.honlivhospital.presenter.fourth.child.FourthMainPresenter;
+
+import butterknife.BindView;
 
 /**
  * Created by Rodin on 2016/10/26.
  */
-public class FourthMainFragment extends BaseFragment implements View.OnClickListener {
-    private TextView login;
+public class FourthMainFragment extends BaseFragment<FourthMainPresenter, FourthMainModel> implements View.OnClickListener, FourthContract.FourthMainView {
+    @BindView(R.id.login)
+    TextView login;
 
     public static FourthMainFragment newInstance() {
 
@@ -25,16 +29,13 @@ public class FourthMainFragment extends BaseFragment implements View.OnClickList
         return fragment;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fourth_main, container, false);
-        initView(view);
-        return view;
+    public int getLayoutId() {
+        return R.layout.fragment_fourth_main;
     }
 
-    private void initView(View view) {
-        login = (TextView) view.findViewById(R.id.login);
+    @Override
+    public void initUI(View view, @Nullable Bundle savedInstanceState) {
         login.setOnClickListener(this);
     }
 
@@ -46,5 +47,10 @@ public class FourthMainFragment extends BaseFragment implements View.OnClickList
                 start(loginFragment);
                 break;
         }
+    }
+
+    @Override
+    public void showError(String msg) {
+
     }
 }

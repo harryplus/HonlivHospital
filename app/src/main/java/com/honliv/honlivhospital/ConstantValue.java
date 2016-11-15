@@ -15,4 +15,6 @@ public interface ConstantValue {
 //    String URL = HOST_URL + "api/user/verifycode";
 
     String SecretKey="honlivhp";
+
+    public String PATH_CACHE=null;
 }

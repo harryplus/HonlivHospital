@@ -2,24 +2,34 @@ package com.honliv.honlivhospital.fragment.fourth.child;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.honliv.honlivhospital.R;
 import com.honliv.honlivhospital.base.BaseFragment;
+import com.honliv.honlivhospital.contract.FourthContract;
+import com.honliv.honlivhospital.model.fourth.child.FourthPersonModel;
+import com.honliv.honlivhospital.presenter.fourth.child.FourthPersonPresenter;
+
+import butterknife.BindView;
 
 /**
  * Created by Rodin on 2016/10/26.
  */
-public class FourthPersonFragment extends BaseFragment implements View.OnClickListener {
-    private View setting_base_info;
-    private View setting_change_pwd;
-    private View setting_card;
-    private View setting_book;
-    private View setting_about;
-    private View setting_recommend;
-    private View setting_logout;
+public class FourthPersonFragment extends BaseFragment<FourthPersonPresenter,FourthPersonModel> implements View.OnClickListener,FourthContract.FourthPersonView {
+   @BindView(R.id.setting_base_info)
+     View setting_base_info;
+    @BindView(R.id.setting_change_pwd)
+     View setting_change_pwd;
+    @BindView(R.id.setting_card)
+     View setting_card;
+    @BindView(R.id.setting_book)
+     View setting_book;
+    @BindView(R.id.setting_about)
+     View setting_about;
+    @BindView(R.id.setting_recommend)
+     View setting_recommend;
+    @BindView(R.id.setting_logout)
+     View setting_logout;
 
     public static FourthPersonFragment newInstance() {
 
@@ -29,17 +39,13 @@ public class FourthPersonFragment extends BaseFragment implements View.OnClickLi
         fragment.setArguments(args);
         return fragment;
     }
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fourth_person, container, false);
-        initView(view);
-        initMotion();
-        return view;
+    public int getLayoutId() {
+        return R.layout.fragment_fourth_person;
     }
 
-    private void initMotion() {
+    @Override
+    public void initUI(View view, @Nullable Bundle savedInstanceState) {
         setting_base_info.setOnClickListener(this);
         setting_change_pwd.setOnClickListener(this);
         setting_card.setOnClickListener(this);
@@ -47,16 +53,6 @@ public class FourthPersonFragment extends BaseFragment implements View.OnClickLi
         setting_about.setOnClickListener(this);
         setting_recommend.setOnClickListener(this);
         setting_logout.setOnClickListener(this);
-    }
-
-    private void initView(View view) {
-        setting_base_info = view.findViewById(R.id.setting_base_info);
-        setting_change_pwd = view.findViewById(R.id.setting_change_pwd);
-        setting_card = view.findViewById(R.id.setting_card);
-        setting_book = view.findViewById(R.id.setting_book);
-        setting_about = view.findViewById(R.id.setting_about);
-        setting_recommend = view.findViewById(R.id.setting_recommend);
-        setting_logout = view.findViewById(R.id.setting_logout);
     }
 
     @Override
@@ -85,5 +81,10 @@ public class FourthPersonFragment extends BaseFragment implements View.OnClickLi
             case R.id.setting_logout:
                 break;
         }
+    }
+
+    @Override
+    public void showError(String msg) {
+
     }
 }

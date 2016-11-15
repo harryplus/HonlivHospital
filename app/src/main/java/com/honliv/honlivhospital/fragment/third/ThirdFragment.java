@@ -2,18 +2,19 @@ package com.honliv.honlivhospital.fragment.third;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.honliv.honlivhospital.R;
 import com.honliv.honlivhospital.base.BaseLazyMainFragment;
+import com.honliv.honlivhospital.contract.ThirdContract;
 import com.honliv.honlivhospital.fragment.third.child.ThirdMainFragment;
+import com.honliv.honlivhospital.model.third.ThirdModel;
+import com.honliv.honlivhospital.presenter.third.ThirdPresenter;
 
 /**
  * Created by Rodin on 2016/10/25.
  */
-public class ThirdFragment extends BaseLazyMainFragment {
+public class ThirdFragment extends BaseLazyMainFragment<ThirdPresenter,ThirdModel> implements ThirdContract.ThirdView {
     public static ThirdFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -23,11 +24,14 @@ public class ThirdFragment extends BaseLazyMainFragment {
         return fragment;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_third, container, false);
-        return view;
+    public int getLayoutId() {
+        return R.layout.fragment_third;
+    }
+
+    @Override
+    public void initUI(View view, @Nullable Bundle savedInstanceState) {
+
     }
 
 //    @Override
@@ -59,5 +63,10 @@ public class ThirdFragment extends BaseLazyMainFragment {
 
     public void onBackToFirstFragment() {
         _mBackToFirstListener.onBackToFirstFragment();
+    }
+
+    @Override
+    public void showError(String msg) {
+
     }
 }

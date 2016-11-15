@@ -2,21 +2,19 @@ package com.honliv.honlivhospital.fragment.fourth;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.honliv.honlivhospital.R;
-import com.honliv.honlivhospital.base.BaseFragment;
 import com.honliv.honlivhospital.base.BaseLazyMainFragment;
-import com.honliv.honlivhospital.fragment.first.child.FirstHomeFragment;
+import com.honliv.honlivhospital.contract.FourthContract;
 import com.honliv.honlivhospital.fragment.fourth.child.FourthMainFragment;
-import com.honliv.honlivhospital.fragment.second.child.SecondMainFragment;
+import com.honliv.honlivhospital.model.fourth.FourthModel;
+import com.honliv.honlivhospital.presenter.fourth.FourthPresenter;
 
 /**
  * Created by Rodin on 2016/10/25.
  */
-public class FourthFragment extends BaseLazyMainFragment {
+public class FourthFragment extends BaseLazyMainFragment<FourthPresenter, FourthModel> implements FourthContract.FourthView {
     public static FourthFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -26,19 +24,16 @@ public class FourthFragment extends BaseLazyMainFragment {
         return fragment;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fourth, container, false);
-        return view;
+    public int getLayoutId() {
+        return R.layout.fragment_fourth;
     }
 
-//    @Override
-//    protected void initLazyView(@Nullable Bundle savedInstanceState) {
-//        if (savedInstanceState == null) {
-//            loadRootFragment(R.id.fl_fourth_container, FirstHomeFragment.newInstance());
-//        }
-//    }
+    @Override
+    public void initUI(View view, @Nullable Bundle savedInstanceState) {
+
+    }
+
 
     @Override
     protected void initLazyView(@Nullable Bundle savedInstanceState) {
@@ -62,5 +57,10 @@ public class FourthFragment extends BaseLazyMainFragment {
 
     public void onBackToFirstFragment() {
         _mBackToFirstListener.onBackToFirstFragment();
+    }
+
+    @Override
+    public void showError(String msg) {
+
     }
 }
