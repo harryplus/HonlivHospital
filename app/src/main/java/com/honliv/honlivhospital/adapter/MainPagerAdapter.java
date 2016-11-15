@@ -6,6 +6,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.controller.ControllerListener;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.honliv.honlivhospital.R;
 
@@ -21,6 +25,8 @@ public class MainPagerAdapter extends PagerAdapter {
     private final List<String> viewpaperData;
     private final Context mContext;
     private List<View> viewList;//view数组
+    ControllerListener listener = new BaseControllerListener() {
+    };
 
     public MainPagerAdapter(Context mContext, List<String> viewpaperData) {
         this.viewpaperData = viewpaperData;
@@ -57,8 +63,18 @@ public class MainPagerAdapter extends PagerAdapter {
         View view = viewList.get(position);
         SimpleDraweeView imageView = (SimpleDraweeView) view.findViewById(R.id.imageview);
         String imageUri = viewpaperData.get(position);
-        Log.i(TAG, imageUri);
-        imageView.setImageURI(imageUri);
+
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(imageUri)
+                .setTapToRetryEnabled(true)
+                .setOldController(imageView.getController())
+                .setControllerListener(listener)
+                .build();
+
+        imageView.setController(controller);
+
+//        Log.i(TAG, imageUri);
+//        imageView.setImageURI(imageUri);
         container.addView(view);
         return view;
     }

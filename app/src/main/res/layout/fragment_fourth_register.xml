@@ -66,21 +66,34 @@
         android:layout_height="wrap_content"
         android:text="@string/alert_note" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/text_alert_note"
             style="@style/text_black_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:text="@string/text_note" />
+
+        <Button
+            android:id="@+id/bt_send_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/text_send_note" />
 
         <EditText
             android:id="@+id/et_note"
             style="@style/style_edittext"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/bt_send_note"
+            android:layout_toRightOf="@id/text_alert_note"
             android:hint="@string/hint_note" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
