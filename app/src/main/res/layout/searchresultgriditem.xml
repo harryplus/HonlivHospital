@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/shape_rounded_rectangle"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5.0dip"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5.0dip" >
+       <!--  android:layout_marginLeft="8.0dip" -->
+
+        <ImageView
+            android:id="@+id/searchresult_product_img"
+            android:layout_width="160.0dip"
+            android:layout_height="140.0dip"
+            android:layout_marginTop="3dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitCenter"
+            android:contentDescription="image"/>
+        
+         <TextView
+            android:id="@+id/searchresult_product_price_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/searchresult_product_img"
+            android:layout_marginTop="10.0dip"
+            android:layout_centerHorizontal="true"
+            android:text="价格:￥200.9"
+            android:textColor="@color/red"
+            android:textSize="15.0sp" />
+    </RelativeLayout>
+
+    <!-- <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.45"
+        android:paddingLeft="2.0dip"
+        android:paddingRight="1.0dip" >
+ -->
+       <!--  <TextView
+            android:id="@+id/searchresult_product_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="4.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="商品的标题"
+            android:textColor="@color/black"
+            android:textSize="14.0sp" /> -->
+
+       <!--  <TextView
+            android:id="@+id/searchresult_product_price_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/searchresult_product_title_text"
+            android:layout_marginBottom="3.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:text="价格:￥200.9"
+            android:textColor="@color/red"
+            android:textSize="15.0sp" /> -->
+
+    <!-- </RelativeLayout> -->
+
+    <!--
+          <ImageView
+         android:layout_marginLeft="1dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/arrow"/>
+    -->
+
+</LinearLayout>

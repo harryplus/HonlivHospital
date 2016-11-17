@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_rounded_rectangle"
+    android:descendantFocusability="blocksDescendants"
+    android:padding="5.0dip" >
+
+    <RelativeLayout
+        android:id="@+id/order_item_rel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/my_account_userPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="8.0dip"
+            android:layout_marginLeft="5.0dip"
+            android:layout_marginTop="5.0dip" >
+
+            <ImageView
+                android:id="@+id/userHeadImage"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:src="@drawable/android_user_no_image" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/my_account_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4.0dip"
+            android:layout_marginLeft="5.0dip"
+            android:layout_marginTop="10.0dip"
+            android:layout_toRightOf="@id/my_account_userPicture" >
+
+            <TextView
+                android:id="@+id/account_name_tv"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="评论人："
+                android:textColor="@color/font_gray" />
+
+            <TextView
+                android:id="@+id/username_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/account_name_tv"
+                android:text="加载中.."
+                android:textColor="@color/font_gray" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/my_account_level"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/my_account_name"
+            android:layout_marginBottom="4.0dip"
+            android:layout_marginLeft="5.0dip"
+            android:layout_toRightOf="@id/my_account_userPicture" >
+
+            <TextView
+                android:id="@+id/account_levle_tv"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="评论时间："
+                android:textColor="@color/font_gray" />
+
+            <TextView
+                android:id="@+id/commonTimeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
+                android:layout_toRightOf="@+id/account_levle_tv"
+                android:text="加载中.."
+                android:textColor="@color/font_gray" />
+        </RelativeLayout>
+
+      
+
+        <RelativeLayout
+            android:id="@+id/my_account_bonus"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/my_account_level"
+            android:layout_marginBottom="10.0dip"
+            android:layout_marginLeft="5.0dip"
+            android:layout_toRightOf="@id/my_account_userPicture" >
+
+            <TextView
+                android:id="@+id/account_bonus_tv"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="评论内容："
+                android:textColor="@color/font_gray" />
+
+            <com.honliv.honlivmall.view.CusTextView
+                android:id="@+id/textfeelcommon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                 android:paddingBottom="1dp"
+                android:layout_toRightOf="@+id/account_bonus_tv"
+                android:text="加载中.."
+                android:textColor="@color/font_gray" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

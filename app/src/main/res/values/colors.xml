@@ -1,15 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0F9A24</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#EA2000</color>
+    <color name="colorPrimaryDark">#ffff0000</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="background_green">#2aa515</color>
-    <color name="white">#ffffff</color>
     <color name="background_line_gray">#bfbfbf</color>
     <color name="tab_unselect">#c9c9c9</color>
     <color name="background_pink">#DAC4D8</color>
-    <color name="background_gray">#bfbfbf</color>
-    <color name="black">#000000</color>
     <color name="text_blue">#1E3FE6</color>
-    <color name="background_white">#bbbbbb</color>
+    <color name="theme_black_7f">#8f000000</color>
+
+    <color name="window_background_dark">#ff303030</color>
+    <color name="window_background_light">#ffeeeeee</color>
+    <color name="list_divider_light">#ffe0e0e0</color>
+    <color name="list_divider_dark">#ff666666</color>
+    <color name="color_1">#7cc576</color>
+    <color name="cateory2_item">#ffF5F5F5</color>
+
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="red">#EA2000</color>
+    <color name="fontblack">#ff4b4b4b</color>
+    <color name="font_gray">#ff888888</color>
+    <color name="font_gray11">#ffF5F5F5</color>
+    <color name="font_search">#ffFAFAFA</color>
+
+    <color name="myitegral">#ff8300</color>
+    <color name="myitegralhead">#948477</color>
+    <color name="official_text2">#ff646464</color>
+    <drawable name="homepage_bkg_color">#FFEEEAE9</drawable>
+
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="result_view">#b0000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="viewfinder_frame">#ff000000</color>
+    <color name="viewfinder_laser">#ffff0000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="background_gray">#EBEBEB</color>
+    <color name="background_red">#E73C30</color>
+    <color name="text_black">#000000</color>
+    <color name="background_black">#D9D9D9</color>
+    <color name="background_white">#ffffff</color>
+    <color name="background_lightgray">#99EBEBEB</color>
+    <color name="background_green">#38AB55</color>
+    <color name="button_blue">#2E88FF</color>
+    <color name="text_color_grey">#838383</color>
+    <color name="pick">#F44336</color>
+    <color name="background_red_limit">#f72a2a</color>
+    <color name="gray_3">#666666</color>
 </resources>

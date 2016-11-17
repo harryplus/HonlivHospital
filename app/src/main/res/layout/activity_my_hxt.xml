@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/home_backgroud">
+
+    <FrameLayout
+        android:id="@id/fraHead"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:background="@color/background_red">
+
+        <TextView
+            android:id="@+id/head_back_text"
+            style="@style/style_15_EBEBEB_BOLD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back_btn"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="goBack" />
+
+        <TextView
+            style="@style/style_18_BEBEBE_BOLD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="我的宏信通" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="10dp"
+            android:clickable="true"
+            android:onClick="addCard"
+            android:src="@drawable/icon_add" />
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomBar"
+        android:layout_below="@id/fraHead"
+        android:padding="8dp" />
+    <!-- <android.support.v4.widget.SwipeRefreshLayout
+         android:id="@+id/refresh_layout"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_above="@id/bottomBar"
+         android:layout_below="@id/fraHead">
+
+         <android.support.v7.widget.RecyclerView
+             android:id="@+id/recy"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:clipChildren="false" />
+
+     </android.support.v4.widget.SwipeRefreshLayout>-->
+</RelativeLayout>

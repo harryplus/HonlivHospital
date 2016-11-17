@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/home_backgroud">
+    <!-- 商品列表 -->
+    <FrameLayout
+        android:id="@+id/fraTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:background="@color/background_red">
+
+        <TextView
+            android:id="@+id/backTv"
+            style="@style/style_15_EBEBEB_BOLD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:background="@drawable/back_btn"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="goBack" />
+
+        <TextView
+            android:id="@+id/search_result_Title"
+            style="@style/style_18_BEBEBE_BOLD"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="搜索结果" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomBar"
+        android:layout_below="@id/fraTitle"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linRank"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/segment_bg"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textRankSale"
+                style="@style/style_13_FFFFFF_BOLD"
+                android:layout_width="60.0dip"
+                android:layout_height="30dp"
+                android:background="@drawable/segment_selected_1_bg"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="saleNumber"
+                android:text="销量" />
+
+            <TextView
+                android:id="@+id/textRankPrice"
+                style="@style/style_13_4B4B4B_BOLD"
+                android:layout_width="60.0dip"
+                android:layout_height="30dp"
+                android:background="@drawable/segment_normal_2_bg"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="priceClick"
+                android:text="价格" />
+
+            <TextView
+                android:id="@+id/textRankTime"
+                style="@style/style_13_4B4B4B_BOLD"
+                android:layout_width="60.0dip"
+                android:layout_height="30dp"
+                android:background="@drawable/segment_normal_2_bg"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="newProduct"
+                android:text="新品" />
+
+            <TextView
+                android:id="@+id/textRankImage"
+                style="@style/style_13_4B4B4B_BOLD"
+                android:layout_width="60.0dip"
+                android:layout_height="30dp"
+                android:background="@drawable/segment_normal_3_bg"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="bigImage"
+                android:text="大图" />
+        </LinearLayout>
+
+
+        <com.honliv.honlivmall.view.PullToRefreshView
+            android:id="@+id/main_pull_refresh_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@id/bottomBar"
+            android:layout_below="@id/linRank"
+            android:orientation="vertical">
+
+            <GridView
+                android:id="@+id/productLv"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:cacheColorHint="#00000000"
+                android:divider="@drawable/listview_item_line"
+                android:listSelector="@drawable/index_item_bg" />
+        </com.honliv.honlivmall.view.PullToRefreshView>
+
+        <TextView
+            android:id="@+id/textsearchNull"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="150dp"
+            android:gravity="center"
+            android:text="暂 无 搜 索 商 品"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_content"
+        android:src="@drawable/listview_item_line" />
+</RelativeLayout>

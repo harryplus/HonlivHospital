@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+      <com.honliv.honlivmall.view.FocusedTextView
+           android:focusableInTouchMode="true"
+        android:id="@+id/tv_search_title_item"
+       android:layout_width="70dp"
+       android:layout_margin="3dp"
+   		android:layout_height="30dp"
+   		android:gravity="center"
+   		android:background="@color/font_search"
+   		android:text="历史搜索11111"
+   		android:textColor="@color/font_gray"
+   		android:textSize="16sp"
+   		android:singleLine="true"
+		android:ellipsize="marquee"
+        />
+</LinearLayout>

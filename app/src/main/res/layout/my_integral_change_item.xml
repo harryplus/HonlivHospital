@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_margin="3dp"
+        android:background="@drawable/login_item_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        
+        <RadioButton 
+            android:clickable="false"  
+        	android:focusable="false"  
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_integral_change_item_radiobutton"/>
+        
+        <LinearLayout
+           
+           	android:layout_marginLeft="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/my_integral_change_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                android:text="20元抵扣券" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/my_integral_change_item_needpoint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="需要积分: 2000" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

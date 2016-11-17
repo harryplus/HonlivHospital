@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/home_backgroud" >
+
+    <FrameLayout
+        android:id="@id/fraHead"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:background="@color/background_red">
+
+        <TextView
+            android:id="@+id/head_goback"
+            style="@style/style_15_EBEBEB_BOLD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back_btn"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="goBack"
+            />
+
+        <TextView
+            android:id="@+id/help_detail_tv"
+            style="@style/style_18_BEBEBE_BOLD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="帮助详情" />
+    </FrameLayout>
+
+ <!-- <ListView
+     android:id="@+id/helpdetailListView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/fraTitle"
+        android:layout_marginTop="50dp"
+        android:layout_above="@id/bottomBar"
+        android:divider="@null"
+        android:cacheColorHint="#00000000"
+        android:fadingEdge="none" 
+        android:dividerHeight="20dp"
+         >
+    </ListView> -->
+
+    <TextView
+        android:id="@+id/textDetail_tv"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/fraHead"
+        android:padding="8dp"
+        android:text="加载中..."
+       />
+</RelativeLayout>

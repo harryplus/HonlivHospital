@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+     android:padding="3.0dip" 
+     android:background="@color/white" 
+    >
+    <!--  android:background="@anim/shape_rounded_rectangle" -->
+    
+  <RelativeLayout
+     	 android:layout_width="match_parent"
+    	android:layout_height="wrap_content" 
+    	android:layout_marginTop="3.0dip"
+  		 android:layout_marginBottom="3dp"
+       > 
+
+     <ImageView
+         android:id="@+id/shopcar_item_prodImage_img_selete"
+         android:layout_width="30dp"
+         android:layout_height="30dp"
+         android:layout_centerVertical="true"
+         android:layout_marginLeft="5dip"
+         android:clickable="true"
+         android:src="@drawable/green_icon"
+         android:visibility="gone"
+          />
+    <RelativeLayout
+        android:id="@+id/shopcar_item_prodImage_rel"
+        android:layout_width="80.0dip"
+        android:layout_height="90.0dip"
+        android:layout_toRightOf="@id/shopcar_item_prodImage_img_selete"
+        android:layout_centerVertical="true"
+         >
+         <!-- android:layout_marginLeft="1.0dip" -->
+       
+        <ImageView
+            android:id="@+id/shopcar_item_prodImage_img"
+            android:layout_width="100.0dip"
+            android:layout_height="match_parent"
+            android:contentDescription="image" 
+            android:scaleType="fitCenter"
+            />
+    </RelativeLayout>
+	
+    <LinearLayout
+        android:id="@+id/shopcar_item_prod_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/shopcar_item_prodImage_rel"
+        android:orientation="vertical"
+        android:paddingLeft="1.0dip"
+        android:paddingRight="3.0dip"
+        android:paddingTop="3.0dip" >
+
+        <TextView
+            android:id="@+id/shopcar_item_prodName_text"
+            style="@style/style_15_666666"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:lines="2"
+            android:textColor="@color/font_gray"
+            android:paddingRight="15.0dip"
+            android:text="商品名称.." />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:layout_marginTop="1dp"
+            >
+
+            <TextView
+                style="@style/style_13_9F9F9F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:text="数量：" />
+
+            <TextView
+                android:id="@+id/shopcar_item_prodCount_text"
+                style="@style/style_13_9F9F9F"
+                android:layout_width="40.0dip"
+                android:layout_height="25dp"
+                android:background="@drawable/id_textview_bg"
+                android:gravity="center"
+                  android:ellipsize="marquee"
+                android:singleLine="true"
+                android:text="1" />
+            
+            <EditText
+                android:id="@+id/shopcar_item_prodCount_edit"
+                android:layout_width="40.0dip"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="3"
+                android:singleLine="true"
+                android:textSize="14.0dip"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/shopcar_item_prodSize_key_text"
+                style="@style/style_13_9F9F9F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22dip"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:text="尺码：" />
+
+            <TextView
+                android:id="@+id/shopcar_item_prodSize_text"
+                style="@style/style_13_9F9F9F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:singleLine="true" 
+                android:text="XXXL"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:layout_marginTop="1dp"
+            >
+
+            <TextView
+                 android:id="@+id/shopcar_item_prodColor_key_text"
+                style="@style/style_13_9F9F9F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:text="颜色：" />
+
+            <TextView
+                android:id="@+id/shopcar_item_prodColor_text"
+                style="@style/style_13_9F9F9F"
+                 android:layout_width="40.0dip"
+                android:layout_height="25dp"
+                android:ellipsize="marquee"
+                android:singleLine="true" 
+                 android:gravity="center"
+                android:text="灰色"
+                android:visibility="visible"/>
+
+            
+
+            <TextView
+                style="@style/style_13_9F9F9F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22dip"
+                android:singleLine="true"
+                android:text="价格：" />
+
+            <TextView
+                android:id="@+id/shopcar_item_prodPrice_text"
+                style="@style/style_14_C21513_BOLD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true" 
+                android:text="￥888.00"/>
+        </LinearLayout>
+        
+<!--         android:id="@+id/shopcar_item_subtotal_text" -->
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="71.0dip"
+        android:layout_height="44.0dip"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" >
+
+        <TextView
+            android:id="@+id/shopcar_item_delete_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="删除"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/shopcar_item_prodImage_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16.0dip"
+        android:src="@drawable/shopcar_item_del" />
+      <!-- android:src="@drawable/arrow_right" -->
+    
+    </RelativeLayout> 
+
+</RelativeLayout>

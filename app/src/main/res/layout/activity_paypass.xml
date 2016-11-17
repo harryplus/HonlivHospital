@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/home_backgroud"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@id/fraHead"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/background_red">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:onClick="goBack"
+            android:src="@drawable/back_btn" />
+
+        <TextView
+            android:id="@+id/result"
+            style="@style/style_18_BEBEBE_BOLD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="去支付" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/bodylayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="290.0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40.0dip"
+            android:background="@drawable/shape_rounded_rectangle"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="1.0dip">
+
+                <TextView
+                    android:id="@+id/orderid_text"
+                    style="@style/style_15_666666"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5.0dip"
+                    android:text="您的订单号：" />
+
+                <TextView
+                    android:id="@+id/orderid_value_text"
+                    style="@style/style_15_666666"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/orderid_text"
+                    android:padding="5.0dip" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="1.0dip">
+
+                <TextView
+                    android:id="@+id/paymoney_text"
+                    style="@style/style_15_666666"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5.0dip"
+                    android:text="应付金额：" />
+
+                <TextView
+                    android:id="@+id/paymoney_value_text"
+                    style="@style/style_15_666666"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/paymoney_text"
+                    android:padding="5.0dip" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="1.0dip">
+
+                <TextView
+                    android:id="@+id/paytype_text"
+                    style="@style/style_15_666666"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5.0dip"
+                    android:text="支付方式：" />
+
+                <TextView
+                    android:id="@+id/paytype_value_text"
+                    style="@style/style_15_666666"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/paytype_text"
+                    android:padding="5.0dip" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="15.0dip" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical">
+
+            <com.gc.materialdesign.views.ButtonRectangle
+                style="@style/buttom"
+                materialdesign:animate="false"
+                android:background="@color/background_red"
+                android:onClick="goPay"
+                android:text="去支付" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/payicon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bodylayout"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/icon_alipay" />
+</RelativeLayout>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/id_item_bg"
+    android:orientation="horizontal" 
+    android:padding="3dp"
+    >
+
+    <ImageView
+        android:id="@+id/marketing_product_image"
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical"
+        />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dip"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/marketing_product_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dip"
+            android:textColor="#CD2626"
+            android:text="商品描述"
+            android:textSize="14sp" />
+        <!-- android:singleLine="true"-->
+ 
+        <TextView
+            android:id="@+id/marketing_product_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dip"
+            android:layout_marginTop="10dip"
+            android:singleLine="true"
+            android:text="数据加载中……"
+            android:textColor="#212121"
+            android:textSize="12sp" />
+        
+          <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip" >
+		 	<LinearLayout
+		 	    	android:id="@+id/market_oldPrice_LL"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:orientation="horizontal" >
+		            <TextView
+		                android:id="@+id/left"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:layout_alignParentLeft="true"
+		                android:layout_centerVertical="true"
+		                android:text="原价:"
+		                android:textColor="#212121"
+			            android:textSize="12sp"  />
+		            <TextView
+		                android:id="@+id/prodoldPrice_text"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                 style="@style/style_13_9F9F9F"
+		                android:layout_toRightOf="@id/left"
+		                android:layout_marginLeft="12dp"
+		                android:textColor="@color/black"
+		                android:singleLine="true" 
+		                android:textStyle="bold"
+		                android:text="￥888.00"/>
+		            </LinearLayout>
+        <LinearLayout
+            android:layout_below="@id/market_oldPrice_LL"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:orientation="horizontal" >
+	        
+		<TextView
+		     android:id="@+id/marketing_product_text"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:singleLine="true"
+	            android:layout_weight="0.1"
+	            android:layout_gravity="center_vertical"
+	            android:text="抢购价:"
+	            android:textColor="#212121"
+	            android:textSize="12sp" />
+	
+	        <TextView
+	            android:id="@+id/marketing_product_price"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:singleLine="true"
+	            android:layout_weight="1"
+	            android:textColor="@color/red"
+	            android:layout_gravity="center_vertical"
+	            android:text="￥0.00"
+	            android:textSize="15sp" />
+        </LinearLayout>
+	        <TextView
+	            android:id="@+id/marketing_product_select"
+	            android:layout_width="90dp"
+	            android:layout_height="30dp"
+	            android:layout_gravity="right"
+	            android:layout_alignParentRight="true"
+	            android:layout_centerVertical="true"
+	            android:layout_marginRight="6dip"
+	            android:layout_marginBottom="5dp"
+	            android:clickable="true"
+	            android:text="立即购买"
+	             android:gravity="center"
+	            style="@style/style_17_FFFFFF_BOLD"
+	            android:textSize="15sp"
+	            android:background="@drawable/button_long" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

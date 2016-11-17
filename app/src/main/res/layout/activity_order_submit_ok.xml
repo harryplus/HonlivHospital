@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/home_backgroud"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@id/fraHead"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/background_red">
+
+        <TextView
+            android:id="@+id/result"
+            style="@style/style_18_BEBEBE_BOLD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="提交成功" />
+    </FrameLayout>
+
+    <ScrollView
+        android:id="@+id/scrLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomBar"
+        android:layout_below="@id/fraHead"
+        android:layout_marginBottom="15.0dip">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="15.0dip" />
+
+            <TextView
+                android:id="@+id/result_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="您的订单已提交，我们会尽快安排发货！"
+                android:textColor="@color/red" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="15.0dip" />
+
+            <LinearLayout
+                android:layout_width="290.0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/shape_rounded_rectangle"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="1.0dip">
+
+                    <TextView
+                        android:id="@+id/orderid_text"
+                        style="@style/style_15_666666"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5.0dip"
+                        android:text="您的订单号：" />
+
+                    <TextView
+                        android:id="@+id/orderid_value_text"
+                        style="@style/style_15_666666"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/orderid_text"
+                        android:padding="5.0dip" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="1.0dip">
+
+                    <TextView
+                        android:id="@+id/paymoney_text"
+                        style="@style/style_15_666666"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5.0dip"
+                        android:text="应付金额：" />
+
+                    <TextView
+                        android:id="@+id/paymoney_value_text"
+                        style="@style/style_15_666666"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/paymoney_text"
+                        android:padding="5.0dip" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="1.0dip">
+
+                    <TextView
+                        android:id="@+id/paytype_text"
+                        style="@style/style_15_666666"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5.0dip"
+                        android:text="支付方式：" />
+
+                    <TextView
+                        android:id="@+id/paytype_value_text"
+                        style="@style/style_15_666666"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/paytype_text"
+                        android:padding="5.0dip" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="15.0dip" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="vertical">
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    style="@style/buttom"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1.0"
+                    android:background="@color/background_red"
+                    android:clickable="true"
+                    android:onClick="goShop"
+                    android:text="继续购物"
+                    materialdesign:animate="false" />
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    style="@style/buttom"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1.0"
+                    android:background="@color/background_red"
+                    android:clickable="true"
+                    android:onClick="watchOrder"
+                    android:text="查看订单"
+                    materialdesign:animate="false" />
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/to_order_payment_text"
+                    style="@style/buttom"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1.0"
+                    android:background="@color/background_red"
+                    android:onClick="paymentOrder"
+                    android:text="重新支付"
+                    materialdesign:animate="false" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="15.0dip" />
+
+            <LinearLayout
+                android:layout_width="290.0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/shape_rounded_rectangle"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textOrderTip"
+                    style="@style/style_15_666666"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5.0dip"
+                    android:text="如有疑问，您可以拨打客服电话：" />
+
+                <TextView
+                    android:id="@+id/textOrderPhone"
+                    style="@style/style_15_666666"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5.0dip"
+                    android:text="@string/servicesphone" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

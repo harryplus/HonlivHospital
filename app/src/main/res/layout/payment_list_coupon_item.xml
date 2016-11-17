@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/payment_coupon_item_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <LinearLayout
+            android:id="@+id/payment_coupon_item_left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@id/payment_coupon_item_radio"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/payment_coupon_item_text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:gravity="left"             
+                android:text="店商互联优惠劵"
+                android:textSize="22dp" />
+
+            <TextView
+                android:id="@+id/payment_coupon_item_couponPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="金额:100" />
+
+            <TextView
+                android:id="@+id/payment_coupon_limitPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最低消费金额 :" />
+
+            <TextView
+                android:id="@+id/payment_coupon_endDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:text="截止时间" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

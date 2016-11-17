@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@id/fraHead"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:background="@color/background_red">
+
+        <TextView
+            android:id="@+id/head_back_text"
+            style="@style/style_15_EBEBEB_BOLD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back_btn"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="goBack" />
+
+        <TextView
+            style="@style/style_18_BEBEBE_BOLD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="宏信通卡详情" />
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/fraHead"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/icon_hxtpay" />
+
+    <LinearLayout
+        android:id="@+id/body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/layout_hxt"
+            android:layout_below="@id/fraHead"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_hxt"
+                android:layout_marginLeft="10dp"
+                android:text="@string/text_cardNo" />
+
+            <TextView
+                android:id="@+id/cardNo"
+                style="@style/text_hxt"
+                android:layout_marginLeft="10dp"
+                android:text="9966113730190207552" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/layout_hxt"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_hxt"
+                android:layout_marginLeft="10dp"
+                android:text="@string/text_hxt_name" />
+
+            <TextView
+                android:id="@+id/cardUserName"
+                style="@style/text_hxt"
+                android:layout_marginLeft="10dp"
+                android:text="小明" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/layout_hxt"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_hxt"
+                android:layout_marginLeft="10dp"
+                android:text="@string/text_hxt_sex" />
+
+            <TextView
+                android:id="@+id/sex"
+                style="@style/text_hxt"
+                android:layout_marginLeft="10dp"
+                android:text="男" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/layout_hxt"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_hxt"
+                android:layout_marginLeft="10dp"
+                android:text="@string/text_hxt_phone" />
+
+            <TextView
+                android:id="@+id/phone"
+                style="@style/text_hxt"
+                android:layout_marginLeft="10dp"
+                android:text="18236167515" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/layout_hxt"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_hxt"
+                android:layout_marginLeft="10dp"
+                android:text="@string/text_hxt_cardType" />
+
+            <TextView
+                android:id="@+id/cardType"
+                style="@style/text_hxt"
+                android:layout_marginLeft="10dp"
+                android:text="内部员工卡" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/layout_hxt"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_hxt"
+                android:layout_marginLeft="10dp"
+                android:text="@string/text_hxt_bindDateTime" />
+
+            <TextView
+                android:id="@+id/bindDateTime"
+                style="@style/text_hxt"
+                android:layout_marginLeft="10dp"
+                android:text="2016-11-02 18:53:40" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.gc.materialdesign.views.ButtonRectangle
+        style="@style/buttom"
+        android:layout_below="@id/body"
+        android:onClick="unBind"
+        android:text="@string/text_unbind" />
+
+</RelativeLayout>
