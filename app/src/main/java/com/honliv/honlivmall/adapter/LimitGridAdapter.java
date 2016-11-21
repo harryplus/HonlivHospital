@@ -25,8 +25,8 @@ public class LimitGridAdapter extends BaseAdapter {
     private final Context mContext;
     private List<Product> data = new ArrayList<Product>();
 
-    public LimitGridAdapter(Context mContext) {
-        this.data = new ArrayList<>();
+    public LimitGridAdapter(Context mContext, List<Product> limitproduct) {
+        this.data = limitproduct;
         this.mContext = mContext;
     }
 
@@ -75,7 +75,6 @@ public class LimitGridAdapter extends BaseAdapter {
 
             holder.name.setText((data.get(position)).getName());
             holder.productPreTV.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中间横线
-            Log.i(TAG,"-----"+Utils.checkImagUrl(data.get(position).getPic() + ""));
             Glide.with(mContext).load(Utils.checkImagUrl(data.get(position).getPic() + "")).crossFade().placeholder(R.mipmap.picture_no).into(holder.productImg);
         }
         return view;
@@ -87,7 +86,6 @@ public class LimitGridAdapter extends BaseAdapter {
 
     public void addAll(List<Product> result) {
         this.data.addAll(result);
-        Log.i(TAG," this.data----"+ this.data.size());
     }
 
     private class GirdViewHolder {

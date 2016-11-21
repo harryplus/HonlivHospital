@@ -320,12 +320,10 @@ public class PullToRefreshView extends LinearLayout {
                 int deltaY = y - mLastMotionY;
                 if (mPullState == PULL_DOWN_STATE) {
                     // PullToRefreshView执行下拉
-                    Log.i(TAG, " pull down!parent view move!");
                     headerPrepareToRefresh(deltaY);
                     // setHeaderPadding(-mHeaderViewHeight);
                 } else if (mPullState == PULL_UP_STATE) {
                     // PullToRefreshView执行上拉
-                    Log.i(TAG, "pull up!parent view move!");
                     footerPrepareToRefresh(deltaY);
                 }
                 mLastMotionY = y;

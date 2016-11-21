@@ -29,7 +29,6 @@ public class PaymentCenterAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        Log.i(TAG, currentProductList.size() + "--size");
         return currentProductList.size();
     }
 
@@ -76,7 +75,6 @@ public class PaymentCenterAdapter extends BaseAdapter {
 
         holder.productTitleTV.setText((currentProductList.get(position))
                 .getName());
-        Log.i(TAG, currentProductList.get(position).getName());
         holder.productNumTV.setText(currentProductList.get(position)
                 .getNumber() + "");
         if (currentProductList.get(position).getPrice() > 0) {

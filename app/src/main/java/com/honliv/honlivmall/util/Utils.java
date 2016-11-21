@@ -189,7 +189,7 @@ public class Utils {
     public static String checkImagUrl(String imagerUrl) {
         if (!imagerUrl.contains("http")) {
             imagerUrl = imagerUrl.replace("{0}", "T175X228_");
-            imagerUrl = ConstantValue.HOST_URL + imagerUrl;
+            imagerUrl = ConstantValue.IMAGE_URL + imagerUrl;
         }
         return imagerUrl;
     }

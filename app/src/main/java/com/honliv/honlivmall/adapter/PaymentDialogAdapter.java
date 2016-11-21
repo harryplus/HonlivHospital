@@ -36,7 +36,6 @@ public class PaymentDialogAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        Log.i(TAG, list.size() + "");
         return list.size();
     }
 

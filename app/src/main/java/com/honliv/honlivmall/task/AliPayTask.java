@@ -60,14 +60,12 @@ public class AliPayTask extends AsyncTask<OrderInfo, Void, String> {
          * 特别注意，这里的签名逻辑需要放在服务端，切勿将私钥泄露在代码中！
          */
         String sign = sign(orderInfo);
-        Log.i(TAG, "null--" + (sign == null));
         try {
             /**
              * 仅需对sign 做URL编码
              */
             sign = URLEncoder.encode(sign, ConstantValue.CHARSET);
         } catch (Exception e) {
-            Log.i(TAG, e.toString());
         }
 
         /**
@@ -110,7 +108,6 @@ public class AliPayTask extends AsyncTask<OrderInfo, Void, String> {
                 result = -2;
             }
         }
-        Log.i(TAG, "payresult---" + result);
         GloableParams.CurrentOrder = orderInfo;
 //        Intent intent = new Intent(mActivity, OrderSubmitOkActivity.class);
 //        intent.putExtra("orderInfo", orderInfo);

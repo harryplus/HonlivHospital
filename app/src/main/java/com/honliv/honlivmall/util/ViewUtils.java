@@ -1,5 +1,13 @@
 package com.honliv.honlivmall.util;
 
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
+import android.util.Log;
+import android.widget.TextView;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,41 +20,40 @@ public class ViewUtils {
 
     private static final String TAG = "ViewUtils";
 
-//    public static void updataTimeTV(TextView timeTV, String dateStr) {
-//        try {
-//            if (dateStr == null) {
-//                dateStr = "2016年12月06日13时00分00秒";
-//            }
-//
-//            long time2time = GroupBuyActivity.getSecondMatchCurrentTime(dateStr);
-//
-//            String str = GroupBuyActivity.getLasttime(time2time + "");
-//            str = "抢购:" + str;
-//
-//            int dayPreIndex = str.indexOf(":");
-//            int dayIndex = str.indexOf("天");
-//            int hourIndex = str.indexOf("时");
-//            int minuteIndex = str.indexOf("分");
-//            int secondIndex = str.indexOf("秒");
-//
-//            SpannableStringBuilder style = new SpannableStringBuilder(str);
-//            style.setSpan(new ForegroundColorSpan(Color.RED), dayPreIndex + 1, dayIndex, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-//            style.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC),
-//                    dayPreIndex + 1, dayIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);   //设置斜体
-//            style.setSpan(new ForegroundColorSpan(Color.RED), dayIndex + 1, hourIndex, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-//            style.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC),
-//                    dayIndex + 1, hourIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);   //设置斜体
-//            style.setSpan(new ForegroundColorSpan(Color.RED), hourIndex + 1, minuteIndex, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-//            style.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC),
-//                    hourIndex + 1, minuteIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);   //设置斜体
-//            style.setSpan(new ForegroundColorSpan(Color.RED), minuteIndex + 1, secondIndex, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-//            style.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC),
-//                    minuteIndex + 1, secondIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);   //设置斜体
-//            timeTV.setText(style);
-//        } catch (Exception e) {
-//            Log.i(TAG, e.toString());
-//        }
-//    }
+    public static void updataTimeTV(TextView timeTV, String dateStr) {
+        try {
+            if (dateStr == null) {
+                dateStr = "2016年12月06日13时00分00秒";
+            }
+
+            long time2time = TimeUtils.getSecondMatchCurrentTime(dateStr);
+
+            String str = TimeUtils.getLasttime(time2time + "");
+            str = "抢购:" + str;
+
+            int dayPreIndex = str.indexOf(":");
+            int dayIndex = str.indexOf("天");
+            int hourIndex = str.indexOf("时");
+            int minuteIndex = str.indexOf("分");
+            int secondIndex = str.indexOf("秒");
+
+            SpannableStringBuilder style = new SpannableStringBuilder(str);
+            style.setSpan(new ForegroundColorSpan(Color.RED), dayPreIndex + 1, dayIndex, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+            style.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC),
+                    dayPreIndex + 1, dayIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);   //设置斜体
+            style.setSpan(new ForegroundColorSpan(Color.RED), dayIndex + 1, hourIndex, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+            style.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC),
+                    dayIndex + 1, hourIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);   //设置斜体
+            style.setSpan(new ForegroundColorSpan(Color.RED), hourIndex + 1, minuteIndex, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+            style.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC),
+                    hourIndex + 1, minuteIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);   //设置斜体
+            style.setSpan(new ForegroundColorSpan(Color.RED), minuteIndex + 1, secondIndex, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+            style.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC),
+                    minuteIndex + 1, secondIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);   //设置斜体
+            timeTV.setText(style);
+        } catch (Exception e) {
+        }
+    }
 
     /**
      * 通过传入一点格式的日期时间设定，得到和当前时间相隔的秒数

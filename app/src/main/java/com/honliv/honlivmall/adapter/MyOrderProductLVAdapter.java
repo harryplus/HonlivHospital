@@ -28,7 +28,6 @@ public class MyOrderProductLVAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        Log.i(TAG, currentProductList.size() + "--size");
         return currentProductList.size();
     }
 
@@ -58,7 +57,6 @@ public class MyOrderProductLVAdapter extends BaseAdapter {
         }
 
         holder.productTitleTV.setText((currentProductList.get(position)).getName());
-        Log.i(TAG, currentProductList.get(position).getName());
         holder.productPriceTV.setText("￥" + currentProductList.get(position).getSaleprice());
         holder.productNumTV.setText(currentProductList.get(position).getNumber() + "");
         holder.standardTV.setVisibility(View.VISIBLE);

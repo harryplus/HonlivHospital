@@ -90,7 +90,6 @@ public class JSONRPCHttpClient extends JSONRPCClient
 		request.setParams(params);
 
 		if(_debug){
-			Log.i(JSONRPCHttpClient.class.toString(), "Request: " + jsonRequest.toString());
 		}
 		
 		HttpEntity entity;
@@ -123,7 +122,6 @@ public class JSONRPCHttpClient extends JSONRPCClient
 			responseString = responseString.trim();
 			
 			if(_debug){
-				Log.i(JSONRPCHttpClient.class.toString(), "Response: " + responseString);
 			}
 			
 			JSONObject jsonResponse = new JSONObject(responseString);

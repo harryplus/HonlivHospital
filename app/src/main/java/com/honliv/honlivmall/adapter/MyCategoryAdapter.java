@@ -60,7 +60,6 @@ public class MyCategoryAdapter extends BaseAdapter {
         }
         holder.textContent.setText(categorys.get(position).getTitle());
         String picUrl = categorys.get(position).getPic();
-        Log.i(TAG,picUrl);
 //        imageLoader.displayImage(Utils.checkImagUrl(picUrl), holder.imgIcon, ImageOptionsUtils.getCategoryItemOption(), animateFirstListener);
         return view;
     }

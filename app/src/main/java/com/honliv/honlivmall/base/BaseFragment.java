@@ -2,6 +2,7 @@ package com.honliv.honlivmall.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -38,7 +39,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
 public abstract class BaseFragment<T extends CoreBasePresenter, E extends CoreBaseModel> extends SupportFragment {
     protected String TAG;
     protected OnBackToFirstListener _mBackToFirstListener;
-
+    public SharedPreferences sp;
     public T mPresenter;
     public E mModel;
     protected Context mContext;
@@ -67,8 +68,8 @@ public abstract class BaseFragment<T extends CoreBasePresenter, E extends CoreBa
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        //设置状态栏透明
-//        setStatusBarColor();
+        sp = getContext().getSharedPreferences("config", getContext().MODE_PRIVATE);
+
         mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         TAG = getClass().getSimpleName();
         binder = ButterKnife.bind(this, view);
@@ -158,7 +159,7 @@ public abstract class BaseFragment<T extends CoreBasePresenter, E extends CoreBa
     }
 
     public void showLog(String msg) {
-        Log.i(TAG,msg);
+        Log.i(TAG, msg);
     }
 
     protected void initToolbarNav(Toolbar toolbar) {
@@ -177,7 +178,7 @@ public abstract class BaseFragment<T extends CoreBasePresenter, E extends CoreBa
     /**
      * 初始化底部购物车商品
      */
-    protected  void initShopCarNumber(){
+    protected void initShopCarNumber() {
 //        shopCarNumTV = (TextView)findViewById(R.id.textShopCarNum);
 //        DbUtils db = DbUtils.create(this);
 //        List<Product> productList=null;

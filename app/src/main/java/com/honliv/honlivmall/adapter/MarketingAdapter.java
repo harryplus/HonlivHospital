@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.Product;
@@ -21,7 +22,6 @@ import java.util.List;
  * Created by Rodin on 2016/11/10.
  */
 public class MarketingAdapter extends BaseAdapter {
-    private static final String TAG = "MarketingAdapter";
     private final List<Product> products;
     private final Context mContext;
 
@@ -95,8 +95,7 @@ public class MarketingAdapter extends BaseAdapter {
                 }
             }
         });
-        String url = Utils.checkImagUrl(product.getPic() + "");
-//        imageLoader.displayImage(url, holder.imageLog, options, animateFirstListener);
+        Glide.with(mContext).load(Utils.checkImagUrl(Utils.checkImagUrl(product.getPic() + ""))).crossFade().placeholder(R.mipmap.picture_no).into(holder.imageLog);
 
         return view;
     }

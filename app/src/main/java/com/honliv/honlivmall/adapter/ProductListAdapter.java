@@ -76,8 +76,6 @@ public class ProductListAdapter extends BaseAdapter {
 
         holder.productOldPriceTV.setText("原价:￥" + currentProductList.get(position).getMarketprice());
         holder.productPriceTV.setText("现价:￥" + currentProductList.get(position).getSaleprice());
-        Log.i(TAG,currentProductList.get(position).getStockcount()+"--"+currentProductList.get(position).getName());
-
         holder.productOldPriceTV.setVisibility(View.VISIBLE);
 
         if (currentProductList.get(position).getStockcount() > 0||isBargain) {

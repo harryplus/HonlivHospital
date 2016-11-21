@@ -77,7 +77,6 @@ public class PaymentPayHintCouponAdapter extends BaseAdapter {
 				@Override
 				public void onClick(View v) {
 					
-					Log.i("logTest", "显示积分卷 onClick");
 					Holder myHolder = (Holder) v.getTag();
 					
 					CouponInfo couponInfo = (CouponInfo) myHolder.radioButton.getTag();
@@ -117,9 +116,6 @@ public class PaymentPayHintCouponAdapter extends BaseAdapter {
 		holder.limitPrice.setText( "最低消费："+ String.format("%.2f", couponInfo.getLimitPrice()));
 //		holder.usedDate.setText("使用时间："+couponInfo.getUsedDate());
 		holder.endDate.setText("截止时间："+ couponInfo.getEndDate().replace("9999-12-31"," 无限期"));
-		
-		Log.i("logTest", " position = "+position);
-		
 		return view;
 	}
 	

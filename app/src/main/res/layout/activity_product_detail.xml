@@ -595,7 +595,7 @@
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/bottomBar"
+        android:layout_alignParentBottom="true"
         android:background="@color/white">
 
         <LinearLayout

@@ -56,7 +56,6 @@ public class WeiXinPayTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(String content) {
-        Log.i(TAGS, "xxxx--" + content);
         try {
             XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
             parser.setInput(new ByteArrayInputStream(content.getBytes()), ConstantValue.CHARSET);//设置数据源编码
@@ -76,7 +75,6 @@ public class WeiXinPayTask extends AsyncTask<Void, Void, String> {
                             } else if ("err_code_des".equalsIgnoreCase(name)) {
                                 PromptManager.showToast(mContext, text);
                             }
-                            Log.i(TAGS, name + "---" + text);
                         }
                         break;
                     case XmlPullParser.END_TAG:
@@ -87,15 +85,10 @@ public class WeiXinPayTask extends AsyncTask<Void, Void, String> {
                 evnType = parser.next();
             }
             payreq.appId = ConstantValue.APP_ID;
-            Log.i(TAGS, "appId---" + payreq.appId);
             payreq.partnerId = ConstantValue.MCH_ID;
-            Log.i(TAGS, "partnerId---" + payreq.partnerId);
             payreq.packageValue = "Sign=WXPay";
-            Log.i(TAGS, "package---" + payreq.packageValue);
             payreq.nonceStr = genNonceStr();
-            Log.i(TAGS, "nonceStr---" + payreq.nonceStr);
             payreq.timeStamp = String.valueOf(genTimeStamp());
-            Log.i(TAGS, "timeStamp---" + payreq.timeStamp);
 
             List<NameValuePair> signParams = new LinkedList<NameValuePair>();
             signParams.add(new BasicNameValuePair("appid", payreq.appId));
@@ -106,11 +99,9 @@ public class WeiXinPayTask extends AsyncTask<Void, Void, String> {
             signParams.add(new BasicNameValuePair("timestamp", payreq.timeStamp));
 
             payreq.sign = genAppSign(signParams);
-            Log.i(TAGS, "sign----" + payreq.sign);
             GloableParams.api.registerApp(ConstantValue.APP_ID);
             GloableParams.api.sendReq(payreq);
         } catch (Exception e) {
-            Log.i(TAGS, e.toString());
         }
     }
 
@@ -125,14 +116,12 @@ public class WeiXinPayTask extends AsyncTask<Void, Void, String> {
             packageParams.add(new BasicNameValuePair("body", ConstantValue.APP_NAME));
             packageParams.add(new BasicNameValuePair("mch_id", ConstantValue.MCH_ID));
             packageParams.add(new BasicNameValuePair("nonce_str", nonceStr));
-            Log.i(TAGS, (orderInfo == null) + "--orderInfo--null");
             packageParams.add(new BasicNameValuePair("notify_url", "http://www.honlivmall.com/pay/payment/notify_url.aspx"));//接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
             if (orderInfo == null) {
                 return null;
             }
             packageParams.add(new BasicNameValuePair("out_trade_no", orderInfo.getOrderCode()));
             GloableParams.CurrentOrder = orderInfo;
-            Log.i(TAGS, orderInfo.getOrderCode() + "--getOrderCode");
             packageParams.add(new BasicNameValuePair("spbill_create_ip", "127.0.0.1"));//用户端实际ip
 
             String allprice = orderInfo.getAllprice();
@@ -141,7 +130,6 @@ public class WeiXinPayTask extends AsyncTask<Void, Void, String> {
             }
             allprice = ((int) Double.parseDouble(allprice) * 100) + "";
 //            allprice="1";
-            Log.i(TAGS, "allprice---" + allprice + "--out_trade_no--" + orderInfo.getOrderCode() + "--body--" + ConstantValue.APP_NAME);
 
             packageParams.add(new BasicNameValuePair("total_fee", allprice));
 
@@ -150,10 +138,8 @@ public class WeiXinPayTask extends AsyncTask<Void, Void, String> {
             packageParams.add(new BasicNameValuePair("sign", sign));
 
             String xmlstring = toXml(packageParams);
-            Log.i(TAGS, "xml----" + xmlstring);
             return xmlstring;
         } catch (Exception e) {
-            Log.i(TAGS, e.toString());
         }
         return null;
     }
@@ -176,7 +162,6 @@ public class WeiXinPayTask extends AsyncTask<Void, Void, String> {
         }
         sb.append("key=");
         sb.append(ConstantValue.MCH_KEY);
-        Log.i(TAGS, "package sign  sb--" + sb);
         String packageSign = MD5.getMessageDigest(sb.toString().getBytes()).toUpperCase();
         return packageSign;
     }
@@ -205,7 +190,6 @@ public class WeiXinPayTask extends AsyncTask<Void, Void, String> {
         sb.append("key=");
         sb.append(ConstantValue.MCH_KEY);
         String value = sb.toString();
-        Log.i(TAGS, value);
         String
                 appSign = MD5.getMessageDigest(value.getBytes()).toUpperCase();
         return appSign;

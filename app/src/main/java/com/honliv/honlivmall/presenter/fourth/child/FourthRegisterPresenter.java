@@ -58,12 +58,10 @@ public class FourthRegisterPresenter extends FourthContract.FourthRegisterPresen
 
                             @Override
                             public void onError(Throwable e) {
-                                Log.i(TAG, e.toString());
                             }
 
                             @Override
                             public void onNext(BaseResult<List<UserBean>> listBaseResult) {
-                                Log.i(TAG, listBaseResult.toString());
                             }
                         }));
         return null;

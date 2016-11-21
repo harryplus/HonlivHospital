@@ -41,7 +41,7 @@ public class FirstSelectDoctorFragment extends BaseFragment<FirstSelectDoctorPre
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_first_professor;
+        return R.layout.fragment_first_product_detail;
     }
 
     @Override

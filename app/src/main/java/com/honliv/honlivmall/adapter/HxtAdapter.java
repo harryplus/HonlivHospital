@@ -30,7 +30,6 @@ public class HxtAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        Log.i(TAG, dataList.size() + "---HxtAdapterCount");
         return dataList.size();
     }
 
@@ -59,7 +58,6 @@ public class HxtAdapter extends BaseAdapter {
             cardNo.setText(hxtBean.getCardNo());
             return view;
         } catch (Exception e) {
-            Log.i(TAG, e.toString());
         }
         return null;
     }

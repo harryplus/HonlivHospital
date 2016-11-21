@@ -1,9 +1,6 @@
 package com.honliv.honlivmall.contract;
 
 import com.honliv.honlivmall.activity.CoreBaseView;
-import com.honliv.honlivmall.bean.BaseBean;
-import com.honliv.honlivmall.bean.BaseInfo;
-import com.honliv.honlivmall.bean.BaseResult;
 import com.honliv.honlivmall.bean.HomeInfo;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.model.CoreBaseModel;
@@ -11,7 +8,6 @@ import com.honliv.honlivmall.presenter.CoreBasePresenter;
 
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import rx.Observable;
 
 
@@ -25,10 +21,14 @@ public interface FirstContract {
     interface FirstView extends CoreBaseView {
     }
 
-    interface FirstProfessorView extends CoreBaseView {
+    interface FirstProductDetailView extends CoreBaseView {
+        void updateView(Product result);
+
+        void updateAddProductFavView(String result);
     }
 
-    interface FirstDetailView extends CoreBaseView {
+    interface FirstBargainView extends CoreBaseView {
+        void updateProductLS(List<Product> result);
     }
 
     interface FirstHomeView extends CoreBaseView {
@@ -37,19 +37,25 @@ public interface FirstContract {
         void updataHomeMarketing(List<Product> result);
     }
 
-    interface FirstGuideView extends CoreBaseView {
+    interface FirstMarketingView extends CoreBaseView {
+        void updateProductLS(List<Product> result);
     }
 
     interface FirstSelectDoctorView extends CoreBaseView {
     }
 
-    interface FirstDetailModel extends CoreBaseModel {
+    interface FirstBargainModel extends CoreBaseModel {
+        Observable<List<Product>> getServiceProductLS();
     }
 
-    interface FirstProfessorModel extends CoreBaseModel {
+    interface FirstProductDetailModel extends CoreBaseModel {
+        Observable<Product> getServiceProductDetail(int pId);
+
+        Observable<String> addProductFav(int pid);
     }
 
-    interface FirstGuideModel extends CoreBaseModel {
+    interface FirstMarketingModel extends CoreBaseModel {
+        Observable<List<Product>> getServiceProductLS();
     }
 
     interface FirstSelectDoctorModel extends CoreBaseModel {
@@ -58,7 +64,8 @@ public interface FirstContract {
     abstract class FirstPresenter extends CoreBasePresenter<FirstModel, FirstView> {
     }
 
-    abstract class FirstDetailPresenter extends CoreBasePresenter<FirstDetailModel, FirstDetailView> {
+    abstract class FirstBargainPresenter extends CoreBasePresenter<FirstBargainModel, FirstBargainView> {
+        public abstract void getServiceProductLS();
     }
 
     abstract class FirstHomePresenter extends CoreBasePresenter<FirstHomeModel, FirstHomeView> {
@@ -73,10 +80,14 @@ public interface FirstContract {
         Observable<List<Product>> getServiceHomeMarketing();
     }
 
-    abstract class FirstProfessorPresenter extends CoreBasePresenter<FirstProfessorModel, FirstProfessorView> {
+    abstract class FirstProductDetailPresenter extends CoreBasePresenter<FirstProductDetailModel, FirstProductDetailView> {
+        public abstract void getServiceProductDetail(int pId);
+
+        public abstract void addProductFav(int id);
     }
 
-    abstract class FirstGuidePresenter extends CoreBasePresenter<FirstGuideModel, FirstGuideView> {
+    abstract class FirstMarketingPresenter extends CoreBasePresenter<FirstMarketingModel, FirstMarketingView> {
+        public abstract void getServiceProductLS();
     }
 
     abstract class FirstSelectDoctorPresenter extends CoreBasePresenter<FirstSelectDoctorModel, FirstSelectDoctorView> {

@@ -44,7 +44,6 @@ public class MainPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        Log.i(TAG, "viewList.size()--" + viewList.size());
         return viewList.size();
     }
 

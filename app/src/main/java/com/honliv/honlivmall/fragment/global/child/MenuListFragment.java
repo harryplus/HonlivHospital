@@ -82,7 +82,6 @@ public class MenuListFragment extends BaseFragment<MenuListPresenter, MenuListMo
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position, View view, RecyclerView.ViewHolder vh) {
-                Log.i(TAG, "setOnItemClickListener--" + position);
                 showContent(position);
             }
         });
@@ -122,7 +121,6 @@ public class MenuListFragment extends BaseFragment<MenuListPresenter, MenuListMo
         listMenus.add("馄饨类");
         listMenus.add("其他");
         ContentFragment fragment = ContentFragment.newInstance(listMenus);
-        Log.i(TAG, "showContent--" + position);
         ((GlobalOfficeSelectFragment) getParentFragment()).switchContentFragment(fragment);
     }
 

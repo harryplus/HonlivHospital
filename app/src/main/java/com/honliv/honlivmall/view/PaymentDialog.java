@@ -77,12 +77,10 @@ public class PaymentDialog {
                     initShipSpinner(payId);
                     lisener.payClick(position);
                     List<View> viewList = payAdapter.getListView();
-                    Log.i(TAG, "viewList.size()---" + viewList.size());
                     for (int i = 0; i < viewList.size(); i++) {
                         View item = viewList.get(i);
                         CheckBox radiobutton = (CheckBox) item.findViewById(R.id.radiobutton);
                         TextView content = (TextView) item.findViewById(R.id.content);
-                        Log.i(TAG, "position---" + position + "--i--" + i);
 //                        radiobutton.setChecked(true);
 //                        content.setTextColor(mActivity.getResources().getColor(R.color.background_red));
                         if (i == position) {
@@ -117,7 +115,6 @@ public class PaymentDialog {
 //            });
 //            dialog.show();
         } catch (Exception e) {
-            Log.i(TAG, e.toString());
         }
     }
 
