@@ -6,17 +6,26 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.activity.CoreBaseView;
+import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.model.CoreBaseModel;
 import com.honliv.honlivmall.presenter.CoreBasePresenter;
 import com.honliv.honlivmall.util.TUtil;
 import com.honliv.honlivmall.util.ToastUtils;
+import com.lidroid.xutils.DbUtils;
+import com.lidroid.xutils.db.sqlite.Selector;
+import com.lidroid.xutils.exception.DbException;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -149,6 +158,7 @@ public abstract class BaseFragment<T extends CoreBasePresenter, E extends CoreBa
     }
 
     public void showLog(String msg) {
+        Log.i(TAG,msg);
     }
 
     protected void initToolbarNav(Toolbar toolbar) {
@@ -162,5 +172,39 @@ public abstract class BaseFragment<T extends CoreBasePresenter, E extends CoreBa
         });
 
 //        initToolbarMenu(toolbar);
+    }
+
+    /**
+     * 初始化底部购物车商品
+     */
+    protected  void initShopCarNumber(){
+//        shopCarNumTV = (TextView)findViewById(R.id.textShopCarNum);
+//        DbUtils db = DbUtils.create(this);
+//        List<Product> productList=null;
+//        try {
+//            if(GloableParams.USERID>0){
+//                productList = db.findAll(Selector.from(Product.class)
+//                        .where("userId","=", GloableParams.USERID));
+//            }else{
+//                productList = db.findAll(Selector.from(Product.class)
+//                        .where("userId","=",-100));
+//            }
+//        } catch (DbException e) {
+//            e.printStackTrace();
+//        }
+//        if(productList!=null){
+//            if(productList.size() > 0){
+//                int num = 0;
+//                for (int i = 0; i < productList.size(); i++) {
+//                    num+=productList.get(i).getNumber();
+//                }
+//                shopCarNumTV.setText(""+num);
+//                shopCarNumTV.setVisibility(View.VISIBLE);
+//            }else{
+//                shopCarNumTV.setVisibility(View.INVISIBLE);
+//            }
+//        }else{
+//            shopCarNumTV.setVisibility(View.INVISIBLE);
+//        }
     }
 }

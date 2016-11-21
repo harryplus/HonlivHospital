@@ -10,11 +10,6 @@ import android.widget.TextView;
 
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.Product;
-import com.honliv.honlivmall.listener.AnimateFirstDisplayListener;
-import com.honliv.honlivmall.util.ImageOptionsUtils;
-import com.honliv.honlivmall.util.Utils;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 import java.util.List;
 
@@ -24,14 +19,11 @@ import java.util.List;
 public class MyOrderProductLVAdapter extends BaseAdapter {
 
     private static final String TAG = "MyOrderProductLVAdapter";
-    private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
-    private ImageLoader imageLoader;
     private List<Product> currentProductList;
     private Context mContext;
 
-    public MyOrderProductLVAdapter(Context mContext, ImageLoader imageLoader, List<Product> currentProductList) {
+    public MyOrderProductLVAdapter(Context mContext, List<Product> currentProductList) {
         this.mContext = mContext;
-        this.imageLoader = imageLoader;
         this.currentProductList = currentProductList;
     }
 
@@ -76,7 +68,7 @@ public class MyOrderProductLVAdapter extends BaseAdapter {
         } else {
             holder.standardTV.setText("规格: 无");
         }
-        imageLoader.displayImage(Utils.checkImagUrl(currentProductList.get(position).getPic() + ""), holder.productImg, ImageOptionsUtils.getMyOrderOptions(), animateFirstListener);
+//        imageLoader.displayImage(Utils.checkImagUrl(currentProductList.get(position).getPic() + ""), holder.productImg, ImageOptionsUtils.getMyOrderOptions(), animateFirstListener);
         return view;
     }
 

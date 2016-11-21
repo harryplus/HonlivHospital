@@ -1,20 +1,17 @@
 package com.honliv.honlivmall.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.Product;
-import com.honliv.honlivmall.listener.AnimateFirstDisplayListener;
-import com.honliv.honlivmall.util.ImageOptionsUtils;
 import com.honliv.honlivmall.util.Utils;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,23 +22,11 @@ import java.util.List;
 public class BargainGridAdapter extends BaseAdapter {
     private static final String TAG = "BargainGridAdapter";
     private final Context mContext;
-    private final DisplayImageOptions options;
-    //抢购标志位
-    private final boolean isMaketing;
-    //喜欢商品标志位
-    private final boolean isLike;
-    protected ImageLoader imageLoader = ImageLoader.getInstance();
     private List<Product> data = new ArrayList<Product>();
-    private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
-    public BargainGridAdapter(List<Product> data, Context mContext, boolean isMaketing, boolean isLike) {
-        if (data != null)
-            this.data = data;
+    public BargainGridAdapter(Context mContext) {
+        this.data = new ArrayList<>();
         this.mContext = mContext;
-
-        this.isMaketing = isMaketing;
-        this.isLike = isLike;
-        options = ImageOptionsUtils.getHomeGridOption();
     }
 
     @Override
@@ -84,7 +69,10 @@ public class BargainGridAdapter extends BaseAdapter {
         if (data.size() > 0) {
             holder.productPriceTV.setText("￥" + (data.get(position)).getSaleprice());//特价专区现价
             holder.name.setText((data.get(position)).getName());
-            imageLoader.displayImage(Utils.checkImagUrl(data.get(position).getPic() + ""), holder.productImg, options, animateFirstListener);
+            Log.i(TAG,"-----"+Utils.checkImagUrl(data.get(position).getPic() + ""));
+            Glide.with(mContext).load(Utils.checkImagUrl(data.get(position).getPic() + "")).crossFade().placeholder(R.mipmap.picture_no).into(holder.productImg);
+
+//            imageLoader.displayImage(Utils.checkImagUrl(data.get(position).getPic() + ""), holder.productImg, options, animateFirstListener);
         }
         return view;
     }
@@ -93,7 +81,12 @@ public class BargainGridAdapter extends BaseAdapter {
         this.data = data;
     }
 
-    static class GirdViewHolder {
+    public void addAll(List<Product> cheapproductlist) {
+        this.data.addAll(cheapproductlist);
+        Log.i(TAG," this.data----"+ this.data.size());
+    }
+
+    private class GirdViewHolder {
         public TextView name;
         ImageView productImg;//商品图标
         TextView productPriceTV;//商品价

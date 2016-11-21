@@ -1,6 +1,5 @@
 package com.honliv.honlivmall.model.fourth.child;
 
-import com.honliv.honlivmall.api.FouthApi;
 import com.honliv.honlivmall.contract.FourthContract;
 import com.honliv.honlivmall.bean.BaseResult;
 import com.honliv.honlivmall.bean.UserBean;
@@ -20,6 +19,7 @@ public class FourthLoginModel implements FourthContract.FourthLoginModel {
     @Override
     public Observable<BaseResult<List<UserBean>>> login(UserBean bean) {
         HashMap<String,String> map=new HashMap<>();
-        return RxService.createApi(FouthApi.class).login(map).compose(RxUtil.rxSchedulerHelper());
+//        return RxService.createApi(FouthApi.class).login(map).compose(RxUtil.rxSchedulerHelper());
+        return null;
     }
 }

@@ -12,13 +12,8 @@ import android.widget.TextView;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.Product;
-import com.honliv.honlivmall.listener.AnimateFirstDisplayListener;
 import com.honliv.honlivmall.util.BuilderTools;
-import com.honliv.honlivmall.util.ImageOptionsUtils;
 import com.honliv.honlivmall.util.Utils;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 import java.util.List;
 
@@ -29,13 +24,10 @@ public class MarketingAdapter extends BaseAdapter {
     private static final String TAG = "MarketingAdapter";
     private final List<Product> products;
     private final Context mContext;
-    private final ImageLoader imageLoader;
-    private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
-    public MarketingAdapter(Context mContext, List<Product> products, ImageLoader imageLoader) {
+    public MarketingAdapter(Context mContext, List<Product> products) {
         this.mContext = mContext;
         this.products = products;
-        this.imageLoader = imageLoader;
     }
 
     @Override
@@ -103,9 +95,8 @@ public class MarketingAdapter extends BaseAdapter {
                 }
             }
         });
-        DisplayImageOptions options = ImageOptionsUtils.getMarketOption();
         String url = Utils.checkImagUrl(product.getPic() + "");
-        imageLoader.displayImage(url, holder.imageLog, options, animateFirstListener);
+//        imageLoader.displayImage(url, holder.imageLog, options, animateFirstListener);
 
         return view;
     }

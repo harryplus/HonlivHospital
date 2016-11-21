@@ -10,4 +10,14 @@ public class SecondMainPresenter extends SecondContract.SecondMainPresenter {
     public void onStart() {
 
     }
+
+    @Override
+    public void getSeaviceSearchKeyList() {
+        mRxManager.add(mModel
+                .getSeaviceSearchKeyList()
+                .subscribe(result -> {
+                    if (result != null)
+                        mView.updataSearchKeyList(result);
+                }));
+    }
 }

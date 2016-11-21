@@ -77,4 +77,7 @@ dependencies {
     compile 'com.github.vajro:MaterialDesignLibrary:1.6'
     compile 'org.apache.httpcomponents:httpcore:4.4.1'
     compile 'org.apache.httpcomponents:httpclient:4.5'
+    // Glide
+    compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    compile "com.github.bumptech.glide:okhttp-integration:$rootProject.glideokhttpVersion"
 }

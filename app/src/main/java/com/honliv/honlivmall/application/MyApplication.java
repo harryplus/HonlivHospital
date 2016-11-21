@@ -11,7 +11,6 @@ import android.view.WindowManager;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.R;
-import com.honliv.honlivmall.api.FouthApi;
 import com.honliv.honlivmall.util.RxManager;
 
 import java.io.File;
@@ -27,9 +26,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class MyApplication extends Application {
     private static final String TAG = "MyApplication";
-    public static RxManager mRxManager = new RxManager();
-    public static Retrofit retrofit = null;
-    public static FouthApi fouthApi = null;
     private static MyApplication instance;
     public static File SaveFile;
 
@@ -64,10 +60,6 @@ public class MyApplication extends Application {
      */
     private void initJar() {
         Fresco.initialize(this);
-        retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(ConstantValue.HOST_URL).build();
-        fouthApi = retrofit.create(FouthApi.class);
     }
 
     public static synchronized MyApplication getInstance() {

@@ -23,7 +23,6 @@ import com.honliv.honlivmall.util.PromptManager;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.exception.DbException;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -38,8 +37,7 @@ public abstract class BaseActivity extends Activity {
 	public SharedPreferences sp;
 	public TextView shopCarNumTV;
 	public Bundle savedInstanceState;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();
-	
+
 	Intent intent;
 	public BaseActivity() {
 		super();

@@ -2,20 +2,17 @@ package com.honliv.honlivmall.adapter;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.Product;
-import com.honliv.honlivmall.listener.AnimateFirstDisplayListener;
-import com.honliv.honlivmall.util.ImageOptionsUtils;
 import com.honliv.honlivmall.util.Utils;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,17 +23,11 @@ import java.util.List;
 public class LimitGridAdapter extends BaseAdapter {
     private static final String TAG = "LimitGridAdapter";
     private final Context mContext;
-    private final DisplayImageOptions options;
-    protected ImageLoader imageLoader = ImageLoader.getInstance();
     private List<Product> data = new ArrayList<Product>();
-    private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
-    public LimitGridAdapter(List<Product> data, Context mContext) {
-        if (data != null)
-            this.data = data;
+    public LimitGridAdapter(Context mContext) {
+        this.data = new ArrayList<>();
         this.mContext = mContext;
-
-        options = ImageOptionsUtils.getHomeGridOption();
     }
 
     @Override
@@ -84,7 +75,8 @@ public class LimitGridAdapter extends BaseAdapter {
 
             holder.name.setText((data.get(position)).getName());
             holder.productPreTV.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中间横线
-            imageLoader.displayImage(Utils.checkImagUrl(data.get(position).getPic() + ""), holder.productImg, options, animateFirstListener);
+            Log.i(TAG,"-----"+Utils.checkImagUrl(data.get(position).getPic() + ""));
+            Glide.with(mContext).load(Utils.checkImagUrl(data.get(position).getPic() + "")).crossFade().placeholder(R.mipmap.picture_no).into(holder.productImg);
         }
         return view;
     }
@@ -93,7 +85,12 @@ public class LimitGridAdapter extends BaseAdapter {
         this.data = data;
     }
 
-    static class GirdViewHolder {
+    public void addAll(List<Product> result) {
+        this.data.addAll(result);
+        Log.i(TAG," this.data----"+ this.data.size());
+    }
+
+    private class GirdViewHolder {
         public TextView name;
         public TextView limitTime;
         ImageView productImg;//商品图标

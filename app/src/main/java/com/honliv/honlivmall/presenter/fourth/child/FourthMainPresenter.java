@@ -10,4 +10,14 @@ public class FourthMainPresenter extends  FourthContract.FourthMainPresenter {
     public void onStart() {
 
     }
+
+    @Override
+    public void getNativeAllShopCart(int userId) {
+        mRxManager.add(mModel
+                .getNativeAllShopCart(userId)
+                .subscribe(result -> {
+                    if (result != null)
+                        mView.updataAllShopCart(result);
+                }));
+    }
 }

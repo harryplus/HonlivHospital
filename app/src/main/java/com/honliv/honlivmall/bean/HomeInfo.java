@@ -1,13 +1,24 @@
 package com.honliv.honlivmall.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 
-public class HomeInfo {
+public class HomeInfo implements Serializable{
     private List<HomeBanner> home_banner; //轮转大图
     private List<LeftMenu> classifies; ///首页左菜单
     private List<HomeBrand> brandlist; //品牌
     private List<GalleryProduct> galleryproduct;//首页gallery产品
+
+    public List<Product> getCheapproductlist() {
+        return cheapproductlist;
+    }
+
+    public void setCheapproductlist(List<Product> cheapproductlist) {
+        this.cheapproductlist = cheapproductlist;
+    }
+
+    private List<Product> cheapproductlist;//首页特价商品
 
     public List<HomeBanner> getHome_banner() {
         return home_banner;

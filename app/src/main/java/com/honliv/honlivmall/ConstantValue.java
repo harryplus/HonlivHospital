@@ -7,7 +7,7 @@ public interface ConstantValue {
     /**
      * 图片地址前缀
      */
-    String HOST_URL = "http://10.1.33.61:8090/"; //本app官方网址
+    String HOST_URL = "http://www.honlivmall.com/api/v1/"; //本app官方网址
     /**
      * 接口地址
      */

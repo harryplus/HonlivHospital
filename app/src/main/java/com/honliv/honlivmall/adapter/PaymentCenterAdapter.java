@@ -10,11 +10,6 @@ import android.widget.TextView;
 
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.Product;
-import com.honliv.honlivmall.listener.AnimateFirstDisplayListener;
-import com.honliv.honlivmall.util.ImageOptionsUtils;
-import com.honliv.honlivmall.util.Utils;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -26,16 +21,12 @@ public class PaymentCenterAdapter extends BaseAdapter {
     private static final String TAG = "PaymentCenterAdapter";
     ArrayList<Product> currentProductList;// 要展示的的商品列表
     String tempStand = "";
-    private ImageLoader imageLoader;
     private Context mContext;
 
-    public PaymentCenterAdapter(Context mContext, ArrayList<Product> currentProductList, ImageLoader imageLoader) {
+    public PaymentCenterAdapter(Context mContext, ArrayList<Product> currentProductList) {
         this.currentProductList = currentProductList;
         this.mContext = mContext;
-        this.imageLoader = imageLoader;
     }
-
-    private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
     public int getCount() {
         Log.i(TAG, currentProductList.size() + "--size");
@@ -139,11 +130,8 @@ public class PaymentCenterAdapter extends BaseAdapter {
                 holder.standardTV.setText("规格 ：无");
             }
 
-            /**
-             * 显示图片 参数1：图片url 参数2：显示图片的控件 参数3：显示图片的设置 参数4：监听器
-             */
-            imageLoader.displayImage(Utils.checkImagUrl(currentProductList.get(position).getPic() + ""), holder.productImg, ImageOptionsUtils.getMyOrderOptions(),
-                    animateFirstListener);
+//            imageLoader.displayImage(Utils.checkImagUrl(currentProductList.get(position).getPic() + ""), holder.productImg, ImageOptionsUtils.getMyOrderOptions(),
+//                    animateFirstListener);
         }
         return view;
     }

@@ -7,17 +7,18 @@
     android:orientation="vertical">
 
     <include
-        android:id="@+id/layout_top"
-        layout="@layout/toolbar" />
+        android:id="@+id/home_search_title"
+        layout="@layout/layout_title_bar" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout_top">
+        android:layout_below="@id/home_search_title">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/layout_viewpaper"
@@ -43,6 +44,6 @@
 
             <include layout="@layout/layout_main_body" />
 
-        </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
 </RelativeLayout>

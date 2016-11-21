@@ -12,10 +12,6 @@ import android.widget.TextView;
 import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.Product;
-import com.honliv.honlivmall.listener.AnimateFirstDisplayListener;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 import java.util.List;
 
@@ -26,16 +22,11 @@ public class ProductListAdapter extends BaseAdapter {
     private static final String TAG = "ProductListAdapter";
     private final Context mContext;
     private final List<Product> currentProductList;
-    private final DisplayImageOptions options;
-    private final ImageLoader imageLoader;
     private final boolean isBargain;
-    private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
-    public ProductListAdapter(Context mContext, List<Product> currentProductList, ImageLoader imageLoader, DisplayImageOptions options, boolean isBargain) {
+    public ProductListAdapter(Context mContext, List<Product> currentProductList, boolean isBargain) {
         this.mContext = mContext;
         this.currentProductList = currentProductList;
-        this.imageLoader = imageLoader;
-        this.options = options;
         this.isBargain=isBargain;
     }
 
@@ -108,7 +99,7 @@ public class ProductListAdapter extends BaseAdapter {
          * 参数3：显示图片的设置
          * 参数4：监听器
          */
-        imageLoader.displayImage(tempImgUrl, holder.productImg, options, animateFirstListener);
+//        imageLoader.displayImage(tempImgUrl, holder.productImg, options, animateFirstListener);
         return view;
     }
 

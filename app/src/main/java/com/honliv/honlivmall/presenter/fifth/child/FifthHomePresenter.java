@@ -10,4 +10,11 @@ public class FifthHomePresenter extends FifthContract.FifthHomePresenter  {
     public void onStart() {
 
     }
+
+    @Override
+    public void getServiceUserInfo(int userId) {
+        mRxManager.add(mModel.getServiceUserInfo( userId).subscribe(result->{
+            mView.updateView(result);
+        }));
+    }
 }

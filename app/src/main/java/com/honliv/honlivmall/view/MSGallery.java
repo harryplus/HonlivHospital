@@ -17,10 +17,6 @@ import android.widget.TextView;
 import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.GalleryProduct;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.util.ArrayList;
 
@@ -40,9 +36,6 @@ public class MSGallery extends Gallery {
 
     private Context context;
 
-    protected ImageLoader imageLoader = ImageLoader.getInstance();
-    DisplayImageOptions options;
-
     private GalleryProduct galleryProduct;
 
     public MSGallery(Context context, GalleryProduct galleryProduct) {
@@ -52,8 +45,6 @@ public class MSGallery extends Gallery {
                 .get(getContext());
         mTouchSlop = configuration.getScaledTouchSlop();
         this.setStaticTransformationsEnabled(true);
-
-        initImageLoader();//初始化图片加载器
         this.galleryProduct = galleryProduct;
     }
 
@@ -177,7 +168,7 @@ public class MSGallery extends Gallery {
                 imagerUrl = ConstantValue.IMAGE_URL + imagerUrl;
             }
 
-            imageLoader.displayImage(imagerUrl, holder.productImg, options);
+//            imageLoader.displayImage(imagerUrl, holder.productImg, options);
             if (view != null) {
                 holder.name.setText(galleryProduct.getProductlist().get(position % galleryProduct.getProductlist().size()).getName());
                 holder.productPriceTV.setText("￥" + galleryProduct.getProductlist().get(position % galleryProduct.getProductlist().size()).getSaleprice() + "");
@@ -191,18 +182,5 @@ public class MSGallery extends Gallery {
         //TextView productTitleTV;//商品标题
         TextView productPriceTV;//商品价
         public TextView name;
-    }
-
-    private void initImageLoader() {
-        options = new DisplayImageOptions.Builder()
-                .showImageForEmptyUri(R.drawable.ic_empty)
-                .showImageOnFail(R.drawable.ic_error)
-                .resetViewBeforeLoading(true)
-                .cacheInMemory(true)
-                .cacheOnDisc(true)
-                .imageScaleType(ImageScaleType.EXACTLY)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .displayer(new FadeInBitmapDisplayer(2))
-                .build();
     }
 }

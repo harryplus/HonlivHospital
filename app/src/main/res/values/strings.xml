@@ -161,4 +161,5 @@
     <string name="bottom_layout_search">搜索</string>
     <string name="bottom_layout_class">分类</string>
     <string name="bottom_layout_shopping">购物车</string>
+    <string name="reLogin">登陆状态错误,请重新登录</string>
 </resources>

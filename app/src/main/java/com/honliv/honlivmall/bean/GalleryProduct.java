@@ -1,8 +1,9 @@
 package com.honliv.honlivmall.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class GalleryProduct {
+public class GalleryProduct implements Serializable {
 
 	private String name;
 	private String name2;

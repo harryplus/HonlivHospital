@@ -3,10 +3,12 @@ package com.honliv.honlivmall.contract;
 
 import com.honliv.honlivmall.activity.CoreBaseView;
 import com.honliv.honlivmall.bean.BaseResult;
+import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.bean.UserBean;
 import com.honliv.honlivmall.model.CoreBaseModel;
 import com.honliv.honlivmall.presenter.CoreBasePresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
@@ -22,6 +24,7 @@ public interface FourthContract {
     }
 
     interface FourthMainView extends CoreBaseView {
+        void updataAllShopCart(ArrayList<Product> result);
     }
 
     interface FourthLoginView extends CoreBaseView {
@@ -49,6 +52,7 @@ public interface FourthContract {
     }
 
     interface FourthMainModel extends CoreBaseModel {
+        Observable<ArrayList<Product>> getNativeAllShopCart(int userId);
     }
 
     interface FourthLoginModel extends CoreBaseModel {
@@ -83,6 +87,7 @@ public interface FourthContract {
     }
 
     abstract class FourthMainPresenter extends CoreBasePresenter<FourthMainModel, FourthMainView> {
+        public abstract void getNativeAllShopCart(int userId);
     }
 
     abstract class FourthLoginPresenter extends CoreBasePresenter<FourthLoginModel, FourthLoginView> {

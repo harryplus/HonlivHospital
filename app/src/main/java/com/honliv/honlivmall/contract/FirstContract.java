@@ -1,8 +1,19 @@
 package com.honliv.honlivmall.contract;
 
 import com.honliv.honlivmall.activity.CoreBaseView;
+import com.honliv.honlivmall.bean.BaseBean;
+import com.honliv.honlivmall.bean.BaseInfo;
+import com.honliv.honlivmall.bean.BaseResult;
+import com.honliv.honlivmall.bean.HomeInfo;
+import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.model.CoreBaseModel;
 import com.honliv.honlivmall.presenter.CoreBasePresenter;
+
+import java.util.List;
+
+import okhttp3.ResponseBody;
+import rx.Observable;
+
 
 /**
  * Created by Rodin on 2016/11/15.
@@ -21,6 +32,9 @@ public interface FirstContract {
     }
 
     interface FirstHomeView extends CoreBaseView {
+        void updataHomeInfo(HomeInfo info);
+
+        void updataHomeMarketing(List<Product> result);
     }
 
     interface FirstGuideView extends CoreBaseView {
@@ -48,9 +62,15 @@ public interface FirstContract {
     }
 
     abstract class FirstHomePresenter extends CoreBasePresenter<FirstHomeModel, FirstHomeView> {
+        public abstract void  getServiceHomeInfo(String s);
+
+        public abstract void getServiceHomeMarketing();
     }
 
     interface FirstHomeModel extends CoreBaseModel {
+        Observable<HomeInfo> getServiceHomeInfo(String s);
+
+        Observable<List<Product>> getServiceHomeMarketing();
     }
 
     abstract class FirstProfessorPresenter extends CoreBasePresenter<FirstProfessorModel, FirstProfessorView> {

@@ -10,4 +10,11 @@ public class ThirdMainPresenter extends   ThirdContract. ThirdMainPresenter {
     public void onStart() {
 
     }
+
+    @Override
+    public void getServiceCategoryList() {
+        mRxManager.add(mModel.getServiceCategoryList().subscribe(result->{
+            mView.updateView(result);
+        }));
+    }
 }

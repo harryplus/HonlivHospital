@@ -3,10 +3,9 @@ package com.honliv.honlivmall.bean;
 import java.io.Serializable;
 
 /**
- * Created by Rodin on 2016/11/14.
+ * Created by Rodin on 2016/11/20.
  */
-public class BaseResult<T> implements Serializable {
-    private T result;
+public class BaseInfo<T> implements Serializable {
 
     public String getStatus() {
         return status;
@@ -25,5 +24,5 @@ public class BaseResult<T> implements Serializable {
     }
 
     private String status;
-
+    private T result;
 }

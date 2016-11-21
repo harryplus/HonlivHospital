@@ -1,122 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@drawable/home_backgroud">
 
-    <RelativeLayout style="@style/layout_user_title">
+    <RelativeLayout
+        android:id="@+id/shopcar_title_rel"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:layout_alignParentTop="true"
+        android:background="@color/background_red"
+        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/head"
+        <TextView
+            android:id="@+id/shopcar_update_text"
+            style="@style/style_15_EBEBEB_BOLD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:src="@mipmap/ic_launcher" />
+            android:background="@drawable/head_button"
+            android:gravity="center"
+            android:text="清空"
+            android:visibility="gone" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/shopcar_back_text"
+            style="@style/style_15_EBEBEB_BOLD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/head"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="5dp"
-            android:text="@string/disLogin"
-            android:textSize="15sp" />
+            android:background="@drawable/back_btn"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="goBack"
+            android:visibility="visible" />
 
         <TextView
-            android:id="@+id/login"
+            android:id="@+id/shopcar_title_text"
+            style="@style/style_18_BEBEBE_BOLD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/name"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="5dp"
-            android:text="@string/text_login"
-            android:textSize="15sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <ImageView
-            android:id="@+id/ic_setting_card"
-            style="@style/setting_image" />
+            android:layout_centerInParent="true"
+            android:text="购物车" />
 
         <TextView
-            android:id="@+id/setting_card"
-            style="@style/setting_text"
+            android:id="@+id/shopcar_delete_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/ic_setting_card"
-            android:text="@string/setting_card" />
-
-        <ImageView style="@style/setting_go" />
+            android:background="@drawable/shop_dele"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="deleteProduct" />
     </RelativeLayout>
 
-    <View style="@style/setting_line" />
+    <FrameLayout
+        android:id="@+id/shopcar_bottom_FL"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
+        <RelativeLayout
+            android:id="@+id/shopcar_bottom_rel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:padding="2.0dip">
 
-        <ImageView
-            android:id="@+id/ic_setting_appoint"
-            style="@style/setting_image" />
+            <TextView
+                android:id="@+id/shopcar_total_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10.0dip"
+                android:text="总计："
+                android:textColor="@color/black"
+                android:textSize="20dip" />
 
-        <TextView
-            android:id="@+id/setting_appoint"
-            style="@style/setting_text"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/ic_setting_appoint"
-            android:text="@string/setting_appoint" />
+            <TextView
+                android:id="@+id/shopcar_allprice_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="10dip"
+                android:layout_toRightOf="@id/shopcar_total_text"
+                android:text="￥0.00"
+                android:textColor="@color/red"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-        <ImageView style="@style/setting_go" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/shopcar_toPay_text"
+                style="@style/style_15_EBEBEB_BOLD"
+                android:layout_width="85dp"
+                android:layout_height="43dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="right"
+                android:layout_marginRight="6dp"
+                android:background="@drawable/product_detail_shop_button"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="goSubmit"
+                android:text="去结算"
+                android:textSize="13sp" />
+        </RelativeLayout>
+    </FrameLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:background="@color/background_gray" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
+    <LinearLayout
+        android:id="@+id/shopcar_body_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/shopcar_bottom_FL"
+        android:layout_below="@id/shopcar_title_rel"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/ic_setting_about"
-            style="@style/setting_image" />
+        <ListView
+            android:id="@+id/shopcar_product_list"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2.0dip"
+            android:cacheColorHint="#00000000"
+            android:divider="@drawable/listview_item_line"
+            android:fadeScrollbars="false"
+            android:headerDividersEnabled="true"
+            android:scrollbarFadeDuration="0" />
 
-        <TextView
-            android:id="@+id/setting_about"
-            style="@style/setting_text"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/ic_setting_about"
-            android:text="@string/setting_about" />
+        <RelativeLayout
+            android:id="@+id/shopcar_prom"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
-        <ImageView style="@style/setting_go" />
-    </RelativeLayout>
+            <!-- android:text="您可享受以下优惠：" -->
+            <TextView
+                android:id="@+id/shopcar_prom_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5.0dip"
+                android:textColor="@color/black"
+                android:textSize="20dip" />
 
-    <View style="@style/setting_line" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/shopcar_prom_text"
+                android:layout_marginLeft="25dip"
+                android:layout_marginRight="10dip"
+                android:textColor="@color/red"
+                android:textSize="18sp" />
+            <!--                     android:text="可以享受的优惠活动信息（满减、打折）" -->
+        </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
+    <TextView
+        android:id="@+id/shopcar_null_text"
+        style="@style/style_20_666666"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="您的购物车中没有商品"
+        android:visibility="gone" />
 
-        <ImageView
-            android:id="@+id/ic_setting_recommend"
-            style="@style/setting_image" />
+    <ImageView
+        android:id="@+id/shopcar_default_nullimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/shopcar_null_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/shopcar"
+        android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/setting_recommend"
-            style="@style/setting_text"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/ic_setting_recommend"
-            android:text="@string/setting_recommend" />
 
-        <ImageView style="@style/setting_go" />
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/shopcar_toBuy_text"
+        style="@style/style_17_FFFFFF_BOLD"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shopcar_null_text"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_long"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="goShopAgain"
+        android:text="再 去 逛 逛"
+        android:visibility="gone" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:background="@color/background_gray" />
-</LinearLayout>
+</RelativeLayout>

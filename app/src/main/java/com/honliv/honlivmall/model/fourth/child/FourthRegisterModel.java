@@ -2,7 +2,6 @@ package com.honliv.honlivmall.model.fourth.child;
 
 import com.google.gson.Gson;
 import com.honliv.honlivmall.ConstantValue;
-import com.honliv.honlivmall.api.FouthApi;
 import com.honliv.honlivmall.contract.FourthContract;
 import com.honliv.honlivmall.bean.BaseResult;
 import com.honliv.honlivmall.bean.UserBean;
@@ -24,7 +23,8 @@ public class FourthRegisterModel implements FourthContract.FourthRegisterModel {
         HashMap<String, String> map = new HashMap<>();
         map.put("UserData", new Gson().toJson(bean));
         map.put("VcodeData", VcodeData);
-        return RxService.createApi(FouthApi.class).register(map).compose(RxUtil.rxSchedulerHelper());
+//        return RxService.createApi(FouthApi.class).register(map).compose(RxUtil.rxSchedulerHelper());
+        return null;
     }
 
     @Override
@@ -35,6 +35,7 @@ public class FourthRegisterModel implements FourthContract.FourthRegisterModel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return RxService.createApi(FouthApi.class).getVerfyVode(map).compose(RxUtil.rxSchedulerHelper());
+//        return RxService.createApi(FouthApi.class).getVerfyVode(map).compose(RxUtil.rxSchedulerHelper());
+        return null;
     }
 }

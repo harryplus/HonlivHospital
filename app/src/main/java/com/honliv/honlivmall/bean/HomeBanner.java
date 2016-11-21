@@ -1,10 +1,13 @@
 package com.honliv.honlivmall.bean;
+
+import java.io.Serializable;
+
 /**
  * 首页banner图片信息
  * @author wang
  *
  */
-public class HomeBanner {
+public class HomeBanner implements Serializable {
 	private int id; 
 	private String title;
 	private String pic;
