@@ -18,16 +18,20 @@ import com.honliv.honlivmall.util.Utils;
 
 import java.util.List;
 
+import me.yokeyword.fragmentation.SupportFragment;
+
 /**
  * Created by Rodin on 2016/11/10.
  */
 public class MarketingAdapter extends BaseAdapter {
     private final List<Product> products;
     private final Context mContext;
+    private final SupportFragment fragment;
 
-    public MarketingAdapter(Context mContext, List<Product> products) {
+    public MarketingAdapter(Context mContext, SupportFragment fragment, List<Product> products) {
         this.mContext = mContext;
         this.products = products;
+        this.fragment=fragment;
     }
 
     @Override
@@ -85,7 +89,7 @@ public class MarketingAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if (GloableParams.USERID < 0) {
                     //弹出登陆按钮
-                    BuilderTools.showLoginDialog(mContext, "抢购需要登录");
+                    BuilderTools.showLoginDialog(mContext,fragment, "抢购需要登录");
                 } else {
                     Intent intent = new Intent();
 //                    intent.setClass(mContext, ProductDetailActivity.class);

@@ -1,5 +1,7 @@
 package com.honliv.honlivmall.model.first.child;
 
+import android.util.Log;
+
 import com.honliv.honlivmall.bean.HomeInfo;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.contract.FirstContract;

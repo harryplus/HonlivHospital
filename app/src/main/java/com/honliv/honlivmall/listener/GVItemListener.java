@@ -12,6 +12,8 @@ import com.honliv.honlivmall.util.BuilderTools;
 
 import java.util.List;
 
+import me.yokeyword.fragmentation.SupportFragment;
+
 /**
  * Created by Rodin on 2016/11/1.
  */
@@ -19,13 +21,15 @@ public class GVItemListener implements AdapterView.OnItemClickListener {
 
     private final List<Product> data;
     private final boolean flag;
+    private final SupportFragment fragment;
     private Context mContext;
 
 
-    public GVItemListener(Context mContext, List<Product> data, boolean flag) {
+    public GVItemListener(Context mContext, SupportFragment fragment, List<Product> data, boolean flag) {
         this.mContext = mContext;
         this.data = data;
         this.flag = flag;
+        this.fragment=fragment;
     }
 
     @Override
@@ -34,7 +38,7 @@ public class GVItemListener implements AdapterView.OnItemClickListener {
 
         if (GloableParams.USERID < 0 && flag) {
             //弹出登陆按钮
-            BuilderTools.showLoginDialog(mContext,"需要登录");
+            BuilderTools.showLoginDialog(mContext,fragment,"需要登录");
         } else {
             if (data.size() > 0) {
                 position = position % data.size();

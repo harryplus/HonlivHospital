@@ -74,11 +74,13 @@ public class MainPagerAdapter extends PagerAdapter {
     }
 
     public void addAll(List<HomeBanner> home_banner) {
-        viewList.clear();
-        this.viewpaperData.addAll(home_banner);
-        for (HomeBanner bean : viewpaperData) {
-            View view = View.inflate(mContext, R.layout.viewpaper_item, null);
-            viewList.add(view);
+        if (home_banner != null) {
+            viewList.clear();
+            this.viewpaperData.addAll(home_banner);
+            for (HomeBanner bean : viewpaperData) {
+                View view = View.inflate(mContext, R.layout.viewpaper_item, null);
+                viewList.add(view);
+            }
         }
     }
 }

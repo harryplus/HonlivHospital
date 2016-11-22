@@ -69,9 +69,8 @@ public class BargainGridAdapter extends BaseAdapter {
         if (data.size() > 0) {
             holder.productPriceTV.setText("￥" + (data.get(position)).getSaleprice());//特价专区现价
             holder.name.setText((data.get(position)).getName());
-            Glide.with(mContext).load(Utils.checkImagUrl(data.get(position).getPic() + "")).crossFade().placeholder(R.mipmap.picture_no).into(holder.productImg);
 
-//            imageLoader.displayImage(Utils.checkImagUrl(data.get(position).getPic() + ""), holder.productImg, options, animateFirstListener);
+            Glide.with(mContext).load(Utils.checkImagUrl(Utils.checkImagUrl(data.get(position).getPic() + ""))).crossFade().placeholder(R.mipmap.picture_no).into(holder.productImg);
         }
         return view;
     }

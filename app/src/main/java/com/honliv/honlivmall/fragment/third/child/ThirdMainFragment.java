@@ -42,7 +42,7 @@ public class ThirdMainFragment extends BaseFragment<ThirdMainPresenter, ThirdMai
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_category1;
+        return R.layout.fragment_third_main;
     }
 
     @Override

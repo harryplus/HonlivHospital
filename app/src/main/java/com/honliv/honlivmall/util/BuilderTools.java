@@ -7,6 +7,9 @@ import android.content.Intent;
 
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.bean.OrderInfo;
+import com.honliv.honlivmall.fragment.global.GlobalLoginFragment;
+
+import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * Created by Rodin on 2016/11/4.
@@ -61,7 +64,7 @@ public class BuilderTools {
         builder.show();
     }
 
-    public static void showLoginDialog(final Context mContext, String title) {
+    public static void showLoginDialog(final Context mContext, SupportFragment fragment, String title) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setOnCancelListener(new DialogInterface.OnCancelListener() {// 无法取消对话框
             public void onCancel(DialogInterface dialog) {
@@ -72,9 +75,8 @@ public class BuilderTools {
         builder.setPositiveButton("确定",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-//                        Intent intent = new Intent(mContext, LoginActivity.class);
-//                        mContext.startActivity(intent);
-//                        GloableParams.toLoginActivity = mContext.getClass();
+                        GlobalLoginFragment loginFragment = GlobalLoginFragment.newInstance();
+                        fragment.start(loginFragment);
                     }
                 });
         builder.setNegativeButton("取消",

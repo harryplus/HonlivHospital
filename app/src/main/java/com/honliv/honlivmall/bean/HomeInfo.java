@@ -9,6 +9,7 @@ public class HomeInfo implements Serializable{
     private List<LeftMenu> classifies; ///首页左菜单
     private List<HomeBrand> brandlist; //品牌
     private List<GalleryProduct> galleryproduct;//首页gallery产品
+    private List<Product> cheapproductlist;//首页特价商品
 
     public List<Product> getCheapproductlist() {
         return cheapproductlist;
@@ -18,7 +19,7 @@ public class HomeInfo implements Serializable{
         this.cheapproductlist = cheapproductlist;
     }
 
-    private List<Product> cheapproductlist;//首页特价商品
+
 
     public List<HomeBanner> getHome_banner() {
         return home_banner;

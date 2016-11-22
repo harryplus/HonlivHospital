@@ -22,6 +22,9 @@ public interface ThirdContract {
         void updateView(List<Category> result);
     }
 
+    interface ThirdCategoryView extends CoreBaseView {
+    }
+
     interface ThirdModel extends CoreBaseModel {
     }
 
@@ -29,10 +32,16 @@ public interface ThirdContract {
         Observable<List<Category>> getServiceCategoryList();
     }
 
+    public interface ThirdCategoryModel extends CoreBaseModel {
+    }
+
     abstract class ThirdPresenter extends CoreBasePresenter<ThirdModel, ThirdView> {
     }
 
     abstract class ThirdMainPresenter extends CoreBasePresenter<ThirdMainModel, ThirdMainView> {
-        public abstract void getServiceCategoryList() ;
+        public abstract void getServiceCategoryList();
+    }
+
+    abstract class ThirdCategoryPresenter extends CoreBasePresenter<ThirdCategoryModel, ThirdCategoryView> {
     }
 }

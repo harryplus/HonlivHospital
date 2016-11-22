@@ -9,9 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.Product;
+import com.honliv.honlivmall.util.Utils;
 
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class ProductListAdapter extends BaseAdapter {
     public ProductListAdapter(Context mContext, List<Product> currentProductList, boolean isBargain) {
         this.mContext = mContext;
         this.currentProductList = currentProductList;
-        this.isBargain=isBargain;
+        this.isBargain = isBargain;
     }
 
 
@@ -78,26 +80,14 @@ public class ProductListAdapter extends BaseAdapter {
         holder.productPriceTV.setText("现价:￥" + currentProductList.get(position).getSaleprice());
         holder.productOldPriceTV.setVisibility(View.VISIBLE);
 
-        if (currentProductList.get(position).getStockcount() > 0||isBargain) {
+        if (currentProductList.get(position).getStockcount() > 0 || isBargain) {
             holder.productOldPriceTV.setText("原价:￥" + currentProductList.get(position).getMarketprice());
             holder.productPriceTV.setText("现价:￥" + currentProductList.get(position).getSaleprice());
         } else {
             holder.productOldPriceTV.setVisibility(View.GONE);
             holder.productPriceTV.setText(mContext.getResources().getString(R.string.commodity_null));
         }
-        String tempImgUrl = currentProductList.get(position).getPic() + "";
-        if (!tempImgUrl.contains("http")) {
-            tempImgUrl = tempImgUrl.replace("{0}", "T175X228_");
-            tempImgUrl = ConstantValue.IMAGE_URL + tempImgUrl;
-        }
-        /**
-         * 显示图片
-         * 参数1：图片url
-         * 参数2：显示图片的控件
-         * 参数3：显示图片的设置
-         * 参数4：监听器
-         */
-//        imageLoader.displayImage(tempImgUrl, holder.productImg, options, animateFirstListener);
+        Glide.with(mContext).load(Utils.checkImagUrl(currentProductList.get(position).getPic() + "")).crossFade().placeholder(R.mipmap.picture_no).into(holder.productImg);
         return view;
     }
 

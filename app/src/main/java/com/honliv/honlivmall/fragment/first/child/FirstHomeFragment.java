@@ -134,11 +134,11 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
                 start(bargainFragment);
                 break;
 //            case R.id.main_body_registrate_day:
-////                GlobalOfficeSelectFragment selectFragment1 = GlobalOfficeSelectFragment.newInstance();
+////                GlobalLoginFragment selectFragment1 = GlobalLoginFragment.newInstance();
 ////                start(selectFragment1);
 //                break;
 //            case R.id.main_body_registrate_recommend:
-////                GlobalOfficeSelectFragment selectFragment2 = GlobalOfficeSelectFragment.newInstance();
+////                GlobalLoginFragment selectFragment2 = GlobalLoginFragment.newInstance();
 ////                start(selectFragment2);
 //                break;
 //            case R.id.main_body_report:
@@ -185,6 +185,7 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
         like.setAdapter(likeAdapter);
         mPresenter.getServiceHomeInfo("0");
         mPresenter.getServiceHomeMarketing();
+
         myPagerTask = new MyPagerTask();
         scheduledExecutor.scheduleAtFixedRate(myPagerTask, 5, 5,
                 TimeUnit.SECONDS);
@@ -192,15 +193,21 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
 
     @Override
     public void updataHomeInfo(HomeInfo info) {
-        List<HomeBanner> home_banner = info.getHome_banner();
-        viewPagerAdapter.addAll(home_banner);
-        viewPagerAdapter.notifyDataSetChanged();
-        List<Product> cheapproductlist = info.getCheapproductlist();
-        bargainAdapter.addAll(cheapproductlist);
-        bargainAdapter.notifyDataSetChanged();
+        if (info != null) {
+            List<HomeBanner> home_banner = info.getHome_banner();
+            if (home_banner != null) {
+                viewPagerAdapter.addAll(home_banner);
+                viewPagerAdapter.notifyDataSetChanged();
+            }
+            List<Product> cheapproductlist = info.getCheapproductlist();
+            if (cheapproductlist != null) {
+                bargainAdapter.addAll(cheapproductlist);
+                bargainAdapter.notifyDataSetChanged();
 
-        likeAdapter.addAll(cheapproductlist);
-        likeAdapter.notifyDataSetChanged();
+                likeAdapter.addAll(cheapproductlist);
+                likeAdapter.notifyDataSetChanged();
+            }
+        }
     }
 
     @Override

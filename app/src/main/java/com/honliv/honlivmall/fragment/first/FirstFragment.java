@@ -45,4 +45,10 @@ public class FirstFragment extends BaseLazyMainFragment<FirstPresenter, FirstMod
             loadRootFragment(R.id.fl_first_container, FirstHomeFragment.newInstance());
         }
     }
+
+
+    public void onBackToFirstFragment() {
+//        _mBackToFirstListener.onBackToFirstFragment();
+        loadRootFragment(R.id.fl_first_container, FirstHomeFragment.newInstance());
+    }
 }
