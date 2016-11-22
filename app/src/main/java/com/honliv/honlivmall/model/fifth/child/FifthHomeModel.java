@@ -12,10 +12,11 @@ import rx.Observable;
 /**
  * Created by Rodin on 2016/11/16.
  */
-public class FifthHomeModel implements FifthContract.FifthHomeModel   {
+public class FifthHomeModel implements FifthContract.FifthHomeModel {
     @Override
     public Observable<UserInfo> getServiceUserInfo(int userId) {
         HashMap<String, Object> map = new HashMap<>();
+        map.put("UserId", userId);
         Observable<UserInfo> result = UserPostUtils.GetUserInfo(map);
         return result;
     }

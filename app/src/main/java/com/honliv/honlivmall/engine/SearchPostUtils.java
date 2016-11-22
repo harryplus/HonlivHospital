@@ -1,7 +1,12 @@
 package com.honliv.honlivmall.engine;
 
+import com.honliv.honlivmall.api.MainApi;
+import com.honliv.honlivmall.bean.Product;
+import com.honliv.honlivmall.util.RxService;
 import com.honliv.honlivmall.util.RxUtil;
+import com.honliv.honlivmall.util.Utils;
 
+import java.util.HashMap;
 import java.util.List;
 
 import rx.Observable;
@@ -39,5 +44,16 @@ public class SearchPostUtils {
             }
         }).compose(RxUtil.rxSchedulerHelper());
         return resultBean;
+    }
+
+    public static Observable<List<Product>> SearchProductList(String keyword, String orderby, int start, int pageNum) {
+        HashMap<String, Object> postMap = Utils.getBaseMap("Login");
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("orderby", orderby);
+        map.put("keyword", keyword);
+        map.put("page", start);
+        map.put("pageNum", pageNum);
+        postMap.put("params", map);
+        return RxService.createApi(MainApi.class).SearchProductList(postMap).map(bean -> bean.getResult().getResult().getProductlist()).compose(RxUtil.rxSchedulerHelper());
     }
 }

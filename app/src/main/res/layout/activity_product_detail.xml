@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:attrs="http://schemas.android.com/tools"
     android:background="@drawable/home_backgroud">
 
     <!-- 商品详情 -->
@@ -48,70 +50,27 @@
             android:focusableInTouchMode="true"
             android:orientation="vertical">
 
-            <FrameLayout
+            <RelativeLayout
+                android:id="@+id/layout_viewpaper"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@color/white">
+                android:layout_height="200dp">
 
                 <android.support.v4.view.ViewPager
-                    android:id="@+id/productDetailViewPager"
+                    android:id="@+id/viewPager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
-                <LinearLayout
-                    android:id="@+id/imgPoint"
-                    android:layout_width="fill_parent"
-                    android:layout_height="10dip"
-                    android:layout_gravity="bottom"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:id="@+id/dot_0"
-                        android:layout_width="5dip"
-                        android:layout_height="5dip"
-                        android:layout_marginLeft="2dip"
-                        android:layout_marginRight="2dip"
-                        android:background="@drawable/dot_focused"
-                        android:visibility="gone" />
-
-                    <View
-                        android:id="@+id/dot_1"
-                        android:layout_width="5dip"
-                        android:layout_height="5dip"
-                        android:layout_marginLeft="2dip"
-                        android:layout_marginRight="2dip"
-                        android:background="@drawable/dot_normal"
-                        android:visibility="gone" />
-
-                    <View
-                        android:id="@+id/dot_2"
-                        android:layout_width="5dip"
-                        android:layout_height="5dip"
-                        android:layout_marginLeft="2dip"
-                        android:layout_marginRight="2dip"
-                        android:background="@drawable/dot_normal"
-                        android:visibility="gone" />
-
-                    <View
-                        android:id="@+id/dot_3"
-                        android:layout_width="5dip"
-                        android:layout_height="5dip"
-                        android:layout_marginLeft="2dip"
-                        android:layout_marginRight="2dip"
-                        android:background="@drawable/dot_normal"
-                        android:visibility="gone" />
-
-                    <View
-                        android:id="@+id/dot_4"
-                        android:layout_width="5dip"
-                        android:layout_height="5dip"
-                        android:layout_marginLeft="2dip"
-                        android:layout_marginRight="2dip"
-                        android:background="@drawable/dot_normal"
-                        android:visibility="gone" />
-                </LinearLayout>
-            </FrameLayout>
+                <com.rd.PageIndicatorView
+                    android:id="@+id/pageIndicatorView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="18dp"
+                    app:piv_animationDuration="1000"
+                    app:piv_animationType="worm"
+                    attrs:viewPager="@id/viewPager" />
+            </RelativeLayout>
             <!-- 商品样式选择 -->
 
             <RelativeLayout

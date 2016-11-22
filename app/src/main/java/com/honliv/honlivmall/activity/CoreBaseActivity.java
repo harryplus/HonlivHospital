@@ -3,6 +3,7 @@ package com.honliv.honlivmall.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,7 +36,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
 public abstract class CoreBaseActivity<T extends CoreBasePresenter, E extends CoreBaseModel> extends SupportActivity {
 
     protected String TAG;
-
+    public SharedPreferences sp;
     public T mPresenter;
     public E mModel;
     protected Context mContext;
@@ -52,6 +53,7 @@ public abstract class CoreBaseActivity<T extends CoreBasePresenter, E extends Co
 //        setStatusBarColor();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         init(savedInstanceState);
+        sp = getSharedPreferences("config", MODE_PRIVATE);
     }
 
     private void init(Bundle savedInstanceState) {

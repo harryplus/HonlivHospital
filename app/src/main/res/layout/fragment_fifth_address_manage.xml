@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/address_manager_top_fram"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:background="@color/background_red">
+
+        <TextView
+            android:id="@+id/head_back_text"
+            style="@style/style_15_EBEBEB_BOLD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back_btn"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="goBack" />
+
+        <TextView
+            android:id="@+id/addressmassagetitle"
+            style="@style/style_18_BEBEBE_BOLD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="收货地址管理" />
+
+        <TextView
+            android:id="@+id/address_list_add_text"
+            style="@style/style_15_EBEBEB_BOLD"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="right"
+            android:layout_marginLeft="3.0dip"
+            android:layout_marginRight="8.0dip"
+            android:background="@drawable/red_but"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="addNewAddress"
+            android:text="新增" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/address_manager_null_text"
+        style="@style/style_18_666666"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="吖哦~您还没添加地址哦,亲~"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomBar"
+        android:layout_below="@id/address_manager_top_fram"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/address_title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="(点击选为收货,长按编辑地址)"
+            android:textColor="@color/black" />
+
+        <ListView
+            android:id="@+id/address_manage_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/address_title2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:cacheColorHint="#00000000"
+            android:divider="@color/white"
+            android:dividerHeight="5dip"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false" />
+        <!-- android:listSelector="@anim/shape_rounded_selectable" -->
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/nullProductTV"
+        style="@style/style_18_666666"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="您还没有添加收货地址, 请点击右上角添加"
+        android:visibility="gone" />
+</RelativeLayout>

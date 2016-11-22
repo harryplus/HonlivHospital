@@ -94,7 +94,7 @@ public class FifthHomeFragment extends BaseFragment<FifthHomePresenter, FifthHom
         loginOut.setOnClickListener(this);
         loginsetting.setOnClickListener(this);
         nearby_market.setOnClickListener(this);
-        getUserInfo();
+
     }
 
     @Override
@@ -103,138 +103,67 @@ public class FifthHomeFragment extends BaseFragment<FifthHomePresenter, FifthHom
     }
 
 
-    void getUserInfo() {
-//        dbUserInfo = (UserInfo) this.getIntent().getSerializableExtra("userInfo");
-        new Thread() {
-            @Override
-            public void run() {
-                if (dbUserInfo == null) {
-                    DbUtils db = DbUtils.create(getContext());
-                    try {
-                        dbUserInfo = db.findFirst(UserInfo.class);
-                    } catch (DbException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    if (dbUserInfo == null) {
-                        PromptManager.showToast(getContext(), getString(R.string.reLogin));
-                        return;
-                    } else {
-                        mPresenter.getServiceUserInfo(dbUserInfo.getUserId());
-                    }
-                }
-            }
-        }.start();
-    }
-
-//     void getServiceUserInfo(int userId) {
-//        new BaseActivity.MyHttpTask<Integer>() {
-//            protected void onPreExecute() {
-//                PromptManager.showCommonProgressDialog(MyCenterActivity.this);
-//                super.onPreExecute();
-//            }
-//
-//            @Override
-//            protected Object doInBackground(Integer... params) {
-//                UserInfoEngine engine = BeanFactory.getImpl(UserInfoEngine.class);
-//                return engine.getServiceUserInfo(params[0]);
-//            }
-//
-//            protected void onPostExecute(Object result) {
-//                super.onPostExecute(result);
-//                PromptManager.closeProgressDialog();
-//                if (result != null) {
-//                    userInfo = (UserInfo) result;
-//                    DbUtils db = DbUtils.create(getApplicationContext());
-//                    try {
-//                        db.dropTable(UserInfo.class);
-//                        userInfo.setPassword(dbUserInfo.getPassword());
-//                        db.save(userInfo);
-//                    } catch (DbException e) {
-//                        e.printStackTrace();
-//                    } finally {
-//                        //有返回东西 ,解析出来数据，设置给屏幕
-//                        initData();
-//                    }
-//                } else {
-//                    PromptManager.showToast(getApplicationContext(), "服务器忙，请稍后重试！！！");
-//                }
-//            }
-//        }.executeProxy(userId);
-//    }
-
     public void initData() {
-        // TODO Auto-generated method stub
-
+        if (dbUserInfo == null) {
+            DbUtils db = DbUtils.create(getContext());
+            try {
+                dbUserInfo = db.findFirst(UserInfo.class);
+            } catch (DbException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            if (dbUserInfo == null) {
+                PromptManager.showToast(getContext(), getString(R.string.reLogin));
+                return;
+            } else {
+                mPresenter.getServiceUserInfo(dbUserInfo.getUserId());
+            }
+        }
     }
 
 
     @Override
     public void onClick(View v) {
-//        if (intent == null) {
-//            intent = new Intent();
-//        }
-//        switch (v.getId()) {
-//            case R.id.my_info_lin:
-//                //个人资料
-//                intent.setClass(getApplicationContext(), EditPersonInfo.class);
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);
-//                break;
-//            case R.id.my_hxt:
-//                //宏信通
-//                intent.setClass(getApplicationContext(), MyHxtActivity.class);
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);
-//
-//                break;
-//            case R.id.my_change_password://修改密码
-//
-//                GloableParams.toCloseActivity = MyCenterActivity.this;
-//                intent.setClass(getApplicationContext(), EditPasswordActivity.class);
-//                startActivityForResult(intent, 100);
-//                overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);
-//                break;
-//            case R.id.my_address_manage://地址管理
-//                intent.setClass(getApplicationContext(), AddressManageActivity.class);
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);
-//                break;
-//            case R.id.my_order_lin://我的订单
-//                intent.setClass(getApplicationContext(), MyOrderActivity.class);
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);
-//                break;
-//
-//            case R.id.my_favorites_lin://我的收藏
-//
-//                intent.setClass(getApplicationContext(), FavoriteActivity.class);
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);
-//                break;
-//            case R.id.my_Inbox_lin://收件箱
-//
-//                break;
-//            case R.id.my_coupon_lin://优惠卷
-//                intent.setClass(getApplicationContext(), MyCouponActivity.class);
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);
-//
-//                break;
-//            case R.id.loginOut_text://注销登录
+        switch (v.getId()) {
+            case R.id.my_info_lin:
+                //个人资料
+                start(FifthEditPersonInfoFragment.newInstance());
+                break;
+            case R.id.my_hxt:
+                //宏信通
+                start(FifthMyHxtFragment.newInstance());
+                break;
+            case R.id.my_change_password://修改密码
+                start(FifthEditPwdFragment.newInstance());
+                break;
+            case R.id.my_address_manage://地址管理
+                start(FifthAddressManageFragment.newInstance());
+                break;
+            case R.id.my_order_lin://我的订单
+                start(FifthMyOrderFragment.newInstance());
+                break;
+
+            case R.id.my_favorites_lin://我的收藏
+                start(FifthFavoriteFragment.newInstance());
+                break;
+            case R.id.my_Inbox_lin://收件箱
+
+                break;
+            case R.id.my_coupon_lin://优惠卷
+               start(FifthMyCouponFragment.newInstance());
+                break;
+            case R.id.loginOut_text://注销登录
 //                getServiceLogOut("-1");
-//
-//                break;
-//            case R.id.head_image_setting://设置
-//                intent.setClass(getApplicationContext(), SettingActivity.class);
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);
-//                break;
-//
-//            case R.id.nearby_market:
-//
-//                break;
-//        }
+
+                break;
+            case R.id.head_image_setting://设置
+               start(FifthSettingFragment.newInstance());
+                break;
+
+            case R.id.nearby_market:
+
+                break;
+        }
     }
 
     @Override

@@ -171,6 +171,7 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
                         db.update(productlist.get(i));
                     }
                 }
+                pop();
             } catch (DbException e) {
                 e.printStackTrace();
             }
@@ -189,7 +190,8 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
 //					initData();
             //有返回东西 ,解析出来数据，设置给屏幕
 //					LogUtil.info(((List)result).toString());
-        }/*else{
+        }
+        /*else{
                     PromptManager.showMyToast(LoginActivity.this,"服务器忙，请稍后重试！！！");
 				}*/
     }

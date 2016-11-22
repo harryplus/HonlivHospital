@@ -1,8 +1,13 @@
 package com.honliv.honlivmall.model.global;
 
+import com.honliv.honlivmall.bean.HomeInfo;
 import com.honliv.honlivmall.bean.UserInfo;
 import com.honliv.honlivmall.contract.GlobalContract;
+import com.honliv.honlivmall.engine.HomePostUtils;
+import com.honliv.honlivmall.engine.UserPostUtils;
 import com.honliv.honlivmall.util.RxUtil;
+
+import java.util.HashMap;
 
 import rx.Observable;
 
@@ -12,12 +17,8 @@ import rx.Observable;
 public class GlobalLoginModel implements GlobalContract.GlobalOfficeSelectModel  {
     @Override
     public Observable<UserInfo> getServiceLoginInfo(UserInfo userInfo) {
-//        Observable<UserInfo> result = Observable.just(userInfo).map(s -> {
-//            UserInfo serviceHomeMarketing = UserInfoEngine.getServiceLoginInfo(s);
-//                    return serviceHomeMarketing;
-//                }
-//        );
-//        return result.compose(RxUtil.rxSchedulerHelper());
-        return null;
+        HashMap<String, Object> map = new HashMap<>();
+        Observable<UserInfo> result = UserPostUtils.getServiceLoginInfo(userInfo);
+        return result;
     }
 }

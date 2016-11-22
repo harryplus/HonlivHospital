@@ -2,8 +2,12 @@ package com.honliv.honlivmall.engine;
 
 import com.honliv.honlivmall.api.MainApi;
 import com.honliv.honlivmall.bean.Category;
+import com.honliv.honlivmall.bean.GifInfo;
 import com.honliv.honlivmall.util.RxService;
 import com.honliv.honlivmall.util.RxUtil;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +28,7 @@ public class CategoryPostUtils {
         map.put("jsonrpc", "2.0");
         return map;
     }
+
     public static Observable<List<Category>> CategoryList(HashMap<String, Object> map) {
         HashMap<String, Object> postMap = getBaseMap("CategoryList");
         postMap.put("params", map);
@@ -34,5 +39,39 @@ public class CategoryPostUtils {
                 return null;
             }
         }).compose(RxUtil.rxSchedulerHelper());
+    }
+
+    public static Observable<Float> GetFreight(int userId, int shipId, int shipTypeId,
+                                               List<JSONObject> productList, float allCouponMoney) {
+        HashMap<String, Object> postMap = getBaseMap("GetFreight");
+        HashMap<String, Object> parames = new HashMap<>();
+        parames.put("userId", userId);
+        parames.put("shipId", shipId);
+        parames.put("shipTypeId", shipTypeId);
+//			parames.put("allCouponMoney", allCouponMoney);
+        parames.put("productList", productList);
+        postMap.put("params", parames);
+        return RxService.createApi(MainApi.class).GetFreight(postMap).map(bean -> bean.getResult().getResult().getFreight()).compose(RxUtil.rxSchedulerHelper());
+    }
+
+    public static Observable<Float> GetTotalPrice(int userid, int proSaleId, int groupBuyId, List<JSONObject> productList) {
+        HashMap<String, Object> postMap = getBaseMap("GetTotalPrice");
+        HashMap<String, Object> parames = new HashMap<>();
+        parames.put("userId", userid);
+        parames.put("groupBuyId", groupBuyId);
+        parames.put("proSaleId", proSaleId);
+        parames.put("productList", productList);
+        postMap.put("params", parames);
+        return RxService.createApi(MainApi.class).GetTotalPrice(postMap).map(bean -> bean.getResult().getResult().getFreight()).compose(RxUtil.rxSchedulerHelper());
+    }
+
+    public static Observable<GifInfo> GetGiftInfo(int userid, List<JSONObject> productList, float couponPrice) {
+        HashMap<String, Object> postMap = getBaseMap("GetGiftInfo");
+        HashMap<String, Object> parames = new HashMap<>();
+        parames.put("userId", userid);
+        parames.put("coupPrice", couponPrice);
+        parames.put("productList", productList);
+        postMap.put("params", parames);
+        return RxService.createApi(MainApi.class).GetGiftInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
     }
 }

@@ -8,6 +8,7 @@ import com.honliv.honlivmall.api.MainApi;
 import com.honliv.honlivmall.bean.BaseBean;
 import com.honliv.honlivmall.bean.BaseInfo;
 import com.honliv.honlivmall.bean.Category;
+import com.honliv.honlivmall.bean.DefaultParas;
 import com.honliv.honlivmall.bean.GalleryProduct;
 import com.honliv.honlivmall.bean.HomeInfo;
 import com.honliv.honlivmall.bean.Product;
@@ -53,10 +54,17 @@ public class HomePostUtils {
     public static Observable<List<Product>> CountDownList() {
         HashMap<String, Object> postMap = Utils.getBaseMap("CountDownList");
         postMap.put("params", new HashMap<>());
-        return RxService.createApi(MainApi.class).CountDownList(postMap).map(bean->{
+        return RxService.createApi(MainApi.class).CountDownList(postMap).map(bean -> {
             return bean.getResult().getResult().getProductlist();
         }).compose(RxUtil.rxSchedulerHelper());
     }
 
 
+    public static Observable<DefaultParas> GetPhone() {
+        HashMap<String, Object> postMap = Utils.getBaseMap("GetPhone");
+        postMap.put("params", new HashMap<>());
+        return RxService.createApi(MainApi.class).GetPhone(postMap).map(bean -> {
+            return bean.getResult().getResult();
+        }).compose(RxUtil.rxSchedulerHelper());
+    }
 }
