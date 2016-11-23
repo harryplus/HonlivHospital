@@ -3,6 +3,7 @@ package com.honliv.honlivmall.contract;
 
 import com.honliv.honlivmall.activity.CoreBaseView;
 import com.honliv.honlivmall.bean.Category;
+import com.honliv.honlivmall.bean.ProductListFilter;
 import com.honliv.honlivmall.model.CoreBaseModel;
 import com.honliv.honlivmall.presenter.CoreBasePresenter;
 
@@ -17,6 +18,8 @@ public interface ThirdContract {
 
     interface ThirdView extends CoreBaseView {
     }
+    interface ThirdCategory2View extends CoreBaseView {
+    }
 
     interface ThirdMainView extends CoreBaseView {
         void updateView(List<Category> result);
@@ -24,8 +27,16 @@ public interface ThirdContract {
 
     interface ThirdCategoryView extends CoreBaseView {
     }
+    interface ThirdProductListView extends CoreBaseView {
+        void updateView(ProductListFilter result);
+    }
 
     interface ThirdModel extends CoreBaseModel {
+    }
+    interface ThirdProductListModel extends CoreBaseModel {
+        Observable<ProductListFilter> ProductList(int categoryId, String orderBy, int page, int pageNum);
+    }
+    interface ThirdCategory2Model extends CoreBaseModel {
     }
 
     public interface ThirdMainModel extends CoreBaseModel {
@@ -43,5 +54,11 @@ public interface ThirdContract {
     }
 
     abstract class ThirdCategoryPresenter extends CoreBasePresenter<ThirdCategoryModel, ThirdCategoryView> {
+    }
+    abstract class ThirdCategory2Presenter extends CoreBasePresenter<ThirdCategory2Model, ThirdCategory2View> {
+    }
+
+    abstract class ThirdProductListPresenter extends CoreBasePresenter<ThirdProductListModel, ThirdProductListView>{
+        public abstract void getServiceProductList(int cId, String hot, int start, int pageNum);
     }
 }

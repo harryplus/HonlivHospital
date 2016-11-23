@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:attrs="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/home_backgroud">
-
-    <!-- 商品详情 -->
 
     <RelativeLayout
         android:id="@+id/relTop"
@@ -256,132 +254,6 @@
                 </LinearLayout>
             </RelativeLayout>
 
-            <!-- 服装颜色和尺码选择 -->
-
-         <!--   <RelativeLayout
-                android:id="@+id/prod_property"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/product_detail_cell_normal">
-
-                <TextView
-                    android:id="@+id/textProductColor"
-                    style="@style/style_13_9F9F9F"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="8.0dip"
-                    android:text="颜色" />
-
-                <TextView
-                    android:id="@+id/textProductColorValue"
-                    style="@style/style_14_FFFFFF"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/textProductColor"
-                    android:background="@drawable/spinner_color"
-                    android:clickable="true"
-                    android:ellipsize="marquee"
-                    android:gravity="center"
-                    android:onClick="seleteClothesColor"
-                    android:paddingRight="24.0dip"
-                    android:singleLine="true"
-                    android:text="灰色" />
-
-                <TextView
-                    android:id="@+id/textProductSize"
-                    style="@style/style_13_9F9F9F"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="8.0dip"
-                    android:layout_toRightOf="@id/textProductColorValue"
-                    android:text="尺码：" />
-
-                <TextView
-                    android:id="@+id/clothesSizeValue"
-                    style="@style/style_14_FFFFFF"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/textProductSize"
-                    android:background="@drawable/spinner_size"
-                    android:clickable="true"
-                    android:ellipsize="marquee"
-                    android:gravity="center"
-                    android:onClick="seleteClothesSize"
-                    android:paddingRight="24.0dip"
-                    android:singleLine="true"
-                    android:text="M" />
-            </RelativeLayout>-->
-
-
-            <!--    属性选择三和四
-                -->
-          <!--  <RelativeLayout
-                android:id="@+id/prod_property2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/product_detail_cell_normal"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/textProductProperty3Key"
-                    style="@style/style_13_9F9F9F"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="8.0dip"
-                    android:text="选择三" />
-
-                <TextView
-                    android:id="@+id/textProductProperty3Value"
-                    style="@style/style_14_FFFFFF"
-                    android:layout_width="75dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/textProductProperty3Key"
-                    android:background="@drawable/spinner_color"
-                    android:clickable="true"
-                    android:ellipsize="marquee"
-                    android:gravity="center"
-                    android:onClick="seleteProductProperty3"
-                    android:paddingRight="24.0dip"
-                    android:singleLine="true"
-                    android:text="选择" />
-
-                <TextView
-                    android:id="@+id/textProductProperty4Key"
-                    style="@style/style_13_9F9F9F"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="8.0dip"
-                    android:layout_toRightOf="@id/textProductProperty3Value"
-                    android:text="选择四："
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/textProductProperty4Value"
-                    style="@style/style_14_FFFFFF"
-                    android:layout_width="75dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/textProductProperty4Key"
-                    android:background="@drawable/spinner_size"
-                    android:clickable="true"
-                    android:ellipsize="marquee"
-                    android:gravity="center"
-                    android:onClick="seleteProductProperty4"
-                    android:paddingRight="24.0dip"
-                    android:singleLine="true"
-                    android:text="选择"
-                    android:visibility="gone" />
-            </RelativeLayout>-->
-
-            <!-- 加入购物车及收藏 -->
-
 
             <!-- 优惠 -->
 
@@ -445,33 +317,12 @@
                     android:text=")" />
             </RelativeLayout>
 
-            <!--
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/product_detail_cell_normal" >
-
-                <TextView
-                    android:id="@+id/orderTelTv"
-                    style="@style/style_16_FFFFFF"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="@anim/button_long"
-                    android:gravity="center"
-                    android:clickable="true"
-                    android:onClick="callPhone"
-                    android:text="订购电话 010-88499999" />
-            </RelativeLayout>
-            -->
-
             <RelativeLayout
                 android:id="@+id/ProductHtmlRL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:visibility="gone">
+                android:layout_marginRight="8dp">
 
                 <TextView
                     android:id="@+id/productHtmlTV"
@@ -500,15 +351,6 @@
         android:layout_below="@id/relTop"
         android:visibility="gone" />
 
-    <!-- <WebView
-        android:id="@+id/hintWebView"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:layout_below="@id/textProductInfoIsNull"
-        android:visibility="invisible"
-        /> -->
-
-    <!-- 加入购物车及收藏 -->
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

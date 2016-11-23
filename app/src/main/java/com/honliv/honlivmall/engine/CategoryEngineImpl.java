@@ -97,7 +97,7 @@ public class CategoryEngineImpl implements CategoryEngine {
             parames.put("page", page);
             parames.put("pageNum", pageNum);
 
-            JSONObject jsonObj = client.callJSONObject("ProductList", parames);
+            JSONObject jsonObj = client.callJSONObject("ProductListFilter", parames);
             //JSONObject jsobj =  MyJSUtil.checkResponse(categoryStr);
             if (jsonObj != null && MyJSUtil.isSuccess(jsonObj)) {
                 String resultContent = jsonObj.getString("result");

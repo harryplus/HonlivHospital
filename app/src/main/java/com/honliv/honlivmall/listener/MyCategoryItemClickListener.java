@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.honliv.honlivmall.bean.Category;
+import com.honliv.honlivmall.fragment.third.child.ThirdCategory2Fragment;
 
 import java.util.ArrayList;
 
@@ -30,14 +31,15 @@ public class MyCategoryItemClickListener implements AdapterView.OnItemClickListe
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
 
-//        Category category = categorys.get(position);
+        Category category = categorys.get(position);
 //        Intent intent;
-//        if (category.isHaschild()) {
+        if (category.isHaschild()) {
 //            intent = new Intent(mContext, CategoryActivity2.class);
 //            intent.putExtra("category", category);
-//        } else {
+            mContext.start(ThirdCategory2Fragment.newInstance());
+        } else {
 //            intent = new Intent(mContext, ProductListActivity.class);
-//        }
+        }
 //        mContext.startActivity(intent);
     }
 }

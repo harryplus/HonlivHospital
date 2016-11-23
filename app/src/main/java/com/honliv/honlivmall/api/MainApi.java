@@ -40,110 +40,110 @@ public interface MainApi {
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<ResponseBody> updateUserInfo(@Body HashMap<String, Object> map);
-
-    @Headers("Content-Type: application/json")
-    @POST("shop.aspx")
     Observable<BaseBean<BaseInfo<HomeInfo>>> HomeIndex(@Body HashMap<String, Object> map);
 
-    @Headers("Content-Type: application/json")
-    @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<ProductListFilter>>> CountDownList(@Body HashMap<String, Object> map);
+//    @Headers("Content-Type: application/json")
+//    @POST("shop.aspx")
+//    Observable<BaseBean<BaseInfo<ProductListFilter>>> ProductListFilter(@Body HashMap<String, Object> map);
+
+//    @Headers("Content-Type: application/json")
+//    @POST("shop.aspx")
+//    Observable<BaseBean<BaseInfo<ProductListFilter>>> ProductListFilter(@Body HashMap<String, Object> map);
+
+//    @Headers("Content-Type: application/json")
+//    @POST("shop.aspx")
+//    Observable<BaseBean<BaseInfo<UserInfo>>> UserInfo(@Body HashMap<String, Object> postMap);
+
+//    @Headers("Content-Type: application/json")
+//    @POST("shop.aspx")
+//    Observable<BaseBean<BaseInfo<UserInfo>>> UserInfo(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<UserInfo>>> Login(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<UserInfo>>> UserInfo(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<UserInfo>>> GetUserInfo(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<ProductListFilter>>> ProductListFilter(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<UserInfo>>> LogOut(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<List<AddressInfo>>>> ListAddressInfo(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<ProductListFilter>>> SearchProductList(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<List<String>>>> ListString(@Body HashMap<String, Object> postMap);
+
+//    @Headers("Content-Type: application/json")
+//    @POST("shop.aspx")
+//    Observable<BaseBean<BaseInfo<List<AddressInfo>>>> ListAddressInfo(@Body HashMap<String, Object> postMap);
+
+//    @Headers("Content-Type: application/json")
+//    @POST("shop.aspx")
+//    Observable<BaseBean<BaseInfo<List<AddressInfo>>>> ListAddressInfo(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<List<AddressInfo>>>> addresslist(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<List<Category>>>> ListCategory(@Body HashMap<String, Object> postMap);
+
+//    @Headers("Content-Type: application/json")
+//    @POST("shop.aspx")
+//    Observable<BaseBean<BaseInfo<String>>> String(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<List<String>>>> HotKeyword(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<DefaultParas>>> DefaultParas(@Body HashMap<String, Object> postMap);
+
+//    @Headers("Content-Type: application/json")
+//    @POST("shop.aspx")
+//    Observable<BaseBean<BaseInfo<PaymentInfo>>> PaymentInfo(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<List<AddressInfo>>>> SaveAddress(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<PaymentInfo>>> PaymentInfo(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<List<AddressInfo>>>> GetRegionList(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<GifInfo>>> GifInfo(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<List<Category>>>> CategoryList(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<Product>>> Product(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<String>>> GetRegionName(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<String>>> String(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<DefaultParas>>> GetPhone(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<VersionInfo>>> VersionInfo(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<PaymentInfo>>> GetFreight(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<List<PayShip>>>> ListPayShip(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<PaymentInfo>>> GetTotalPrice(@Body HashMap<String, Object> postMap);
-
-    @Headers("Content-Type: application/json")
-    @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<GifInfo>>> GetGiftInfo(@Body HashMap<String, Object> postMap);
-
-    @Headers("Content-Type: application/json")
-    @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<Product>>> ProductDetail(@Body HashMap<String, Object> postMap);
-
-    @Headers("Content-Type: application/json")
-    @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<String>>> ProductAddFav(@Body HashMap<String, Object> postMap);
-
-    @Headers("Content-Type: application/json")
-    @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<VersionInfo>>> checkVersion(@Body HashMap<String, Object> postMap);
-
-    @Headers("Content-Type: application/json")
-    @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<List<PayShip>>>> GetPayList(@Body HashMap<String, Object> postMap);
-
-    @Headers("Content-Type: application/json")
-    @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<List<HxtBean>>>> HxtUserList(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<List<HxtBean>>>> ListHxtBean(@Body HashMap<String, Object> postMap);
 
     //    @Headers("Content-Type: application/json")
 //    @POST("shop.aspx")
-//    Observable<ResponseBody> MyCunpon(@Body HashMap<String, Object> postMap);
+//    Observable<ResponseBody> ListCouponInfo(@Body HashMap<String, Object> postMap);
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<List<CouponInfo>>>> MyCunpon(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<List<CouponInfo>>>> ListCouponInfo(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<List<Product>>>> MyFavorList(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<List<Product>>>> ListProduct(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<List<Help>>>> HelpList(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<List<Help>>>> ListHelp(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
-    Observable<BaseBean<BaseInfo<Help>>> HelpDetail(@Body HashMap<String, Object> postMap);
+    Observable<BaseBean<BaseInfo<Help>>> Help(@Body HashMap<String, Object> postMap);
 
 
 }

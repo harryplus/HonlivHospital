@@ -20,7 +20,7 @@ public class HelpPostUtils {
         HashMap<String, Object> postMap = Utils.getBaseMap("checkVersion");
         HashMap<String, Object> parames = new HashMap<>();
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).checkVersion(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).VersionInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
 
     }
 
@@ -29,7 +29,7 @@ public class HelpPostUtils {
         HashMap<String, Object> parames = new HashMap<>();
         parames.put("classid", helpId);
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).HelpList(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).ListHelp(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
 
     }
 
@@ -37,7 +37,7 @@ public class HelpPostUtils {
         HashMap<String, Object> postMap = Utils.getBaseMap("HelpDetail");
         HashMap<String, Object> parames = new HashMap<>();
         parames.put("contentid", id);
-        return RxService.createApi(MainApi.class).HelpDetail(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).Help(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
 
     }
 }

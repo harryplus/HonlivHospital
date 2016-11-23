@@ -47,7 +47,9 @@ public class ThirdMainFragment extends BaseFragment<ThirdMainPresenter, ThirdMai
 
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
-
+        categorys=new ArrayList<>();
+        myCategoryAdapter=new MyCategoryAdapter(getContext(),categorys);
+        category1List.setAdapter(myCategoryAdapter);
     }
 
     @Override
@@ -57,31 +59,24 @@ public class ThirdMainFragment extends BaseFragment<ThirdMainPresenter, ThirdMai
 
     @Override
     public void updateView(List<Category> result) {
-//        if (result != null) {
-//            showToast("add   ppp");
-//            categorys.addAll(result);
-//            GloableParams.hasCategory = true;
-//            GloableParams.categoryInfos = categorys;
-//            myCategoryItemClickListener.setData(categorys);
-////            initData();
-//        }
+        if (result != null) {
+            categorys.addAll(result);
+            GloableParams.hasCategory = true;
+            GloableParams.categoryInfos = categorys;
+            myCategoryItemClickListener.setData(categorys);
+            myCategoryAdapter.notifyDataSetChanged();
+        }
     }
-
 
     // 初始化数据
     public void initData() {
         if (GloableParams.hasCategory) {//已经联网访问过分类数据
             categorys = GloableParams.categoryInfos;
-            initData();
         } else {
-//            try {
-//                mPresenter.getServiceCategoryList();
-//            } catch (Exception e) {
-//                showLog(e.toString());
-//            }
+            mPresenter.getServiceCategoryList();
         }
         if (myCategoryItemClickListener == null) {
-            myCategoryItemClickListener = new MyCategoryItemClickListener((SupportFragment) getParentFragment());
+            myCategoryItemClickListener = new MyCategoryItemClickListener(this);
         }
         category1List.setOnItemClickListener(myCategoryItemClickListener);
     }

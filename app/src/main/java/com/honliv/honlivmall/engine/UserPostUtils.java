@@ -1,9 +1,5 @@
 package com.honliv.honlivmall.engine;
 
-import android.util.Log;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.api.MainApi;
 import com.honliv.honlivmall.bean.CouponInfo;
@@ -13,16 +9,10 @@ import com.honliv.honlivmall.util.RxService;
 import com.honliv.honlivmall.util.RxUtil;
 import com.honliv.honlivmall.util.Utils;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
-import okhttp3.ResponseBody;
 import rx.Observable;
-import rx.functions.Func1;
 
 /**
  * Created by Rodin on 2016/11/21.
@@ -34,7 +24,7 @@ public class UserPostUtils {
     public static Observable<UserInfo> GetUserInfo(HashMap<String, Object> map) {
         HashMap<String, Object> postMap = Utils.getBaseMap("GetUserInfo");
         postMap.put("params", map);
-        return RxService.createApi(MainApi.class).GetUserInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).UserInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
 //        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
 //            Type type2 = new TypeToken<UserInfo>() {
 //            }.getType();
@@ -52,7 +42,7 @@ public class UserPostUtils {
         map.put("UserName", userInfo.getUserName());
         map.put("Password", userInfo.getPassword());
         postMap.put("params", map);
-        return RxService.createApi(MainApi.class).Login(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).UserInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
 //        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
 //            Type type2 = new TypeToken<UserInfo>() {
 //            }.getType();
@@ -129,7 +119,7 @@ public class UserPostUtils {
         parames.put("pageNum", pageNum);
         parames.put("type", type);
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).MyCunpon(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).ListCouponInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
 //        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
 //            Type type2 = new TypeToken<List<CouponInfo>>() {
 //            }.getType();
@@ -148,7 +138,7 @@ public class UserPostUtils {
         parames.put("pageIndex", pageIndex);
         parames.put("pageSize", pageSize);
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).MyFavorList(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).ListProduct(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
     }
 
     public static Observable<Boolean> CancelFav(int userId, int productId) {

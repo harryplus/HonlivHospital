@@ -50,7 +50,7 @@ public class HttpClientUtil {
         headers[9] = new BasicHeader("Content-Type", "text/plain; charset=utf-8");
 
         GloableParams.RequestID = new Random().nextInt(10000);
-        //headers[9] = new BasicHeader("X-JSON-RPC", "Login");
+        //headers[9] = new BasicHeader("X-JSON-RPC", "UserInfo");
     }
 
     public HttpClientUtil() {

@@ -8,8 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.Category;
+import com.honliv.honlivmall.util.Utils;
 
 import java.util.ArrayList;
 
@@ -59,8 +61,8 @@ public class MyCategoryAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
         holder.textContent.setText(categorys.get(position).getTitle());
-        String picUrl = categorys.get(position).getPic();
-//        imageLoader.displayImage(Utils.checkImagUrl(picUrl), holder.imgIcon, ImageOptionsUtils.getCategoryItemOption(), animateFirstListener);
+        Glide.with(mContext).load(Utils.checkImagUrl(Utils.checkImagUrl(categorys.get(position).getPic()))).crossFade().placeholder(R.mipmap.picture_no).into(holder.imgIcon);
+
         return view;
     }
 

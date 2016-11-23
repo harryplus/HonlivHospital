@@ -7,6 +7,7 @@ import com.honliv.honlivmall.bean.Category;
 import com.honliv.honlivmall.contract.ThirdContract;
 import com.honliv.honlivmall.engine.CategoryPostUtils;
 import com.honliv.honlivmall.engine.HomePostUtils;
+import com.honliv.honlivmall.util.RxUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,10 +24,6 @@ public class ThirdMainModel implements ThirdContract.ThirdMainModel {
     public Observable<List<Category>> getServiceCategoryList() {
         HashMap<String, Object> map = new HashMap<>();
         Observable<List<Category>> result = CategoryPostUtils.CategoryList(map);
-        result.map(k->{
-            Log.i(TAG,new Gson().toJson(k).toString());
-            return null;
-        });
         return result;
     }
 }

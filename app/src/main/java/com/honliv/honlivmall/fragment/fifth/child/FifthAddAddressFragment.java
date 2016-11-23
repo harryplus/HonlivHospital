@@ -283,7 +283,7 @@ public class FifthAddAddressFragment extends BaseFragment<FifthAddAddressPresent
         return true;
     }
 
-    //    public void GetRegionList(){
+    //    public void ListAddressInfo(){
 //        new BaseActivity.MyHttpTask<Integer>() {
 //            @Override
 //            protected void onPreExecute() {

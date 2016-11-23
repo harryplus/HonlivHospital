@@ -1,19 +1,13 @@
 package com.honliv.honlivmall.engine;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.api.MainApi;
 import com.honliv.honlivmall.bean.AddressInfo;
-import com.honliv.honlivmall.bean.GifInfo;
 import com.honliv.honlivmall.bean.PayShip;
-import com.honliv.honlivmall.util.LogUtil;
 import com.honliv.honlivmall.util.RxService;
 import com.honliv.honlivmall.util.RxUtil;
 import com.honliv.honlivmall.util.Utils;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,13 +18,13 @@ import rx.Observable;
  */
 public class AddressPostUtils {
     public static Observable<List<AddressInfo>> getServiceProductList() {
-        HashMap<String, Object> postMap = Utils.getBaseMap("addresslist");
+        HashMap<String, Object> postMap = Utils.getBaseMap("ListAddressInfo");
         HashMap<String, Object> parames = new HashMap<>();
         parames.put("userId", GloableParams.USERID);
         parames.put("pageIndex", 1);
         parames.put("pageNum", 50);
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).addresslist(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).ListAddressInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
 //        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
 //            Type type = new TypeToken<List<AddressInfo>>() {
 //            }.getType();
@@ -47,7 +41,7 @@ public class AddressPostUtils {
         HashMap<String, Object> parames = new HashMap<>();
         parames.put("regionId", addressId);
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).GetRegionList(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).ListAddressInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
 //        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
 //            Type type = new TypeToken<List<AddressInfo>>() {
 //            }.getType();
@@ -69,7 +63,7 @@ public class AddressPostUtils {
         parames.put("celphone", info.getPhone());
         parames.put("areadetail", info.getAreaDetail());
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).SaveAddress(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).ListAddressInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
 //        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
 //            Type type = new TypeToken<List<AddressInfo>>() {
 //            }.getType();
@@ -90,7 +84,7 @@ public class AddressPostUtils {
         parames.put("celphone", info.getPhone());
         parames.put("areadetail", info.getAreaDetail());
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).SaveAddress(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).ListAddressInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
 //        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
 //            Type type = new TypeToken<List<AddressInfo>>() {
 //            }.getType();
@@ -107,7 +101,7 @@ public class AddressPostUtils {
         HashMap<String, Object> parames = new HashMap<>();
         parames.put("regionId", addressId);
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).GetRegionName(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).String(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
 //        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
 //            String result = null;
 //            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
@@ -124,7 +118,7 @@ public class AddressPostUtils {
         parames.put("pageIndex", pageIndex);
         parames.put("pageNum", pageNum);
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).addresslist(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).ListAddressInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
 //        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
 //            Type type = new TypeToken<List<AddressInfo>>() {
 //            }.getType();
@@ -140,7 +134,7 @@ public class AddressPostUtils {
         HashMap<String, Object> postMap = Utils.getBaseMap("GetPayList");
         HashMap<String, Object> parames = new HashMap<>();
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).GetPayList(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).ListPayShip(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
 //        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
 //            Type type = new TypeToken<List<PayShip>>() {
 //            }.getType();
