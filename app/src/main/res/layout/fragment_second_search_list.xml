@@ -55,7 +55,6 @@
                 android:background="@drawable/segment_selected_1_bg"
                 android:clickable="true"
                 android:gravity="center"
-                android:onClick="saleNumber"
                 android:text="销量" />
 
             <TextView
@@ -66,7 +65,6 @@
                 android:background="@drawable/segment_normal_2_bg"
                 android:clickable="true"
                 android:gravity="center"
-                android:onClick="priceClick"
                 android:text="价格" />
 
             <TextView
@@ -77,7 +75,6 @@
                 android:background="@drawable/segment_normal_2_bg"
                 android:clickable="true"
                 android:gravity="center"
-                android:onClick="newProduct"
                 android:text="新品" />
 
             <TextView
@@ -88,7 +85,6 @@
                 android:background="@drawable/segment_normal_3_bg"
                 android:clickable="true"
                 android:gravity="center"
-                android:onClick="bigImage"
                 android:text="大图" />
         </LinearLayout>
 

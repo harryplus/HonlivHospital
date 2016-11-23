@@ -10,4 +10,11 @@ public class FifthMyHxtPresenter extends FifthContract.FifthMyHxtPresenter {
     public void onStart() {
 
     }
+
+    @Override
+    public void getData() {
+        mRxManager.add(mModel.getData().subscribe(result->{
+            mView.updateView(result);
+        }));
+    }
 }

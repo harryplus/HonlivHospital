@@ -26,10 +26,10 @@ import me.yokeyword.fragmentation.SupportFragment;
  */
 public class ThirdMainFragment extends BaseFragment<ThirdMainPresenter, ThirdMainModel> implements ThirdContract.ThirdMainView {
     @BindView(R.id.category1List)
-     ListView category1List;
-     ArrayList<Category> categorys;//一级分类.里面有所有的分类信息
-     MyCategoryAdapter myCategoryAdapter;
-     MyCategoryItemClickListener myCategoryItemClickListener;
+    ListView category1List;
+    ArrayList<Category> categorys;//一级分类.里面有所有的分类信息
+    MyCategoryAdapter myCategoryAdapter;
+    MyCategoryItemClickListener myCategoryItemClickListener;
 
     public static ThirdMainFragment newInstance() {
 
@@ -49,6 +49,7 @@ public class ThirdMainFragment extends BaseFragment<ThirdMainPresenter, ThirdMai
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
 
     }
+
     @Override
     public void showError(String msg) {
 
@@ -56,55 +57,30 @@ public class ThirdMainFragment extends BaseFragment<ThirdMainPresenter, ThirdMai
 
     @Override
     public void updateView(List<Category> result) {
-                        if(result != null){
-                    categorys = (ArrayList)result;
-                    GloableParams.hasCategory = true;
-                    GloableParams.categoryInfos = categorys;
-                    myCategoryItemClickListener.setData(categorys);
-                    initData();
-                }
+//        if (result != null) {
+//            showToast("add   ppp");
+//            categorys.addAll(result);
+//            GloableParams.hasCategory = true;
+//            GloableParams.categoryInfos = categorys;
+//            myCategoryItemClickListener.setData(categorys);
+////            initData();
+//        }
     }
 
 
-    /**
-     *拿到服务器的分类列表
-     */
-//     void getServiceCategoryList(){
-//        new BaseActivity.MyHttpTask<Integer>() {
-//            protected void onPreExecute() {
-//                PromptManager.showCommonProgressDialog(CategoryActivity1.this);
-//                super.onPreExecute();
-//            }
-//            @Override
-//            protected Object doInBackground(Integer... params) {
-//                CategoryEngine engine = BeanFactory.getImpl(CategoryEngine.class);
-//                return engine.getServiceCategoryList();
-//            }
-//            protected void onPostExecute(Object result) {
-//                super.onPostExecute(result);
-//                PromptManager.closeProgressDialog();
-//                if(result != null){
-//                    categorys = (ArrayList)result;
-//                    GloableParams.hasCategory = true;
-//                    GloableParams.categoryInfos = categorys;
-//                    myCategoryItemClickListener.setData(categorys);
-//                    initData();
-//                }else{
-//                    PromptManager.showToast(getApplicationContext(), "服务器忙，请稍后重试！！！");
-//                }
-//            }
-//        }.executeProxy(1);
-//    }
-
     // 初始化数据
     public void initData() {
-        if(GloableParams.hasCategory){//已经联网访问过分类数据
+        if (GloableParams.hasCategory) {//已经联网访问过分类数据
             categorys = GloableParams.categoryInfos;
             initData();
-        }else{
-            mPresenter.getServiceCategoryList();
+        } else {
+//            try {
+//                mPresenter.getServiceCategoryList();
+//            } catch (Exception e) {
+//                showLog(e.toString());
+//            }
         }
-        if(myCategoryItemClickListener==null){
+        if (myCategoryItemClickListener == null) {
             myCategoryItemClickListener = new MyCategoryItemClickListener((SupportFragment) getParentFragment());
         }
         category1List.setOnItemClickListener(myCategoryItemClickListener);

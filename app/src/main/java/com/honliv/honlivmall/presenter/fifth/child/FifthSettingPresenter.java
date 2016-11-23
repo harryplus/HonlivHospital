@@ -10,4 +10,18 @@ public class FifthSettingPresenter extends FifthContract.FifthSettingPresenter {
     public void onStart() {
 
     }
+
+    @Override
+    public void checkVersion() {
+        mRxManager.add(mModel.checkVersion().subscribe(result->{
+            mView.updateVersion(result);
+        }));
+    }
+
+    @Override
+    public void getServiceLogOut(String s) {
+        mRxManager.add(mModel.LogOut().subscribe(result->{
+            mView.updateLogOut(result);
+        }));
+    }
 }

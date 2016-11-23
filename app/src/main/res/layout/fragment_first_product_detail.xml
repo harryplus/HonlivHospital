@@ -258,7 +258,7 @@
 
             <!-- 服装颜色和尺码选择 -->
 
-            <RelativeLayout
+         <!--   <RelativeLayout
                 android:id="@+id/prod_property"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -314,12 +314,12 @@
                     android:paddingRight="24.0dip"
                     android:singleLine="true"
                     android:text="M" />
-            </RelativeLayout>
+            </RelativeLayout>-->
 
 
             <!--    属性选择三和四
                 -->
-            <RelativeLayout
+          <!--  <RelativeLayout
                 android:id="@+id/prod_property2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -378,52 +378,10 @@
                     android:singleLine="true"
                     android:text="选择"
                     android:visibility="gone" />
-            </RelativeLayout>
+            </RelativeLayout>-->
 
             <!-- 加入购物车及收藏 -->
 
-            <!--  <FrameLayout
-                 android:layout_width="fill_parent"
-                 android:layout_height="wrap_content"
-                 android:background="@drawable/product_detail_cell_normal"
-                 android:layout_marginBottom="5dp"
-                 android:layout_alignParentBottom="true"  >
-
-                 <RelativeLayout
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_centerInParent="true" >
-
-                     <TextView
-                         android:id="@+id/textPutIntoShopcar"
-                         style="@style/style_16_FFFFFF"
-                         android:layout_width="wrap_content"
-                         android:layout_height="40dp"
-                         android:layout_marginLeft="30.0dip"
-                         android:background="@anim/product_detail_shop_button"
-                         android:clickable="true"
-                         android:gravity="center"
-                         android:onClick="putIntoShopcar"
-                         android:textSize="14sp"
-                         android:text="加入购物车" />
-
-                     <TextView
-                         android:id="@+id/shopcar_prdtoFav_text"
-                         style="@style/style_16_FFFFFF"
-                         android:layout_width="wrap_content"
-                         android:layout_height="40dp"
-                         android:layout_alignParentRight="true"
-                            android:layout_marginRight="30dp"
-                            android:layout_centerVertical="true"
-                         android:background="@anim/product_detail_shop_button"
-                         android:clickable="true"
-                         android:ellipsize="marquee"
-                         android:gravity="center"
-                         android:onClick="putIntoCollect"
-                         android:textSize="14sp"
-                         android:text="收藏" />
-                 </RelativeLayout>
-             </FrameLayout> -->
 
             <!-- 优惠 -->
 

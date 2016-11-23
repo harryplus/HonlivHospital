@@ -1,5 +1,6 @@
 package com.honliv.honlivmall.presenter.fifth.child;
 
+import com.honliv.honlivmall.bean.UserInfo;
 import com.honliv.honlivmall.contract.FifthContract;
 
 /**
@@ -9,5 +10,12 @@ public class FifthEditPwdPresenter extends FifthContract.FifthEditPwdPresenter {
     @Override
     public void onStart() {
 
+    }
+
+    @Override
+    public void updateServicePassword(UserInfo userInfo) {
+        mRxManager.add(mModel.updateServicePassword(userInfo).subscribe(result->{
+            mView.updateView(result);
+        }));
     }
 }

@@ -30,6 +30,7 @@
             android:text="我的宏信通" />
 
         <ImageView
+            android:id="@+id/addCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"

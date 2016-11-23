@@ -47,6 +47,10 @@ public class FifthEditPersonInfoFragment extends BaseFragment<FifthEditPersonInf
     TextView addressProvinceET;//区域选择
     @BindView(R.id.head_goback)
     TextView headGoback;//区域选择
+    @BindView(R.id.updateInfo)
+    TextView updateInfo;
+    @BindView(R.id.register_ok)
+    TextView register_ok;
 
     String nicknameStr;
     String eMailStr;
@@ -82,6 +86,8 @@ public class FifthEditPersonInfoFragment extends BaseFragment<FifthEditPersonInf
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
         mRadioGroup.setOnCheckedChangeListener(new RadioButtonOnCheckedChangeListenerImpl());
         headGoback.setOnClickListener(this);
+        updateInfo.setOnClickListener(this);
+        register_ok.setOnClickListener(this);
     }
 
     @Override
@@ -100,9 +106,55 @@ public class FifthEditPersonInfoFragment extends BaseFragment<FifthEditPersonInf
             case R.id.head_goback:
                 pop();
                 break;
+            case R.id.updateInfo:
+            case R.id.register_ok:
+                if (userId < 0) {
+                    return;
+                }
+                nicknameStr = nicknameET.getText().toString().trim();
+                eMailStr = editEmailET.getText().toString().trim();
+                mobileStr = editMobileET.getText().toString().trim();
+                telStr = editTELET.getText().toString().trim();
+                brithdayStr = editBrithdayET.getText().toString().trim();
+                provinceStr = addressProvinceET.getText().toString().trim();
+
+                if (!"".equals(eMailStr)) {
+                    String reg = "[a-zA-Z0-9_.]{2,20}@[a-zA-Z0-9]+(\\.[a-zA-Z]+){1,3}";//比较精确的匹配
+                    if (!eMailStr.matches(reg)) {
+                        showToast("请输入正确的邮箱");
+                        return;
+                    }
+                }
+
+                if (!"".equals(mobileStr)) {
+                    String reg = "^1([38][0-9]|4[57]|5[^4]|7[0678]|)\\d{8}$";      //      1[0-9]{10}       /^1([38][0-9]|4[57]|5[^4])\d{8}$/
+                    if (!mobileStr.matches(reg)) {
+                        showToast("请输入正确的手机号");
+                        return;
+                    }
+                }
+                int selRegionId = sp.getInt("regionId", -1);
+
+                info = new UserInfo();
+                info.setUserId(GloableParams.USERID);
+                if (!"".equals(nicknameStr))
+                    info.setNickName(nicknameStr);
+                if (!"".equals(eMailStr))
+                    info.setEmail(eMailStr);
+                info.setSex(userSex + "");
+                if (!"".equals(mobileStr))
+                    info.setPhone(mobileStr);
+                if (!"".equals(telStr))
+                    info.setTel(telStr);
+                if (!"".equals(brithdayStr))
+                    info.setBirthday(brithdayStr);
+                if (selRegionId > 0)
+                    info.setRegionId(selRegionId);
+
+                mPresenter.updateUserInfo(info);
+                break;
         }
     }
-
 
     public void initData() {
         userId = GloableParams.USERID;
@@ -110,38 +162,6 @@ public class FifthEditPersonInfoFragment extends BaseFragment<FifthEditPersonInf
             showToast("请您先登录~");
             return;
         }
-
-        if (userInfo.getNickName() != null)
-            nicknameET.setText(userInfo.getNickName() + "");
-
-        if (userInfo.getEmail() != null)
-            editEmailET.setText(userInfo.getEmail() + "");
-
-        if (userInfo.getPhone() != null)
-            editMobileET.setText(userInfo.getPhone() + "");
-
-        if (userInfo.getTel() != null)
-            editTELET.setText(userInfo.getTel() + "");
-
-        if (userInfo.getBirthday() != null)
-            editBrithdayET.setText(userInfo.getBirthday() + "");
-
-        if (userInfo.getProvince() != null) {
-            int index = 0;
-            for (int i = 0; i < proviceIds.length; i++) {
-                if (userInfo.getProvince().equals(proviceIds[i] + "")) {
-                    index = i;
-                }
-            }
-            addressProvinceET.setText(proviceitems[index]);
-        }
-
-        LogUtil.info(userInfo.getSex() + "=========" + (userInfo.getSex()));
-
-        if ("0".equals(userInfo.getSex())) {
-            mRadioGroup.check(R.id.woman);//如果是女的，就调用这句代码
-        }
-
         mPresenter.getServicePersonal(getContext());
     }
 
@@ -149,11 +169,36 @@ public class FifthEditPersonInfoFragment extends BaseFragment<FifthEditPersonInf
     public void updateServicePersonal(UserInfo result) {
         if (result != null) {
             //有返回东西 ,解析出来数据，设置给屏幕
-            userInfo = (UserInfo) result;
-            LogUtil.info("数据库 userInfo=userInfo=" + userInfo);
+            userInfo = result;
             if (userInfo != null) {
                 //获取成功
-                initData();
+                if (userInfo.getNickName() != null)
+                    nicknameET.setText(userInfo.getNickName() + "");
+
+                if (userInfo.getEmail() != null)
+                    editEmailET.setText(userInfo.getEmail() + "");
+
+                if (userInfo.getPhone() != null)
+                    editMobileET.setText(userInfo.getPhone() + "");
+
+                if (userInfo.getTel() != null)
+                    editTELET.setText(userInfo.getTel() + "");
+
+                if (userInfo.getBirthday() != null)
+                    editBrithdayET.setText(userInfo.getBirthday() + "");
+
+                if (userInfo.getProvince() != null) {
+                    int index = 0;
+                    for (int i = 0; i < proviceIds.length; i++) {
+                        if (userInfo.getProvince().equals(proviceIds[i] + "")) {
+                            index = i;
+                        }
+                    }
+                    addressProvinceET.setText(proviceitems[index]);
+                }
+                if ("0".equals(userInfo.getSex())) {
+                    mRadioGroup.check(R.id.woman);//如果是女的，就调用这句代码
+                }
             } else {
                 //获取失败
                 showToast("服务器忙，请稍后重试！！！");
@@ -196,57 +241,6 @@ public class FifthEditPersonInfoFragment extends BaseFragment<FifthEditPersonInf
         }
     }
 
-    /**
-     * 点击更新资料
-     *
-     * @param view
-     */
-    public void updateInfo(View view) {
-        if (userId < 0) {
-            return;
-        }
-        nicknameStr = nicknameET.getText().toString().trim();
-        eMailStr = editEmailET.getText().toString().trim();
-        mobileStr = editMobileET.getText().toString().trim();
-        telStr = editTELET.getText().toString().trim();
-        brithdayStr = editBrithdayET.getText().toString().trim();
-        provinceStr = addressProvinceET.getText().toString().trim();
-
-        if (!"".equals(eMailStr)) {
-            String reg = "[a-zA-Z0-9_.]{2,20}@[a-zA-Z0-9]+(\\.[a-zA-Z]+){1,3}";//比较精确的匹配
-            if (!eMailStr.matches(reg)) {
-                showToast("请输入正确的邮箱");
-                return;
-            }
-        }
-
-        if (!"".equals(mobileStr)) {
-            String reg = "^1([38][0-9]|4[57]|5[^4]|7[0678]|)\\d{8}$";      //      1[0-9]{10}       /^1([38][0-9]|4[57]|5[^4])\d{8}$/
-            if (!mobileStr.matches(reg)) {
-                showToast("请输入正确的手机号");
-                return;
-            }
-        }
-        int selRegionId = sp.getInt("regionId", -1);
-
-        info = new UserInfo();
-        info.setUserId(GloableParams.USERID);
-        if (!"".equals(nicknameStr))
-            info.setNickName(nicknameStr);
-        if (!"".equals(eMailStr))
-            info.setEmail(eMailStr);
-        info.setSex(userSex + "");
-        if (!"".equals(mobileStr))
-            info.setPhone(mobileStr);
-        if (!"".equals(telStr))
-            info.setTel(telStr);
-        if (!"".equals(brithdayStr))
-            info.setBirthday(brithdayStr);
-        if (selRegionId > 0)
-            info.setRegionId(selRegionId);
-
-        mPresenter.updateUserInfo(info);
-    }
 
 //     void updateUserInfo(final UserInfo info) {
 //        new BaseActivity.MyHttpTask<Integer>() {

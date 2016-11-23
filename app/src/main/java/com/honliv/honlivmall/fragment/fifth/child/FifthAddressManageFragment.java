@@ -78,32 +78,12 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
 
     }
 
-
-    //     void addresslist(){
-//        new BaseActivity.MyHttpTask<Integer>() {
-//            @Override
-//            protected void onPreExecute() {
-//                PromptManager.showCommonProgressDialog(AddressManageActivity.this);
-//                super.onPreExecute();
-//            }
-//            @Override
-//            protected Object doInBackground(Integer... params) {
-//                AddressEngine engine = BeanFactory.getImpl(AddressEngine.class);
-//                return engine.getServiceAddressList(GloableParams.USERID, 1, 50);
-//            }
-//            protected void onPostExecute(Object result){
-//                super.onPostExecute(result);
-//                PromptManager.closeProgressDialog();
-//
-//            }
-//        }.executeProxy(0);
-//    }
     public void initData() {
         addressAdapter = new AddressAdapter();
         addressLV.setAdapter(addressAdapter);
 //		addressLV.setOnItemLongClickListener(new AddressItemLongClickListener());
         addressLV.setOnItemClickListener(new AddressItemClickListener());
-        mPresenter.getServiceProductList();
+//        mPresenter.getServiceProductList();
     }
 
     AddressInfo addressInfo;
@@ -111,29 +91,15 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
     @Override
     public void updateProductList(List<AddressInfo> result) {
         if (result != null) {
-            addressList = ((List<AddressInfo>) result);
-            LogUtil.info("====addressList==" + addressList);
-                /*	if(isUpload){
-						//加载更多
-						if(productlist.size()==0){
-							PromptManager.showMyToast(ProductListActivity.this, "暂无更多内容~");
-						}else{
-							currentProductList.addAll(productlist);
-							adapter.notifyDataSetChanged();
-						}
-						isUpload = false;
-					}else{*/
+            addressList = result;
             if (addressList.size() == 0) {
                 nullProductTV.setVisibility(View.VISIBLE);
                 addressLV.setVisibility(View.GONE);
-//							addressListAddTV.setVisibility(View.VISIBLE);
             } else {
                 nullProductTV.setVisibility(View.GONE);
                 addressLV.setVisibility(View.VISIBLE);
-//							addressListAddTV.setVisibility(View.GONE);
                 initData();
             }
-            //		}
         } else {
             showToast("服务器忙，请稍后重试！！！");
         }
@@ -163,7 +129,7 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
             if (convertView == null) {
                 holder = new ViewHolder();
                 view = View.inflate(getContext(), R.layout.address_manage_listitem, null);
-				/*view = LayoutInflater.from(getApplicationContext()).inflate(
+                /*view = LayoutInflater.from(getApplicationContext()).inflate(
 						R.layout.product_list_item, null);*/
                 holder.addressNameTV = (TextView) view.findViewById(R.id.addressnameTV);
                 holder.addressPhoneTV = (TextView) view.findViewById(R.id.addressphoneTV);
@@ -220,28 +186,6 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view,
                                        int position, long id) {
-			/*intent = new Intent();
-			intent.putExtra("addressInfo", addressList.get(position));
-			intent.setClass(AddressManageActivity.this, PaymentCenterActivity.class);
-			startActivity(intent);
-			finish();*/
-			/*String tempStr = addressInfo.getAreaDetail().split(",")[0]+"";
-			int which = 0;
-			for (int i = 0; i < proviceitems.length; i++) {
-				if(proviceitems[i].equals(tempStr)){
-					which=i;
-				}
-			}
-			Editor editor = sp.edit();
-			editor.putInt("regionId", proviceIds[which]);
-			editor.commit();*/
-
-//            Intent data=new Intent();
-//            //请求代码可以自己设置，这里设置成20
-//            data.putExtra("addressInfo",addressList.get(position));
-//            setResult(20, data);
-//            //关闭掉这个Activity
-//            finish();
             return true;
         }
     }
@@ -257,7 +201,7 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
 
     @Override
     public void onResume() {
-        mPresenter.getServiceProductList();
+//        mPresenter.getServiceProductList();
         super.onResume();
     }
 

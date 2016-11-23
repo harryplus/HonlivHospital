@@ -1,5 +1,8 @@
 package com.honliv.honlivmall.engine;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.api.MainApi;
 import com.honliv.honlivmall.bean.AddressInfo;
@@ -10,6 +13,7 @@ import com.honliv.honlivmall.util.RxService;
 import com.honliv.honlivmall.util.RxUtil;
 import com.honliv.honlivmall.util.Utils;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,9 +30,16 @@ public class AddressPostUtils {
         parames.put("pageIndex", 1);
         parames.put("pageNum", 50);
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).addresslist(postMap).map(bean -> {
-            return bean.getResult().getResult();
-        }).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).addresslist(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+//        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
+//            Type type = new TypeToken<List<AddressInfo>>() {
+//            }.getType();
+//            List<AddressInfo> result = null;
+//            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
+//                result = new Gson().fromJson(bean.getResult().getResult(), type);
+//            }
+//            return result;
+//        }).compose(RxUtil.rxSchedulerHelper());
     }
 
     public static Observable<List<AddressInfo>> GetRegionList(int addressId) {
@@ -36,9 +47,16 @@ public class AddressPostUtils {
         HashMap<String, Object> parames = new HashMap<>();
         parames.put("regionId", addressId);
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).GetRegionList(postMap).map(bean -> {
-            return bean.getResult().getResult();
-        }).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).GetRegionList(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+//        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
+//            Type type = new TypeToken<List<AddressInfo>>() {
+//            }.getType();
+//            List<AddressInfo> result = null;
+//            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
+//                result = new Gson().fromJson(bean.getResult().getResult(), type);
+//            }
+//            return result;
+//        }).compose(RxUtil.rxSchedulerHelper());
     }
 
     public static Observable<List<AddressInfo>> getServiceSaveAddress(AddressInfo info) {
@@ -51,9 +69,16 @@ public class AddressPostUtils {
         parames.put("celphone", info.getPhone());
         parames.put("areadetail", info.getAreaDetail());
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).GetRegionList(postMap).map(bean -> {
-            return bean.getResult().getResult();
-        }).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).SaveAddress(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+//        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
+//            Type type = new TypeToken<List<AddressInfo>>() {
+//            }.getType();
+//            List<AddressInfo> result = null;
+//            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
+//                result = new Gson().fromJson(bean.getResult().getResult(), type);
+//            }
+//            return result;
+//        }).compose(RxUtil.rxSchedulerHelper());
     }
 
     public static Observable<List<AddressInfo>> getServiceAddAddress(AddressInfo info) {
@@ -65,9 +90,16 @@ public class AddressPostUtils {
         parames.put("celphone", info.getPhone());
         parames.put("areadetail", info.getAreaDetail());
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).GetRegionList(postMap).map(bean -> {
-            return bean.getResult().getResult();
-        }).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).SaveAddress(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+//        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
+//            Type type = new TypeToken<List<AddressInfo>>() {
+//            }.getType();
+//            List<AddressInfo> result = null;
+//            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
+//                result = new Gson().fromJson(bean.getResult().getResult(), type);
+//            }
+//            return result;
+//        }).compose(RxUtil.rxSchedulerHelper());
     }
 
     public static Observable<String> GetRegionName(int addressId) {
@@ -76,6 +108,13 @@ public class AddressPostUtils {
         parames.put("regionId", addressId);
         postMap.put("params", parames);
         return RxService.createApi(MainApi.class).GetRegionName(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+//        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
+//            String result = null;
+//            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
+//                result = bean.getResult().getResult();
+//            }
+//            return result;
+//        }).compose(RxUtil.rxSchedulerHelper());
     }
 
     public static Observable<List<AddressInfo>> addresslist(int userid, int pageIndex, int pageNum) {
@@ -86,6 +125,15 @@ public class AddressPostUtils {
         parames.put("pageNum", pageNum);
         postMap.put("params", parames);
         return RxService.createApi(MainApi.class).addresslist(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+//        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
+//            Type type = new TypeToken<List<AddressInfo>>() {
+//            }.getType();
+//            List<AddressInfo> result = null;
+//            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
+//                result = new Gson().fromJson(bean.getResult().getResult(), type);
+//            }
+//            return result;
+//        }).compose(RxUtil.rxSchedulerHelper());
     }
 
     public static Observable<List<PayShip>> GetPayList() {
@@ -93,5 +141,14 @@ public class AddressPostUtils {
         HashMap<String, Object> parames = new HashMap<>();
         postMap.put("params", parames);
         return RxService.createApi(MainApi.class).GetPayList(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+//        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
+//            Type type = new TypeToken<List<PayShip>>() {
+//            }.getType();
+//            List<PayShip> result = null;
+//            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
+//                result = new Gson().fromJson(bean.getResult().getResult(), type);
+//            }
+//            return result;
+//        }).compose(RxUtil.rxSchedulerHelper());
     }
 }

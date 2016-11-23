@@ -23,8 +23,8 @@ public class LikeGridAdapter extends BaseAdapter {
     private final Context mContext;
     private List<Product> data = new ArrayList<Product>();
 
-    public LikeGridAdapter(Context mContext) {
-        this.data = new ArrayList<>();
+    public LikeGridAdapter(Context mContext,ArrayList<Product> likeProduct) {
+        this.data = likeProduct;
         this.mContext = mContext;
     }
 

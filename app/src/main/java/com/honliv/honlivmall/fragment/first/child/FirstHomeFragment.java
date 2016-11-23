@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,12 +15,12 @@ import com.honliv.honlivmall.adapter.LikeGridAdapter;
 import com.honliv.honlivmall.adapter.LimitGridAdapter;
 import com.honliv.honlivmall.adapter.MainPagerAdapter;
 import com.honliv.honlivmall.base.BaseFragment;
-import com.honliv.honlivmall.bean.GalleryProduct;
 import com.honliv.honlivmall.bean.HomeBanner;
-import com.honliv.honlivmall.bean.HomeBrand;
 import com.honliv.honlivmall.bean.HomeInfo;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.contract.FirstContract;
+import com.honliv.honlivmall.fragment.second.child.SecondMainFragment;
+import com.honliv.honlivmall.listener.GVItemListener;
 import com.honliv.honlivmall.model.first.child.FirstHomeModel;
 import com.honliv.honlivmall.presenter.first.child.FirstHomePresenter;
 import com.honliv.honlivmall.util.ViewUtils;
@@ -67,6 +66,8 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
     private Timer timer;
     private TimerTask task;
     private ScheduledExecutorService scheduledExecutor;
+    private List<Product> bargainproduct;
+    private ArrayList<Product> likeProduct;
 
     private Handler handler = new Handler() {
         @Override
@@ -89,6 +90,8 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
             }
         }
     };
+
+
     ;
 
     public static FirstHomeFragment newInstance() {
@@ -121,8 +124,7 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.seach_keyword:
-//                FirstBargainFragment detailFragment = FirstBargainFragment.newInstance();
-//                start(detailFragment);
+                start(SecondMainFragment.newInstance());
                 break;
 
             case R.id.more_limit:
@@ -179,9 +181,11 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
         limitproduct = new ArrayList<>();
         limitAdapter = new LimitGridAdapter(getContext(), limitproduct);
         limit.setAdapter(limitAdapter);
-        bargainAdapter = new BargainGridAdapter(getContext());
+        bargainproduct=new ArrayList<>();
+        bargainAdapter = new BargainGridAdapter(getContext(),bargainproduct);
         bargain.setAdapter(bargainAdapter);
-        likeAdapter = new LikeGridAdapter(getContext());
+        likeProduct=new ArrayList<>();
+        likeAdapter = new LikeGridAdapter(getContext(),likeProduct);
         like.setAdapter(likeAdapter);
         mPresenter.getServiceHomeInfo("0");
         mPresenter.getServiceHomeMarketing();
@@ -189,6 +193,9 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
         myPagerTask = new MyPagerTask();
         scheduledExecutor.scheduleAtFixedRate(myPagerTask, 5, 5,
                 TimeUnit.SECONDS);
+        limit.setOnItemClickListener(new GVItemListener(getContext(),this, mPresenter.mRxManager, limitproduct, true));
+        bargain.setOnItemClickListener(new GVItemListener(getContext(),this , mPresenter.mRxManager, bargainproduct, false));
+        like.setOnItemClickListener(new GVItemListener(getContext(),this ,mPresenter.mRxManager, likeProduct, false));
     }
 
     @Override
@@ -201,7 +208,7 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
             }
             List<Product> cheapproductlist = info.getCheapproductlist();
             if (cheapproductlist != null) {
-                bargainAdapter.addAll(cheapproductlist);
+                bargainproduct.addAll(cheapproductlist);
                 bargainAdapter.notifyDataSetChanged();
 
                 likeAdapter.addAll(cheapproductlist);

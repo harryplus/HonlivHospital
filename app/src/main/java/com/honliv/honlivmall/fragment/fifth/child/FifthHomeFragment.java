@@ -15,6 +15,7 @@ import com.honliv.honlivmall.activity.BaseActivity;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.UserInfo;
 import com.honliv.honlivmall.contract.FifthContract;
+import com.honliv.honlivmall.fragment.global.GlobalLoginFragment;
 import com.honliv.honlivmall.fragment.second.child.SecondMainFragment;
 import com.honliv.honlivmall.model.fifth.child.FifthHomeModel;
 import com.honliv.honlivmall.presenter.fifth.child.FifthHomePresenter;
@@ -131,6 +132,7 @@ public class FifthHomeFragment extends BaseFragment<FifthHomePresenter, FifthHom
                 break;
             case R.id.my_hxt:
                 //宏信通
+//                start(FifthEditPersonInfoFragment.newInstance());
                 start(FifthMyHxtFragment.newInstance());
                 break;
             case R.id.my_change_password://修改密码
@@ -150,14 +152,13 @@ public class FifthHomeFragment extends BaseFragment<FifthHomePresenter, FifthHom
 
                 break;
             case R.id.my_coupon_lin://优惠卷
-               start(FifthMyCouponFragment.newInstance());
+                start(FifthMyCouponFragment.newInstance());
                 break;
             case R.id.loginOut_text://注销登录
-//                getServiceLogOut("-1");
-
+                mPresenter.getServiceLogOut("-1");
                 break;
             case R.id.head_image_setting://设置
-               start(FifthSettingFragment.newInstance());
+                start(FifthSettingFragment.newInstance());
                 break;
 
             case R.id.nearby_market:
@@ -176,40 +177,21 @@ public class FifthHomeFragment extends BaseFragment<FifthHomePresenter, FifthHom
         }
     }
 
-//     void getServiceLogOut(String userId) {
-//        new BaseActivity.MyHttpTask<String>() {
-//            protected void onPreExecute() {
-//                PromptManager.showCommonProgressDialog(MyCenterActivity.this);
-//                super.onPreExecute();
-//            }
-//
-//            @Override
-//            protected Object doInBackground(String... params) {
-//                UserInfoEngine engine = BeanFactory.getImpl(UserInfoEngine.class);
-//                return engine.getServiceLogOut();
-//            }
-//
-//            protected void onPostExecute(Object result) {
-//                super.onPostExecute(result);
-//                PromptManager.closeProgressDialog();
-//                if (result != null && (Boolean) result) {
-//
-//                    DbUtils db = DbUtils.create(getApplicationContext());
-//                    try {
-//                        db.dropTable(UserInfo.class);
-//                    } catch (DbException e) {
-//                        // TODO Auto-generated catch block
-//                        e.printStackTrace();
-//                    }
-//                    GloableParams.USERID = -1;
-//
-//                    PromptManager.showToast(getApplicationContext(), "注销成功!");
-//                    animNextActivity(LoginActivity.class);
-//                    finish();
-//                } else {
-//                    PromptManager.showToast(getApplicationContext(), "服务器忙，请稍后重试！！！");
-//                }
-//            }
-//        }.executeProxy(userId);
-//    }
+    @Override
+    public void updateLogOutView(Boolean result) {
+        if (result != null && result) {
+            DbUtils db = DbUtils.create(getContext());
+            try {
+                db.dropTable(UserInfo.class);
+            } catch (DbException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            GloableParams.USERID = -1;
+            showToast("注销成功!");
+            start(GlobalLoginFragment.newInstance());
+        } else {
+            showToast("服务器忙，请稍后重试！！！");
+        }
+    }
 }

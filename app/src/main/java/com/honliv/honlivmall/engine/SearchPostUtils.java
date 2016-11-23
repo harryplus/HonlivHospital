@@ -1,11 +1,16 @@
 package com.honliv.honlivmall.engine;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.api.MainApi;
+import com.honliv.honlivmall.bean.HxtBean;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.util.RxService;
 import com.honliv.honlivmall.util.RxUtil;
 import com.honliv.honlivmall.util.Utils;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,37 +22,23 @@ import rx.functions.Func1;
  */
 public class SearchPostUtils {
     public static Observable<List<String>> HotKeyword() {
-        Observable<List<String>> resultBean = Observable.just("").map(new Func1<String, List<String>>() {
-            @Override
-            public List<String> call(String r) {
-//                List<String> result;
-//
-//                HttpClientUtil clientUtil = new HttpClientUtil();
-//                Map<String, Object> params = new HashMap<String, Object>();
-//
-//                params.put("method", "HotKeyword");
-//                String searchStr = clientUtil.sendPost(ConstantValue.URL, params);
-//
-//                // 对返回的结果进行解析
-//                try {
-//                    String resultContent = MyJSUtil.checkResponseString(searchStr);
-//                    if (resultContent != null && resultContent.length() > 0) {
-//                        result = JSON.parseArray(resultContent, String.class);
-//                        return result;
-//                    } else {// 得到错误的信息
-//                        String errorMsg = MyJSUtil.getErrorMsg(searchStr);
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-                return null;
-            }
-        }).compose(RxUtil.rxSchedulerHelper());
-        return resultBean;
+        HashMap<String, Object> postMap = Utils.getBaseMap("HotKeyword");
+        HashMap<String, Object> map = new HashMap<>();
+        postMap.put("params", map);
+        return RxService.createApi(MainApi.class).HotKeyword(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+//        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
+//            Type type = new TypeToken<List<String>>() {
+//            }.getType();
+//            List<String> result = null;
+//            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
+//                result = new Gson().fromJson(bean.getResult().getResult(), type);
+//            }
+//            return result;
+//        }).compose(RxUtil.rxSchedulerHelper());
     }
 
     public static Observable<List<Product>> SearchProductList(String keyword, String orderby, int start, int pageNum) {
-        HashMap<String, Object> postMap = Utils.getBaseMap("Login");
+        HashMap<String, Object> postMap = Utils.getBaseMap("SearchProductList");
         HashMap<String, Object> map = new HashMap<>();
         map.put("orderby", orderby);
         map.put("keyword", keyword);
@@ -55,5 +46,14 @@ public class SearchPostUtils {
         map.put("pageNum", pageNum);
         postMap.put("params", map);
         return RxService.createApi(MainApi.class).SearchProductList(postMap).map(bean -> bean.getResult().getResult().getProductlist()).compose(RxUtil.rxSchedulerHelper());
+//        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
+//            Type type = new TypeToken<List<Product>>() {
+//            }.getType();
+//            List<Product> result = null;
+//            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
+//                result = new Gson().fromJson(bean.getResult().getResult(), type);
+//            }
+//            return result;
+//        }).compose(RxUtil.rxSchedulerHelper());
     }
 }

@@ -20,4 +20,10 @@ public class FifthHomeModel implements FifthContract.FifthHomeModel {
         Observable<UserInfo> result = UserPostUtils.GetUserInfo(map);
         return result;
     }
+
+    @Override
+    public Observable<Boolean> getServiceLogOut(String s) {
+        Observable<Boolean> result = UserPostUtils.LogOut();
+        return result;
+    }
 }

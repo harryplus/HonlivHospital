@@ -56,13 +56,13 @@ public class FlashActivity extends CoreBaseActivity<FlashPresenter,FlashModel>im
 
     @Override
     public void initView(Bundle savedInstanceState) {
-//        deleteUpdata();//删除升级的apk
+        deleteUpdata();//删除升级的apk
 //        mPresenter.getServiceDafault(); //获取默认参数
-//
+
 //        installShortCut();// 创建快捷图标
-//
-//        registerWeiXin();//注册微信
-//        getDbUserInfo();
+
+        registerWeiXin();//注册微信
+        getDbUserInfo();
         startActivity(MainActivity.class);
 //        Observable.timer(2000, TimeUnit.MILLISECONDS)
 //                .compose(RxPermissions.getInstance(this).ensure(Manifest.permission.READ_PHONE_STATE))

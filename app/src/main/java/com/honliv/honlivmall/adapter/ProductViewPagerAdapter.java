@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.bumptech.glide.Glide;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.listener.MyItemListener;
 import com.honliv.honlivmall.listener.ProductItemListener;
+import com.honliv.honlivmall.util.Utils;
 
 /**
  * Created by Rodin on 2016/11/10.
@@ -26,7 +28,7 @@ public class ProductViewPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return Integer.MAX_VALUE;
+        return imagevpes.length;
     }
 
     @Override
@@ -39,6 +41,7 @@ public class ProductViewPagerAdapter extends PagerAdapter {
         ImageView imageView = (ImageView) imageLayout.findViewById(R.id.image);
         final ProgressBar spinner = (ProgressBar) imageLayout.findViewById(R.id.loading);
         String tempUrl = imagevpes[position % imagevpes.length].replace("{0}", "T300X390_");
+        Glide.with(mContext).load(tempUrl).crossFade().placeholder(R.mipmap.picture_no).into(imageView);
 
         imageView.setOnClickListener(new MyItemListener(position));
         container.addView(imageLayout);

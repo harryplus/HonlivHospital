@@ -152,7 +152,6 @@
                 android:layout_marginRight="10dip"
                 android:textColor="@color/red"
                 android:textSize="18sp" />
-            <!--                     android:text="可以享受的优惠活动信息（满减、打折）" -->
         </RelativeLayout>
     </LinearLayout>
 

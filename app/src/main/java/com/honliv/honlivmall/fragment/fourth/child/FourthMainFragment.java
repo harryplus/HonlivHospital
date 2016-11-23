@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
@@ -34,6 +35,7 @@ import com.honliv.honlivmall.util.DelayTask;
 import com.honliv.honlivmall.util.LogUtil;
 import com.honliv.honlivmall.util.MoneyUtils;
 import com.honliv.honlivmall.util.PromptManager;
+import com.honliv.honlivmall.util.Utils;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.exception.DbException;
 
@@ -67,9 +69,9 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
 
     ShopCartAdapter productAdapter;
     boolean[] flags;
-    int userId;
+//    int userId;
     float allProductPrice;//所有商品价格，要在listview设置完后才有值
-    ArrayList<Product> productlist=new ArrayList<>();//购物车的商品列表
+    ArrayList<Product> productlist = null;//购物车的商品列表
 
     public static FourthMainFragment newInstance() {
         Bundle args = new Bundle();
@@ -91,10 +93,6 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.login:
-//                FourthLoginFragment loginFragment = FourthLoginFragment.newInstance();
-//                start(loginFragment);
-                break;
         }
     }
 
@@ -106,7 +104,7 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
 
     public void onResume() {
         super.onResume();
-        mPresenter.getNativeAllShopCart(userId);
+//        mPresenter.getNativeAllShopCart(userId);
     }
 
     /**
@@ -121,20 +119,29 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
     }
 
     @Override
-    public void initData() {
-        mPresenter.getNativeAllShopCart(userId);
-        initShopCarNumber();
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        productlist=new ArrayList<>();
         productAdapter = new ShopCartAdapter();
         shopcar_product_list.setAdapter(productAdapter);
 
         shopcar_product_list.setOnItemClickListener(new ProductItemListener());
+//        showToast(GloableParams.USERID+"--GloableParams.USERID");
+        mPresenter.getNativeAllShopCart(GloableParams.USERID);
+        initShopCarNumber();
     }
 
+    @Override
+    public void initData() {
+
+    }
     @Override
     public void updataAllShopCart(ArrayList<Product> result) {
         initShopCarNumber();
         if (result != null) {
-            List<Product> productlist = (List<Product>) result;
+//            showToast(productlist.size()+"---ppp--");
+//            productlist.clear();
+            productlist.addAll(result);
 
             if (productlist.size() == 0) {
                 //没有数据
@@ -145,8 +152,6 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
                 headDeleteTV.setVisibility(View.GONE);
                 shopcarBottomRel.setVisibility(View.GONE);
             } else {
-                //有返回东西 ,解析出来数据，设置给屏幕
-                //LogUtil.info((result).toString());
                 shopcarLayout.setVisibility(View.VISIBLE);
                 headDeleteTV.setVisibility(View.VISIBLE);
                 shopcarBottomRel.setVisibility(View.VISIBLE);
@@ -161,8 +166,6 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
                 }
                 initShopCarNumber();//初始化底部小球的数量
                 initTotalPrice();//初始化顶部的价格和积分
-
-                initData();
             }
         } else {
             shopcarLayout.setVisibility(View.GONE);
@@ -176,6 +179,7 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
 
     class ShopCartAdapter extends BaseAdapter {
         public int getCount() {
+            showLog("-------"+ productlist.size());
             return productlist.size();
         }
 
@@ -230,7 +234,6 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
                 holder.productSizeKey.setText(productlist.get(position).getShopCarSizekey() + "：");
                 holder.productSize.setText(productlist.get(position).getShopCarProductSize());
             }
-            //String saprice  = cartes.get(position).getProduct().getSaleprice();
             holder.productPrice.setText("￥" + productlist.get(position).getSaleprice());
 
             final TextView tvNum = holder.productNum;
@@ -243,16 +246,9 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
             holder.prodImage_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*if(GloableParams.USERID<=0){
-						PromptManager.showMyToast(getContext(),"登录状态错误,请先登录！");
-						return;
-					}
-					*/
                     DbUtils db = DbUtils.create(getContext());
                     try {
                         db.delete(productlist.get(position));
-
-//						getNativeAllShopCart(GloableParams.USERID);
                         productlist.remove(position);
                         productAdapter.notifyDataSetChanged();
                         if (productlist.size() == 0) {
@@ -271,12 +267,7 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
                     }
                 }
             });
-            String tempImgUrl = productlist.get(position).getPic() + "";
-            if (!tempImgUrl.contains("http")) {
-                tempImgUrl = tempImgUrl.replace("{0}", "T175X228_");//replace("{0}", "");
-                tempImgUrl = ConstantValue.IMAGE_URL + tempImgUrl;
-            }
-//            imageLoader.displayImage(tempImgUrl, holder.imgIcon, options, animateFirstListener);
+            Glide.with(mContext).load(Utils.checkImagUrl(Utils.checkImagUrl(productlist.get(position).getPic() + ""))).crossFade().placeholder(R.mipmap.picture_no).into(holder.imgIcon);
             return view;
         }
     }
@@ -462,14 +453,6 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
                 }
 
                 selProduct.setNumber(num);
-				/*intent = new Intent();
-				ArrayList<Product> pds = new ArrayList<Product>();
-				pds.add(selProduct);
-				intent.setClass(getApplicationContext(),PaymentCenterActivity.class);
-				intent.putExtra("productlist",pds);
-				intent.putExtra("isFavorable", true);
-				startActivity(intent);
-				overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);//下个*/
                 DbUtils db = DbUtils.create(getContext());
 
                 if (GloableParams.USERID > 0) {

@@ -4,7 +4,6 @@ import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.application.MyApplication;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.contract.FourthContract;
-import com.honliv.honlivmall.util.LogUtil;
 import com.honliv.honlivmall.util.RxUtil;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.db.sqlite.Selector;
@@ -24,16 +23,12 @@ public class FourthMainModel implements FourthContract.FourthMainModel  {
             DbUtils db = DbUtils.create(MyApplication.getInstance().getAppContext());
             ArrayList<Product> productlist = null;
             try {
-                Product product = new Product();
-                //product.setUserId(GloableParams.USERID);
-                //	productlist = db.findAll(Product.class);
                 if (GloableParams.USERID > 0) {
                     productlist = (ArrayList) db.findAll(Selector.from(Product.class)
                             .where("userId", "=", GloableParams.USERID));
                 } else {
                     productlist = (ArrayList) db.findAll(Selector.from(Product.class).where("userId", "=", -100));
                 }
-                LogUtil.info("product 111db ===" + productlist);
             } catch (DbException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

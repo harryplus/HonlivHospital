@@ -16,6 +16,7 @@ import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.contract.SecondContract;
+import com.honliv.honlivmall.fragment.first.child.FirstProductDetailFragment;
 import com.honliv.honlivmall.model.second.child.SecondSearchResultModel;
 import com.honliv.honlivmall.presenter.second.child.SecondSearchResultPresenter;
 import com.honliv.honlivmall.util.DensityUtil;
@@ -32,9 +33,6 @@ import butterknife.BindView;
  * Created by Rodin on 2016/10/26.
  */
 public class SecondSearchResultFragment extends BaseFragment<SecondSearchResultPresenter, SecondSearchResultModel> implements SecondContract.SecondSearchResultView, View.OnClickListener, PullToRefreshView.OnHeaderRefreshListener, PullToRefreshView.OnFooterRefreshListener {
-
-
-    static final String TAG = "SearchResultActivity";
     @BindView(R.id.productLv)
     GridView productGv;
     // String[] productTitles;
@@ -49,6 +47,8 @@ public class SecondSearchResultFragment extends BaseFragment<SecondSearchResultP
     TextView textRankTime;
     @BindView(R.id.textRankImage)
     TextView textRankImage;
+    @BindView(R.id.backTv)
+    TextView backTv;
 
     boolean flagPrice = false;
 
@@ -92,11 +92,74 @@ public class SecondSearchResultFragment extends BaseFragment<SecondSearchResultP
 
         setBackgroundColor();
         textRankSale.setBackgroundResource(R.drawable.segment_selected_2_bg);
+        backTv.setOnClickListener(this);
+        textRankImage.setOnClickListener(this);
+        textRankTime.setOnClickListener(this);
+        textRankPrice.setOnClickListener(this);
+        textRankSale.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.backTv:
+                pop();
+                break;
+            case R.id.textRankImage:
+                initFlags();
+                flags[3] = true;
+                start = 1;
+                setBackgroundColor();
+                textRankImage.setBackgroundResource(R.drawable.segment_selected_3_bg);
+                orderby = "hot";
+                mPresenter.getSeaviceSearchProductList(searchKey, orderby, start);
+                break;
+            case R.id.textRankTime:
+                initFlags();
+                flags[2] = true;
+                flags[3] = false;
+                start = 1;
+                setBackgroundColor();
+                textRankTime.setBackgroundResource(R.drawable.segment_selected_2_bg);
+                orderby = "new";
+                mPresenter.getSeaviceSearchProductList(searchKey, orderby, start);
+                break;
+            case R.id.textRankPrice:
+                initFlags();
+                flags[1] = true;
+                flags[3] = false;
+                start = 1;
+                setBackgroundColor();
+                textRankPrice.setBackgroundResource(R.drawable.segment_selected_2_bg);
 
+                if (isLowestPrice) {
+                    isLowestPrice = !isLowestPrice;
+                    orderby = "price";
+                    mPresenter.getSeaviceSearchProductList(searchKey, orderby, start);
+                } else {
+                    isLowestPrice = !isLowestPrice;
+                    orderby = "pricedesc";
+                    mPresenter.getSeaviceSearchProductList(searchKey, orderby, start);
+                }
+                break;
+
+            case R.id.textRankSale:
+                initFlags();
+                flags[0] = true;
+                flags[3] = false;
+                start = 1;
+                orderby = "hot";
+                setBackgroundColor();
+                textRankSale.setBackgroundResource(R.drawable.segment_selected_1_bg);
+                mPresenter.getSeaviceSearchProductList(searchKey, orderby, start);
+                break;
+        }
+    }
+
+    @Override
+    public boolean onBackPressedSupport() {
+        pop();
+        return true;
     }
 
     @Override
@@ -106,10 +169,11 @@ public class SecondSearchResultFragment extends BaseFragment<SecondSearchResultP
 
     @Override
     public void initData() {
-        getSearchKey();
-    }
-
-    protected void getSearchKey() {
+        mPresenter.mRxManager.on("searchKey", result -> {
+            showToast((String) result);
+        });
+        searchKey = "鸡蛋";
+        showToast(searchKey);
 //        searchKey = (String)this.getIntent().getSerializableExtra("searchKey");
         searchResultTitle.setText("(" + searchKey + ")搜索结果");
         mPresenter.getSeaviceSearchProductList(searchKey, orderby, start);
@@ -142,78 +206,6 @@ public class SecondSearchResultFragment extends BaseFragment<SecondSearchResultP
         productGv.setAdapter(adapter);
 
         productGv.setOnItemClickListener(new GVItemListener());
-    }
-
-    /**
-     * 销量
-     *
-     * @param view
-     */
-    public void saleNumber(View view) {
-        initFlags();
-        flags[0] = true;
-        flags[3] = false;
-        start = 1;
-        orderby = "hot";
-        setBackgroundColor();
-        textRankSale.setBackgroundResource(R.drawable.segment_selected_1_bg);
-
-        mPresenter.getSeaviceSearchProductList(searchKey, orderby, start);
-    }
-
-    /**
-     * 价格
-     *
-     * @param view
-     */
-    public void priceClick(View view) {
-        initFlags();
-        flags[1] = true;
-        flags[3] = false;
-        start = 1;
-        setBackgroundColor();
-        textRankPrice.setBackgroundResource(R.drawable.segment_selected_2_bg);
-
-        if (isLowestPrice) {
-            isLowestPrice = !isLowestPrice;
-            orderby = "price";
-            mPresenter.getSeaviceSearchProductList(searchKey, orderby, start);
-        } else {
-            isLowestPrice = !isLowestPrice;
-            orderby = "pricedesc";
-            mPresenter.getSeaviceSearchProductList(searchKey, orderby, start);
-        }
-    }
-
-    /**
-     * 新品
-     *
-     * @param view
-     */
-    public void newProduct(View view) {
-        initFlags();
-        flags[2] = true;
-        flags[3] = false;
-        start = 1;
-        setBackgroundColor();
-        textRankTime.setBackgroundResource(R.drawable.segment_selected_2_bg);
-        orderby = "new";
-        mPresenter.getSeaviceSearchProductList(searchKey, orderby, start);
-    }
-
-    /**
-     * 大图
-     *
-     * @param view
-     */
-    public void bigImage(View view) {
-        initFlags();
-        flags[3] = true;
-        start = 1;
-        setBackgroundColor();
-        textRankImage.setBackgroundResource(R.drawable.segment_selected_3_bg);
-        orderby = "hot";
-        mPresenter.getSeaviceSearchProductList(searchKey, orderby, start);
     }
 
     @Override
@@ -361,7 +353,8 @@ public class SecondSearchResultFragment extends BaseFragment<SecondSearchResultP
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
             int pId = currentProductList.get(position).getId();
-
+            showToast(pId+"----");
+            start(FirstProductDetailFragment.newInstance());
 //            Intent intent = new Intent(SearchResultActivity.this,ProductDetailActivity.class);
 //            intent.putExtra("pId", pId);
 //            startActivityForResult(intent, 100);
@@ -376,9 +369,6 @@ public class SecondSearchResultFragment extends BaseFragment<SecondSearchResultP
 
             @Override
             public void run() {
-                System.out.println("上拉加载");/*
-                listDrawable.add(R.drawable.pic1);
-				adapter.notifyDataSetChanged();*/
                 start = start + 1;
                 isUpload = true;
                 mPresenter.getSeaviceSearchProductList(searchKey, orderby, start);
@@ -393,12 +383,6 @@ public class SecondSearchResultFragment extends BaseFragment<SecondSearchResultP
         mPullToRefreshView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // 设置更新时间
-                // mPullToRefreshView.onHeaderRefreshComplete("最近更新:01-23 12:01");
-                System.out.println("下拉更新");/*
-                listDrawable.add(R.drawable.pic1);
-				adapter.notifyDataSetChanged();*/
-
                 start = 1;
                 mPresenter.getSeaviceSearchProductList(searchKey, orderby, start);
                 mPullToRefreshView.onHeaderRefreshComplete();

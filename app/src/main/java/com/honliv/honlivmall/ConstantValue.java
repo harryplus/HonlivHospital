@@ -69,6 +69,7 @@ public interface ConstantValue {
             "VnuZbhurUgNopJJIk9w04AbThzm3W3q147kDvz8iyW3Lk++cNKDEt1WMBvFJpcKB\n" +
             "p6owQYdxKzRYIbPKsQJBAItf/Rx0WYVBoDPTg7510Czpxqc9NDEs02IswfsC8g8T\n" +
             "yuOrIi/+uVucwTTK3tRCAgyEbtKeuWdZnKWLOnZwB+k=";
-    String MSG_FirstMarketing = "MSG_FirstMarketing";
+    String msg_privilegeproduct = "msg_privilegeproduct";
     String Flag_Address_Address="Flag_Address_Address";
+    String SUCCESS = "success";
 }

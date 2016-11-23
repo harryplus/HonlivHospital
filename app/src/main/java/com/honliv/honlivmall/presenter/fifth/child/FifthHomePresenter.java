@@ -17,4 +17,11 @@ public class FifthHomePresenter extends FifthContract.FifthHomePresenter  {
             mView.updateView(result);
         }));
     }
+
+    @Override
+    public void getServiceLogOut(String s) {
+        mRxManager.add(mModel.getServiceLogOut(s).subscribe(result->{
+            mView.updateLogOutView(result);
+        }));
+    }
 }

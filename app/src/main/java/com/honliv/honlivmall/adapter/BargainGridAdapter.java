@@ -24,8 +24,8 @@ public class BargainGridAdapter extends BaseAdapter {
     private final Context mContext;
     private List<Product> data = new ArrayList<Product>();
 
-    public BargainGridAdapter(Context mContext) {
-        this.data = new ArrayList<>();
+    public BargainGridAdapter(Context mContext, List<Product> bargainproduct) {
+        this.data = bargainproduct;
         this.mContext = mContext;
     }
 

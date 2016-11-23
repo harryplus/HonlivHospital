@@ -10,4 +10,18 @@ public class FifthFavoritePresenter  extends FifthContract.FifthFavoritePresente
     public void onStart() {
 
     }
+
+    @Override
+    public void getServiceCancelFav(int userid, int favId) {
+        mRxManager.add(mModel.CancelFav(userid,favId).subscribe(result->{
+            mView.updateServiceCancelFav(result);
+        }));
+    }
+
+    @Override
+    public void getServiceFavInfo(int userid, int start, int i) {
+        mRxManager.add(mModel.updateServicePassword(userid,start,i).subscribe(result->{
+            mView.updateServiceFavInfo(result);
+        }));
+    }
 }

@@ -19,10 +19,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.adapter.HistoryAdapter;
@@ -69,7 +69,7 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
     @BindView(R.id.search_x)
     ImageView search_x;
     @BindView(R.id.searchImageButton)
-    ImageView imageView_ok;
+    ImageButton imageView_ok;
 
     //    int currentPage = 0;
     PagerAdapter pagerAdapter;
@@ -100,6 +100,10 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
         vibrator = (Vibrator) getActivity().getSystemService(getContext().VIBRATOR_SERVICE);
+        hotTitle.setOnClickListener(this);
+        search_x.setOnClickListener(this);
+        historyTitle.setOnClickListener(this);
+        imageView_ok.setOnClickListener(this);
     }
 
     private void initView() {
@@ -131,7 +135,6 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
         hotTitle.setTextColor(Color.RED);
 
         viewPager.setOnPageChangeListener(new MyPageListener(hotTitle, historyTitle, searchDelTV, selete, historyNames));
-        setLinstener();
 
         seachkeywordET.requestFocus();
 
@@ -307,6 +310,7 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
             case R.id.searchImageButton:
                 //搜索被点了
                 //PromptManager.showToast(this, "正在搜索ok.........");
+//                showToast("正在搜索ok.........");
                 searchBTOK();
                 break;
             default:
@@ -335,8 +339,7 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
 
         if (StringUtils.isBlank(seachkeywordStr)) {
             vibrator = (Vibrator) getActivity().getSystemService(getContext().VIBRATOR_SERVICE);
-            PromptManager.showToast(getContext(), "搜索内容不能为空");
-
+            showToast( "搜索内容不能为空");
             Animation loadAnimation = AnimationUtils.loadAnimation(
                     getContext(), R.anim.shake);// 输入框振动
             seachkeywordET.setAnimation(loadAnimation);
@@ -351,7 +354,7 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
 
     void searchKey(String searchKey) {
         if (searchKey == null) {
-            PromptManager.showToast(getContext(), "搜索内容不能为空");
+            showToast( "搜索内容不能为空");
             return;
         }
         DbUtils db = DbUtils.create(getContext());
@@ -390,7 +393,8 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
         }
         historyAdapter.notifyDataSetChanged();
         /*******************加的历史搜索看看有没有效果*****************/
-
+        start(SecondSearchResultFragment.newInstance());
+        mPresenter.mRxManager.post("searchKey",searchKey);
 //        intent = new Intent();
 //        intent.putExtra("searchKey", searchKey);
 //
@@ -401,13 +405,6 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
         //finish();
     }
 
-
-    protected void setLinstener() {
-        hotTitle.setOnClickListener(this);
-        search_x.setOnClickListener(this);
-        historyTitle.setOnClickListener(this);
-        imageView_ok.setOnClickListener(this);
-    }
 
     class HotOnItemClickListener implements AdapterView.OnItemClickListener {
         @Override
