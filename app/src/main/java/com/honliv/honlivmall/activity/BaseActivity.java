@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.RemoteException;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -19,7 +18,6 @@ import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.util.NetUtil;
-import com.honliv.honlivmall.util.PromptManager;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.exception.DbException;
@@ -112,7 +110,7 @@ public abstract class BaseActivity extends Activity {
 			 if(NetUtil.checkNet(BaseActivity.this)){//在每次异步前先判断网络
 					return execute(params);
 				}else{
-					PromptManager.showNoNetWork(BaseActivity.this);
+//					PromptManager.showNoNetWork(BaseActivity.this);
 					return null;
 				}
 		 }
@@ -159,7 +157,7 @@ public abstract class BaseActivity extends Activity {
 	public void cleanCacheAll(){
 		//利用系统的一个特性，当申请的内存超过现有空闲内存时，系统会自动清理掉缓存
 		
-		PromptManager.showToast(getApplicationContext(), "正在清理中...");
+//		PromptManager.showToast(getApplicationContext(), "正在清理中...");
 		
 		PackageManager pm = getPackageManager();
 		Method[] methods = PackageManager.class.getMethods();
@@ -187,7 +185,7 @@ public abstract class BaseActivity extends Activity {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				PromptManager.showToast(getApplicationContext(), "恭喜你，缓存已经全部清除，手机达到最佳状态");
+//				PromptManager.showToast(getApplicationContext(), "恭喜你，缓存已经全部清除，手机达到最佳状态");
 			}
 		}
 	};

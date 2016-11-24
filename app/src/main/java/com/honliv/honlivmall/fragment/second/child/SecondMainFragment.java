@@ -35,7 +35,6 @@ import com.honliv.honlivmall.listener.MyPageListener;
 import com.honliv.honlivmall.model.second.child.SecondMainModel;
 import com.honliv.honlivmall.presenter.second.child.SecondMainPresenter;
 import com.honliv.honlivmall.util.DensityUtil;
-import com.honliv.honlivmall.util.PromptManager;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.exception.DbException;
 

@@ -2,31 +2,22 @@ package com.honliv.honlivmall.fragment.fifth.child;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
-import com.honliv.honlivmall.activity.BaseActivity;
-import com.honliv.honlivmall.activity.MainActivity;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.UserInfo;
 import com.honliv.honlivmall.contract.FifthContract;
 import com.honliv.honlivmall.fragment.global.GlobalLoginFragment;
-import com.honliv.honlivmall.model.fifth.child.FifthEditPersonInfoModel;
 import com.honliv.honlivmall.model.fifth.child.FifthEditPwdModel;
-import com.honliv.honlivmall.presenter.fifth.child.FifthEditPersonInfoPresenter;
 import com.honliv.honlivmall.presenter.fifth.child.FifthEditPwdPresenter;
-import com.honliv.honlivmall.util.BeanFactory;
-import com.honliv.honlivmall.util.PromptManager;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.exception.DbException;
 
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.Calendar;
 
 import butterknife.BindView;
 

@@ -17,6 +17,8 @@ import com.honliv.honlivmall.fragment.third.child.ThirdMainFragment;
 import com.honliv.honlivmall.view.BottomBar;
 import com.honliv.honlivmall.view.BottomBarTab;
 
+import java.io.Serializable;
+
 import butterknife.BindView;
 import me.yokeyword.fragmentation.SupportFragment;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
@@ -142,6 +144,13 @@ public class MainActivity extends CoreBaseActivity implements BaseLazyMainFragme
 //                }
             }
         });
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            Class fragment = (Class) bundle.getSerializable("fragment");
+            int position = bundle.getInt("position");
+            startAssignFragment(position, fragment);
+        }
     }
 
     public void startAssignFragment(int position, Class<SecondMainFragment> fragmentClass) {

@@ -1,9 +1,7 @@
 package com.honliv.honlivmall.fragment.fifth.child;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,10 +14,7 @@ import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.Help;
 import com.honliv.honlivmall.contract.FifthContract;
 import com.honliv.honlivmall.model.fifth.child.FifthHelpList2Model;
-import com.honliv.honlivmall.model.fifth.child.FifthHelpListModel;
 import com.honliv.honlivmall.presenter.fifth.child.FifthHelpList2Presenter;
-import com.honliv.honlivmall.presenter.fifth.child.FifthHelpListPresenter;
-import com.honliv.honlivmall.util.PromptManager;
 
 import java.util.ArrayList;
 import java.util.List;

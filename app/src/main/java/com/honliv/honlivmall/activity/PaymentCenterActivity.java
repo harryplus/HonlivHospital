@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -32,9 +31,7 @@ import com.honliv.honlivmall.model.activity.PaymentCenterModel;
 import com.honliv.honlivmall.presenter.activity.PaymentCenterPresenter;
 import com.honliv.honlivmall.task.GetCunPonListInfosTask;
 import com.honliv.honlivmall.task.GetServiceSubmitOrderTask;
-import com.honliv.honlivmall.util.LogUtil;
 import com.honliv.honlivmall.util.MoneyUtils;
-import com.honliv.honlivmall.util.PromptManager;
 import com.honliv.honlivmall.view.PaymentDialog;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.db.sqlite.Selector;
@@ -172,7 +169,7 @@ public class PaymentCenterActivity extends CoreBaseActivity<PaymentCenterPresent
         isFavorable = this.getIntent().getBooleanExtra("isFavorable", false);
 
         if (currentProductList == null || currentProductList.size() == 0) {
-            PromptManager.showToast(this, "没有购物清单");
+            showToast("没有购物清单");
             return;
         }
         //转换成sku传送给服务器的
@@ -373,16 +370,16 @@ public class PaymentCenterActivity extends CoreBaseActivity<PaymentCenterPresent
     public void goSubmit(View view) {// submitOK
 
         if (addressInfo == null) {
-            PromptManager.showToast(this, "请选择地址,再提交");
+            showToast("请选择地址,再提交");
             return;
         }
         regionId = addressInfo.getRegionId();
         if (regionId == 0) {
-            PromptManager.showToast(this, "请重新选择地址,再提交");
+            showToast("请重新选择地址,再提交");
             return;
         }
         if (payId == 0 || shipId == 0) {
-            PromptManager.showToast(this, "请先选择支付配送方式");
+            showToast("请先选择支付配送方式");
             return;
         }
         showShopcarDialog();
@@ -418,8 +415,7 @@ public class PaymentCenterActivity extends CoreBaseActivity<PaymentCenterPresent
                 if (result != null) {
                     OrderInfo orderInfo = (OrderInfo) result;
                     if (orderInfo == null) {
-                        PromptManager.showToast(PaymentCenterActivity.this,
-                                "提交订单失败,请重试");
+                        showToast("提交订单失败,请重试");
                     } else {
                         if (orderInfo.getErrMsg() != null) {
                             if ("NOSTOCK".equals(orderInfo.getErrMsg())) {// NOSHOPPINGCARTINFO
@@ -428,22 +424,15 @@ public class PaymentCenterActivity extends CoreBaseActivity<PaymentCenterPresent
                                 if (name.length() > 15) {
                                     name = name.substring(0, 25) + "..";
                                 }
-                                PromptManager.showToast(
-                                        PaymentCenterActivity.this,
-                                        name + "库存不足");
+                                showToast(name + "库存不足");
                             } else if ("NOSHOPPINGCARTINFO".equals(orderInfo
                                     .getErrMsg())) {
-                                PromptManager.showToast(
-                                        PaymentCenterActivity.this,
-                                        "有商品库存不足,请减少数量或者联系客服！");
+                                showToast("有商品库存不足,请减少数量或者联系客服！");
                             } else if ("PROSALEEXPIRED".equals(orderInfo
                                     .getErrMsg())) {
-                                PromptManager.showToast(
-                                        PaymentCenterActivity.this, "商品已经过期！");
+                                showToast("商品已经过期！");
                             } else {
-                                PromptManager.showToast(
-                                        PaymentCenterActivity.this,
-                                        "提交订单失败,请联系客服");
+                                showToast("提交订单失败,请联系客服");
                             }
                         } else {
                             try {
@@ -725,7 +714,7 @@ public class PaymentCenterActivity extends CoreBaseActivity<PaymentCenterPresent
             initAllPrice(freight);
             mPresenter.getServiceAddressList(1, 50);
         } else {
-            PromptManager.showToast(getApplicationContext(), "服务器忙，请稍后重试！！！");
+            showToast("服务器忙，请稍后重试！！！");
         }
     }
 
@@ -780,10 +769,10 @@ public class PaymentCenterActivity extends CoreBaseActivity<PaymentCenterPresent
             if (PayShipList != null && PayShipList.size() > 0) {
                 initSpinnerPay(PayShipList);
             } else {
-                PromptManager.showToast(getApplicationContext(), "服务器忙，请稍后重试！！！");
+                showToast("服务器忙，请稍后重试！！！");
             }
         } else {
-            PromptManager.showToast(getApplicationContext(), "服务器忙，请稍后重试！！！");
+            showToast("服务器忙，请稍后重试！！！");
         }
     }
 

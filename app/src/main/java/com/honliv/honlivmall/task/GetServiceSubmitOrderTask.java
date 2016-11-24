@@ -2,13 +2,11 @@ package com.honliv.honlivmall.task;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
-import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.bean.AddressInfo;
 import com.honliv.honlivmall.bean.CouponInfo;
 import com.honliv.honlivmall.bean.Product;
-import com.honliv.honlivmall.util.BeanFactory;
-import com.honliv.honlivmall.util.PromptManager;
 
 import org.json.JSONObject;
 
@@ -51,8 +49,6 @@ public class GetServiceSubmitOrderTask extends AsyncTask<Integer, Void, Object> 
 
     @Override
     protected void onPreExecute() {
-        PromptManager
-                .showCommonProgressDialog(mContext);
         super.onPreExecute();
     }
 
@@ -80,7 +76,6 @@ public class GetServiceSubmitOrderTask extends AsyncTask<Integer, Void, Object> 
 
     @Override
     protected void onPostExecute(Object result) {
-        PromptManager.closeProgressDialog();
         listener.motion(result);
     }
 }

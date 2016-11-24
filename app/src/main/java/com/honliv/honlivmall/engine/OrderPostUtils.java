@@ -1,5 +1,6 @@
 package com.honliv.honlivmall.engine;
 
+import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.api.MainApi;
 import com.honliv.honlivmall.bean.OrderInfo;
@@ -25,5 +26,28 @@ public class OrderPostUtils {
         postMap.put("params", parames);
         return RxService.createApi(MainApi.class).ListOrderInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
 
+    }
+
+    public static Observable<OrderInfo> OrderDetail(int userid, int orderId) {
+        HashMap<String, Object> postMap = Utils.getBaseMap("OrderDetail");
+        HashMap<String, Object> parames = new HashMap<>();
+        parames.put("UserID", userid);//UserID
+        parames.put("id", orderId);//UserID
+        postMap.put("params", parames);
+        return RxService.createApi(MainApi.class).OrderInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+    }
+
+    public static Observable<Boolean> CancelOrder(int userId, int orderId) {
+        HashMap<String, Object> postMap = Utils.getBaseMap("OrderDetail");
+        HashMap<String, Object> parames = new HashMap<>();
+        parames.put("UserID", userId);
+        parames.put("Id", orderId);
+        postMap.put("params", parames);
+        return RxService.createApi(MainApi.class).String(postMap).map(bean -> {
+            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
+                return true;
+            }
+            return false;
+        }).compose(RxUtil.rxSchedulerHelper());
     }
 }

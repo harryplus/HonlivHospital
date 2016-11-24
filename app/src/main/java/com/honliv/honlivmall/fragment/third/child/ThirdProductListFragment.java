@@ -21,7 +21,6 @@ import com.honliv.honlivmall.fragment.first.child.FirstProductDetailFragment;
 import com.honliv.honlivmall.model.third.child.ThirdProductListModel;
 import com.honliv.honlivmall.presenter.third.child.ThirdProductListPresenter;
 import com.honliv.honlivmall.util.DensityUtil;
-import com.honliv.honlivmall.util.PromptManager;
 import com.honliv.honlivmall.util.Utils;
 import com.honliv.honlivmall.view.PullToRefreshView;
 
@@ -164,7 +163,7 @@ public class ThirdProductListFragment extends BaseFragment<ThirdProductListPrese
                 }
             }
         } else {
-            PromptManager.showToast(getContext(), "服务器忙，请稍后重试！！！");
+            showToast("服务器忙，请稍后重试！！！");
         }
     }
 

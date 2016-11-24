@@ -9,12 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.OrderInfo;
 import com.honliv.honlivmall.util.BuilderTools;
 import com.honliv.honlivmall.util.LogUtil;
-import com.honliv.honlivmall.util.PromptManager;
 import com.honliv.honlivmall.view.GalleryItem;
 
 import java.util.List;
@@ -33,7 +33,6 @@ public class MyOrderAdapter extends BaseAdapter {
 
     public MyOrderAdapter(Context context, List<GalleryItem> galleryitemList,
                           List<OrderInfo> currentOrderList, List<OrderInfo> ordereList) {
-        super();
         this.context = context;
         this.galleryitemList = galleryitemList;
         this.currentOrderList = currentOrderList;
@@ -165,7 +164,6 @@ public class MyOrderAdapter extends BaseAdapter {
         new AsyncTask<Integer, Void, Object>() {
             @Override
             protected void onPreExecute() {
-                PromptManager.showCommonProgressDialog(context);
                 super.onPreExecute();
             }
 
@@ -178,17 +176,16 @@ public class MyOrderAdapter extends BaseAdapter {
 
             protected void onPostExecute(Object result) {
                 super.onPostExecute(result);
-                PromptManager.closeProgressDialog();
                 if (result != null) {
                     Boolean isSuccess = (Boolean) result;
                     if (isSuccess) {
 //                        MyOrderUtils.OrderList(context, context.userId);
 //							initCancelOrder(position);
                     } else {
-                        PromptManager.showToast(context, "取消订单失败！！！");
+                        Toast.makeText(context, "取消订单失败！！！", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    PromptManager.showToast(context, "服务器忙，请稍后重试！！！");
+                    Toast.makeText(context, "服务器忙，请稍后重试！！！", Toast.LENGTH_SHORT).show();
                 }
             }
         }.execute(position);
@@ -218,7 +215,7 @@ public class MyOrderAdapter extends BaseAdapter {
             if ("1".equals(flag)) {
                 showShopcarDialog(position);
             } else {
-                PromptManager.showToast(context, "订单状态不可取消");
+                Toast.makeText(context, "订单状态不可取消", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -1,16 +1,14 @@
 package com.honliv.honlivmall.model.fifth.child;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.honliv.honlivmall.bean.UserInfo;
 import com.honliv.honlivmall.contract.FifthContract;
 import com.honliv.honlivmall.engine.UserPostUtils;
-import com.honliv.honlivmall.util.PromptManager;
 import com.honliv.honlivmall.util.RxUtil;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.exception.DbException;
-
-import java.util.HashMap;
 
 import rx.Observable;
 
@@ -20,13 +18,13 @@ import rx.Observable;
 public class FifthEditPersonInfoModel implements FifthContract.FifthEditPersonInfoModel {
     @Override
     public Observable<UserInfo> getServicePersonal(Context context) {
-        return Observable.just(context).map(t->{
+        return Observable.just(context).map(t -> {
             DbUtils db = DbUtils.create(context);
             try {
-                UserInfo dbUserInfo  = db.findFirst(UserInfo.class);
-                if(dbUserInfo==null){
-                    PromptManager.showToast(context, "登陆状态错误,请退出重进");
-                }else{
+                UserInfo dbUserInfo = db.findFirst(UserInfo.class);
+                if (dbUserInfo == null) {
+                    Toast.makeText(context, "登陆状态错误,请退出重进", Toast.LENGTH_SHORT).show();
+                } else {
                     return dbUserInfo;
                 }
             } catch (DbException e) {

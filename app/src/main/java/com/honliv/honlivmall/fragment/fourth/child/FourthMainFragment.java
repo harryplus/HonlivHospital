@@ -35,13 +35,11 @@ import com.honliv.honlivmall.presenter.fourth.child.FourthMainPresenter;
 import com.honliv.honlivmall.util.DelayTask;
 import com.honliv.honlivmall.util.LogUtil;
 import com.honliv.honlivmall.util.MoneyUtils;
-import com.honliv.honlivmall.util.PromptManager;
 import com.honliv.honlivmall.util.Utils;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.exception.DbException;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -330,7 +328,7 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
                     num = 1;
                 }
                 if (num > selProduct.getStockcount()) {
-                    PromptManager.showToast(getContext(), "商品可售库存仅为(" + selProduct.getStockcount() + ")！");
+                    showToast( "商品可售库存仅为(" + selProduct.getStockcount() + ")！");
                     productNumET.removeTextChangedListener(this);
                     productNumET.setText(selProduct.getStockcount() + "");
                     productNum.setText("x " + selProduct.getStockcount());
@@ -377,7 +375,7 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
 
                 num = num - 1;
                 if (num == 0) {
-                    PromptManager.showToast(getContext(), "亲,数量不能再减少了～");
+                    showToast("亲,数量不能再减少了～");
                     return;
                 }
                 if (num == 1) {
@@ -406,7 +404,7 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
                 }
                 num = num + 1;
                 if (num > selProduct.getStockcount()) {
-                    PromptManager.showToast(getContext(), "商品可售库存仅为(" + selProduct.getStockcount() + ")");
+                    showToast("商品可售库存仅为(" + selProduct.getStockcount() + ")");
                     aaNumBT.setBackgroundResource(R.drawable.edit_product_num_add_no_enable);
                     aaNumBT.setClickable(false);
                     return;

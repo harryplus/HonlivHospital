@@ -1,7 +1,5 @@
 package com.honliv.honlivmall.fragment.third.child;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -15,7 +13,6 @@ import com.honliv.honlivmall.bean.Category;
 import com.honliv.honlivmall.contract.ThirdContract;
 import com.honliv.honlivmall.model.third.child.ThirdCategoryModel;
 import com.honliv.honlivmall.presenter.third.child.ThirdCategoryPresenter;
-import com.honliv.honlivmall.util.PromptManager;
 
 import java.util.List;
 
@@ -181,7 +178,7 @@ public class ThirdCategoryFragment extends BaseFragment<ThirdCategoryPresenter, 
         public boolean onChildClick(ExpandableListView parent, View v,
                                     int groupPosition, int childPosition, long id) {
             if (groupList.get(groupPosition).getChildlist().get(childPosition).isHaschild()) {
-                PromptManager.showToastTest(getContext(), "还有子分类。。。");
+                showToast("还有子分类。。。");
 
                 int cId = groupList.get(groupPosition).getChildlist().get(childPosition).getId();
 

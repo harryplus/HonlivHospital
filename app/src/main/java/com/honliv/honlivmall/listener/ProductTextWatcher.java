@@ -6,10 +6,10 @@ import android.text.Selection;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.Product;
-import com.honliv.honlivmall.util.PromptManager;
 
 /**
  * Created by Rodin on 2016/11/10.
@@ -22,11 +22,11 @@ public class ProductTextWatcher implements TextWatcher {
     private final Button subNumBT;
 
     public ProductTextWatcher(Context mContext, EditText prodNumValue, Product privilegeProduct, Button addNumBT, Button subNumBT) {
-        this.mContext=mContext;
-        this.prodNumValue=prodNumValue;
-        this.privilegeProduct=privilegeProduct;
-        this.addNumBT=addNumBT;
-        this.subNumBT=subNumBT;
+        this.mContext = mContext;
+        this.prodNumValue = prodNumValue;
+        this.privilegeProduct = privilegeProduct;
+        this.addNumBT = addNumBT;
+        this.subNumBT = subNumBT;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class ProductTextWatcher implements TextWatcher {
         }
         if (privilegeProduct != null && privilegeProduct.getLimitQty() != 0) {
             if (num > privilegeProduct.getLimitQty()) {
-                PromptManager.showToast(mContext, "限购数量为(" + privilegeProduct.getLimitQty() + ")");
+                Toast.makeText(mContext, "限购数量为(" + privilegeProduct.getLimitQty() + ")", Toast.LENGTH_SHORT).show();
 
                 prodNumValue.removeTextChangedListener(this);
                 prodNumValue.setText(privilegeProduct.getLimitQty() + "");

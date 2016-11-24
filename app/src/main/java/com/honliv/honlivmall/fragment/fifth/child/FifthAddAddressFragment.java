@@ -15,15 +15,12 @@ import android.widget.TextView;
 
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
-import com.honliv.honlivmall.activity.BaseActivity;
 import com.honliv.honlivmall.adapter.MyAdapter;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.AddressInfo;
 import com.honliv.honlivmall.contract.FifthContract;
 import com.honliv.honlivmall.model.fifth.child.FifthAddAddressModel;
 import com.honliv.honlivmall.presenter.fifth.child.FifthAddAddressPresenter;
-import com.honliv.honlivmall.util.BeanFactory;
-import com.honliv.honlivmall.util.PromptManager;
 
 import org.apache.commons.lang3.StringUtils;
 

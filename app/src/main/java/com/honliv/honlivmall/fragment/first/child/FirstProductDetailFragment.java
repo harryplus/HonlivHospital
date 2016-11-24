@@ -43,7 +43,6 @@ import com.honliv.honlivmall.model.first.child.FirstProductDetailModel;
 import com.honliv.honlivmall.presenter.first.child.FirstProductDetailPresenter;
 import com.honliv.honlivmall.util.BuilderTools;
 import com.honliv.honlivmall.util.MoneyUtils;
-import com.honliv.honlivmall.util.PromptManager;
 import com.honliv.honlivmall.util.ViewUtils;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.db.sqlite.Selector;
@@ -207,9 +206,9 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
     @Override
     public void initData() {
         Bundle bundle = getArguments();
-        pId = bundle.getInt("pId",-1);
-        scanning=bundle.getBoolean("scanning", false);
-        privilegeProduct= (Product) bundle.getSerializable("privilegeProduct");
+        pId = bundle.getInt("pId", -1);
+        scanning = bundle.getBoolean("scanning", false);
+        privilegeProduct = (Product) bundle.getSerializable("privilegeProduct");
 //        pId = this.getIntent().getIntExtra("pId", -1);
 //        scanning = getIntent().getBooleanExtra("scanning", false);
 
@@ -803,7 +802,7 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
 
                 try {
                     if (CheckNum(db, productNumber)) return;
-                    PromptManager.showToast(getContext(), "商品成功加入购物车");
+                    showToast("商品成功加入购物车");
                 } catch (DbException e) {
                     e.printStackTrace();
                     try {
@@ -812,7 +811,7 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
-                    PromptManager.showToast(getContext(), "加入购物车失败，请重试!");
+                    showToast("加入购物车失败，请重试!");
                 } finally {
                     initShopCarNumber();//初始化底部球的数量
                 }
@@ -891,7 +890,7 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
-                    PromptManager.showToast(getContext(), getResources().getString(R.string.buy_fail));
+                    showToast(getResources().getString(R.string.buy_fail));
                 }
                 break;
         }

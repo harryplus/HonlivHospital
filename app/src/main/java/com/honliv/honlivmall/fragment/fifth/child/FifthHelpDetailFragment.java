@@ -1,6 +1,5 @@
 package com.honliv.honlivmall.fragment.fifth.child;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,33 +13,19 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
-import android.util.DisplayMetrics;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
-import com.honliv.honlivmall.activity.BaseActivity;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.Help;
-import com.honliv.honlivmall.bean.UserInfo;
 import com.honliv.honlivmall.contract.FifthContract;
-import com.honliv.honlivmall.fragment.global.GlobalLoginFragment;
-import com.honliv.honlivmall.model.fifth.child.FifthEditPwdModel;
 import com.honliv.honlivmall.model.fifth.child.FifthHelpDetailModel;
-import com.honliv.honlivmall.presenter.fifth.child.FifthEditPwdPresenter;
 import com.honliv.honlivmall.presenter.fifth.child.FifthHelpDetailPresenter;
-import com.honliv.honlivmall.util.BeanFactory;
 import com.honliv.honlivmall.util.LogUtil;
-import com.honliv.honlivmall.util.PromptManager;
-import com.lidroid.xutils.DbUtils;
-import com.lidroid.xutils.exception.DbException;
 
-import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.XMLReader;
 
 import java.net.URL;

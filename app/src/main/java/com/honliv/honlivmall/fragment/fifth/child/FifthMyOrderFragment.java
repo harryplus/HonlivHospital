@@ -115,7 +115,7 @@ public class FifthMyOrderFragment extends BaseFragment<FifthMyOrderPresenter, Fi
             item.initAdapter(getContext());
             galleryitemList.add(item);
         }
-        orderAdapter = new MyOrderAdapter(getContext(), galleryitemList, currentOrderList, ordereList);
+        orderAdapter = new MyOrderAdapter(getContext(),galleryitemList, currentOrderList, ordereList);
         orderListView.setAdapter(orderAdapter);
     }
 

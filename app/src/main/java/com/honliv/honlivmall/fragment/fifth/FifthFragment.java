@@ -6,15 +6,18 @@ import android.view.View;
 
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.base.BaseLazyMainFragment;
+import com.honliv.honlivmall.contract.FifthContract;
 import com.honliv.honlivmall.contract.SecondContract;
 import com.honliv.honlivmall.fragment.fifth.child.FifthHomeFragment;
+import com.honliv.honlivmall.model.fifth.FifthModel;
 import com.honliv.honlivmall.model.second.SecondModel;
+import com.honliv.honlivmall.presenter.fifth.FifthPresenter;
 import com.honliv.honlivmall.presenter.second.SecondPresenter;
 
 /**
  * Created by Rodin on 2016/11/16.
  */
-public class FifthFragment extends BaseLazyMainFragment<SecondPresenter,SecondModel> implements SecondContract.SecondView {
+public class FifthFragment extends BaseLazyMainFragment<FifthPresenter,FifthModel> implements FifthContract.FifthView {
     public static FifthFragment newInstance() {
 
         Bundle args = new Bundle();

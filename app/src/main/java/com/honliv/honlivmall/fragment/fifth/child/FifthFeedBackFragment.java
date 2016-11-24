@@ -8,15 +8,10 @@ import android.widget.TextView;
 
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
-import com.honliv.honlivmall.activity.BaseActivity;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.contract.FifthContract;
 import com.honliv.honlivmall.model.fifth.child.FifthFeedBackModel;
-import com.honliv.honlivmall.model.fifth.child.FifthHelpListModel;
 import com.honliv.honlivmall.presenter.fifth.child.FifthFeedBackPresenter;
-import com.honliv.honlivmall.presenter.fifth.child.FifthHelpListPresenter;
-import com.honliv.honlivmall.util.BeanFactory;
-import com.honliv.honlivmall.util.PromptManager;
 
 import org.apache.commons.lang3.StringUtils;
 

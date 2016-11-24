@@ -27,7 +27,6 @@ import com.honliv.honlivmall.contract.FifthContract;
 import com.honliv.honlivmall.model.fifth.child.FifthSettingModel;
 import com.honliv.honlivmall.presenter.fifth.child.FifthSettingPresenter;
 import com.honliv.honlivmall.util.LogUtil;
-import com.honliv.honlivmall.util.PromptManager;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.DbException;
@@ -143,8 +142,7 @@ public class FifthSettingFragment extends BaseFragment<FifthSettingPresenter, Fi
     public void cleanAll() {
 
         //利用系统的一个特性，当申请的内存超过现有空闲内存时，系统会自动清理掉缓存
-
-        PromptManager.showToast(getContext(), "正在清理中...");
+        showToast("正在清理中...");
 
         PackageManager pm = getContext().getPackageManager();
         Method[] methods = PackageManager.class.getMethods();
@@ -180,7 +178,7 @@ public class FifthSettingFragment extends BaseFragment<FifthSettingPresenter, Fi
                     e.printStackTrace();
                 }
                 initShopCarNumber();
-                PromptManager.showToast(getContext(), "恭喜你，缓存已经全部清除，手机达到最佳状态");
+                showToast("恭喜你，缓存已经全部清除，手机达到最佳状态");
             }
         }
     };
@@ -394,13 +392,12 @@ public class FifthSettingFragment extends BaseFragment<FifthSettingPresenter, Fi
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-
-            PromptManager.showToast(getContext(), "注销成功!");
+            showToast("注销成功!");
             pop();
             //有返回东西 ,解析出来数据，设置给屏幕
 //					LogUtil.info(((List)result).toString());
         } else {
-            PromptManager.showToast(getContext(), "服务器忙，请稍后重试！！！");
+            showToast("服务器忙，请稍后重试！！！");
         }
     }
 }

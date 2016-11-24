@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,18 +19,13 @@ import android.widget.TextView;
 
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
-import com.honliv.honlivmall.activity.BaseActivity;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.CouponInfo;
 import com.honliv.honlivmall.contract.FifthContract;
-import com.honliv.honlivmall.model.fifth.child.FifthEditPersonInfoModel;
 import com.honliv.honlivmall.model.fifth.child.FifthMyCouponModel;
-import com.honliv.honlivmall.presenter.fifth.child.FifthEditPersonInfoPresenter;
 import com.honliv.honlivmall.presenter.fifth.child.FifthMyCouponPresenter;
-import com.honliv.honlivmall.util.BeanFactory;
 import com.honliv.honlivmall.util.DensityUtil;
 import com.honliv.honlivmall.util.LogUtil;
-import com.honliv.honlivmall.util.PromptManager;
 
 import org.apache.commons.lang3.StringUtils;
 

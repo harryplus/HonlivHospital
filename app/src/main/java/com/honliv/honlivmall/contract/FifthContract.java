@@ -28,6 +28,16 @@ public interface FifthContract {
     public interface FifthModel extends CoreBaseModel {
     }
 
+    public interface FifthAddressListModel extends CoreBaseModel {
+        Observable<List<AddressInfo>> addresslist(int userId, int pageIndex, int pageNum);
+    }
+
+    public interface FifthMyOrderDetailModel extends CoreBaseModel {
+        Observable<OrderInfo> OrderDetail(int userid, int orderId);
+
+        Observable<Boolean> CancelOrder(int userid, int orderId);
+    }
+
     public interface FifthAboutModel extends CoreBaseModel {
     }
 
@@ -35,6 +45,16 @@ public interface FifthContract {
     }
 
     interface FifthView extends CoreBaseView {
+    }
+
+    interface FifthAddressListView extends CoreBaseView {
+        void updateServiceProductList(List<AddressInfo> result);
+    }
+
+    interface FifthMyOrderDetailView extends CoreBaseView {
+        void updateServiceOrderDetail(OrderInfo result);
+
+        void updateServiceCancelOrder(Boolean result);
     }
 
     interface FifthNearByView extends CoreBaseView {
@@ -294,5 +314,15 @@ public interface FifthContract {
     }
 
     abstract class FifthNearByPresenter extends CoreBasePresenter<FifthNearByModel, FifthNearByView> {
+    }
+
+    abstract class FifthMyOrderDetailPresenter extends CoreBasePresenter<FifthMyOrderDetailModel, FifthMyOrderDetailView> {
+        public abstract void getServiceOrderDetail(int userid, int orderId);
+
+        public abstract void getServiceCancelOrder(int userid, int orderId);
+    }
+
+    abstract class FifthAddressListPresenter extends CoreBasePresenter<FifthAddressListModel, FifthAddressListView> {
+        public abstract void getServiceProductList(int userId, int pageIndex, int pageNum);
     }
 }

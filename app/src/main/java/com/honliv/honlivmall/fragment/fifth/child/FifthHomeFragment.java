@@ -16,7 +16,6 @@ import com.honliv.honlivmall.contract.FifthContract;
 import com.honliv.honlivmall.fragment.global.GlobalLoginFragment;
 import com.honliv.honlivmall.model.fifth.child.FifthHomeModel;
 import com.honliv.honlivmall.presenter.fifth.child.FifthHomePresenter;
-import com.honliv.honlivmall.util.PromptManager;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.exception.DbException;
 
