@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.activity.BaseActivity;
+import com.honliv.honlivmall.activity.MainActivity;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.UserInfo;
 import com.honliv.honlivmall.contract.FifthContract;
@@ -152,7 +153,7 @@ public class FifthEditPwdFragment extends BaseFragment<FifthEditPwdPresenter, Fi
                 }
                 initShopCarNumber();
                 pop();
-                start(GlobalLoginFragment.newInstance());
+                start(GlobalLoginFragment.newInstance(new Bundle()));
             } else {//获取失败
                 showToast("修改失败！！！");
             }

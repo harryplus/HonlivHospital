@@ -1,5 +1,6 @@
 package com.honliv.honlivmall.engine;
 
+import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.api.MainApi;
 import com.honliv.honlivmall.bean.AddressInfo;
@@ -144,5 +145,19 @@ public class AddressPostUtils {
 //            }
 //            return result;
 //        }).compose(RxUtil.rxSchedulerHelper());
+    }
+
+    public static Observable<Boolean> SetAddressDefault(int userId, int addressId) {
+        HashMap<String, Object> postMap = Utils.getBaseMap("SetAddressDefault");
+        HashMap<String, Object> parames = new HashMap<>();
+        parames.put("userId", userId);
+        parames.put("shipId", addressId);
+        postMap.put("params", parames);
+        return RxService.createApi(MainApi.class).String(postMap).map(bean -> {
+            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
+                return true;
+            }
+            return false;
+        }).compose(RxUtil.rxSchedulerHelper());
     }
 }

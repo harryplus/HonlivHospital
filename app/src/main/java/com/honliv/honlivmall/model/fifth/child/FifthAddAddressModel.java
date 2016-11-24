@@ -42,4 +42,10 @@ public class FifthAddAddressModel implements FifthContract.FifthAddAddressModel 
         Observable<String> result = AddressPostUtils.GetRegionName(regionId);
         return result;
     }
+
+    @Override
+    public Observable<Boolean> SetAddressDefault(int userid, int id) {
+        Observable<Boolean> result = AddressPostUtils.SetAddressDefault(userid,id);
+        return result;
+    }
 }

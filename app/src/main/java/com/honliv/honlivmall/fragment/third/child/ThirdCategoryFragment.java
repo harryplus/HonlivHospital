@@ -24,25 +24,25 @@ import butterknife.BindView;
 /**
  * Created by Rodin on 2016/10/26.
  */
-public class ThirdCategoryFragment extends BaseFragment<ThirdCategoryPresenter, ThirdCategoryModel> implements ThirdContract.ThirdCategoryView {
+public class ThirdCategoryFragment extends BaseFragment<ThirdCategoryPresenter, ThirdCategoryModel> implements ThirdContract.ThirdCategoryView, View.OnClickListener {
     @BindView(R.id.category2EList)
     ExpandableListView ELV_category;
+    @BindView(R.id.head_goback)
+    TextView head_goback;
 
     private String[] groupTitles;
-    private String[] item_describes;
-    private TextView categoryEmptyListTv;
-    private List<Bitmap> bitmaps;
-    private String[] category3;
-    private String[][] childTitle;
-    private int[] groupLogos;
-    private int[][] childLogos;
+//    private String[] item_describes;
+//    private TextView categoryEmptyListTv;
+//    private List<Bitmap> bitmaps;
+//    private String[] category3;
+//    private String[][] childTitle;
+//    private int[] groupLogos;
+//    private int[][] childLogos;
     private Category category;//
     private List<Category> groupList;//本页面的父分类的
+    private int sign = -1;//控制列表的展开 在不在顶部
 
-    public static ThirdCategoryFragment newInstance() {
-
-        Bundle args = new Bundle();
-
+    public static ThirdCategoryFragment newInstance(Bundle args) {
         ThirdCategoryFragment fragment = new ThirdCategoryFragment();
         fragment.setArguments(args);
         return fragment;
@@ -55,32 +55,10 @@ public class ThirdCategoryFragment extends BaseFragment<ThirdCategoryPresenter, 
 
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
-//        category = (Category)this.getIntent().getSerializableExtra("category");
+        Bundle data = getArguments();
+        category = (Category) data.getSerializable("category");
         groupList = category.getChildlist();
-
-        initView();
-    }
-
-    @Override
-    public void showError(String msg) {
-
-    }
-
-
-    private void getAllCategorys(List<Category> childlist) {
-        int index = 2;
-        for (int i = 0; i < childlist.size(); i++) {
-            groupTitles = new String[childlist.size()];
-            groupTitles[i] = childlist.get(i).getTitle();
-            if (childlist.get(i).isHaschild()) {
-
-            }
-        }
-    }
-
-    private int sign = -1;//控制列表的展开 在不在顶部
-
-    private void initView() {
+        head_goback.setOnClickListener(this);
         ELV_category.setAdapter(new MyELVAdapter(getContext(), groupList));
 
         ELV_category.setOnChildClickListener(new MyChildListener());
@@ -138,9 +116,12 @@ public class ThirdCategoryFragment extends BaseFragment<ThirdCategoryPresenter, 
                     return false;
                 } else {
                     String titlegroup = groupList.get(groupPosition).getTitle();
-                    showToast("已经没有子类，进入商品列表=" + titlegroup);
                     int cId = groupList.get(groupPosition).getId();
-
+                    showToast("titlegroup--"+titlegroup+"--cId---"+cId);
+                    Bundle data = new Bundle();
+                    data.putInt("cId", cId);
+                    data.putString("cTitle", titlegroup);
+                    start(ThirdProductListFragment.newInstance(data));
 //                    Intent intent = new Intent(CategoryActivity2.this,ProductListActivity.class);
 //                    intent.putExtra("cId", cId);
 //                    intent.putExtra("cTitle", titlegroup);
@@ -150,6 +131,45 @@ public class ThirdCategoryFragment extends BaseFragment<ThirdCategoryPresenter, 
                 }
             }
         });
+    }
+
+    @Override
+    public void showError(String msg) {
+
+    }
+
+
+    private void getAllCategorys(List<Category> childlist) {
+        int index = 2;
+        for (int i = 0; i < childlist.size(); i++) {
+            groupTitles = new String[childlist.size()];
+            groupTitles[i] = childlist.get(i).getTitle();
+            if (childlist.get(i).isHaschild()) {
+
+            }
+        }
+    }
+
+
+
+    @Override
+    public boolean onBackPressedSupport() {
+        pop();
+        return true;
+    }
+
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.head_goback:
+                pop();
+                break;
+        }
     }
 
     /**

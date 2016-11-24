@@ -32,10 +32,10 @@ public class FifthMyHxtPwdFragment extends BaseFragment<FifthMyHxtPwdPresenter, 
     String cardNo = null;
     @BindView(R.id.title)
     TextView title;
+    @BindView(R.id.head_back_text)
+    TextView head_back_text;
 
-    public static FifthMyHxtPwdFragment newInstance() {
-        Bundle args = new Bundle();
-
+    public static FifthMyHxtPwdFragment newInstance(Bundle args) {
         FifthMyHxtPwdFragment fragment = new FifthMyHxtPwdFragment();
         fragment.setArguments(args);
         return fragment;
@@ -54,9 +54,11 @@ public class FifthMyHxtPwdFragment extends BaseFragment<FifthMyHxtPwdPresenter, 
      */
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
+        Bundle data = getArguments();
+        orderInfo = (OrderInfo) data.getSerializable("orderInfo");
+        cardNo = data.getString("cardNo");
 //        orderInfo = (OrderInfo) getIntent().getSerializableExtra("orderInfo");
 //        cardNo = getIntent().getStringExtra("cardNo");
-        bind.setOnClickListener(this);
         title.setText(getString(R.string.text_hxt_bind));
         bind.setText(getString(R.string.text_bind));
         if (cardNo != null) {
@@ -64,6 +66,8 @@ public class FifthMyHxtPwdFragment extends BaseFragment<FifthMyHxtPwdPresenter, 
             title.setText(getString(R.string.text_hxt_input_pwd));
             bind.setText(getString(R.string.text_pay));
         }
+        bind.setOnClickListener(this);
+        head_back_text.setOnClickListener(this);
     }
 
     @Override
@@ -96,6 +100,9 @@ public class FifthMyHxtPwdFragment extends BaseFragment<FifthMyHxtPwdPresenter, 
                 } else {
                     BuilderTools.showSurePayDialog(getContext(), orderInfo, cardNo, et_pwdText);
                 }
+                break;
+            case R.id.head_back_text:
+                pop();
                 break;
         }
     }

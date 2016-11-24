@@ -8,6 +8,7 @@ import com.honliv.honlivmall.bean.AddressInfo;
 import com.honliv.honlivmall.bean.CouponInfo;
 import com.honliv.honlivmall.bean.Help;
 import com.honliv.honlivmall.bean.HxtBean;
+import com.honliv.honlivmall.bean.OrderInfo;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.bean.UserInfo;
 import com.honliv.honlivmall.bean.VersionInfo;
@@ -26,11 +27,19 @@ import rx.Subscription;
 public interface FifthContract {
     public interface FifthModel extends CoreBaseModel {
     }
+
     public interface FifthAboutModel extends CoreBaseModel {
+    }
+
+    public interface FifthNearByModel extends CoreBaseModel {
     }
 
     interface FifthView extends CoreBaseView {
     }
+
+    interface FifthNearByView extends CoreBaseView {
+    }
+
     interface FifthAboutView extends CoreBaseView {
     }
 
@@ -65,6 +74,7 @@ public interface FifthContract {
     }
 
     public interface FifthMyOrderView extends CoreBaseView {
+        void updateView(List<OrderInfo> result);
     }
 
     public interface FifthFavoriteView extends CoreBaseView {
@@ -90,17 +100,21 @@ public interface FifthContract {
 
     public interface FifthFindPwdView extends CoreBaseView {
     }
+
     public interface FifthFeedBackView extends CoreBaseView {
         void updateView(Boolean result);
     }
 
     public interface FifthMyHxtDetailView extends CoreBaseView {
     }
+
     public interface FifthHelpList2View extends CoreBaseView {
     }
+
     public interface FifthHelpDetailView extends CoreBaseView {
         void updateView(Help result);
     }
+
     public interface FifthHelpListView extends CoreBaseView {
         void updateView(List<Help> result);
     }
@@ -113,6 +127,8 @@ public interface FifthContract {
         void updateServiceProductList(List<AddressInfo> result, boolean b);
 
         void updateServiceAddressName(String result);
+
+        void updateAddressDefault(Boolean result);
     }
 
     public interface FifthEditPersonInfoModel extends CoreBaseModel {
@@ -130,6 +146,7 @@ public interface FifthContract {
     }
 
     public interface FifthMyOrderModel extends CoreBaseModel {
+        Observable<List<OrderInfo>> OrderList(int userId, int page, int pageNum);
     }
 
     public interface FifthMyHxtPwdModel extends CoreBaseModel {
@@ -151,17 +168,21 @@ public interface FifthContract {
 
     public interface FifthMyHxtDetailModel extends CoreBaseModel {
     }
+
     public interface FifthHelpDetailModel extends CoreBaseModel {
         Observable<Help> HelpDetail(int helpId);
     }
 
     public interface FifthFindPwdModel extends CoreBaseModel {
     }
+
     public interface FifthHelpList2Model extends CoreBaseModel {
     }
+
     public interface FifthHelpListModel extends CoreBaseModel {
-        Observable< List<Help>> HelpList(int i);
+        Observable<List<Help>> HelpList(int i);
     }
+
     public interface FifthFeedBackModel extends CoreBaseModel {
         Observable<Boolean> LiveMessage(int userId, String telephone, String email, String content);
     }
@@ -180,6 +201,8 @@ public interface FifthContract {
         Observable<List<AddressInfo>> getServiceProductList(AddressInfo addressPreInfo, AddressInfo addressInfo, boolean b);
 
         Observable<String> getServiceAddressName(int regionId);
+
+        Observable<Boolean> SetAddressDefault(int userid, int id);
     }
 
     abstract class FifthPresenter extends CoreBasePresenter<FifthModel, FifthView> {
@@ -210,6 +233,7 @@ public interface FifthContract {
     }
 
     abstract class FifthMyOrderPresenter extends CoreBasePresenter<FifthMyOrderModel, FifthMyOrderView> {
+        public abstract void getServiceOrderList(int id, int start, int userId);
     }
 
     abstract class FifthFavoritePresenter extends CoreBasePresenter<FifthFavoriteModel, FifthFavoriteView> {
@@ -238,6 +262,8 @@ public interface FifthContract {
         public abstract void getServiceProductList(AddressInfo addressPreInfo, AddressInfo addressInfo, boolean b);
 
         public abstract void getServiceAddressName(int regionId);
+
+        public abstract void addressDefault(int userid, int id);
     }
 
     abstract class FifthMyHxtPwdPresenter extends CoreBasePresenter<FifthMyHxtPwdModel, FifthMyHxtPwdView> {
@@ -249,21 +275,24 @@ public interface FifthContract {
     abstract class FifthFindPwdPresenter extends CoreBasePresenter<FifthFindPwdModel, FifthFindPwdView> {
     }
 
-    abstract class FifthHelpListPresenter extends CoreBasePresenter<FifthHelpListModel, FifthHelpListView>{
+    abstract class FifthHelpListPresenter extends CoreBasePresenter<FifthHelpListModel, FifthHelpListView> {
         public abstract void getServiceHelpList(int i);
     }
 
-    abstract class FifthFeedBackPresenter extends CoreBasePresenter<FifthFeedBackModel, FifthFeedBackView>{
+    abstract class FifthFeedBackPresenter extends CoreBasePresenter<FifthFeedBackModel, FifthFeedBackView> {
         public abstract void getServiceFeedBack(int userid, String mobilePhoneStr, String s, String contentEtString);
     }
 
-    abstract class FifthHelpDetailPresenter extends CoreBasePresenter<FifthHelpDetailModel, FifthHelpDetailView>{
+    abstract class FifthHelpDetailPresenter extends CoreBasePresenter<FifthHelpDetailModel, FifthHelpDetailView> {
         public abstract void getServiceHelpList(int helpId);
     }
 
-    abstract class FifthHelpList2Presenter extends CoreBasePresenter<FifthHelpList2Model, FifthHelpList2View>{
+    abstract class FifthHelpList2Presenter extends CoreBasePresenter<FifthHelpList2Model, FifthHelpList2View> {
     }
 
-    abstract class FifthAboutPresenter  extends CoreBasePresenter<FifthAboutModel, FifthAboutView>{
+    abstract class FifthAboutPresenter extends CoreBasePresenter<FifthAboutModel, FifthAboutView> {
+    }
+
+    abstract class FifthNearByPresenter extends CoreBasePresenter<FifthNearByModel, FifthNearByView> {
     }
 }

@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
+import com.honliv.honlivmall.activity.MainActivity;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.contract.FourthContract;
@@ -653,5 +654,11 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
      * 为了删除一个商品
      */
     public void deleteProduct() {
+    }
+
+    @Override
+    public boolean onBackPressedSupport() {
+        ((MainActivity)getActivity()).onBackToFirstFragment();
+        return true;
     }
 }

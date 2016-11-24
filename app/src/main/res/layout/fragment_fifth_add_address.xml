@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/fraTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip"
+            android:background="@color/background_red">
+
+            <TextView
+                android:id="@+id/head_goback"
+                style="@style/style_15_EBEBEB_BOLD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/back_btn"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="goBack" />
+
+            <TextView
+                android:id="@+id/edit_address_title"
+                style="@style/style_18_BEBEBE_BOLD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="编辑地址" />
+
+            <TextView
+                android:id="@+id/address_manager_add_text"
+                style="@style/style_15_EBEBEB_BOLD"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginLeft="3.0dip"
+                android:layout_marginRight="8.0dip"
+                android:background="@drawable/red_but"
+                android:gravity="center"
+                android:text="保存" />
+        </FrameLayout>
+
+        <ScrollView
+            android:id="@+id/shopcar_body_srcoll"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/fraTitle"
+            android:layout_marginBottom="50.0dip"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="5.0dip">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5.0dip"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="70.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="收货人："
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/add_address_name"
+                        android:layout_width="230.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="5.0dip"
+                        android:hint="必填"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="15.0sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="70.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="手机："
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/add_address_mobile"
+                        android:layout_width="230.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="5.0dip"
+                        android:hint="必填"
+                        android:phoneNumber="true"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="15.0sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="70.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="地址:"
+                        android:textColor="@color/black"
+                        android:visibility="gone" />
+
+                    <Spinner
+                        android:id="@+id/spinner1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <Spinner
+                        android:id="@+id/spinner2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <Spinner
+                        android:id="@+id/spinner3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <!--  <TextView
+                         android:layout_width="70.0dip"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="center_vertical"
+                         android:text="北京市："
+                         android:textColor="@color/black" />
+
+                     <TextView
+                         android:id="@+id/add_address_province"
+                         android:layout_width="230.0dip"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="center_vertical"
+                         android:gravity="center_vertical"
+                         android:layout_margin="5.0dip"
+                         android:background="@android:drawable/edit_text"
+                         android:hint="请选择区域"
+                         android:singleLine="true"
+                         android:textColor="@color/black"
+                         android:textSize="15.0sp" />
+
+                      <ImageView
+                         android:src="@drawable/jiantou1"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_centerVertical="true"
+                         android:layout_marginRight="20dp"
+                          /> -->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5.0dip"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="70.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="详细地址："
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/add_address_detail"
+                        android:layout_width="230.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="5.0dip"
+                        android:hint="必填"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="15.0sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/seleteLine_LL"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:clickable="true"
+                    android:onClick="seleteLine"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="70.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="线路选择："
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/add_address_line"
+                        android:layout_width="230.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="5.0dip"
+                        android:background="@android:drawable/edit_text"
+                        android:gravity="center_vertical"
+                        android:hint="请选择线路"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="15.0sp" />
+
+                    <!--   <ImageView
+                         android:src="@drawable/jiantou1"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_centerVertical="true"
+                         android:layout_marginRight="20dp"
+                          /> -->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5.0dip"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="70.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="邮编："
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/add_address_zipcode"
+                        android:layout_width="230.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="5.0dip"
+                        android:hint="必填"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="15.0sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/add_address_bottom_LL"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/default_address_button"
+                        style="@style/style_17_FFFFFF_BOLD"
+                        android:layout_width="120.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:background="@drawable/button_long"
+                        android:gravity="center"
+                        android:text="设为默认" />
+
+                    <Button
+                        android:id="@+id/del_address_button"
+                        style="@style/style_17_FFFFFF_BOLD"
+                        android:layout_width="120.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:background="@drawable/button_long"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:onClick="deleteAddress"
+                        android:text="删除地址" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/add_address_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="18dp"
+                    android:text="小提示：当地址内容有修改时,请您记得保存！"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/address_edit_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+</FrameLayout>

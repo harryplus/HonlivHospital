@@ -143,4 +143,10 @@ public class MainActivity extends CoreBaseActivity implements BaseLazyMainFragme
             }
         });
     }
+
+    public void startAssignFragment(int position, Class<SecondMainFragment> fragmentClass) {
+        mBottomBar.setCurrentItem(position);
+        SupportFragment currentFragment = mFragments[position];
+        currentFragment.popToChild(fragmentClass, false);
+    }
 }

@@ -25,6 +25,6 @@ public class FourthMainPresenter extends  FourthContract.FourthMainPresenter {
                 .subscribe(result -> {
                     if (result != null)
                         mView.updataAllShopCart(result);
-                },e->mView.showError("獲取數據失敗"+e.toString())));
+                },e->mView.showError(e.toString())));
     }
 }

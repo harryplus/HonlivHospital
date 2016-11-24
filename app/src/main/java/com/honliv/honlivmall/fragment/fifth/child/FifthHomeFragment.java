@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
+import com.honliv.honlivmall.activity.MainActivity;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.UserInfo;
 import com.honliv.honlivmall.contract.FifthContract;
@@ -109,8 +110,10 @@ public class FifthHomeFragment extends BaseFragment<FifthHomePresenter, FifthHom
                 e.printStackTrace();
             }
             if (dbUserInfo == null) {
-//                showToast(getString(R.string.reLogin));
-                start(GlobalLoginFragment.newInstance());
+                Bundle data = new Bundle();
+                data.putInt("position", MainActivity.FIFTH);
+                data.putSerializable("fragment", FifthHomeFragment.class);
+                start(GlobalLoginFragment.newInstance(data));
                 return;
             } else {
                 mPresenter.getServiceUserInfo(dbUserInfo.getUserId());
@@ -158,7 +161,7 @@ public class FifthHomeFragment extends BaseFragment<FifthHomePresenter, FifthHom
                 break;
 
             case R.id.nearby_market:
-
+                start(FifthNearByFragment.newInstance());
                 break;
         }
     }
@@ -185,9 +188,18 @@ public class FifthHomeFragment extends BaseFragment<FifthHomePresenter, FifthHom
             }
             GloableParams.USERID = -1;
             showToast("注销成功!");
-            start(GlobalLoginFragment.newInstance());
+            Bundle data = new Bundle();
+            data.putInt("position", MainActivity.FIFTH);
+            data.putSerializable("fragment", FifthHomeFragment.class);
+            start(GlobalLoginFragment.newInstance(data));
         } else {
             showToast("服务器忙，请稍后重试！！！");
         }
+    }
+
+    @Override
+    public boolean onBackPressedSupport() {
+        ((MainActivity) getActivity()).onBackToFirstFragment();
+        return true;
     }
 }

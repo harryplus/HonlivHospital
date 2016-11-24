@@ -1,13 +1,11 @@
 package com.honliv.honlivmall.listener;
 
-import android.util.Log;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.honliv.honlivmall.bean.Category;
-import com.honliv.honlivmall.fragment.fourth.child.FourthMainFragment;
-import com.honliv.honlivmall.fragment.third.child.ThirdCategory2Fragment;
+import com.honliv.honlivmall.fragment.third.child.ThirdCategoryFragment;
 
 import java.util.ArrayList;
 
@@ -39,9 +37,11 @@ public class MyCategoryItemClickListener implements AdapterView.OnItemClickListe
         if (category.isHaschild()) {
 //            intent = new Intent(mContext, CategoryActivity2.class);
 //            intent.putExtra("category", category);
-            mContext.start(ThirdCategory2Fragment.newInstance());
-//            Log.i("jjjj","--------");
+            Bundle data=new Bundle();
+            data.putSerializable("category", category);
+            mContext.start(ThirdCategoryFragment.newInstance(data));
         } else {
+//            mContext.start(ThirdCategoryFragment.newInstance(data));
 //            intent = new Intent(mContext, ProductListActivity.class);
         }
 //        mContext.startActivity(intent);

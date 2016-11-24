@@ -185,7 +185,10 @@ public class FirstMarketingFragment extends BaseFragment<FirstMarketingPresenter
             } else {
                 Product selProduct = products.get(position);
                 mPresenter.mRxManager.post(ConstantValue.msg_privilegeproduct, selProduct);
-                start(FirstProductDetailFragment.newInstance());
+                Bundle data=new Bundle();
+                data.putInt("pId", selProduct.getId());
+                data.putSerializable("privilegeProduct", selProduct);
+                start(FirstProductDetailFragment.newInstance(data));
 
 //                intent = new Intent();
 //                intent.setClass(getApplicationContext(), ProductDetailActivity.class);

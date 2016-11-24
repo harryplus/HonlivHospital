@@ -16,9 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/back_btn"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="goBack" />
+            android:gravity="center" />
 
         <TextView
             style="@style/style_18_BEBEBE_BOLD"
@@ -30,12 +28,11 @@
             android:text="我的宏信通" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/addCard"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical|right"
             android:layout_marginRight="10dp"
-            android:clickable="true"
-            android:onClick="addCard"
             android:src="@drawable/icon_add" />
     </FrameLayout>
 

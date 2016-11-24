@@ -76,7 +76,7 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
     TextView productHtmlTV; //产品的html富文本描述
     @BindView(R.id.ProductHtmlRL)
     RelativeLayout productHtmlRL;//产品的html富文本描述
-//    @BindView(R.id.textProductSize)
+    //    @BindView(R.id.textProductSize)
 //    TextView textProductSize;
 //    @BindView(R.id.clothesSizeValue)
 //    TextView clothesSizeValueTV;//产品尺寸
@@ -92,7 +92,7 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
     TextView textPriceValue;//售出价
     @BindView(R.id.textProductCommentNum)
     TextView textProductCommentNum; //评论数
-//    @BindView(R.id.prod_property)
+    //    @BindView(R.id.prod_property)
 //    RelativeLayout prod_property;//商品属性控件一
 //    @BindView(R.id.prod_property2)
 //    RelativeLayout prod_property2;//商品属性控件二
@@ -102,7 +102,7 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
     RelativeLayout priceLayout;
     @BindView(R.id.marketing_product_time)
     TextView marketingProductTimeTV;//倒记时
-//    @BindView(R.id.textProductProperty3Key)
+    //    @BindView(R.id.textProductProperty3Key)
 //    TextView textProductProperty3Key; //三个四个属性选择
 //    @BindView(R.id.textProductProperty3Value)
 //    TextView textProductProperty3Value;
@@ -114,7 +114,7 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
     Button subNumBT;
     @BindView(R.id.add_Num_BT)
     Button addNumBT;
-//    @BindView(R.id.textProductProperty4Value)
+    //    @BindView(R.id.textProductProperty4Value)
 //    TextView textProductProperty4Value;
     @BindView(R.id.shopcar_prdtoFav_text)
     TextView addFavTV;
@@ -157,15 +157,13 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
     String[] prodPropertyValues4;
     int pId;
     Product privilegeProduct;//团购，抢购界面传送过来的商品
+    Timer timer;
+    TimerTask task;
 
-
-    public static FirstProductDetailFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        FirstProductDetailFragment fragment = new FirstProductDetailFragment();
-        fragment.setArguments(args);
-        return fragment;
+    public static FirstProductDetailFragment newInstance(Bundle args) {
+        FirstProductDetailFragment instance = new FirstProductDetailFragment();
+        instance.setArguments(args);
+        return instance;
     }
 
     @Override
@@ -206,28 +204,23 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
         return true;
     }
 
-
-    void getProductId() {
-        mPresenter.mRxManager.on(ConstantValue.msg_privilegeproduct, result -> {
-            showToast("lalalal");
-            privilegeProduct = (Product) result;
-            showToast("ssss----" + privilegeProduct.toString());
-        });
+    @Override
+    public void initData() {
+        Bundle bundle = getArguments();
+        pId = bundle.getInt("pId",-1);
+        scanning=bundle.getBoolean("scanning", false);
+        privilegeProduct= (Product) bundle.getSerializable("privilegeProduct");
 //        pId = this.getIntent().getIntExtra("pId", -1);
 //        scanning = getIntent().getBooleanExtra("scanning", false);
 
 //        privilegeProduct = (Product) this.getIntent().getSerializableExtra("privilegeProduct");
-        pId = 4;
+//            pId = 4;
+//        showToast(pId+"-----");
         if (pId == -1) {
             showToast("获取商品id失败");
             return;
         }
         mPresenter.getServiceProductDetail(pId);
-    }
-
-    @Override
-    public void initData() {
-        getProductId();
     }
 
     @Override
@@ -457,60 +450,6 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
         }
     };
 
-    /**
-     * 加入购物车,立即购买
-     *
-     * @param view
-     */
-    public void putIntoShopcar(View view) {
-        if (product == null) {
-            return;
-        }
-        DbUtils db = DbUtils.create(getContext());
-        //拿到数量
-        String prodNumValueStr = prodNumValue.getText().toString().trim();
-        int productNumber = 1;
-        try {
-            Integer.parseInt(prodNumValueStr);
-        } catch (Exception e) {
-            PromptManager.showToastTest(getContext(), "输入框字符非法");
-            return;
-        }
-        if (StringUtils.isNumericSpace(prodNumValueStr) && prodNumValueStr != null) {//判断字符是数字
-            productNumber = Integer.parseInt(prodNumValueStr);
-        }
-
-        userId = GloableParams.USERID;
-        if (userId < 0) {
-            userId = -100;
-            SharedPreferences.Editor edit = sp.edit();
-            edit.putInt("isLogin", userId);
-            edit.commit();
-        }
-        product.setUserId(userId);
-
-
-        if (IsAvailable()) {
-            showToast("本规格没有库存,请更换规格购买");
-            return;
-        }
-
-        try {
-            if (CheckNum(db, productNumber)) return;
-            PromptManager.showToast(getContext(), "商品成功加入购物车");
-        } catch (DbException e) {
-            e.printStackTrace();
-            try {
-                db.dropTable(Product.class);
-            } catch (DbException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-            PromptManager.showToast(getContext(), "加入购物车失败，请重试!");
-        } finally {
-            initShopCarNumber();//初始化底部球的数量
-        }
-    }
 
     boolean CheckNum(DbUtils db, int productNumber) throws DbException {
         Product dbproduct = null;
@@ -703,26 +642,6 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
         return false;
     }
 
-    /**
-     * 加入收藏
-     *
-     * @param view
-     */
-    public void putIntoCollect(View view) {
-        if (product == null) {
-            showToast("没有商品信息");
-            return;
-        }
-
-        if (GloableParams.USERID < 0) {
-            BuilderTools.showLoginDialog(getContext(), getPreFragment(), "需要登录");
-        } else {
-            mPresenter.addProductFav(product.getId());
-        }
-
-    }
-
-
     @Override
     public void updateView(Product result) {
         if (result != null) {
@@ -758,7 +677,8 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
 
     @Override
     public void updateStartView(Product arg) {
-        showToast(arg.getName()+"------");
+//        showToast("卡埃看    打回电话");
+        showToast(arg.getName() + "------");
     }
 
     /**
@@ -1013,8 +933,6 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
                 TimeUnit.SECONDS);
     }
 
-    Timer timer;
-    TimerTask task;
 
     void initProductEditNumListener() {
         ProductTextWatcher watcher = new ProductTextWatcher(getContext(), prodNumValue, privilegeProduct, addNumBT, subNumBT);
@@ -1061,82 +979,5 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
             timer = null;
         }
         super.onDestroy();
-    }
-
-    public void buyItNow(View v) {
-        if (GloableParams.USERID < 0) {
-            BuilderTools.showLoginDialog(getContext(), getPreFragment(), "需要登录");
-            return;
-        }
-
-        if (product == null) {
-            return;
-        }
-        DbUtils db = DbUtils.create(getContext());
-        //拿到数量
-        String prodNumValueStr = prodNumValue.getText().toString().trim();
-        int productNumber = 1;
-        try {
-            Integer.parseInt(prodNumValueStr);
-        } catch (Exception e) {
-            PromptManager.showToastTest(getContext(), "输入框字符非法");
-            return;
-        }
-        if (StringUtils.isNumericSpace(prodNumValueStr) && prodNumValueStr != null) {//判断字符是数字
-            productNumber = Integer.parseInt(prodNumValueStr);
-        }
-
-        userId = GloableParams.USERID;
-
-        if (userId < 0) {
-            userId = -100;
-            SharedPreferences.Editor edit = sp.edit();
-            edit.putInt("isLogin", userId);
-            edit.commit();
-        }
-        product.setUserId(userId);
-
-        if (privilegeProduct != null) {//购物和抢购过来的
-            if (privilegeProduct.getCountDownId() > 0) {
-                product.setCountDownId(privilegeProduct.getCountDownId());
-            }
-            if (privilegeProduct.getGroupBuyid() > 0) {
-                product.setGroupBuyid(privilegeProduct.getGroupBuyid());
-            }
-            if (privilegeProduct.getLimitQty() != 0 && productNumber > privilegeProduct.getLimitQty()) {
-                showToast("限购数量为(" + privilegeProduct.getLimitQty() + ")");
-                prodNumValue.setText(privilegeProduct.getLimitQty() + "");
-                addNumBT.setBackgroundResource(R.drawable.edit_product_num_add_no_enable);
-                addNumBT.setClickable(false);
-                return;
-            }
-        }
-
-        if (IsAvailable()) {
-            showToast("本规格没有库存,请更换规格购买");
-            return;
-        }
-
-        try {
-            if (CheckNum(db, productNumber)) return;
-
-            Intent intent = new Intent();
-            ArrayList<Product> pds = new ArrayList<Product>();
-            product.setNumber(productNumber);
-
-            pds.add(product);
-            intent.setClass(getContext(), PaymentCenterActivity.class);
-            intent.putExtra("productlist", pds);
-            startActivity(intent);
-        } catch (DbException e) {
-            e.printStackTrace();
-            try {
-                db.dropTable(Product.class);
-            } catch (DbException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-            PromptManager.showToast(getContext(), getResources().getString(R.string.buy_fail));
-        }
     }
 }

@@ -1,6 +1,5 @@
 package com.honliv.honlivmall.activity;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,34 +9,21 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.view.KeyEvent;
-import android.widget.Toast;
 
-import com.baidu.android.pushservice.PushConstants;
-import com.baidu.android.pushservice.PushManager;
 import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.DefaultParas;
 import com.honliv.honlivmall.bean.UserInfo;
 import com.honliv.honlivmall.contract.ActivityContract;
-import com.honliv.honlivmall.helper.RxPermissions;
 import com.honliv.honlivmall.model.activity.FlashModel;
 import com.honliv.honlivmall.presenter.activity.FlashPresenter;
-import com.honliv.honlivmall.util.BeanFactory;
-import com.honliv.honlivmall.util.LogUtil;
-import com.honliv.honlivmall.util.RxUtil;
-import com.honliv.honlivmall.util.Utils;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.exception.DbException;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import java.io.File;
-import java.util.concurrent.TimeUnit;
-
-import rx.Observable;
 
 /**
  * Created by rodin on 16/10/28.
@@ -209,7 +195,6 @@ public class FlashActivity extends CoreBaseActivity<FlashPresenter,FlashModel>im
                 editor.putString("phone", defaultParas.getPhone());
                 editor.commit();
 
-                LogUtil.info("defaultParas==" + defaultParas + "");
             }
         }
     }

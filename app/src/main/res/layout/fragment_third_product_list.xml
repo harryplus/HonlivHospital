@@ -25,9 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/back_btn"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="goBack" />
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/filtTv"
@@ -74,9 +72,7 @@
                 android:layout_width="60.0dip"
                 android:layout_height="30dp"
                 android:background="@drawable/segment_selected_1_bg"
-                android:clickable="true"
                 android:gravity="center"
-                android:onClick="saleNumber"
                 android:text="销量" />
 
             <TextView
@@ -85,9 +81,7 @@
                 android:layout_width="60.0dip"
                 android:layout_height="30dp"
                 android:background="@drawable/segment_normal_2_bg"
-                android:clickable="true"
                 android:gravity="center"
-                android:onClick="priceClick"
                 android:text="价格" />
 
             <TextView
@@ -96,9 +90,7 @@
                 android:layout_width="60.0dip"
                 android:layout_height="30dp"
                 android:background="@drawable/segment_normal_2_bg"
-                android:clickable="true"
                 android:gravity="center"
-                android:onClick="newProduct"
                 android:text="新品" />
 
             <TextView
@@ -107,9 +99,7 @@
                 android:layout_width="60.0dip"
                 android:layout_height="30dp"
                 android:background="@drawable/segment_normal_3_bg"
-                android:clickable="true"
                 android:gravity="center"
-                android:onClick="bigImage"
                 android:text="大图" />
         </LinearLayout>
 

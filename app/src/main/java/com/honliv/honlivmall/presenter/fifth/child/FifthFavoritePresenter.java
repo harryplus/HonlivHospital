@@ -5,7 +5,7 @@ import com.honliv.honlivmall.contract.FifthContract;
 /**
  * Created by Rodin on 2016/11/22.
  */
-public class FifthFavoritePresenter  extends FifthContract.FifthFavoritePresenter {
+public class FifthFavoritePresenter extends FifthContract.FifthFavoritePresenter {
     @Override
     public void onStart() {
 
@@ -13,15 +13,15 @@ public class FifthFavoritePresenter  extends FifthContract.FifthFavoritePresente
 
     @Override
     public void getServiceCancelFav(int userid, int favId) {
-        mRxManager.add(mModel.CancelFav(userid,favId).subscribe(result->{
+        mRxManager.add(mModel.CancelFav(userid, favId).subscribe(result -> {
             mView.updateServiceCancelFav(result);
-        }));
+        }, e -> mView.showError(e.toString())));
     }
 
     @Override
     public void getServiceFavInfo(int userid, int start, int i) {
-        mRxManager.add(mModel.updateServicePassword(userid,start,i).subscribe(result->{
+        mRxManager.add(mModel.updateServicePassword(userid, start, i).subscribe(result -> {
             mView.updateServiceFavInfo(result);
-        }));
+        }, e -> mView.showError(e.toString())));
     }
 }

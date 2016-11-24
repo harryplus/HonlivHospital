@@ -33,6 +33,8 @@ public class FifthMyHxtDetailFragment extends BaseFragment<FifthMyHxtDetailPrese
     TextView phone;
     @BindView(R.id.cardNo)
     TextView cardNo;
+    @BindView(R.id.head_back_text)
+    TextView head_back_text;
     @BindView(R.id.bindDateTime)
     TextView bindDateTime;
     @BindView(R.id.sex)
@@ -42,9 +44,7 @@ public class FifthMyHxtDetailFragment extends BaseFragment<FifthMyHxtDetailPrese
 
     HxtBean hxtBean;
 
-    public static FifthMyHxtDetailFragment newInstance() {
-        Bundle args = new Bundle();
-
+    public static FifthMyHxtDetailFragment newInstance(Bundle args) {
         FifthMyHxtDetailFragment fragment = new FifthMyHxtDetailFragment();
         fragment.setArguments(args);
         return fragment;
@@ -63,6 +63,8 @@ public class FifthMyHxtDetailFragment extends BaseFragment<FifthMyHxtDetailPrese
      */
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
+        Bundle arguments = getArguments();
+        hxtBean = (HxtBean) arguments.getSerializable("hxtBean");
 //        hxtBean = (HxtBean) getIntent().getSerializableExtra("hxtBean");
         cardType.setText(hxtBean.getCardType());
         cardUserName.setText(hxtBean.getCardUserName());
@@ -71,6 +73,7 @@ public class FifthMyHxtDetailFragment extends BaseFragment<FifthMyHxtDetailPrese
         bindDateTime.setText(hxtBean.getBindDateTime());
         sex.setText(hxtBean.getSex());
         unBind.setOnClickListener(this);
+        head_back_text.setOnClickListener(this);
     }
 
     @Override
@@ -100,13 +103,15 @@ public class FifthMyHxtDetailFragment extends BaseFragment<FifthMyHxtDetailPrese
                 });
                 task.execute(hxtBean.getCardNo());
                 break;
+            case R.id.head_back_text:
+                pop();
+                break;
         }
     }
 
-
     @Override
-    public void onStop() {
+    public boolean onBackPressedSupport() {
         pop();
-        super.onStop();
+        return true;
     }
 }

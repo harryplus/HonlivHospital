@@ -1,6 +1,5 @@
 package com.honliv.honlivmall.fragment.fifth.child;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -16,7 +15,6 @@ import com.honliv.honlivmall.bean.OrderInfo;
 import com.honliv.honlivmall.contract.FifthContract;
 import com.honliv.honlivmall.model.fifth.child.FifthMyOrderModel;
 import com.honliv.honlivmall.presenter.fifth.child.FifthMyOrderPresenter;
-import com.honliv.honlivmall.util.MyOrderUtils;
 import com.honliv.honlivmall.view.GalleryItem;
 import com.honliv.honlivmall.view.PullToRefreshView;
 
@@ -29,27 +27,24 @@ import butterknife.BindView;
  * Created by Rodin on 2016/11/16.
  */
 public class FifthMyOrderFragment extends BaseFragment<FifthMyOrderPresenter, FifthMyOrderModel> implements FifthContract.FifthMyOrderView, View.OnClickListener, PullToRefreshView.OnHeaderRefreshListener, PullToRefreshView.OnFooterRefreshListener {
-
-    static final String TAG = "MyOrderActivity";
-    public static Context mContext;
-    public boolean isUpload = false;//是否是加载
+    boolean isUpload = false;//是否是加载
     @BindView(R.id.main_pull_refresh_view)
-    public PullToRefreshView mPullToRefreshView;
-    public int start = 1;
-    public List<OrderInfo> ordereList;//所有商品的集合
-    public List<OrderInfo> currentOrderList;//商品显示列表
+    PullToRefreshView mPullToRefreshView;
+    int start = 1;
+    List<OrderInfo> ordereList;//所有商品的集合
+    List<OrderInfo> currentOrderList;//商品显示列表
     @BindView(R.id.my_order_list)
-    public ListView orderListView;
-    public int userId = -1;
+    ListView orderListView;
+    int userId = -1;
     @BindView(R.id.my_order_null_text)
-    public TextView orderNullTV;
+    TextView orderNullTV;
     @BindView(R.id.head_back_text)
-    public TextView head_back_text;
-    public MyOrderAdapter orderAdapter;
+    TextView head_back_text;
+    MyOrderAdapter orderAdapter;
+    List<GalleryItem> galleryitemList = new ArrayList<GalleryItem>();
 
     public static FifthMyOrderFragment newInstance() {
         Bundle args = new Bundle();
-
         FifthMyOrderFragment fragment = new FifthMyOrderFragment();
         fragment.setArguments(args);
         return fragment;
@@ -80,7 +75,12 @@ public class FifthMyOrderFragment extends BaseFragment<FifthMyOrderPresenter, Fi
             pop();
             return;
         }
-//        MyOrderUtils.getServiceOrderList((MyOrderActivity) mContext, userId);
+    }
+
+    @Override
+    public boolean onBackPressedSupport() {
+        pop();
+        return true;
     }
 
     @Override
@@ -102,14 +102,12 @@ public class FifthMyOrderFragment extends BaseFragment<FifthMyOrderPresenter, Fi
         }
     }
 
+    @Override
+    public void initData() {
+        mPresenter.getServiceOrderList(userId, start, 30);
+    }
 
-    /**
-     * 存GalleryItem的list集合
-     */
-    public List<GalleryItem> galleryitemList = new ArrayList<GalleryItem>();
-
-
-    public void initDate(List<OrderInfo> orderes) {
+    public void nDate(List<OrderInfo> orderes) {
         GalleryItem item = null;
         galleryitemList = new ArrayList<GalleryItem>();
         for (int i = 0; i < orderes.size(); i++) {
@@ -121,11 +119,6 @@ public class FifthMyOrderFragment extends BaseFragment<FifthMyOrderPresenter, Fi
         orderListView.setAdapter(orderAdapter);
     }
 
-//    public void goBack(View view) {
-//        animPreActivity(MyCenterActivity.class);
-//        finish();
-//    }
-
     @Override
     public void onFooterRefresh(PullToRefreshView view) {
         mPullToRefreshView.postDelayed(new Runnable() {
@@ -134,7 +127,7 @@ public class FifthMyOrderFragment extends BaseFragment<FifthMyOrderPresenter, Fi
                 System.out.println("上拉加载");
                 start = start + 1;
                 isUpload = true;
-//                MyOrderUtils.getServiceOrderList((MyOrderActivity) mContext, userId);
+//                MyOrderUtils.OrderList((MyOrderActivity) mContext, userId);
                 mPullToRefreshView.onFooterRefreshComplete();
             }
         }, 1);
@@ -148,7 +141,7 @@ public class FifthMyOrderFragment extends BaseFragment<FifthMyOrderPresenter, Fi
                 // mPullToRefreshView.onHeaderRefreshComplete("最近更新:01-23 12:01");
                 System.out.println("下拉更新");
                 start = 1;
-//                MyOrderUtils.getServiceOrderList((MyOrderActivity) mContext, userId);
+//                MyOrderUtils.OrderList((MyOrderActivity) mContext, userId);
                 mPullToRefreshView.onHeaderRefreshComplete();
                 mPullToRefreshView.setEnablePullLoadMoreDataStatus(true);
             }
@@ -162,8 +155,44 @@ public class FifthMyOrderFragment extends BaseFragment<FifthMyOrderPresenter, Fi
             showToast("登陆状态错误");
             return;
         }
-//        MyOrderUtils.getServiceOrderList((MyOrderActivity) mContext, GloableParams.USERID);
+//        MyOrderUtils.OrderList((MyOrderActivity) mContext, GloableParams.USERID);
         super.onResume();
     }
 
+    @Override
+    public void updateView(List<OrderInfo> result) {
+        if (result != null) {
+            ordereList = (List<OrderInfo>) result;
+            if (isUpload) {
+                //加载更多
+                if (ordereList.size() == 0) {
+                    showToast("暂无更多内容");
+                    mPullToRefreshView.setEnablePullLoadMoreDataStatus(false);
+                } else {
+                    currentOrderList.addAll(ordereList);
+
+                    GalleryItem item = null;
+                    for (int i = 0; i < ordereList.size(); i++) {
+                        item = new GalleryItem(mContext, ordereList.get(i));
+                        item.initAdapter(mContext);
+                        galleryitemList.add(item);
+                    }
+                    orderAdapter.notifyDataSetChanged();
+                }
+                isUpload = false;
+            } else {
+                if (ordereList.size() == 0) {
+                    orderListView.setVisibility(View.GONE);
+                    orderNullTV.setVisibility(View.VISIBLE);
+                    mPullToRefreshView.setVisibility(View.GONE);
+                } else {
+                    //有返回东西 ,解析出来数据，设置给屏幕
+                    currentOrderList = ordereList;
+                    nDate(currentOrderList);
+                }
+            }
+        } else {
+            showToast("服务器忙，请稍后重试！！！");
+        }
+    }
 }

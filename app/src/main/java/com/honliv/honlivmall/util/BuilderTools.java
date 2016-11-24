@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.honliv.honlivmall.GloableParams;
+import com.honliv.honlivmall.activity.MainActivity;
 import com.honliv.honlivmall.bean.OrderInfo;
 import com.honliv.honlivmall.fragment.global.GlobalLoginFragment;
 
@@ -75,7 +77,10 @@ public class BuilderTools {
         builder.setPositiveButton("确定",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        GlobalLoginFragment loginFragment = GlobalLoginFragment.newInstance();
+                        Bundle data = new Bundle();
+                        data.putInt("position", MainActivity.FIRST);
+                        data.putSerializable("fragment", fragment.getClass());
+                        GlobalLoginFragment loginFragment = GlobalLoginFragment.newInstance(data);
                         fragment.start(loginFragment);
                     }
                 });

@@ -31,6 +31,6 @@ public class ThirdMainPresenter extends ThirdContract.ThirdMainPresenter {
 //        }.run();
         mRxManager.add(mModel.getServiceCategoryList().subscribe(result -> {
             mView.updateView(result);
-        }));
+        },e->mView.showError(e.toString())));
     }
 }

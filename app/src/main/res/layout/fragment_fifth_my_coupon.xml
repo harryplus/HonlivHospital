@@ -14,9 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/back_btn"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="goBack" />
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/title"
@@ -37,9 +35,7 @@
             android:layout_marginLeft="3.0dip"
             android:layout_marginRight="8.0dip"
             android:background="@drawable/red_but"
-            android:clickable="true"
             android:gravity="center"
-            android:onClick="onExchane"
             android:text="兑换"
             android:visibility="gone" />
     </RelativeLayout>
@@ -100,16 +96,14 @@
             android:padding="3dp"></android.support.v4.view.ViewPager>
 
         <TextView
-            android:id="@+id/search_del_TV"
+            android:id="@+id/contentLV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/search_del"
-            android:clickable="true"
             android:gravity="center"
-            android:onClick="clearKey"
             android:text="清空历史搜索"
             android:textColor="@color/font_gray"
             android:textSize="16sp"

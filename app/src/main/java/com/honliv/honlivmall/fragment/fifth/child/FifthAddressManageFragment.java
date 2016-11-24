@@ -38,6 +38,8 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
     TextView addressListAddTV;
     @BindView(R.id.address_title2)
     TextView address_title2;
+    @BindView(R.id.head_back_text)
+    TextView head_back_text;
 
     public static FifthAddressManageFragment newInstance() {
         Bundle args = new Bundle();
@@ -61,11 +63,12 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
         address_title2.setVisibility(View.GONE);
+        head_back_text.setOnClickListener(this);
     }
 
     @Override
     public void showError(String msg) {
-
+        showToast(msg);
     }
 
     /**
@@ -75,7 +78,17 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
      */
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.head_back_text:
+                pop();
+                break;
+        }
+    }
 
+    @Override
+    public boolean onBackPressedSupport() {
+        pop();
+        return true;
     }
 
     public void initData() {
@@ -83,7 +96,7 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
         addressLV.setAdapter(addressAdapter);
 //		addressLV.setOnItemLongClickListener(new AddressItemLongClickListener());
         addressLV.setOnItemClickListener(new AddressItemClickListener());
-//        mPresenter.getServiceProductList();
+        mPresenter.getServiceProductList();
     }
 
     AddressInfo addressInfo;
@@ -129,8 +142,6 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
             if (convertView == null) {
                 holder = new ViewHolder();
                 view = View.inflate(getContext(), R.layout.address_manage_listitem, null);
-                /*view = LayoutInflater.from(getApplicationContext()).inflate(
-						R.layout.product_list_item, null);*/
                 holder.addressNameTV = (TextView) view.findViewById(R.id.addressnameTV);
                 holder.addressPhoneTV = (TextView) view.findViewById(R.id.addressphoneTV);
                 holder.addressDetailTV = (TextView) view.findViewById(R.id.addressdetailTV);
@@ -147,13 +158,6 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
 
             holder.ProvinceTV.setText("所在地区:  " + addressInfo.getAddressArea() + "");
             holder.addressDetailTV.setText("详细地址:  " + addressInfo.getAreaDetail() + "");
-			/*holder.ProvinceTV.setText("北京市:  "+addressInfo.getAreaDetail().split(",")[0]+"");
-			if(addressInfo.getAreaDetail().split(",").length>1){
-				holder.addressDetailTV.setText("详细地址:  "+addressInfo.getAreaDetail().split(",")[1]+"");
-			}else{
-				holder.addressDetailTV.setText("详细地址:  "+addressInfo.getAreaDetail()+"");
-			}*/
-
             return view;
         }
     }
@@ -169,8 +173,9 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-            start(FifthAddAddressFragment.newInstance());
-            mPresenter.mRxManager.post(ConstantValue.Flag_Address_Address, addressList.get(position));
+            Bundle data=new Bundle();
+            data.putSerializable("addressInfo", addressList.get(position));
+            start(FifthAddAddressFragment.newInstance(data));
 //            intent = new Intent();
 //            intent.putExtra("addressInfo", addressList.get(position));
 //            LogUtil.info("addressInfo   返回前==="+addressList.get(position));
@@ -189,20 +194,4 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
             return true;
         }
     }
-
-    /**
-     * add new address
-     *
-     * @param view
-     */
-    public void addNewAddress(View view) {
-        start(FifthAddAddressFragment.newInstance());
-    }
-
-    @Override
-    public void onResume() {
-//        mPresenter.getServiceProductList();
-        super.onResume();
-    }
-
 }

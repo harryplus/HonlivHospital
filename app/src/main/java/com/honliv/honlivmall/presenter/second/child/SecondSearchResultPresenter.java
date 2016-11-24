@@ -14,10 +14,10 @@ public class SecondSearchResultPresenter extends SecondContract.SecondSearchResu
     @Override
     public void getSeaviceSearchProductList(String searchKey, String orderby, int start) {
         mRxManager.add(mModel
-                .getSeaviceSearchProductList(searchKey,orderby,start)
+                .getSeaviceSearchProductList(searchKey, orderby, start)
                 .subscribe(result -> {
                     if (result != null)
                         mView.updataSearchProductList(result);
-                }));
+                }, e -> mView.showError(e.toString())));
     }
 }

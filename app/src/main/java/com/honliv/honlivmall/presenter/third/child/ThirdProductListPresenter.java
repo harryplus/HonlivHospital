@@ -15,6 +15,6 @@ public class ThirdProductListPresenter extends   ThirdContract. ThirdProductList
     public void getServiceProductList(int categoryId, String orderBy, int page, int pageNum) {
         mRxManager.add(mModel.ProductList(categoryId,orderBy,page,pageNum).subscribe(result -> {
             mView.updateView(result);
-        }));
+        },e->mView.showError(e.toString())));
     }
 }

@@ -182,7 +182,7 @@ public class MyOrderAdapter extends BaseAdapter {
                 if (result != null) {
                     Boolean isSuccess = (Boolean) result;
                     if (isSuccess) {
-//                        MyOrderUtils.getServiceOrderList(context, context.userId);
+//                        MyOrderUtils.OrderList(context, context.userId);
 //							initCancelOrder(position);
                     } else {
                         PromptManager.showToast(context, "取消订单失败！！！");

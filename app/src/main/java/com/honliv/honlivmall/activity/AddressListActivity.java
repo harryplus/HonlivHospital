@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.AddressInfo;
-import com.honliv.honlivmall.util.LogUtil;
 import com.honliv.honlivmall.util.PromptManager;
 
 import java.util.List;
@@ -66,7 +65,6 @@ public class AddressListActivity extends BaseActivity {
 				PromptManager.closeProgressDialog();
 				if(result != null){
 					 addressList  = ((List<AddressInfo>)result);
-					 LogUtil.info("====addressList=="+addressList);
 				/*	if(isUpload){
 						//加载更多
 						if(productlist.size()==0){
@@ -189,12 +187,11 @@ public class AddressListActivity extends BaseActivity {
 			intent.setClass(AddressManageActivity.this, PaymentCenterActivity.class);
 			startActivity(intent);
 			finish();*/
-			intent = new Intent();
-			intent.putExtra("addressInfo", addressList.get(position));
-			LogUtil.info("addressInfo   返回前==="+addressList.get(position));
-			intent.setClass(AddressListActivity.this, AddAddressActivity.class);
-			startActivityForResult(intent, 100);
-			
+//			intent = new Intent();
+//			intent.putExtra("addressInfo", addressList.get(position));
+//			LogUtil.info("addressInfo   返回前==="+addressList.get(position));
+//			intent.setClass(AddressListActivity.this, AddAddressActivity.class);
+//			startActivityForResult(intent, 100);
 			return true;
 		}
 	}
@@ -210,10 +207,10 @@ public class AddressListActivity extends BaseActivity {
 	 * @param view
 	 */
 	public void addNewAddress(View view){
-		 intent = new Intent();
-		intent.setClass(this, AddAddressActivity.class);
-	//	startActivityForResult(intent, 100);
-		startActivity(intent);
+//		 intent = new Intent();
+//		intent.setClass(this, AddAddressActivity.class);
+//	//	startActivityForResult(intent, 100);
+//		startActivity(intent);
 	}
 	
 	@Override

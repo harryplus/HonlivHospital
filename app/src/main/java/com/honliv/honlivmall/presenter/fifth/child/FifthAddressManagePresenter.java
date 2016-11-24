@@ -15,6 +15,6 @@ public class FifthAddressManagePresenter extends FifthContract.FifthAddressManag
     public void getServiceProductList() {
         mRxManager.add(mModel.getServiceProductList().subscribe(result->{
             mView.updateProductList(result);
-        }));
+        },e->mView.showError(e.toString())));
     }
 }

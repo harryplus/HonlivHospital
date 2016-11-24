@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
+import com.honliv.honlivmall.activity.MainActivity;
 import com.honliv.honlivmall.adapter.HistoryAdapter;
 import com.honliv.honlivmall.adapter.SearchAdapter;
 import com.honliv.honlivmall.base.BaseFragment;
@@ -75,7 +76,7 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
     PagerAdapter pagerAdapter;
     HistoryAdapter historyAdapter;
     SearchAdapter hotAdapter;
-    Vibrator vibrator =null;
+    Vibrator vibrator = null;
     List<View> pagers;
     List<SearchKey> keyHistoryList;
     String[] hotNames;//
@@ -339,7 +340,7 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
 
         if (StringUtils.isBlank(seachkeywordStr)) {
             vibrator = (Vibrator) getActivity().getSystemService(getContext().VIBRATOR_SERVICE);
-            showToast( "搜索内容不能为空");
+            showToast("搜索内容不能为空");
             Animation loadAnimation = AnimationUtils.loadAnimation(
                     getContext(), R.anim.shake);// 输入框振动
             seachkeywordET.setAnimation(loadAnimation);
@@ -354,7 +355,7 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
 
     void searchKey(String searchKey) {
         if (searchKey == null) {
-            showToast( "搜索内容不能为空");
+            showToast("搜索内容不能为空");
             return;
         }
         DbUtils db = DbUtils.create(getContext());
@@ -393,8 +394,9 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
         }
         historyAdapter.notifyDataSetChanged();
         /*******************加的历史搜索看看有没有效果*****************/
-        start(SecondSearchResultFragment.newInstance());
-        mPresenter.mRxManager.post("searchKey",searchKey);
+        Bundle data = new Bundle();
+        data.putString("searchKey", searchKey);
+        start(SecondSearchResultFragment.newInstance(data));
 //        intent = new Intent();
 //        intent.putExtra("searchKey", searchKey);
 //
@@ -438,13 +440,9 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
         }
     }
 
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {//处理返回键
-//        if (keyCode == KeyEvent.KEYCODE_BACK) {//返回值被点击了
-//            finish();
-//            overridePendingTransition(R.anim.tran_pre_in, R.anim.tran_pre_out);
-//        }
-//        return super.onKeyDown(keyCode, event);
-//    }
-
+    @Override
+    public boolean onBackPressedSupport() {
+        ((MainActivity) getActivity()).onBackToFirstFragment();
+        return true;
+    }
 }

@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.R;
-import com.honliv.honlivmall.activity.AboutActivity;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.bean.UserInfo;
@@ -47,7 +46,7 @@ import butterknife.BindView;
  * Created by Rodin on 2016/11/16.
  */
 public class FifthSettingFragment extends BaseFragment<FifthSettingPresenter, FifthSettingModel> implements FifthContract.FifthSettingView, View.OnClickListener {
-//    Intent intent;
+    //    Intent intent;
     VersionInfo version;
     @BindView(R.id.my_logout_rl)
     RelativeLayout my_logout;

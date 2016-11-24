@@ -10,10 +10,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.honliv.honlivmall.R;
+import com.honliv.honlivmall.activity.MainActivity;
 import com.honliv.honlivmall.adapter.BargainGridAdapter;
 import com.honliv.honlivmall.adapter.LikeGridAdapter;
 import com.honliv.honlivmall.adapter.LimitGridAdapter;
 import com.honliv.honlivmall.adapter.MainPagerAdapter;
+import com.honliv.honlivmall.application.MyApplication;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.HomeBanner;
 import com.honliv.honlivmall.bean.HomeInfo;
@@ -68,6 +70,7 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
     private ScheduledExecutorService scheduledExecutor;
     private List<Product> bargainproduct;
     private ArrayList<Product> likeProduct;
+    private long firstClick = 0;
 
     private Handler handler = new Handler() {
         @Override
@@ -90,8 +93,6 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
             }
         }
     };
-
-
     ;
 
     public static FirstHomeFragment newInstance() {
@@ -124,7 +125,8 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.seach_keyword:
-                start(SecondMainFragment.newInstance());
+//                start(SecondMainFragment.newInstance());
+                ((MainActivity)getActivity()).startAssignFragment(MainActivity.SECOND,SecondMainFragment.class);
                 break;
 
             case R.id.more_limit:
@@ -168,8 +170,12 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
 
     @Override
     public boolean onBackPressedSupport() {
-//        loadRootFragment(R.id.fl_container, FirstHomeFragment.newInstance());
+        if (System.currentTimeMillis() - firstClick < 1500) {
+            MyApplication.getInstance().exitApp();
+            return true;
+        }
         showToast(getString(R.string.again_exit));
+        firstClick = System.currentTimeMillis();
         return true;
     }
 
@@ -181,11 +187,11 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
         limitproduct = new ArrayList<>();
         limitAdapter = new LimitGridAdapter(getContext(), limitproduct);
         limit.setAdapter(limitAdapter);
-        bargainproduct=new ArrayList<>();
-        bargainAdapter = new BargainGridAdapter(getContext(),bargainproduct);
+        bargainproduct = new ArrayList<>();
+        bargainAdapter = new BargainGridAdapter(getContext(), bargainproduct);
         bargain.setAdapter(bargainAdapter);
-        likeProduct=new ArrayList<>();
-        likeAdapter = new LikeGridAdapter(getContext(),likeProduct);
+        likeProduct = new ArrayList<>();
+        likeAdapter = new LikeGridAdapter(getContext(), likeProduct);
         like.setAdapter(likeAdapter);
         mPresenter.getServiceHomeInfo("0");
         mPresenter.getServiceHomeMarketing();
@@ -193,9 +199,9 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
         myPagerTask = new MyPagerTask();
         scheduledExecutor.scheduleAtFixedRate(myPagerTask, 5, 5,
                 TimeUnit.SECONDS);
-        limit.setOnItemClickListener(new GVItemListener(getContext(),this, mPresenter.mRxManager, limitproduct, true));
-        bargain.setOnItemClickListener(new GVItemListener(getContext(),this , mPresenter.mRxManager, bargainproduct, false));
-        like.setOnItemClickListener(new GVItemListener(getContext(),this ,mPresenter.mRxManager, likeProduct, false));
+        limit.setOnItemClickListener(new GVItemListener(getContext(), this, mPresenter.mRxManager, limitproduct, true));
+        bargain.setOnItemClickListener(new GVItemListener(getContext(), this, mPresenter.mRxManager, bargainproduct, false));
+        like.setOnItemClickListener(new GVItemListener(getContext(), this, mPresenter.mRxManager, likeProduct, false));
     }
 
     @Override

@@ -32,7 +32,7 @@ import butterknife.BindView;
 /**
  * Created by Rodin on 2016/10/26.
  */
-public class ThirdProductListFragment extends BaseFragment<ThirdProductListPresenter, ThirdProductListModel> implements ThirdContract.ThirdProductListView, PullToRefreshView.OnHeaderRefreshListener, PullToRefreshView.OnFooterRefreshListener {
+public class ThirdProductListFragment extends BaseFragment<ThirdProductListPresenter, ThirdProductListModel> implements ThirdContract.ThirdProductListView, PullToRefreshView.OnHeaderRefreshListener, PullToRefreshView.OnFooterRefreshListener, View.OnClickListener {
     @BindView(R.id.textRankSale)
     TextView textRankSale;
     @BindView(R.id.textRankPrice)
@@ -69,10 +69,7 @@ public class ThirdProductListFragment extends BaseFragment<ThirdProductListPrese
     int key3Id = -1;
     int key4Id = -1;
 
-    public static ThirdProductListFragment newInstance() {
-
-        Bundle args = new Bundle();
-
+    public static ThirdProductListFragment newInstance(Bundle args) {
         ThirdProductListFragment fragment = new ThirdProductListFragment();
         fragment.setArguments(args);
         return fragment;
@@ -87,26 +84,33 @@ public class ThirdProductListFragment extends BaseFragment<ThirdProductListPrese
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
         mPullToRefreshView.setOnHeaderRefreshListener(this);
         mPullToRefreshView.setOnFooterRefreshListener(this);
+        textRankTime.setOnClickListener(this);
+        textRankImage.setOnClickListener(this);
+        textRankPrice.setOnClickListener(this);
+        textRankSale.setOnClickListener(this);
+        backTv.setOnClickListener(this);
     }
 
     @Override
     public void showError(String msg) {
-
+        showToast(msg);
     }
 
 
     public void initDate() {
+        Bundle data = getArguments();
+        cId = data.getInt("cId", -1);
+        String cTitle = data.getString("cTitle");
 //       cId = this.getIntent().getIntExtra("cId", -1);
 //       String cTitle = this.getIntent().getStringExtra("cTitle");
-//       if (cTitle != null) {
-//           productlistTitle.setText("(" + cTitle + ")列表");
-//       }
+        if (cTitle != null) {
+            productlistTitle.setText("(" + cTitle + ")列表");
+        }
         mPresenter.getServiceProductList(cId, "hot", start, 30);
         if (flags[3]) {
             productLv.setNumColumns(2);
             productLv.setVerticalSpacing(DensityUtil.dip2px(getContext(), 4L));
             adapter = new GridAdapter();
-
         } else {
             productLv.setNumColumns(1);
             productLv.setVerticalSpacing(DensityUtil.dip2px(getContext(), 0L));
@@ -132,82 +136,10 @@ public class ThirdProductListFragment extends BaseFragment<ThirdProductListPrese
         textRankImage.setBackgroundResource(R.drawable.segment_normal_3_bg);
     }
 
-    /**
-     * 销量
-     *
-     * @param view
-     */
-    public void saleNumber(View view) {
-        initFlags();
-        flags[0] = true;
-        flags[3] = false;
-        start = 1;
-        orderby = "hot";
-        setBackgroundColor();
-        textRankSale.setBackgroundResource(R.drawable.segment_selected_1_bg);
-        mPresenter.getServiceProductList(cId, "hot", start, 30);
-    }
-
-    /**
-     * 价格
-     *
-     * @param view
-     */
-    public void priceClick(View view) {
-        //Price—LowestSalePrice    价格
-        //Pricedesc--LowestSalePrice  desc
-        initFlags();
-        flags[1] = true;
-        flags[3] = false;
-        start = 1;
-        setBackgroundColor();
-        textRankPrice.setBackgroundResource(R.drawable.segment_selected_2_bg);
-        if (isLowestPrice) {
-            isLowestPrice = !isLowestPrice;
-            orderby = "price";
-            mPresenter.getServiceProductList(cId, "price", start, 30);
-        } else {
-            isLowestPrice = !isLowestPrice;
-            orderby = "pricedesc";
-            mPresenter.getServiceProductList(cId, "pricedesc", start, 30);
-        }
-    }
-
-    /**
-     * 新品
-     *
-     * @param view
-     */
-    public void newProduct(View view) {
-        initFlags();
-        flags[2] = true;
-        flags[3] = false;
-        start = 1;
-        setBackgroundColor();
-        textRankTime.setBackgroundResource(R.drawable.segment_selected_2_bg);
-        orderby = "new";
-        mPresenter.getServiceProductList(cId, "new", start, 30);
-    }
-
-    /**
-     * 大图
-     *
-     * @param view
-     */
-    public void bigImage(View view) {
-        initFlags();
-        flags[3] = true;
-        start = 1;
-        setBackgroundColor();
-        textRankImage.setBackgroundResource(R.drawable.segment_selected_3_bg);
-        orderby = "hot";
-        mPresenter.getServiceProductList(cId, "hot", start, 30);
-    }
-
     @Override
     public void updateView(ProductListFilter result) {
         if (result != null) {
-            ProductListFilter productLS = (ProductListFilter) result;
+            ProductListFilter productLS = result;
             productList = productLS.getProductlist();
 
             if (isUpload) {
@@ -236,13 +168,76 @@ public class ThirdProductListFragment extends BaseFragment<ThirdProductListPrese
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.textRankTime:
+                initFlags();
+                flags[2] = true;
+                flags[3] = false;
+                start = 1;
+                setBackgroundColor();
+                textRankTime.setBackgroundResource(R.drawable.segment_selected_2_bg);
+                orderby = "new";
+                mPresenter.getServiceProductList(cId, "new", start, 30);
+                break;
+            case R.id.textRankImage:
+                initFlags();
+                flags[3] = true;
+                start = 1;
+                setBackgroundColor();
+                textRankImage.setBackgroundResource(R.drawable.segment_selected_3_bg);
+                orderby = "hot";
+                mPresenter.getServiceProductList(cId, "hot", start, 30);
+                break;
+            case R.id.textRankPrice:
+                initFlags();
+                flags[1] = true;
+                flags[3] = false;
+                start = 1;
+                setBackgroundColor();
+                textRankPrice.setBackgroundResource(R.drawable.segment_selected_2_bg);
+                if (isLowestPrice) {
+                    isLowestPrice = !isLowestPrice;
+                    orderby = "price";
+                    mPresenter.getServiceProductList(cId, "price", start, 30);
+                } else {
+                    isLowestPrice = !isLowestPrice;
+                    orderby = "pricedesc";
+                    mPresenter.getServiceProductList(cId, "pricedesc", start, 30);
+                }
+                break;
+            case R.id.textRankSale:
+                initFlags();
+                flags[0] = true;
+                flags[3] = false;
+                start = 1;
+                orderby = "hot";
+                setBackgroundColor();
+                textRankSale.setBackgroundResource(R.drawable.segment_selected_1_bg);
+                mPresenter.getServiceProductList(cId, "hot", start, 30);
+                break;
+            case R.id.backTv:
+                pop();
+                break;
+        }
+    }
+
+    @Override
+    public boolean onBackPressedSupport() {
+        pop();
+        return true;
+    }
+
     class ProductItemListener implements AdapterView.OnItemClickListener {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
             int pId = currentProductList.get(position).getId();
-            start(FirstProductDetailFragment.newInstance());
+            Bundle data = new Bundle();
+            data.putInt("pId", pId);
+            start(FirstProductDetailFragment.newInstance(data));
 //            Intent intent = new Intent(ProductListActivity.this, ProductDetailActivity.class);
 //            intent.putExtra("pId", pId);
 //            startActivity(intent);

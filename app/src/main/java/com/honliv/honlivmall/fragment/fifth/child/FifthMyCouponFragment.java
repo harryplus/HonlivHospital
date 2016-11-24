@@ -55,6 +55,10 @@ public class FifthMyCouponFragment extends BaseFragment<FifthMyCouponPresenter, 
     TextView categoryUsedTV;
     @BindView(R.id.titleBack)
     TextView titleBack;
+    @BindView(R.id.nullProductTV)
+    TextView nullProductTV;
+    @BindView(R.id.contentLV)
+    TextView contentLV;
 
     int start = 1;
     int userId;
@@ -90,6 +94,8 @@ public class FifthMyCouponFragment extends BaseFragment<FifthMyCouponPresenter, 
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
         initImage();///处理标题下划线位置信息
+        categoryUsedTV.setOnClickListener(this);
+        categoryUnusedTV.setOnClickListener(this);
         categoryUnusedTV.setTextColor(Color.RED);
         titleBack.setOnClickListener(this);
     }
@@ -97,11 +103,6 @@ public class FifthMyCouponFragment extends BaseFragment<FifthMyCouponPresenter, 
     @Override
     public void showError(String msg) {
 
-    }
-
-    protected void setLinstener() {
-        categoryUsedTV.setOnClickListener(this);
-        categoryUnusedTV.setOnClickListener(this);
     }
 
     public void onClick(View v) {
@@ -128,7 +129,7 @@ public class FifthMyCouponFragment extends BaseFragment<FifthMyCouponPresenter, 
      * 初始化标题下划线位置
      */
     void initImage() {
-        myCouponList=new ArrayList<>();
+        myCouponList = new ArrayList<>();
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.id_category_selector);
         int BitmapWidth = bitmap.getWidth();
         int left = (GloableParams.WINDOW_WIDTH / 2 - BitmapWidth) / 2;
@@ -138,13 +139,12 @@ public class FifthMyCouponFragment extends BaseFragment<FifthMyCouponPresenter, 
     }
 
     public void initData() {
-//        mPresenter.getServiceCoupon1(userId, start, 30, 1);
+        mPresenter.getServiceCoupon1(userId, start, 30, 1);
         initPager();
         pagerAdapter = new ViewAdapter();
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(0);//初始化时显示哪个界面
         viewPager.setOnPageChangeListener(new MyPageListener());
-        setLinstener();
     }
 
 
@@ -204,8 +204,8 @@ public class FifthMyCouponFragment extends BaseFragment<FifthMyCouponPresenter, 
                 //获取成功
             } else {
                 //获取失败
-//						nullProductTV.setVisibility(View.VISIBLE);
-//						contentLV.setVisibility(View.GONE);
+                nullProductTV.setVisibility(View.VISIBLE);
+                contentLV.setVisibility(View.GONE);
             }
             pagerAdapter.notifyDataSetChanged();
 //            initData();
@@ -224,8 +224,8 @@ public class FifthMyCouponFragment extends BaseFragment<FifthMyCouponPresenter, 
                 currentUnusedCouponList = myCouponList;
             } else {
                 //获取失败
-//						nullProductTV.setVisibility(View.VISIBLE);
-//						contentLV.setVisibility(View.GONE);
+                nullProductTV.setVisibility(View.VISIBLE);
+                contentLV.setVisibility(View.GONE);
             }
             mPresenter.getServiceCoupon2(userId, start, 30, 2);
         } else {

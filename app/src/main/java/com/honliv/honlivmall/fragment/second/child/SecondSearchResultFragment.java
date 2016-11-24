@@ -69,10 +69,7 @@ public class SecondSearchResultFragment extends BaseFragment<SecondSearchResultP
     @BindView(R.id.main_pull_refresh_view)
     PullToRefreshView mPullToRefreshView;
 
-    public static SecondSearchResultFragment newInstance() {
-
-        Bundle args = new Bundle();
-
+    public static SecondSearchResultFragment newInstance(Bundle args) {
         SecondSearchResultFragment fragment = new SecondSearchResultFragment();
         fragment.setArguments(args);
         return fragment;
@@ -164,16 +161,13 @@ public class SecondSearchResultFragment extends BaseFragment<SecondSearchResultP
 
     @Override
     public void showError(String msg) {
-
+        showToast(msg);
     }
 
     @Override
     public void initData() {
-        mPresenter.mRxManager.on("searchKey", result -> {
-            showToast((String) result);
-        });
-        searchKey = "鸡蛋";
-        showToast(searchKey);
+        Bundle arguments = getArguments();
+        searchKey = arguments.getString("searchKey");
 //        searchKey = (String)this.getIntent().getSerializableExtra("searchKey");
         searchResultTitle.setText("(" + searchKey + ")搜索结果");
         mPresenter.getSeaviceSearchProductList(searchKey, orderby, start);
@@ -212,8 +206,6 @@ public class SecondSearchResultFragment extends BaseFragment<SecondSearchResultP
     public void updataSearchProductList(List<Product> result) {
         if (result != null) {
             productList = ((ArrayList<Product>) result);
-            LogUtil.info("=searchresult=" + productList);
-
             if (isUpload) {
                 //加载更多
                 if (productList.size() == 0) {
@@ -353,8 +345,9 @@ public class SecondSearchResultFragment extends BaseFragment<SecondSearchResultP
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
             int pId = currentProductList.get(position).getId();
-            showToast(pId+"----");
-            start(FirstProductDetailFragment.newInstance());
+            Bundle data = new Bundle();
+            data.putInt("pId", pId);
+            start(FirstProductDetailFragment.newInstance(data));
 //            Intent intent = new Intent(SearchResultActivity.this,ProductDetailActivity.class);
 //            intent.putExtra("pId", pId);
 //            startActivityForResult(intent, 100);

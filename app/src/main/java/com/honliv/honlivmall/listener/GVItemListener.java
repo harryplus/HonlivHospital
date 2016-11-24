@@ -1,8 +1,10 @@
 package com.honliv.honlivmall.listener;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 
 import com.honliv.honlivmall.ConstantValue;
@@ -32,8 +34,8 @@ public class GVItemListener implements AdapterView.OnItemClickListener {
         this.mContext = mContext;
         this.data = data;
         this.flag = flag;
-        this.fragment=fragment;
-        this.mRxManager=mRxManager;
+        this.fragment = fragment;
+        this.mRxManager = mRxManager;
     }
 
     @Override
@@ -42,7 +44,7 @@ public class GVItemListener implements AdapterView.OnItemClickListener {
 
         if (GloableParams.USERID < 0 && flag) {
             //弹出登陆按钮
-            BuilderTools.showLoginDialog(mContext,fragment,"需要登录");
+            BuilderTools.showLoginDialog(mContext, fragment, "需要登录");
         } else {
             if (data.size() > 0) {
                 position = position % data.size();
@@ -56,9 +58,13 @@ public class GVItemListener implements AdapterView.OnItemClickListener {
 //            }
 //            intent.putExtra("pId", selProduct.getId());
 //            mContext.startActivity(intent);
-            fragment. start(FirstProductDetailFragment.newInstance());
-            mRxManager.post(ConstantValue.msg_privilegeproduct,selProduct);
-            mRxManager.post("s",selProduct);
+//            Toast.makeText(mContext,selProduct.getName()+"----",Toast.LENGTH_SHORT).show();
+            Bundle data = new Bundle();
+            if (flag) {
+                data.putSerializable("privilegeProduct", selProduct);
+            }
+            data.putInt("pId", selProduct.getId());
+            fragment.start(FirstProductDetailFragment.newInstance(data));
         }
     }
 }

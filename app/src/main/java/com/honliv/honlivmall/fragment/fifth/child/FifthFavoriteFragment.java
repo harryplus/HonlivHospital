@@ -34,19 +34,21 @@ import butterknife.BindView;
  * Created by Rodin on 2016/11/16.
  */
 public class FifthFavoriteFragment extends BaseFragment<FifthFavoritePresenter, FifthFavoriteModel> implements FifthContract.FifthFavoriteView, View.OnClickListener, PullToRefreshView.OnHeaderRefreshListener, PullToRefreshView.OnFooterRefreshListener {
-
-    int start = 1;
-    boolean isUpload = false;//是否是加载
-    ArrayList<Product> productlist;//所有商品的集合
-    ArrayList<Product> currentProductList;//商品显示列表
     @BindView(R.id.main_pull_refresh_view)
     PullToRefreshView mPullToRefreshView;
     @BindView(R.id.nullProductTV)
     TextView nullProductTV;
     @BindView(R.id.address_title)
     TextView address_title;//
+    @BindView(R.id.head_back_text)
+    TextView head_back_text;//
     @BindView(R.id.myfavorite_product_list)
     ListView productList;
+
+    int start = 1;
+    boolean isUpload = false;//是否是加载
+    ArrayList<Product> productlist;//所有商品的集合
+    ArrayList<Product> currentProductList;//商品显示列表
     ProductListAdapter productAdapter;
 
     public static FifthFavoriteFragment newInstance() {
@@ -70,25 +72,37 @@ public class FifthFavoriteFragment extends BaseFragment<FifthFavoritePresenter, 
      */
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
-        mPullToRefreshView.setOnHeaderRefreshListener(this);
-        mPullToRefreshView.setOnFooterRefreshListener(this);
-        productAdapter = new ProductListAdapter();
-        productList.setAdapter(productAdapter);
+//        mPullToRefreshView.setOnHeaderRefreshListener(this);
+//        mPullToRefreshView.setOnFooterRefreshListener(this);
+//        productAdapter = new ProductListAdapter();
+//        productList.setAdapter(productAdapter);
+//        head_back_text.setOnClickListener(this);
     }
 
     @Override
     public void showError(String msg) {
+        showToast(msg);
+    }
 
+    @Override
+    public boolean onBackPressedSupport() {
+        pop();
+        return true;
     }
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.head_back_text:
+                pop();
+                break;
+        }
     }
 
     @Override
     public void initData() {
-        mPresenter.getServiceFavInfo(GloableParams.USERID, start, 30);
+
+//        mPresenter.getServiceFavInfo(GloableParams.USERID, start, 30);
     }
 
     @Override
@@ -129,7 +143,7 @@ public class FifthFavoriteFragment extends BaseFragment<FifthFavoritePresenter, 
         if (result != null) {
             Boolean isSuccess = (Boolean) result;
             if (isSuccess) {
-                //getServiceOrderList(userId);
+                //OrderList(userId);
 //                initCancelOrder(position);
             } else {
                 showToast("取消收藏失败！！！");
@@ -193,7 +207,9 @@ public class FifthFavoriteFragment extends BaseFragment<FifthFavoritePresenter, 
                 @Override
                 public void onClick(View v) {
                     int pId = currentProductList.get(position).getId();
-                    start(FirstProductDetailFragment.newInstance());
+                    Bundle data = new Bundle();
+                    data.putInt("pId", pId);
+                    start(FirstProductDetailFragment.newInstance(data));
 //                    intent = new Intent(FavoriteActivity.this, ProductDetailActivity.class);
 //                    intent.putExtra("pId", pId);
 //                    startActivity(intent);
@@ -259,9 +275,6 @@ public class FifthFavoriteFragment extends BaseFragment<FifthFavoritePresenter, 
         mPullToRefreshView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                System.out.println("上拉加载");/*
-                listDrawable.add(R.drawable.pic1);
-				adapter.notifyDataSetChanged();*/
                 start = start + 1;
                 isUpload = true;
                 mPresenter.getServiceFavInfo(GloableParams.USERID, start, 30);
@@ -276,10 +289,6 @@ public class FifthFavoriteFragment extends BaseFragment<FifthFavoritePresenter, 
         mPullToRefreshView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // 设置更新时间
-                // mPullToRefreshView.onHeaderRefreshComplete("最近更新:01-23 12:01");
-                System.out.println("下拉更新");/*
-                adapter.notifyDataSetChanged();*/
                 start = 1;
                 mPresenter.getServiceFavInfo(GloableParams.USERID, start, 30);
                 mPullToRefreshView.onHeaderRefreshComplete();

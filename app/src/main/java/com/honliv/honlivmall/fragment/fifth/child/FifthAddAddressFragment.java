@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -14,12 +15,15 @@ import android.widget.TextView;
 
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
+import com.honliv.honlivmall.activity.BaseActivity;
 import com.honliv.honlivmall.adapter.MyAdapter;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.AddressInfo;
 import com.honliv.honlivmall.contract.FifthContract;
 import com.honliv.honlivmall.model.fifth.child.FifthAddAddressModel;
 import com.honliv.honlivmall.presenter.fifth.child.FifthAddAddressPresenter;
+import com.honliv.honlivmall.util.BeanFactory;
+import com.honliv.honlivmall.util.PromptManager;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -49,8 +53,12 @@ public class FifthAddAddressFragment extends BaseFragment<FifthAddAddressPresent
     LinearLayout addAddressBottomLL;
     @BindView(R.id.add_address_message)
     TextView addressMessageTV;
+    @BindView(R.id.default_address_button)
+    Button default_address_button;
     @BindView(R.id.edit_address_title)
     TextView editAddressTitle;
+    @BindView(R.id.address_manager_add_text)
+    TextView address_manager_add_text;
 
     List<AddressInfo> lineList; //线路列表
     boolean isAddressSave = true;//是否保存执行成功了
@@ -75,9 +83,7 @@ public class FifthAddAddressFragment extends BaseFragment<FifthAddAddressPresent
     /**********
      * 以上三级联动
      *************/
-    public static FifthAddAddressFragment newInstance() {
-        Bundle args = new Bundle();
-
+    public static FifthAddAddressFragment newInstance(Bundle args) {
         FifthAddAddressFragment fragment = new FifthAddAddressFragment();
         fragment.setArguments(args);
         return fragment;
@@ -85,7 +91,7 @@ public class FifthAddAddressFragment extends BaseFragment<FifthAddAddressPresent
 
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.fragment_fifth_add_address;
     }
 
     /**
@@ -99,11 +105,13 @@ public class FifthAddAddressFragment extends BaseFragment<FifthAddAddressPresent
         spinner1.setPrompt("省");
         spinner2.setPrompt("城市");
         spinner3.setPrompt("地区");
+        address_manager_add_text.setOnClickListener(this);
+        default_address_button.setOnClickListener(this);
     }
 
     @Override
     public void showError(String msg) {
-
+        showToast(msg);
     }
 
     /**
@@ -113,7 +121,99 @@ public class FifthAddAddressFragment extends BaseFragment<FifthAddAddressPresent
      */
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.address_manager_add_text:
+                addressSave();
+                break;
+            case R.id.default_address_button:
+                addressSave();
+                if (isAddressSave) {
+                    return;
+                }
+                if (addressPreInfo == null || addressPreInfo.getId() < 1) {
+                    return;
+                }
+                mPresenter.addressDefault(GloableParams.USERID, addressPreInfo.getId());
+//                new BaseActivity.MyHttpTask<Integer>() {
+//                    @Override
+//                    protected void onPreExecute() {
+//                        PromptManager.showCommonProgressDialog(AddAddressActivity.this);
+//                        super.onPreExecute();
+//                    }
+//                    @Override
+//                    protected Object doInBackground(Integer... params) {
+//                        AddressEngine engine = BeanFactory.getImpl(AddressEngine.class);
+//                        return engine.getServiceSetDefaultAddress(GloableParams.USERID, addressPreInfo.getId());
+//                    }
+//                    protected void onPostExecute(Object result){
+//                        super.onPostExecute(result);
+//                        PromptManager.closeProgressDialog();
+//                       
+//                    }
+//                }.executeProxy(0);
+                break;
+        }
+    }
 
+    private void addressSave() {
+        String addressName = addressNameET.getText().toString().trim();
+        if (StringUtils.isBlank(addressName)) {
+            showToast("收货人名字不能为空");
+
+            return;
+        } else if (addressName.length() < 2) {
+            showToast("名字字数过少");
+            return;
+        }
+
+        String mobilePhoneStr = addressPhoneET.getText().toString().trim();
+        if (StringUtils.isBlank(mobilePhoneStr)) {
+            showToast("手机号不能为空");
+            return;
+        }
+        // 这里要加上一个匹配手机号的格式。。String regex = "1[3458][0-9]{9}";
+        String regPhone = "^1([38][0-9]|4[57]|5[^4]|7[0678]|)\\d{8}$"; // 定义正则
+
+        boolean flagPhone = mobilePhoneStr.matches(regPhone);
+        if (!flagPhone) {
+            showToast("请填写正确的手机号");
+            return;
+        }
+        int regionId = sp.getInt("regionId", 0);
+        if (regionId == 0) {
+            regionId = addressPreInfo.getRegionId();
+        }
+        if (regionId == 0) {
+            showToast("请重新选择区域,再提交");
+            return;
+        }
+
+        String addressDetail = addressDetailET.getText().toString().trim();
+        if (StringUtils.isBlank(addressDetail)) {
+            showToast("详细地址不能为空");
+            return;
+        } else if (addressDetail.length() < 6) {
+            showToast("详细地址字数过少");
+            return;
+        }
+
+        int userId = GloableParams.USERID;//sp.getInt("isLogin", -1);
+        if (userId < 0) {
+            showToast("登录状态错误，请重新登录！");
+            return;
+        }
+        addressInfo = new AddressInfo();
+        if (addressPreInfo != null) {
+            addressInfo.setId(addressPreInfo.getId());
+        }
+
+        addressInfo.setUserId(userId);
+        addressInfo.setName(addressName);
+        addressInfo.setPhone(mobilePhoneStr);
+        addressInfo.setRegionId(regionId);//regionId
+        addressInfo.setAreaDetail(addressDetail);
+        mPresenter.getServiceProductList(addressPreInfo, addressInfo, true);
+        isAddressSave = false;
     }
 
     protected void initLineDate() {
@@ -129,16 +229,13 @@ public class FifthAddAddressFragment extends BaseFragment<FifthAddAddressPresent
     }
 
     public void initData() {
+        Bundle arguments = getArguments();
+        addressPreInfo = (AddressInfo) arguments.getSerializable("addressInfo");
 //        addressPreInfo = (AddressInfo)this.getIntent().getSerializableExtra("addressInfo");
 
         if (addressPreInfo != null) {//编辑地址
             addressNameET.setText(addressPreInfo.getName() + "");
             addressPhoneET.setText(addressPreInfo.getPhone() + "");
-            /*String addressAreaStr = addressPreInfo.getAddressArea();
-            if(addressAreaStr.contains("北京市")){
-				int index = addressAreaStr.indexOf("北京市");
-				addressAreaStr = addressAreaStr.substring(index+3);
-			}*/
             addressDetailET.setText("" + addressPreInfo.getAreaDetail() + "");
             seleteLineLL.setVisibility(View.GONE);
 
@@ -210,98 +307,12 @@ public class FifthAddAddressFragment extends BaseFragment<FifthAddAddressPresent
         builder.show();
     }
 
-    /**
-     * 提交保存,新增地址
-     *
-     * @param view
-     */
-    public void addressSave(View view) {
-        String addressName = addressNameET.getText().toString().trim();
-        if (StringUtils.isBlank(addressName)) {
-            showToast("收货人名字不能为空");
-
-            return;
-        } else if (addressName.length() < 2) {
-            showToast("名字字数过少");
-            return;
-        }
-
-        String mobilePhoneStr = addressPhoneET.getText().toString().trim();
-        if (StringUtils.isBlank(mobilePhoneStr)) {
-            showToast("手机号不能为空");
-            return;
-        }
-        // 这里要加上一个匹配手机号的格式。。String regex = "1[3458][0-9]{9}";
-        String regPhone = "^1([38][0-9]|4[57]|5[^4]|7[0678]|)\\d{8}$"; // 定义正则
-
-        boolean flagPhone = mobilePhoneStr.matches(regPhone);
-        if (!flagPhone) {
-            showToast("请填写正确的手机号");
-            return;
-        }
-        int regionId = sp.getInt("regionId", 0);
-        if (regionId == 0) {
-            regionId = addressPreInfo.getRegionId();
-        }
-        if (regionId == 0) {
-            showToast("请重新选择区域,再提交");
-            return;
-        }
-
-        String addressDetail = addressDetailET.getText().toString().trim();
-        if (StringUtils.isBlank(addressDetail)) {
-            showToast("详细地址不能为空");
-            return;
-        } else if (addressDetail.length() < 6) {
-            showToast("详细地址字数过少");
-            return;
-        }
-
-        int userId = GloableParams.USERID;//sp.getInt("isLogin", -1);
-        if (userId < 0) {
-            showToast("登录状态错误，请重新登录！");
-            return;
-        }
-        addressInfo = new AddressInfo();
-        if (addressPreInfo != null) {
-            addressInfo.setId(addressPreInfo.getId());
-        }
-
-        addressInfo.setUserId(userId);
-        addressInfo.setName(addressName);
-        addressInfo.setPhone(mobilePhoneStr);
-        addressInfo.setRegionId(regionId);//regionId
-        addressInfo.setAreaDetail(addressDetail);
-        mPresenter.getServiceProductList(addressPreInfo, addressInfo, true);
-        isAddressSave = false;
-
-    }
-
     @Override
     public boolean onBackPressedSupport() {
         pop();
         return true;
     }
 
-    //    public void ListAddressInfo(){
-//        new BaseActivity.MyHttpTask<Integer>() {
-//            @Override
-//            protected void onPreExecute() {
-//                PromptManager.showCommonProgressDialog(AddAddressActivity.this);
-//                super.onPreExecute();
-//            }
-//            @Override
-//            protected Object doInBackground(Integer... params) {
-//                AddressEngine engine = BeanFactory.getImpl(AddressEngine.class);
-//                return engine.getServiceAddressSelectList(0);
-//            }
-//            protected void onPostExecute(Object result){
-//                super.onPostExecute(result);
-//                PromptManager.closeProgressDialog();
-//                
-//            }
-//        }.executeProxy(0);
-//    }
     protected void initSpinnerDate1(List<AddressInfo> addressList) {
         MyAdapter myAdapter = new MyAdapter(getContext(), addressList);
         spinner1.setAdapter(myAdapter);
@@ -318,28 +329,6 @@ public class FifthAddAddressFragment extends BaseFragment<FifthAddAddressPresent
             spinner1.setSelection(tempPosition, true);
         }
     }
-
-//    public void initSpinner2(final int pcode) {
-//        new BaseActivity.MyHttpTask<Integer>() {
-//            @Override
-//            protected void onPreExecute() {
-////				PromptManager.showCommonProgressDialog(AddAddressActivity.this);
-//                super.onPreExecute();
-//            }
-//
-//            @Override
-//            protected Object doInBackground(Integer... params) {
-//                AddressEngine engine = BeanFactory.getImpl(AddressEngine.class);
-//                return engine.getServiceAddressSelectList(pcode);
-//            }
-//
-//            protected void onPostExecute(Object result) {
-//                super.onPostExecute(result);
-////				PromptManager.closeProgressDialog();
-//
-//            }
-//        }.executeProxy(pcode);
-//    }
 
     protected void initSpinnerDate2(List<AddressInfo> addressList) {
         MyAdapter myAdapter = new MyAdapter(getContext(), addressList);
@@ -439,6 +428,22 @@ public class FifthAddAddressFragment extends BaseFragment<FifthAddAddressPresent
         } else {
             showToast("服务器忙，请稍后重试！！！");
             return;
+        }
+    }
+
+    @Override
+    public void updateAddressDefault(Boolean result) {
+        if (result != null) {
+            Boolean isSuccess = (Boolean) result;
+            if (isSuccess) {
+                showToast("设置成功");
+                GloableParams.SETDEFAULTADDRESS = true;
+                pop();
+            } else {
+                showToast("服务器忙，请稍后重试！！！");
+            }
+        } else {
+            showToast("服务器忙，请稍后重试！！！");
         }
     }
 

@@ -190,19 +190,19 @@ public class PaymentCenterActivity extends CoreBaseActivity<PaymentCenterPresent
             }
         }
 
-        mPresenter.getServiceTotalPrice(favorableProduct != null ? favorableProduct
-                        .getCountDownId() : 0,
-                favorableProduct != null ? favorableProduct
-                        .getGroupBuyid() : 0, productJsobList);//获取服务器的应付金额
+//        mPresenter.getServiceTotalPrice(favorableProduct != null ? favorableProduct
+//                        .getCountDownId() : 0,
+//                favorableProduct != null ? favorableProduct
+//                        .getGroupBuyid() : 0, productJsobList);//获取服务器的应付金额
 
-        if (isFavorable) {
-            favorableProduct = currentProductList.get(0);
-        } else {
-            mPresenter.getServiceGifInfo(productJsobList, 0);
-        }
-
-        // 获取积分卷信息,使用优惠卷
-        getCunPonListInfos();
+//        if (isFavorable) {
+//            favorableProduct = currentProductList.get(0);
+//        } else {
+//            mPresenter.getServiceGifInfo(productJsobList, 0);
+//        }
+//
+//        // 获取积分卷信息,使用优惠卷
+//        getCunPonListInfos();
     }
 
 //     void getServiceGifInfo(final float couponPrice) {
@@ -483,9 +483,10 @@ public class PaymentCenterActivity extends CoreBaseActivity<PaymentCenterPresent
      */
     public void paymentAddress(View view) {
         Intent intent = new Intent();
-        intent.setClass(getApplicationContext(), AddressListActivity.class);
-        startActivityForResult(intent, 100);
-        overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);
+
+//        intent.setClass(getApplicationContext(), AddressListActivity.class);
+//        startActivityForResult(intent, 100);
+//        overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);
     }
 
     @Override
@@ -493,7 +494,6 @@ public class PaymentCenterActivity extends CoreBaseActivity<PaymentCenterPresent
         if (20 == resultCode) {
             addressInfo = (AddressInfo) data
                     .getSerializableExtra("addressInfo");
-            LogUtil.info("addressInfo   选择界面返回后===" + addressInfo);
             if (addressInfo != null) {
                 paymentName.setText(addressInfo.getName());
                 paymentAddress.setText(addressInfo.getAddressArea() + " "
@@ -721,8 +721,6 @@ public class PaymentCenterActivity extends CoreBaseActivity<PaymentCenterPresent
     public void updateServiceTotalPrice(Float result) {
         if (result != null) {
             returnShouldPayAllPrice = result;
-
-            LogUtil.info("returnShouldPayAllPrice==" + returnShouldPayAllPrice);
 //					这里要初始化价格
             initAllPrice(freight);
             mPresenter.getServiceAddressList(1, 50);
@@ -787,5 +785,11 @@ public class PaymentCenterActivity extends CoreBaseActivity<PaymentCenterPresent
         } else {
             PromptManager.showToast(getApplicationContext(), "服务器忙，请稍后重试！！！");
         }
+    }
+
+    @Override
+    public void onBackPressedSupport() {
+//        Intent intent=new Intent(this,MainActivity.class);
+//        startActivity(intent);
     }
 }

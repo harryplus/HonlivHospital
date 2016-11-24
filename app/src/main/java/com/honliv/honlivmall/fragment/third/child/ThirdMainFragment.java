@@ -8,6 +8,7 @@ import android.widget.ListView;
 
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
+import com.honliv.honlivmall.activity.MainActivity;
 import com.honliv.honlivmall.adapter.MyCategoryAdapter;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.Category;
@@ -33,7 +34,6 @@ public class ThirdMainFragment extends BaseFragment<ThirdMainPresenter, ThirdMai
     MyCategoryItemClickListener myCategoryItemClickListener;
 
     public static ThirdMainFragment newInstance() {
-
         Bundle args = new Bundle();
 
         ThirdMainFragment fragment = new ThirdMainFragment();
@@ -48,14 +48,14 @@ public class ThirdMainFragment extends BaseFragment<ThirdMainPresenter, ThirdMai
 
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
-        categorys=new ArrayList<>();
-        myCategoryAdapter=new MyCategoryAdapter(getContext(),categorys);
+        categorys = new ArrayList<>();
+        myCategoryAdapter = new MyCategoryAdapter(getContext(), categorys);
         category1List.setAdapter(myCategoryAdapter);
     }
 
     @Override
     public void showError(String msg) {
-
+        showToast(msg);
     }
 
     @Override
@@ -73,6 +73,9 @@ public class ThirdMainFragment extends BaseFragment<ThirdMainPresenter, ThirdMai
     public void initData() {
         if (GloableParams.hasCategory) {//已经联网访问过分类数据
             categorys = GloableParams.categoryInfos;
+            if (categorys == null || categorys.size() == 0) {
+                mPresenter.getServiceCategoryList();
+            }
         } else {
             mPresenter.getServiceCategoryList();
         }
@@ -80,5 +83,11 @@ public class ThirdMainFragment extends BaseFragment<ThirdMainPresenter, ThirdMai
             myCategoryItemClickListener = new MyCategoryItemClickListener(this);
         }
         category1List.setOnItemClickListener(myCategoryItemClickListener);
+    }
+
+    @Override
+    public boolean onBackPressedSupport() {
+        ((MainActivity) getActivity()).onBackToFirstFragment();
+        return true;
     }
 }

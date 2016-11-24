@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.honliv.honlivmall.R;
+import com.honliv.honlivmall.application.MyApplication;
 import com.honliv.honlivmall.helper.AppManager;
 import com.honliv.honlivmall.model.CoreBaseModel;
 import com.honliv.honlivmall.presenter.CoreBasePresenter;
@@ -54,6 +55,7 @@ public abstract class CoreBaseActivity<T extends CoreBasePresenter, E extends Co
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         init(savedInstanceState);
         sp = getSharedPreferences("config", MODE_PRIVATE);
+        MyApplication.getInstance().addActivity(this);
     }
 
     private void init(Bundle savedInstanceState) {

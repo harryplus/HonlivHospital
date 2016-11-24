@@ -10,6 +10,7 @@ import com.honliv.honlivmall.bean.GifInfo;
 import com.honliv.honlivmall.bean.Help;
 import com.honliv.honlivmall.bean.HomeInfo;
 import com.honliv.honlivmall.bean.HxtBean;
+import com.honliv.honlivmall.bean.OrderInfo;
 import com.honliv.honlivmall.bean.PayShip;
 import com.honliv.honlivmall.bean.PaymentInfo;
 import com.honliv.honlivmall.bean.Product;
@@ -41,6 +42,7 @@ public interface MainApi {
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
     Observable<BaseBean<BaseInfo<HomeInfo>>> HomeIndex(@Body HashMap<String, Object> map);
+
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
     Observable<BaseBean<BaseInfo<Integer>>> Integer(@Body HashMap<String, Object> map);
@@ -72,6 +74,10 @@ public interface MainApi {
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
     Observable<BaseBean<BaseInfo<List<AddressInfo>>>> ListAddressInfo(@Body HashMap<String, Object> postMap);
+
+    @Headers("Content-Type: application/json")
+    @POST("shop.aspx")
+    Observable<BaseBean<BaseInfo<List<OrderInfo>>>> ListOrderInfo(@Body HashMap<String, Object> postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")

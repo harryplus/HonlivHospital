@@ -16,9 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/back_btn"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="goBack" />
+            android:gravity="center" />
 
         <TextView
             style="@style/style_18_BEBEBE_BOLD"

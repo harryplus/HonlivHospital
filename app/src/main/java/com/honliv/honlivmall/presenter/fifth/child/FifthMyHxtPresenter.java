@@ -15,6 +15,6 @@ public class FifthMyHxtPresenter extends FifthContract.FifthMyHxtPresenter {
     public void getData() {
         mRxManager.add(mModel.getData().subscribe(result->{
             mView.updateView(result);
-        }));
+        },e->mView.showError(e.toString())));
     }
 }

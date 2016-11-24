@@ -13,15 +13,15 @@ public class FifthMyCouponPresenter extends FifthContract.FifthMyCouponPresenter
 
     @Override
     public void getServiceCoupon2(int userId, int start, int i, int i1) {
-        mRxManager.add(mModel.getServiceCouponInfo( userId,start,i,i1).subscribe(result->{
+        mRxManager.add(mModel.getServiceCouponInfo(userId, start, i, i1).subscribe(result -> {
             mView.updateView2(result);
-        }));
+        }, e -> mView.showError(e.toString())));
     }
 
     @Override
     public void getServiceCoupon1(int userId, int start, int i, int i1) {
-        mRxManager.add(mModel.getServiceCouponInfo( userId,start,i,i1).subscribe(result->{
+        mRxManager.add(mModel.getServiceCouponInfo(userId, start, i, i1).subscribe(result -> {
             mView.updateView1(result);
-        }));
+        }, e -> mView.showError(e.toString())));
     }
 }

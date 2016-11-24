@@ -23,6 +23,7 @@ import com.lidroid.xutils.exception.DbException;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -43,12 +44,11 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
     TextView login_text;
     @BindView(R.id.forgin_password_TV)
     TextView forgin_password_TV;
+    private int position = -1;
+    private Class fragment = null;
 
 
-    public static GlobalLoginFragment newInstance() {
-
-        Bundle args = new Bundle();
-
+    public static GlobalLoginFragment newInstance(Bundle args) {
         GlobalLoginFragment fragment = new GlobalLoginFragment();
         fragment.setArguments(args);
         return fragment;
@@ -61,6 +61,9 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
 
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
+        Bundle data = getArguments();
+        position = data.getInt("position");
+        fragment = (Class) data.getSerializable("fragment");
         backTv.setOnClickListener(this);
         login_register.setOnClickListener(this);
         login_text.setOnClickListener(this);
@@ -86,7 +89,7 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.backTv:
-                ( (MainActivity)  getActivity()).onBackToFirstFragment();
+                ((MainActivity) getActivity()).onBackToFirstFragment();
                 break;
             case R.id.login_register:
                 GlobalRegisterFragment registerFragment = GlobalRegisterFragment.newInstance();
@@ -95,7 +98,6 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
             case R.id.login_text:
                 String username = username_et.getText().toString().trim();
                 String password = password_et.getText().toString().trim();
-
                 if (StringUtils.isBlank(username)) {
                     showToast("登录名不能为空");
                     return;
@@ -119,17 +121,14 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
                 mPresenter.getServiceLoginInfo(userInfo);
                 break;
             case R.id.forgin_password_TV:
-//                intent = new Intent();
-//                intent.setClass(getApplicationContext(), FindPasswordActivity.class);
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);
+                start(GlobalFindPwdFragment.newInstance());
                 break;
         }
     }
 
     @Override
     public boolean onBackPressedSupport() {
-        ( (MainActivity)  getActivity()).onBackToFirstFragment();
+        ((MainActivity) getActivity()).onBackToFirstFragment();
         return true;
     }
 
@@ -155,6 +154,11 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
                         }
                         db.update(productlist.get(i));
                     }
+                }
+                if (fragment == null || position < 0) {
+                    ((MainActivity) getActivity()).onBackToFirstFragment();
+                } else {
+                    ((MainActivity) getActivity()).startAssignFragment(position, fragment);
                 }
                 pop();
             } catch (DbException e) {
