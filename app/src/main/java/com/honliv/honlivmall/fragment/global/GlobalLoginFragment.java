@@ -9,10 +9,12 @@ import android.widget.TextView;
 
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
+import com.honliv.honlivmall.activity.MainActivity;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.bean.UserInfo;
 import com.honliv.honlivmall.contract.GlobalContract;
+import com.honliv.honlivmall.fragment.first.child.FirstHomeFragment;
 import com.honliv.honlivmall.model.global.GlobalLoginModel;
 import com.honliv.honlivmall.presenter.global.GlobalLoginPresenter;
 import com.lidroid.xutils.DbUtils;
@@ -75,29 +77,6 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
 
     }
 
-//    /**
-//     * 和服务器连接登录
-//     * @param userInfo
-//     */
-//     void getServiceLoginInfo(final UserInfo userInfo){
-//        new BaseActivity.MyHttpTask<UserInfo>() {
-//            protected void onPreExecute() {
-//                PromptManager.showCommonProgressDialog(LoginActivity.this);
-//                super.onPreExecute();
-//            }
-//            @Override
-//            protected Object doInBackground(UserInfo... params) {
-//                UserInfoEngine engine = BeanFactory.getImpl(UserInfoEngine.class);
-//                return engine.getServiceLoginInfo(params[0]);
-//            }
-//            protected void onPostExecute(Object result) {
-//                super.onPostExecute(result);
-//                PromptManager.closeProgressDialog();
-//
-//            }
-//        }.executeProxy(userInfo);
-//    }
-
     /**
      * Called when a view has been clicked.
      *
@@ -107,7 +86,7 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.backTv:
-                pop();
+                ( (MainActivity)  getActivity()).onBackToFirstFragment();
                 break;
             case R.id.login_register:
                 GlobalRegisterFragment registerFragment = GlobalRegisterFragment.newInstance();
@@ -149,6 +128,12 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
     }
 
     @Override
+    public boolean onBackPressedSupport() {
+        ( (MainActivity)  getActivity()).onBackToFirstFragment();
+        return true;
+    }
+
+    @Override
     public void updateView(UserInfo result) {
         if (result != null) {
             UserInfo userInfo2 = result;
@@ -175,6 +160,7 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
             } catch (DbException e) {
                 e.printStackTrace();
             }
+
 //            intent = new Intent();
 //
 //            if(GloableParams.toLoginActivity!=null){//从哪来

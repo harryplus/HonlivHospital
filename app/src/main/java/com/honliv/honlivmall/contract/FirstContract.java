@@ -25,6 +25,8 @@ public interface FirstContract {
         void updateView(Product result);
 
         void updateAddProductFavView(String result);
+
+        void updateStartView(Product arg);
     }
 
     interface FirstBargainView extends CoreBaseView {

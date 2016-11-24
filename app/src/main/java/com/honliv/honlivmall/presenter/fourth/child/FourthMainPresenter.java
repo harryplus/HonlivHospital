@@ -1,5 +1,6 @@
 package com.honliv.honlivmall.presenter.fourth.child;
 
+import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.contract.FourthContract;
 
 /**
@@ -8,7 +9,13 @@ import com.honliv.honlivmall.contract.FourthContract;
 public class FourthMainPresenter extends  FourthContract.FourthMainPresenter {
     @Override
     public void onStart() {
-
+//        mView.updateStart();
+        mRxManager.add(mModel
+                .getNativeAllShopCart(GloableParams.USERID)
+                .subscribe(result -> {
+                    if (result != null)
+                        mView.updataAllShopCart(result);
+                }));
     }
 
     @Override
@@ -18,6 +25,6 @@ public class FourthMainPresenter extends  FourthContract.FourthMainPresenter {
                 .subscribe(result -> {
                     if (result != null)
                         mView.updataAllShopCart(result);
-                }));
+                },e->mView.showError("獲取數據失敗"+e.toString())));
     }
 }

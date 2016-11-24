@@ -109,7 +109,8 @@ public class FifthHomeFragment extends BaseFragment<FifthHomePresenter, FifthHom
                 e.printStackTrace();
             }
             if (dbUserInfo == null) {
-                PromptManager.showToast(getContext(), getString(R.string.reLogin));
+//                showToast(getString(R.string.reLogin));
+                start(GlobalLoginFragment.newInstance());
                 return;
             } else {
                 mPresenter.getServiceUserInfo(dbUserInfo.getUserId());

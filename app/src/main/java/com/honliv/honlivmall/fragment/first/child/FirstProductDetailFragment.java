@@ -756,6 +756,11 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
         }
     }
 
+    @Override
+    public void updateStartView(Product arg) {
+        showToast(arg.getName()+"------");
+    }
+
     /**
      * Called when a view has been clicked.
      *

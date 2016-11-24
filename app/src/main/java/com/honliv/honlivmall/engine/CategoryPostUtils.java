@@ -1,5 +1,8 @@
 package com.honliv.honlivmall.engine;
 
+import android.util.Log;
+
+import com.google.gson.Gson;
 import com.honliv.honlivmall.api.MainApi;
 import com.honliv.honlivmall.bean.Category;
 import com.honliv.honlivmall.bean.GifInfo;
@@ -26,7 +29,10 @@ public class CategoryPostUtils {
         HashMap<String, Object> postMap = Utils.getBaseMap("CategoryList");
         postMap.put("params", map);
 
-        return RxService.createApi(MainApi.class).ListCategory(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).ListCategory(postMap).map(bean -> {
+//            Log.i(TAG,new Gson().toJson(bean).toString());
+            return bean.getResult().getResult();
+        }).compose(RxUtil.rxSchedulerHelper());
 //        return RxService.createApi(MainApi.class).ListCategory(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
 
 //        return Observable.just(map).map(m -> {

@@ -1,9 +1,12 @@
 package com.honliv.honlivmall.listener;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.honliv.honlivmall.bean.Category;
+import com.honliv.honlivmall.fragment.fourth.child.FourthMainFragment;
 import com.honliv.honlivmall.fragment.third.child.ThirdCategory2Fragment;
 
 import java.util.ArrayList;
@@ -37,6 +40,7 @@ public class MyCategoryItemClickListener implements AdapterView.OnItemClickListe
 //            intent = new Intent(mContext, CategoryActivity2.class);
 //            intent.putExtra("category", category);
             mContext.start(ThirdCategory2Fragment.newInstance());
+//            Log.i("jjjj","--------");
         } else {
 //            intent = new Intent(mContext, ProductListActivity.class);
         }

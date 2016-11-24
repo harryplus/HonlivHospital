@@ -87,7 +87,13 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
 
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
-
+        productlist=new ArrayList<>();
+        productAdapter = new ShopCartAdapter();
+        shopcar_product_list.setAdapter(productAdapter);
+        shopcar_product_list.setOnItemClickListener(new ProductItemListener());
+//        showToast(GloableParams.USERID+"--GloableParams.USERID");
+//        mPresenter.getNativeAllShopCart(GloableParams.USERID);
+        initShopCarNumber();
     }
 
     @Override
@@ -98,7 +104,7 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
 
     @Override
     public void showError(String msg) {
-
+        showToast(msg);
     }
 
 
@@ -119,19 +125,6 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        productlist=new ArrayList<>();
-        productAdapter = new ShopCartAdapter();
-        shopcar_product_list.setAdapter(productAdapter);
-
-        shopcar_product_list.setOnItemClickListener(new ProductItemListener());
-//        showToast(GloableParams.USERID+"--GloableParams.USERID");
-        mPresenter.getNativeAllShopCart(GloableParams.USERID);
-        initShopCarNumber();
-    }
-
-    @Override
     public void initData() {
 
     }
@@ -139,9 +132,7 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
     public void updataAllShopCart(ArrayList<Product> result) {
         initShopCarNumber();
         if (result != null) {
-//            showToast(productlist.size()+"---ppp--");
-//            productlist.clear();
-            productlist.addAll(result);
+//            productlist.addAll(result);
 
             if (productlist.size() == 0) {
                 //没有数据
@@ -177,9 +168,14 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
         }
     }
 
+    @Override
+    public void updateStart() {
+
+    }
+
     class ShopCartAdapter extends BaseAdapter {
         public int getCount() {
-            showLog("-------"+ productlist.size());
+            showLog("----"+productlist.size());
             return productlist.size();
         }
 

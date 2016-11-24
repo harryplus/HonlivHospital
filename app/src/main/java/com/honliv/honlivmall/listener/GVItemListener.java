@@ -56,8 +56,9 @@ public class GVItemListener implements AdapterView.OnItemClickListener {
 //            }
 //            intent.putExtra("pId", selProduct.getId());
 //            mContext.startActivity(intent);
-            mRxManager.post(ConstantValue.msg_privilegeproduct,selProduct);
             fragment. start(FirstProductDetailFragment.newInstance());
+            mRxManager.post(ConstantValue.msg_privilegeproduct,selProduct);
+            mRxManager.post("s",selProduct);
         }
     }
 }
