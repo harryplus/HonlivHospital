@@ -41,6 +41,9 @@ public interface MainApi {
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
     Observable<BaseBean<BaseInfo<HomeInfo>>> HomeIndex(@Body HashMap<String, Object> map);
+    @Headers("Content-Type: application/json")
+    @POST("shop.aspx")
+    Observable<BaseBean<BaseInfo<Integer>>> Integer(@Body HashMap<String, Object> map);
 
 //    @Headers("Content-Type: application/json")
 //    @POST("shop.aspx")

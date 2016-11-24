@@ -23,6 +23,10 @@ public interface ActivityContract {
         Observable<DefaultParas> getServiceDafault();
     }
 
+    interface CaptureModel extends CoreBaseModel {
+        Observable<Integer> GetOrder(String contentStr);
+    }
+
     interface PaymentCenterModel extends CoreBaseModel {
         Observable<Float> getServiceTotalPrice(int proSaleId, int groupBuyId, List<JSONObject> productList);
 
@@ -38,6 +42,10 @@ public interface ActivityContract {
     interface FlashView extends CoreBaseView {
 
         void updateView(DefaultParas result);
+    }
+
+    interface CaptureView extends CoreBaseView {
+        void updateView(Integer result);
     }
 
     interface PaymentCenterView extends CoreBaseView {
@@ -66,5 +74,9 @@ public interface ActivityContract {
 
     abstract class FlashPresenter extends CoreBasePresenter<FlashModel, FlashView> {
         public abstract void getServiceDafault();
+    }
+
+    abstract class CapturePresenter extends CoreBasePresenter<CaptureModel, CaptureView> {
+        public abstract void getOrderId(String contentStr);
     }
 }

@@ -45,7 +45,7 @@ public class HomePostUtils {
     public static Observable<List<Product>> CountDownList() {
         HashMap<String, Object> postMap = Utils.getBaseMap("CountDownList");
         postMap.put("params", new HashMap<>());
-        return RxService.createApi(MainApi.class).ProductListFilter(postMap).map(bean ->bean.getResult().getResult().getProductlist()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).ProductListFilter(postMap).map(bean -> bean.getResult().getResult().getProductlist()).compose(RxUtil.rxSchedulerHelper());
 //        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
 //            Type type = new TypeToken<List<Product>>() {
 //            }.getType();
@@ -71,5 +71,13 @@ public class HomePostUtils {
 //            }
 //            return result;
 //        }).compose(RxUtil.rxSchedulerHelper());
+    }
+
+    public static Observable<Integer> GetOrder(String twoCodeStr) {
+        HashMap<String, Object> postMap = Utils.getBaseMap("GetOrder");
+        HashMap<Object, Object> parames = new HashMap<>();
+        parames.put("orderCode", twoCodeStr);
+        postMap.put("params", parames);
+        return RxService.createApi(MainApi.class).Integer(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
     }
 }

@@ -47,7 +47,7 @@ import butterknife.BindView;
  * Created by Rodin on 2016/11/16.
  */
 public class FifthSettingFragment extends BaseFragment<FifthSettingPresenter, FifthSettingModel> implements FifthContract.FifthSettingView, View.OnClickListener {
-    Intent intent;
+//    Intent intent;
     VersionInfo version;
     @BindView(R.id.my_logout_rl)
     RelativeLayout my_logout;
@@ -107,10 +107,6 @@ public class FifthSettingFragment extends BaseFragment<FifthSettingPresenter, Fi
 
     @Override
     public void onClick(View view) {
-
-        if (intent == null) {
-            intent = new Intent();
-        }
         switch (view.getId()) {
             case R.id.my_logout_rl://注销
                 mPresenter.getServiceLogOut("-1");
@@ -125,8 +121,7 @@ public class FifthSettingFragment extends BaseFragment<FifthSettingPresenter, Fi
                 start(FifthFeedBackFragment.newInstance());
                 break;
             case R.id.my_about_rl://关于
-                intent.setClass(getContext(), AboutActivity.class);
-                startActivity(intent);
+                start(FifthAboutFragment.newInstance());
                 break;
             case R.id.checkupdate://检查更新
 //			PromptManager.showToastTest(getContext(), "功能稍后开放");

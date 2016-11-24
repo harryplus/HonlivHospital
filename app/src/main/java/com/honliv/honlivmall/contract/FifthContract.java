@@ -26,8 +26,12 @@ import rx.Subscription;
 public interface FifthContract {
     public interface FifthModel extends CoreBaseModel {
     }
+    public interface FifthAboutModel extends CoreBaseModel {
+    }
 
     interface FifthView extends CoreBaseView {
+    }
+    interface FifthAboutView extends CoreBaseView {
     }
 
     interface FifthHomeView extends CoreBaseView {
@@ -258,5 +262,8 @@ public interface FifthContract {
     }
 
     abstract class FifthHelpList2Presenter extends CoreBasePresenter<FifthHelpList2Model, FifthHelpList2View>{
+    }
+
+    abstract class FifthAboutPresenter  extends CoreBasePresenter<FifthAboutModel, FifthAboutView>{
     }
 }
