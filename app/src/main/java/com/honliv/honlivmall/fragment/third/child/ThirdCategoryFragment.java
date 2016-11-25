@@ -114,7 +114,7 @@ public class ThirdCategoryFragment extends BaseFragment<ThirdCategoryPresenter, 
                 } else {
                     String titlegroup = groupList.get(groupPosition).getTitle();
                     int cId = groupList.get(groupPosition).getId();
-                    showToast("titlegroup--"+titlegroup+"--cId---"+cId);
+//                    showToast("titlegroup--"+titlegroup+"--cId---"+cId);
                     Bundle data = new Bundle();
                     data.putInt("cId", cId);
                     data.putString("cTitle", titlegroup);

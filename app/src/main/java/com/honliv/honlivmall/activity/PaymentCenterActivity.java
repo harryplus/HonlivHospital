@@ -778,7 +778,7 @@ public class PaymentCenterActivity extends CoreBaseActivity<PaymentCenterPresent
 
     @Override
     public void onBackPressedSupport() {
-//        Intent intent=new Intent(this,MainActivity.class);
-//        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.tran_pre_in, R.anim.tran_pre_out);
     }
 }

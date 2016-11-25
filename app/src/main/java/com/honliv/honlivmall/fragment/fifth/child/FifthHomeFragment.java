@@ -90,7 +90,6 @@ public class FifthHomeFragment extends BaseFragment<FifthHomePresenter, FifthHom
         loginOut.setOnClickListener(this);
         loginsetting.setOnClickListener(this);
         nearby_market.setOnClickListener(this);
-
     }
 
     @Override

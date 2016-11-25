@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.Product;
+import com.honliv.honlivmall.util.ToastUtils;
 
 /**
  * Created by Rodin on 2016/11/10.
@@ -53,8 +54,7 @@ public class ProductTextWatcher implements TextWatcher {
         }
         if (privilegeProduct != null && privilegeProduct.getLimitQty() != 0) {
             if (num > privilegeProduct.getLimitQty()) {
-                Toast.makeText(mContext, "限购数量为(" + privilegeProduct.getLimitQty() + ")", Toast.LENGTH_SHORT).show();
-
+                ToastUtils.showShortToast("限购数量为(" + privilegeProduct.getLimitQty() + ")");
                 prodNumValue.removeTextChangedListener(this);
                 prodNumValue.setText(privilegeProduct.getLimitQty() + "");
                 prodNumValue.addTextChangedListener(this);

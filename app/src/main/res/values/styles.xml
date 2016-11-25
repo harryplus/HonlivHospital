@@ -1,5 +1,5 @@
 <resources>
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+<!--    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
     </style>
     <style name="CoreAppTheme" parent="AppBaseTheme">
@@ -13,13 +13,13 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
-    </style>
+    </style>-->
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--<item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorAccent</item>-->
     </style>
 
     <style name="AppTheme.NoActionBar">

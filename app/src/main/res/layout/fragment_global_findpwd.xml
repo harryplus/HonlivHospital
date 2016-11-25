@@ -60,7 +60,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/login_text"
+            android:id="@+id/findPassword"
             style="@style/style_17_FFFFFF_BOLD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,8 +68,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/findpassword"
-            android:clickable="true"
             android:gravity="center"
-            android:onClick="findPassword" />
+             />
     </LinearLayout>
 </RelativeLayout>

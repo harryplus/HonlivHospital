@@ -16,11 +16,10 @@ import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.contract.SecondContract;
-import com.honliv.honlivmall.fragment.first.child.FirstProductDetailFragment;
+import com.honliv.honlivmall.fragment.global.GlobalProductDetailFragment;
 import com.honliv.honlivmall.model.second.child.SecondSearchResultModel;
 import com.honliv.honlivmall.presenter.second.child.SecondSearchResultPresenter;
 import com.honliv.honlivmall.util.DensityUtil;
-import com.honliv.honlivmall.util.LogUtil;
 import com.honliv.honlivmall.util.Utils;
 import com.honliv.honlivmall.view.PullToRefreshView;
 
@@ -347,7 +346,7 @@ public class SecondSearchResultFragment extends BaseFragment<SecondSearchResultP
             int pId = currentProductList.get(position).getId();
             Bundle data = new Bundle();
             data.putInt("pId", pId);
-            start(FirstProductDetailFragment.newInstance(data));
+            start(GlobalProductDetailFragment.newInstance(data));
 //            Intent intent = new Intent(SearchResultActivity.this,ProductDetailActivity.class);
 //            intent.putExtra("pId", pId);
 //            startActivityForResult(intent, 100);

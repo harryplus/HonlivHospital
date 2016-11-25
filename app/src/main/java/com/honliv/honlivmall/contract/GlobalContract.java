@@ -2,6 +2,7 @@ package com.honliv.honlivmall.contract;
 
 
 import com.honliv.honlivmall.activity.CoreBaseView;
+import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.bean.UserInfo;
 import com.honliv.honlivmall.model.CoreBaseModel;
 import com.honliv.honlivmall.presenter.CoreBasePresenter;
@@ -56,5 +57,23 @@ public interface GlobalContract {
     }
 
     abstract class GlobalFindPresenter extends CoreBasePresenter<GlobalFindModel, GlobalFindView> {
+    }
+    abstract class GlobalProductDetailPresenter extends CoreBasePresenter<GlobalProductDetailModel, GlobalProductDetailView> {
+        public abstract void getServiceProductDetail(int pId);
+
+        public abstract void addProductFav(int id);
+    }
+    interface GlobalProductDetailModel extends CoreBaseModel {
+        Observable<Product> getServiceProductDetail(int pId);
+
+        Observable<String> addProductFav(int pid);
+    }
+
+    interface GlobalProductDetailView extends CoreBaseView {
+        void updateView(Product result);
+
+        void updateAddProductFavView(String result);
+
+        void updateStartView(Product arg);
     }
 }

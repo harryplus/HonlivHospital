@@ -1,5 +1,8 @@
 package com.honliv.honlivmall.engine;
 
+import android.util.Log;
+
+import com.google.gson.Gson;
 import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.api.MainApi;
 import com.honliv.honlivmall.bean.CouponInfo;
@@ -42,7 +45,13 @@ public class UserPostUtils {
         map.put("UserName", userInfo.getUserName());
         map.put("Password", userInfo.getPassword());
         postMap.put("params", map);
-        return RxService.createApi(MainApi.class).UserInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).UserInfo(postMap).map(bean -> {
+            UserInfo result = null;
+            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
+                result = bean.getResult().getResult();
+            }
+            return result;
+        }).compose(RxUtil.rxSchedulerHelper());
 //        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
 //            Type type2 = new TypeToken<UserInfo>() {
 //            }.getType();

@@ -90,6 +90,7 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
         productAdapter = new ShopCartAdapter();
         shopcar_product_list.setAdapter(productAdapter);
         shopcar_product_list.setOnItemClickListener(new ProductItemListener());
+        shopcar_toBuy_text.setOnClickListener(this);
 //        showToast(GloableParams.USERID+"--GloableParams.USERID");
 //        mPresenter.getNativeAllShopCart(GloableParams.USERID);
         initShopCarNumber();
@@ -98,6 +99,9 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.shopcar_toBuy_text:
+                ((MainActivity)getActivity()).onBackToFirstFragment();
+                break;
         }
     }
 
@@ -597,16 +601,6 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
 ////        intent.putExtra("productlist", TempCI);
 ////        startActivity(intent);
 //    }
-
-    /**
-     * 当购物车没有商品时，点击再去逛商店，购买商品
-     *
-     * @param view
-     */
-    public void goShopAgain(View view) {
-//        intent = new Intent(getContext(), HomeActivity.class);
-//        startActivity(intent);
-    }
 
     /**
      * 删除清空商品

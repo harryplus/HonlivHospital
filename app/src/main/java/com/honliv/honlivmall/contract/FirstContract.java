@@ -21,13 +21,6 @@ public interface FirstContract {
     interface FirstView extends CoreBaseView {
     }
 
-    interface FirstProductDetailView extends CoreBaseView {
-        void updateView(Product result);
-
-        void updateAddProductFavView(String result);
-
-        void updateStartView(Product arg);
-    }
 
     interface FirstBargainView extends CoreBaseView {
         void updateProductLS(List<Product> result);
@@ -50,11 +43,7 @@ public interface FirstContract {
         Observable<List<Product>> getServiceProductLS();
     }
 
-    interface FirstProductDetailModel extends CoreBaseModel {
-        Observable<Product> getServiceProductDetail(int pId);
 
-        Observable<String> addProductFav(int pid);
-    }
 
     interface FirstMarketingModel extends CoreBaseModel {
         Observable<List<Product>> getServiceProductLS();
@@ -82,11 +71,6 @@ public interface FirstContract {
         Observable<List<Product>> getServiceHomeMarketing();
     }
 
-    abstract class FirstProductDetailPresenter extends CoreBasePresenter<FirstProductDetailModel, FirstProductDetailView> {
-        public abstract void getServiceProductDetail(int pId);
-
-        public abstract void addProductFav(int id);
-    }
 
     abstract class FirstMarketingPresenter extends CoreBasePresenter<FirstMarketingModel, FirstMarketingView> {
         public abstract void getServiceProductLS();

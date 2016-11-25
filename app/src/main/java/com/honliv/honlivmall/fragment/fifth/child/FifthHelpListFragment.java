@@ -28,6 +28,8 @@ public class FifthHelpListFragment extends BaseFragment<FifthHelpListPresenter, 
 
     @BindView(R.id.helpListView)
     ListView helpListView;
+    @BindView(R.id.head_goback)
+    TextView head_goback;
     List<Help> helpDates;
 
     public static FifthHelpListFragment newInstance() {
@@ -52,6 +54,7 @@ public class FifthHelpListFragment extends BaseFragment<FifthHelpListPresenter, 
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
         helpDates = new ArrayList<>();
+        head_goback.setOnClickListener(this);
     }
 
     @Override
@@ -78,7 +81,8 @@ public class FifthHelpListFragment extends BaseFragment<FifthHelpListPresenter, 
             case R.id.helpListView:
                 start(FifthHelpDetailFragment.newInstance());
                 break;
-            default:
+            case  R.id.head_goback:
+                pop();
                 break;
         }
     }

@@ -28,7 +28,7 @@ public abstract  class MyJSUtil {
 				String errorMsg = jsonObject.getString("result");
 				JSONObject jsobj = new JSONObject(errorMsg);
 				LogUtil.info(MyJSUtil.class, "到达=failed");
-				ToastUtil.showShortToast(jsobj.getString("message"));
+				ToastUtils.showShortToast(jsobj.getString("message"));
 				return false;
 			}
 		} catch (JSONException e) {

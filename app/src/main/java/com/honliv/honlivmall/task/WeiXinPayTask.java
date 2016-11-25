@@ -8,6 +8,7 @@ import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.bean.OrderInfo;
 import com.honliv.honlivmall.util.MD5;
+import com.honliv.honlivmall.util.ToastUtils;
 import com.honliv.honlivmall.util.Utils;
 import com.tencent.mm.sdk.modelpay.PayReq;
 
@@ -70,9 +71,9 @@ public class WeiXinPayTask extends AsyncTask<Void, Void, String> {
                             if ("prepay_id".equalsIgnoreCase(name)) {
                                 payreq.prepayId = text;
                             } else if ("return_msg".equalsIgnoreCase(name) && !text.equalsIgnoreCase("ok")) {
-                                Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
+                                ToastUtils.showShortToast( text);
                             } else if ("err_code_des".equalsIgnoreCase(name)) {
-                                Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
+                                ToastUtils.showShortToast( text);
                             }
                         }
                         break;

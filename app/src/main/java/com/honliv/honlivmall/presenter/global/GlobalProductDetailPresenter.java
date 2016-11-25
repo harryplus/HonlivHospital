@@ -1,17 +1,13 @@
-package com.honliv.honlivmall.presenter.first.child;
+package com.honliv.honlivmall.presenter.global;
 
-import android.util.Log;
-
-import com.honliv.honlivmall.ConstantValue;
-import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.contract.FirstContract;
-import com.honliv.honlivmall.fragment.first.child.FirstProductDetailFragment;
+import com.honliv.honlivmall.contract.GlobalContract;
 
 /**
  * Created by Rodin on 2016/11/15.
  */
-public class FirstProductDetailPresenter extends FirstContract.FirstProductDetailPresenter {
-    private static final String TAG = "FirstProductDetailPresenter";
+public class GlobalProductDetailPresenter extends GlobalContract.GlobalProductDetailPresenter {
+    private static final String TAG = "GlobalProductDetailPresenter";
 
     @Override
     public void onStart() {

@@ -27,6 +27,8 @@ public class FifthFindPwdFragment extends BaseFragment<FifthFindPwdPresenter, Fi
     TextView servicesphoneTV;
     @BindView(R.id.findPassword)
     TextView findPassword;
+    @BindView(R.id.backTv)
+    TextView backTv;
     String phone;
 
     public static FifthFindPwdFragment newInstance() {
@@ -53,6 +55,7 @@ public class FifthFindPwdFragment extends BaseFragment<FifthFindPwdPresenter, Fi
         findPassword.setOnClickListener(this);
         phone = sp.getString("phone", "4008888 8888");
         servicesphoneTV.setText(phone);
+        backTv.setOnClickListener(this);
     }
 
     @Override
@@ -74,6 +77,9 @@ public class FifthFindPwdFragment extends BaseFragment<FifthFindPwdPresenter, Fi
                 intent.setData(Uri.parse("tel:" + phone));
 
                 startActivity(intent);
+                pop();
+                break;
+            case R.id.backTv:
                 pop();
                 break;
         }

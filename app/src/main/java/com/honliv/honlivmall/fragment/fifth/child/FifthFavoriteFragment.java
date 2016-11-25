@@ -18,7 +18,7 @@ import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.contract.FifthContract;
-import com.honliv.honlivmall.fragment.first.child.FirstProductDetailFragment;
+import com.honliv.honlivmall.fragment.global.GlobalProductDetailFragment;
 import com.honliv.honlivmall.model.fifth.child.FifthFavoriteModel;
 import com.honliv.honlivmall.presenter.fifth.child.FifthFavoritePresenter;
 import com.honliv.honlivmall.util.LogUtil;
@@ -72,11 +72,11 @@ public class FifthFavoriteFragment extends BaseFragment<FifthFavoritePresenter, 
      */
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
-//        mPullToRefreshView.setOnHeaderRefreshListener(this);
-//        mPullToRefreshView.setOnFooterRefreshListener(this);
-//        productAdapter = new ProductListAdapter();
-//        productList.setAdapter(productAdapter);
-//        head_back_text.setOnClickListener(this);
+        mPullToRefreshView.setOnHeaderRefreshListener(this);
+        mPullToRefreshView.setOnFooterRefreshListener(this);
+        productAdapter = new ProductListAdapter();
+        productList.setAdapter(productAdapter);
+        head_back_text.setOnClickListener(this);
     }
 
     @Override
@@ -209,7 +209,7 @@ public class FifthFavoriteFragment extends BaseFragment<FifthFavoritePresenter, 
                     int pId = currentProductList.get(position).getId();
                     Bundle data = new Bundle();
                     data.putInt("pId", pId);
-                    start(FirstProductDetailFragment.newInstance(data));
+                    start(GlobalProductDetailFragment.newInstance(data));
 //                    intent = new Intent(FavoriteActivity.this, ProductDetailActivity.class);
 //                    intent.putExtra("pId", pId);
 //                    startActivity(intent);

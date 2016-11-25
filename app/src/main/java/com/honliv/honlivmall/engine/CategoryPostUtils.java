@@ -162,7 +162,7 @@ public class CategoryPostUtils {
     }
 
     public static Observable<ProductListFilter> ProductList(int categoryId, String orderBy, int page, int pageNum) {
-        HashMap<String, Object> postMap = Utils.getBaseMap("String");
+        HashMap<String, Object> postMap = Utils.getBaseMap("ProductList");
         HashMap<String, Object> parames = new HashMap<>();
         parames.put("cId", categoryId);
         if (orderBy == null) {

@@ -4,13 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 
-import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.bean.Product;
-import com.honliv.honlivmall.fragment.first.child.FirstProductDetailFragment;
+import com.honliv.honlivmall.fragment.global.GlobalProductDetailFragment;
 import com.honliv.honlivmall.util.BuilderTools;
 import com.honliv.honlivmall.util.RxManager;
 
@@ -64,7 +62,7 @@ public class GVItemListener implements AdapterView.OnItemClickListener {
                 data.putSerializable("privilegeProduct", selProduct);
             }
             data.putInt("pId", selProduct.getId());
-            fragment.start(FirstProductDetailFragment.newInstance(data));
+            fragment.start(GlobalProductDetailFragment.newInstance(data));
         }
     }
 }

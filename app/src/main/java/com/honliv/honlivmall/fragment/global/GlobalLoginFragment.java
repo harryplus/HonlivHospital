@@ -3,6 +3,7 @@ package com.honliv.honlivmall.fragment.global;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -134,9 +135,9 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
 
     @Override
     public void updateView(UserInfo result) {
-        if (result != null) {
+        if (result != null && !TextUtils.isEmpty(result.getUserName())) {
             UserInfo userInfo2 = result;
-//            userInfo2.setPassword(userInfo.getPassword());
+            showToast(userInfo2.toString());
             GloableParams.USERID = userInfo2.getUserId();
             DbUtils db = DbUtils.create(getContext());
             try {
@@ -164,25 +165,8 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
             } catch (DbException e) {
                 e.printStackTrace();
             }
-
-//            intent = new Intent();
-//
-//            if(GloableParams.toLoginActivity!=null){//从哪来
-//                intent.setClass(getApplicationContext(), GloableParams.toLoginActivity);
-//            }else{
-//                intent.putExtra("userInfo", userInfo2);
-//                intent.setClass(getApplicationContext(), MyCenterActivity.class);
-//            }
-//            GloableParams.toLoginActivity=null;
-//            startActivity(intent);
-//            finish();
-
-//					initData();
-            //有返回东西 ,解析出来数据，设置给屏幕
-//					LogUtil.info(((List)result).toString());
+        } else {
+            showToast(getString(R.string.login_error));
         }
-        /*else{
-                    PromptManager.showMyToast(LoginActivity.this,"服务器忙，请稍后重试！！！");
-				}*/
     }
 }

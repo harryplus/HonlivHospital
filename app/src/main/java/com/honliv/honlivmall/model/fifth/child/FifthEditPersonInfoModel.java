@@ -7,6 +7,7 @@ import com.honliv.honlivmall.bean.UserInfo;
 import com.honliv.honlivmall.contract.FifthContract;
 import com.honliv.honlivmall.engine.UserPostUtils;
 import com.honliv.honlivmall.util.RxUtil;
+import com.honliv.honlivmall.util.ToastUtils;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.exception.DbException;
 
@@ -23,7 +24,7 @@ public class FifthEditPersonInfoModel implements FifthContract.FifthEditPersonIn
             try {
                 UserInfo dbUserInfo = db.findFirst(UserInfo.class);
                 if (dbUserInfo == null) {
-                    Toast.makeText(context, "登陆状态错误,请退出重进", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShortToast( "登陆状态错误,请退出重进");
                 } else {
                     return dbUserInfo;
                 }

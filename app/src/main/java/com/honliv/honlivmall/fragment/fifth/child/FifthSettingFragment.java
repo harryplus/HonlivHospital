@@ -27,6 +27,7 @@ import com.honliv.honlivmall.contract.FifthContract;
 import com.honliv.honlivmall.model.fifth.child.FifthSettingModel;
 import com.honliv.honlivmall.presenter.fifth.child.FifthSettingPresenter;
 import com.honliv.honlivmall.util.LogUtil;
+import com.honliv.honlivmall.util.ToastUtils;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.DbException;
@@ -63,6 +64,10 @@ public class FifthSettingFragment extends BaseFragment<FifthSettingPresenter, Fi
     TextView callphone;
     @BindView(R.id.head_goback)
     TextView head_goback;
+
+    AlertDialog upDatadialog;
+    TextView updateTV;
+    ProgressBar pb;
 
 
     public static FifthSettingFragment newInstance() {
@@ -133,7 +138,7 @@ public class FifthSettingFragment extends BaseFragment<FifthSettingPresenter, Fi
                 startActivity(intent);
                 break;
             case R.id.head_goback:
-
+pop();
                 break;
         }
     }
@@ -302,7 +307,7 @@ public class FifthSettingFragment extends BaseFragment<FifthSettingPresenter, Fi
                                                 upDatadialog.dismiss();
                                             }
 //								updateTV.setVisibility(View.GONE);
-                                            Toast.makeText(getContext(), "下载失败...", Toast.LENGTH_SHORT).show();
+                                            ToastUtils.showShortToast("下载失败...");
                                         }
 
                                         @Override
@@ -329,7 +334,7 @@ public class FifthSettingFragment extends BaseFragment<FifthSettingPresenter, Fi
                                         }
                                     });
                         } else {
-                            Toast.makeText(getContext(), "SD卡不可用,请检查", Toast.LENGTH_SHORT).show();
+                            ToastUtils.showShortToast("SD卡不可用,请检查");
                         }
                     }
                 }
@@ -337,9 +342,6 @@ public class FifthSettingFragment extends BaseFragment<FifthSettingPresenter, Fi
         builder.show();
     }
 
-    AlertDialog upDatadialog;
-    TextView updateTV;
-    ProgressBar pb;
 
     void showUpdataProcess() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

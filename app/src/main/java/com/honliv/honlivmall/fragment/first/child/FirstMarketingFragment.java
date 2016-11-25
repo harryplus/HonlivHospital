@@ -17,6 +17,7 @@ import com.honliv.honlivmall.adapter.MarketingAdapter;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.contract.FirstContract;
+import com.honliv.honlivmall.fragment.global.GlobalProductDetailFragment;
 import com.honliv.honlivmall.model.first.child.FirstMarketingModel;
 import com.honliv.honlivmall.presenter.first.child.FirstMarketingPresenter;
 import com.honliv.honlivmall.util.BuilderTools;
@@ -188,7 +189,7 @@ public class FirstMarketingFragment extends BaseFragment<FirstMarketingPresenter
                 Bundle data=new Bundle();
                 data.putInt("pId", selProduct.getId());
                 data.putSerializable("privilegeProduct", selProduct);
-                start(FirstProductDetailFragment.newInstance(data));
+                start(GlobalProductDetailFragment.newInstance(data));
 
 //                intent = new Intent();
 //                intent.setClass(getApplicationContext(), ProductDetailActivity.class);

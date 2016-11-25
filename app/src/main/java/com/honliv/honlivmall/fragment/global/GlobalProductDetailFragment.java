@@ -1,4 +1,4 @@
-package com.honliv.honlivmall.fragment.first.child;
+package com.honliv.honlivmall.fragment.global;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,9 +38,10 @@ import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.bean.ProductProperty;
 import com.honliv.honlivmall.bean.SkuData;
 import com.honliv.honlivmall.contract.FirstContract;
+import com.honliv.honlivmall.contract.GlobalContract;
 import com.honliv.honlivmall.listener.ProductTextWatcher;
-import com.honliv.honlivmall.model.first.child.FirstProductDetailModel;
-import com.honliv.honlivmall.presenter.first.child.FirstProductDetailPresenter;
+import com.honliv.honlivmall.model.global.GlobalProductDetailModel;
+import com.honliv.honlivmall.presenter.global.GlobalProductDetailPresenter;
 import com.honliv.honlivmall.util.BuilderTools;
 import com.honliv.honlivmall.util.MoneyUtils;
 import com.honliv.honlivmall.util.ViewUtils;
@@ -66,7 +67,7 @@ import butterknife.BindView;
 /**
  * Created by Rodin on 2016/10/29.
  */
-public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailPresenter, FirstProductDetailModel> implements SwipeRefreshLayout.OnRefreshListener, FirstContract.FirstProductDetailView, View.OnClickListener {
+public class GlobalProductDetailFragment extends BaseFragment<GlobalProductDetailPresenter, GlobalProductDetailModel> implements SwipeRefreshLayout.OnRefreshListener, GlobalContract.GlobalProductDetailView, View.OnClickListener {
     @BindView(R.id.prodNumValue)
     EditText prodNumValue;
     @BindView(R.id.viewPager)
@@ -159,8 +160,8 @@ public class FirstProductDetailFragment extends BaseFragment<FirstProductDetailP
     Timer timer;
     TimerTask task;
 
-    public static FirstProductDetailFragment newInstance(Bundle args) {
-        FirstProductDetailFragment instance = new FirstProductDetailFragment();
+    public static GlobalProductDetailFragment newInstance(Bundle args) {
+        GlobalProductDetailFragment instance = new GlobalProductDetailFragment();
         instance.setArguments(args);
         return instance;
     }

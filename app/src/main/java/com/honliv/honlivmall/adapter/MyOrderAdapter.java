@@ -15,6 +15,7 @@ import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.OrderInfo;
 import com.honliv.honlivmall.util.BuilderTools;
 import com.honliv.honlivmall.util.LogUtil;
+import com.honliv.honlivmall.util.ToastUtils;
 import com.honliv.honlivmall.view.GalleryItem;
 
 import java.util.List;
@@ -182,10 +183,10 @@ public class MyOrderAdapter extends BaseAdapter {
 //                        MyOrderUtils.OrderList(context, context.userId);
 //							initCancelOrder(position);
                     } else {
-                        Toast.makeText(context, "取消订单失败！！！", Toast.LENGTH_SHORT).show();
+                        ToastUtils.showShortToast("取消订单失败！！！");
                     }
                 } else {
-                    Toast.makeText(context, "服务器忙，请稍后重试！！！", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showShortToast("服务器忙，请稍后重试！！！");
                 }
             }
         }.execute(position);
@@ -215,7 +216,7 @@ public class MyOrderAdapter extends BaseAdapter {
             if ("1".equals(flag)) {
                 showShopcarDialog(position);
             } else {
-                Toast.makeText(context, "订单状态不可取消", Toast.LENGTH_SHORT).show();
+                ToastUtils.showShortToast("订单状态不可取消");
             }
         }
     }

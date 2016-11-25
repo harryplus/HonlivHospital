@@ -61,7 +61,7 @@ public class MyCategoryAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
         holder.textContent.setText(categorys.get(position).getTitle());
-        Glide.with(mContext).load(Utils.checkImagUrl(Utils.checkImagUrl(categorys.get(position).getPic()))).crossFade().placeholder(R.mipmap.picture_no).into(holder.imgIcon);
+        Glide.with(mContext).load(Utils.checkImagUrl(Utils.checkImagUrl(categorys.get(position).getPic()))).crossFade().placeholder(R.mipmap.picture_no_square).into(holder.imgIcon);
 
         return view;
     }

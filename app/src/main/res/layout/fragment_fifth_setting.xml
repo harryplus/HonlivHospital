@@ -17,7 +17,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/back_btn"
-            android:clickable="true"
             android:gravity="center" />
 
         <TextView
@@ -296,7 +295,6 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="26dp"
                 android:background="@drawable/button_long"
-                android:clickable="true"
                 android:gravity="center"
                 android:text="@string/settingphone" />
         </LinearLayout>

@@ -26,7 +26,7 @@ import com.honliv.honlivmall.activity.CoreBaseActivity;
 import com.honliv.honlivmall.activity.MainActivity;
 import com.honliv.honlivmall.contract.ActivityContract;
 import com.honliv.honlivmall.fragment.fifth.child.FifthMyOrderDetailFragment;
-import com.honliv.honlivmall.fragment.first.child.FirstProductDetailFragment;
+import com.honliv.honlivmall.fragment.global.GlobalProductDetailFragment;
 import com.honliv.honlivmall.fragment.global.GlobalLoginFragment;
 import com.honliv.honlivmall.model.activity.CaptureModel;
 import com.honliv.honlivmall.presenter.activity.CapturePresenter;
@@ -167,7 +167,7 @@ public class CaptureActivity extends CoreBaseActivity<CapturePresenter, CaptureM
         if (contentStr.contains("http://")) {//如果是网址
             Bundle data = new Bundle();
             data.putInt("position", MainActivity.FIRST);
-            data.putSerializable("fragment", FirstProductDetailFragment.class);
+            data.putSerializable("fragment", GlobalProductDetailFragment.class);
 //			Intent intent = new Intent(this, ProductDetailActivity.class);
             contentStr = contentStr.substring(contentStr.lastIndexOf("/") + 1);
             try {

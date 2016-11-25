@@ -1,5 +1,7 @@
 package com.honliv.honlivmall.fragment.global;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -33,6 +35,11 @@ import butterknife.BindView;
 public class GlobalFindPwdFragment extends BaseFragment<GlobalFindPresenter, GlobalFindModel> implements GlobalContract.GlobalFindView, View.OnClickListener {
     @BindView(R.id.backTv)
     TextView backTv;
+    @BindView(R.id.findPassword)
+    TextView findPassword;
+    @BindView(R.id.servicesphoneTV)
+    TextView servicesphoneTV;
+    private String phone;
 
     public static GlobalFindPwdFragment newInstance() {
         Bundle args = new Bundle();
@@ -49,6 +56,9 @@ public class GlobalFindPwdFragment extends BaseFragment<GlobalFindPresenter, Glo
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
         backTv.setOnClickListener(this);
+        findPassword.setOnClickListener(this);
+        phone = sp.getString("phone", "4008888 8888");
+        servicesphoneTV.setText(phone);
     }
 
     @Override
@@ -66,6 +76,13 @@ public class GlobalFindPwdFragment extends BaseFragment<GlobalFindPresenter, Glo
         switch (v.getId()) {
             case R.id.backTv:
                 pop();
+                break;
+            case R.id.findPassword:
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_DIAL);//拨号界面，不是马上打电话
+                intent.setData(Uri.parse("tel:" + phone));
+
+                startActivity(intent);
                 break;
         }
     }

@@ -58,7 +58,7 @@
 
     <!-- App Theme Launch -->
     <style name="AppThemeLaunch" parent="BaseAppThemeLight">
-        <item name="android:windowBackground">@color/colorPrimary</item>
+        <!--<item name="android:windowBackground">@color/colorPrimary</item>-->
     </style>
 
     <style name="AppWidget" parent="Theme.AppCompat.Light" />

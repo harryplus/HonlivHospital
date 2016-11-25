@@ -17,13 +17,14 @@ import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.bean.ProductListFilter;
 import com.honliv.honlivmall.contract.ThirdContract;
-import com.honliv.honlivmall.fragment.first.child.FirstProductDetailFragment;
+import com.honliv.honlivmall.fragment.global.GlobalProductDetailFragment;
 import com.honliv.honlivmall.model.third.child.ThirdProductListModel;
 import com.honliv.honlivmall.presenter.third.child.ThirdProductListPresenter;
 import com.honliv.honlivmall.util.DensityUtil;
 import com.honliv.honlivmall.util.Utils;
 import com.honliv.honlivmall.view.PullToRefreshView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -95,17 +96,22 @@ public class ThirdProductListFragment extends BaseFragment<ThirdProductListPrese
         showToast(msg);
     }
 
-
-    public void initDate() {
+    @Override
+    public void initData() {
         Bundle data = getArguments();
         cId = data.getInt("cId", -1);
         String cTitle = data.getString("cTitle");
+        currentProductList=new ArrayList<>();
 //       cId = this.getIntent().getIntExtra("cId", -1);
 //       String cTitle = this.getIntent().getStringExtra("cTitle");
         if (cTitle != null) {
             productlistTitle.setText("(" + cTitle + ")列表");
         }
         mPresenter.getServiceProductList(cId, "hot", start, 30);
+        nData();
+    }
+
+    private void nData() {
         if (flags[3]) {
             productLv.setNumColumns(2);
             productLv.setVerticalSpacing(DensityUtil.dip2px(getContext(), 4L));
@@ -157,9 +163,10 @@ public class ThirdProductListFragment extends BaseFragment<ThirdProductListPrese
                     mPullToRefreshView.setVisibility(View.GONE);
                 } else {
                     //有返回东西 ,解析出来数据，设置给屏幕
-                    currentProductList = productList;
+                    currentProductList .addAll(productList);
                     mPullToRefreshView.setEnablePullLoadMoreDataStatus(true);
-                    initDate();
+                    adapter.notifyDataSetChanged();
+                    nData();
                 }
             }
         } else {
@@ -236,7 +243,7 @@ public class ThirdProductListFragment extends BaseFragment<ThirdProductListPrese
             int pId = currentProductList.get(position).getId();
             Bundle data = new Bundle();
             data.putInt("pId", pId);
-            start(FirstProductDetailFragment.newInstance(data));
+            start(GlobalProductDetailFragment.newInstance(data));
 //            Intent intent = new Intent(ProductListActivity.this, ProductDetailActivity.class);
 //            intent.putExtra("pId", pId);
 //            startActivity(intent);

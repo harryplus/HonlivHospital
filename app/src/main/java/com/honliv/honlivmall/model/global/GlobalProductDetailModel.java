@@ -1,8 +1,8 @@
-package com.honliv.honlivmall.model.first.child;
+package com.honliv.honlivmall.model.global;
 
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.bean.Product;
-import com.honliv.honlivmall.contract.FirstContract;
+import com.honliv.honlivmall.contract.GlobalContract;
 import com.honliv.honlivmall.engine.CategoryPostUtils;
 
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import rx.Observable;
 /**
  * Created by Rodin on 2016/11/15.
  */
-public class FirstProductDetailModel implements FirstContract.FirstProductDetailModel {
+public class GlobalProductDetailModel implements GlobalContract.GlobalProductDetailModel {
     @Override
     public Observable<Product> getServiceProductDetail(int pId) {
         Observable<Product> result = CategoryPostUtils.ProductDetail(pId, GloableParams.USERID);
