@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.base.BaseLazyMainFragment;
+import com.honliv.honlivmall.base.CoreBaseActivity;
 import com.honliv.honlivmall.fragment.fifth.FifthFragment;
 import com.honliv.honlivmall.fragment.fifth.child.FifthHomeFragment;
 import com.honliv.honlivmall.fragment.first.FirstFragment;
@@ -16,8 +17,6 @@ import com.honliv.honlivmall.fragment.third.ThirdFragment;
 import com.honliv.honlivmall.fragment.third.child.ThirdMainFragment;
 import com.honliv.honlivmall.view.BottomBar;
 import com.honliv.honlivmall.view.BottomBarTab;
-
-import java.io.Serializable;
 
 import butterknife.BindView;
 import me.yokeyword.fragmentation.SupportFragment;

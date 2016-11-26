@@ -1,4 +1,4 @@
-package com.honliv.honlivmall.activity;
+package com.honliv.honlivmall.base;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -46,6 +47,19 @@ public abstract class CoreBaseActivity<T extends CoreBasePresenter, E extends Co
     public SwipeBackLayout swipeBackLayout;
     private ImageView ivShadow;
     private boolean isOpen = false;
+
+    protected void initToolbar(Toolbar toolbar, String title, boolean flag) {
+        toolbar.setTitle(title);
+        if(flag){
+            toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

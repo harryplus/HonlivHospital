@@ -8,7 +8,9 @@ import android.os.Bundle;
 
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.activity.MainActivity;
+import com.honliv.honlivmall.activity.PayPassActivity;
 import com.honliv.honlivmall.bean.OrderInfo;
+import com.honliv.honlivmall.fragment.fifth.child.FifthMyOrderFragment;
 import com.honliv.honlivmall.fragment.global.GlobalLoginFragment;
 
 import me.yokeyword.fragmentation.SupportFragment;
@@ -17,6 +19,8 @@ import me.yokeyword.fragmentation.SupportFragment;
  * Created by Rodin on 2016/11/4.
  */
 public class BuilderTools {
+
+
     public static void showToPayDialog(final Context mContext, final OrderInfo orderInfo) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setOnCancelListener(new DialogInterface.OnCancelListener() {// 无法取消对话框
@@ -28,9 +32,9 @@ public class BuilderTools {
         builder.setPositiveButton("确定",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-//                        Intent intent = new Intent(mContext, PayPassActivity.class);
-//                        intent.putExtra("orderInfo", orderInfo);
-//                        mContext.startActivity(intent);
+                        Intent intent = new Intent(mContext, PayPassActivity.class);
+                        intent.putExtra("orderInfo", orderInfo);
+                        mContext.startActivity(intent);
                     }
                 });
         builder.setNegativeButton("取消",

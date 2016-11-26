@@ -16,4 +16,11 @@ public class FifthMyOrderPresenter extends FifthContract.FifthMyOrderPresenter {
             mView.updateView(result);
         },e->mView.showError(e.toString())));
     }
+
+    @Override
+    public void getServiceCancelOrder(int userid, int orderid, int position) {
+        mRxManager.add(mModel.CancelOrder(userid,orderid).subscribe(result->{
+            mView.updateServiceCancelOrder(result,position);
+        },e->mView.showError(e.toString())));
+    }
 }

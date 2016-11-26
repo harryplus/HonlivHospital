@@ -8,8 +8,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -50,7 +52,19 @@ public abstract class BaseActivity extends Activity {
 		
 		initCreate();
 	}
-	
+
+	protected void initToolbar(Toolbar toolbar,String title,boolean flag) {
+		toolbar.setTitle(title);
+		if(flag){
+			toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+			toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					finish();
+				}
+			});
+		}
+	}
 	/**
 	 * 1.设置View.setContentView(R.layout.activity_);
 	 * 2.BottomManager.getInstanse().init(this);

@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
+import com.honliv.honlivmall.base.CoreBaseActivity;
 import com.honliv.honlivmall.bean.DefaultParas;
 import com.honliv.honlivmall.bean.UserInfo;
 import com.honliv.honlivmall.contract.ActivityContract;
@@ -29,7 +30,7 @@ import java.io.File;
  * Created by rodin on 16/10/28.
  */
 
-public class FlashActivity extends CoreBaseActivity<FlashPresenter,FlashModel>implements ActivityContract.FlashView {
+public class FlashActivity extends CoreBaseActivity<FlashPresenter,FlashModel> implements ActivityContract.FlashView {
     @Override
     public int getLayoutId() {
         return R.layout.activity_flash;

@@ -3,44 +3,46 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/white">
+<include
+    android:id="@id/fraHead"
+    layout="@layout/toolbar"/>
+    <!--<FrameLayout-->
+        <!--android:id="@id/fraHead"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="50.0dip"-->
+        <!--android:background="@color/background_red">-->
 
-    <FrameLayout
-        android:id="@id/fraHead"
-        android:layout_width="fill_parent"
-        android:layout_height="50.0dip"
-        android:background="@color/background_red">
+        <!--<TextView-->
+            <!--android:id="@+id/head_back_text"-->
+            <!--style="@style/style_15_EBEBEB_BOLD"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/back_btn"-->
+            <!--android:clickable="true"-->
+            <!--android:gravity="center"-->
+            <!--android:onClick="goBack" />-->
 
-        <TextView
-            android:id="@+id/head_back_text"
-            style="@style/style_15_EBEBEB_BOLD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/back_btn"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="goBack" />
+        <!--<TextView-->
+            <!--style="@style/style_18_BEBEBE_BOLD"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:clickable="true"-->
+            <!--android:text="订单详情" />-->
 
-        <TextView
-            style="@style/style_18_BEBEBE_BOLD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:text="订单详情" />
-
-        <TextView
-            android:id="@+id/payment_submit_top_text"
-            style="@style/style_15_EBEBEB_BOLD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="@drawable/head_button_greytored"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="submitOK"
-            android:text="提交"
-            android:visibility="gone" />
-    </FrameLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/payment_submit_top_text"-->
+            <!--style="@style/style_15_EBEBEB_BOLD"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="right"-->
+            <!--android:background="@drawable/head_button_greytored"-->
+            <!--android:clickable="true"-->
+            <!--android:gravity="center"-->
+            <!--android:onClick="submitOK"-->
+            <!--android:text="提交"-->
+            <!--android:visibility="gone" />-->
+    <!--</FrameLayout>-->
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -273,7 +275,6 @@
                 android:id="@+id/productLv"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@id/payment_payType_rel"
                 android:fadingEdge="none"
                 android:scrollingCache="false" />
 

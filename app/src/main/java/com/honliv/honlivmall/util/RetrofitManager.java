@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import cz.msebera.httpclient.android.BuildConfig;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
@@ -19,6 +18,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Subscriber;
+import rx.android.BuildConfig;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 

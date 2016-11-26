@@ -2,8 +2,7 @@ package com.honliv.honlivmall.contract;
 
 import android.content.Context;
 
-import com.facebook.datasource.DataSource;
-import com.honliv.honlivmall.activity.CoreBaseView;
+import com.honliv.honlivmall.base.CoreBaseView;
 import com.honliv.honlivmall.bean.AddressInfo;
 import com.honliv.honlivmall.bean.CouponInfo;
 import com.honliv.honlivmall.bean.Help;
@@ -17,9 +16,7 @@ import com.honliv.honlivmall.presenter.CoreBasePresenter;
 
 import java.util.List;
 
-import butterknife.BindView;
 import rx.Observable;
-import rx.Subscription;
 
 /**
  * Created by Rodin on 2016/11/16.
@@ -95,6 +92,8 @@ public interface FifthContract {
 
     public interface FifthMyOrderView extends CoreBaseView {
         void updateView(List<OrderInfo> result);
+
+        void updateServiceCancelOrder(Boolean result, int position);
     }
 
     public interface FifthFavoriteView extends CoreBaseView {
@@ -167,6 +166,8 @@ public interface FifthContract {
 
     public interface FifthMyOrderModel extends CoreBaseModel {
         Observable<List<OrderInfo>> OrderList(int userId, int page, int pageNum);
+
+        Observable<Boolean> CancelOrder(int userid, int orderid);
     }
 
     public interface FifthMyHxtPwdModel extends CoreBaseModel {
@@ -254,6 +255,8 @@ public interface FifthContract {
 
     abstract class FifthMyOrderPresenter extends CoreBasePresenter<FifthMyOrderModel, FifthMyOrderView> {
         public abstract void getServiceOrderList(int id, int start, int userId);
+
+        public abstract void getServiceCancelOrder(int userid, int orderid, int position);
     }
 
     abstract class FifthFavoritePresenter extends CoreBasePresenter<FifthFavoriteModel, FifthFavoriteView> {

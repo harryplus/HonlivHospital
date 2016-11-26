@@ -5,7 +5,7 @@
     android:background="@color/white">
 
     <FrameLayout
-        android:id="@id/fraHead"
+        android:id="@+id/fraHead"
         android:layout_width="fill_parent"
         android:layout_height="50.0dip"
         android:background="@color/background_red">
@@ -285,7 +285,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/payment_payHint_text"
                     android:background="@drawable/arrow_right" />
             </RelativeLayout>
 

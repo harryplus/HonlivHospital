@@ -43,7 +43,6 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/bottomBar"
         android:layout_below="@id/relTop"
         android:orientation="vertical">
 

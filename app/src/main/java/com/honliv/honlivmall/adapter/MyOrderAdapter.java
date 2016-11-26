@@ -129,37 +129,38 @@ public class MyOrderAdapter extends BaseAdapter {
             holder.gallery.setSelection(1);
         }
 
-        holder.OrderDetailTV.setOnClickListener(new OrderDetailListener(position));
-        view.setOnClickListener(new OrderDetailListener(position));
-        holder.CancelOrderTV.setOnClickListener(new CancelOrderListener(position));
-        holder.toPayTV.setOnClickListener(new toPayListener(position));
+//        holder.OrderDetailTV.setOnClickListener(new OrderDetailListener(position));
+//        view.setOnClickListener(new OrderDetailListener(position));
+
+//        holder.CancelOrderTV.setOnClickListener(new CancelOrderListener(position));
+//        holder.toPayTV.setOnClickListener(new toPayListener(position));
         return view;
     }
 
 
-    private void showShopcarDialog(final int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {// 无法取消对话框
-            public void onCancel(DialogInterface dialog) {
-                //loadHomeActivity();// 取消对话框，进入主界面
-                LogUtil.info(" 取消对话框");
-            }
-        });
-//		builder.setTitle("添加成功 !");
-        builder.setMessage("您确定要取消这件商品？");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                getServiceCancelOrder(position);
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                //loadHomeActivity();
-                LogUtil.info(" 回到界面");
-            }
-        });
-        builder.show();
-    }
+//    private void showShopcarDialog(final int position) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {// 无法取消对话框
+//            public void onCancel(DialogInterface dialog) {
+//                //loadHomeActivity();// 取消对话框，进入主界面
+//                LogUtil.info(" 取消对话框");
+//            }
+//        });
+////		builder.setTitle("添加成功 !");
+//        builder.setMessage("您确定要取消这件商品？");
+//        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int which) {
+//                getServiceCancelOrder(position);
+//            }
+//        });
+//        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int which) {
+//                //loadHomeActivity();
+//                LogUtil.info(" 回到界面");
+//            }
+//        });
+//        builder.show();
+//    }
 
     public void getServiceCancelOrder(final int position) {
         new AsyncTask<Integer, Void, Object>() {
@@ -192,7 +193,7 @@ public class MyOrderAdapter extends BaseAdapter {
         }.execute(position);
     }
 
-    static class ViewHolder {
+    private class ViewHolder {
         TextView orderIDTV;//订单编号
         TextView textOrderPrice;//订单价格
         TextView textTimeIcon;//订单时间
@@ -203,52 +204,52 @@ public class MyOrderAdapter extends BaseAdapter {
         GalleryItem gallery; //滑动图片
     }
 
-    private class CancelOrderListener implements View.OnClickListener {
-        int position;
+//    private class CancelOrderListener implements View.OnClickListener {
+//        int position;
+//
+//        public CancelOrderListener(int position) {
+//            super();
+//            this.position = position;
+//        }
+//
+//        public void onClick(View v) {
+//            String flag = currentOrderList.get(position).getFlag();
+//            if ("1".equals(flag)) {
+//                showShopcarDialog(position);
+//            } else {
+//                ToastUtils.showShortToast("订单状态不可取消");
+//            }
+//        }
+//    }
 
-        public CancelOrderListener(int position) {
-            super();
-            this.position = position;
-        }
+//    private class toPayListener implements View.OnClickListener {
+//        int position;
+//
+//        public toPayListener(int position) {
+//            super();
+//            this.position = position;
+//        }
+//
+//        public void onClick(View v) {
+//            BuilderTools.showToPayDialog(context, ordereList.get(position));
+//        }
+//    }
 
-        public void onClick(View v) {
-            String flag = currentOrderList.get(position).getFlag();
-            if ("1".equals(flag)) {
-                showShopcarDialog(position);
-            } else {
-                ToastUtils.showShortToast("订单状态不可取消");
-            }
-        }
-    }
-
-    private class toPayListener implements View.OnClickListener {
-        int position;
-
-        public toPayListener(int position) {
-            super();
-            this.position = position;
-        }
-
-        public void onClick(View v) {
-            BuilderTools.showToPayDialog(context, ordereList.get(position));
-        }
-    }
-
-    private class OrderDetailListener implements View.OnClickListener {
-        int position;
-
-        public OrderDetailListener(int position) {
-            super();
-            this.position = position;
-        }
-
-        public void onClick(View v) {
-//            intent = new Intent(context.getApplicationContext(), MyOrderDetailActivity.class);
-//            intent.putExtra("orderId", currentOrderList.get(position).getOrderid());
-//            intent.putExtra("OrderCode", ordereList.get(position).getOrderCode());
-//            intent.putExtra("Allprice", ordereList.get(position).getAllprice());
-//            Log.i(TAG, ordereList.get(position).getOrderCode() + "---getOrderCode");
-//            context.startActivity(intent);
-        }
-    }
+//    private class OrderDetailListener implements View.OnClickListener {
+//        int position;
+//
+//        public OrderDetailListener(int position) {
+//            super();
+//            this.position = position;
+//        }
+//
+//        public void onClick(View v) {
+////            intent = new Intent(context.getApplicationContext(), MyOrderDetailActivity.class);
+////            intent.putExtra("orderId", currentOrderList.get(position).getOrderid());
+////            intent.putExtra("OrderCode", ordereList.get(position).getOrderCode());
+////            intent.putExtra("Allprice", ordereList.get(position).getAllprice());
+////            Log.i(TAG, ordereList.get(position).getOrderCode() + "---getOrderCode");
+////            context.startActivity(intent);
+//        }
+//    }
 }

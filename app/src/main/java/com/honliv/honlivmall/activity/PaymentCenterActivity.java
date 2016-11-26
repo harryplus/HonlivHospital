@@ -20,6 +20,7 @@ import com.honliv.honlivmall.adapter.PaymentCenterAdapter;
 import com.honliv.honlivmall.adapter.PaymentPayHintCouponAdapter;
 import com.honliv.honlivmall.adapter.PaymentPayHintCouponAdapter.PaymentPayHintCouponAdapterCallBack;
 import com.honliv.honlivmall.base.BaseLazyMainFragment;
+import com.honliv.honlivmall.base.CoreBaseActivity;
 import com.honliv.honlivmall.bean.AddressInfo;
 import com.honliv.honlivmall.bean.CouponInfo;
 import com.honliv.honlivmall.bean.GifInfo;

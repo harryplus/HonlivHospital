@@ -11,22 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
-import com.honliv.honlivmall.activity.CoreBaseView;
-import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.model.CoreBaseModel;
 import com.honliv.honlivmall.presenter.CoreBasePresenter;
 import com.honliv.honlivmall.util.TUtil;
 import com.honliv.honlivmall.util.ToastUtils;
-import com.lidroid.xutils.DbUtils;
-import com.lidroid.xutils.db.sqlite.Selector;
-import com.lidroid.xutils.exception.DbException;
-
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -45,6 +36,19 @@ public abstract class BaseFragment<T extends CoreBasePresenter, E extends CoreBa
     protected Context mContext;
     protected Activity mActivity;
     Unbinder binder;
+
+    protected void initToolbar(Toolbar toolbar,String title,boolean flag) {
+        toolbar.setTitle(title);
+        if(flag){
+            toolbar.setNavigationIcon(R.drawable.back_btn);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pop();
+                }
+            });
+        }
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -141,13 +145,14 @@ public abstract class BaseFragment<T extends CoreBasePresenter, E extends CoreBa
      */
     @Override
     public boolean onBackPressedSupport() {
-        if (getChildFragmentManager().getBackStackEntryCount() > 1) {
-            popChild();
-        } else {
-//            _mBackToFirstListener.onBackToFirstFragment();
-            start(getPreFragment());
-            _mActivity.finish();
-        }
+        pop();
+//        if (getChildFragmentManager().getBackStackEntryCount() > 1) {
+//            popChild();
+//        } else {
+////            _mBackToFirstListener.onBackToFirstFragment();
+//            start(getPreFragment());
+//            _mActivity.finish();
+//        }
         return true;
     }
 

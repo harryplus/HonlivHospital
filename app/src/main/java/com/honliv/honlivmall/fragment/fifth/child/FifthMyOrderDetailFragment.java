@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -84,10 +85,6 @@ public class FifthMyOrderDetailFragment extends BaseFragment<FifthMyOrderDetailP
     TextView order_bottom_money_text;//订单应付金额
     @BindView(R.id.order_invoiceHintValue_text)
     TextView order_invoiceHintValue_text;//订单应付金额
-    @BindView(R.id.orderDetail_cancel_TV)
-    TextView orderDetail_cancel_TV;//取消订单按钮
-    @BindView(R.id.toPayOrder_bottom_text)
-    TextView toPayOrder_bottom_text;//支付订单订单按钮
     @BindView(R.id.payment_lookProduct_IV)
     ImageView lookProductIV;
     @BindView(R.id.order_paytype_text)
@@ -105,11 +102,10 @@ public class FifthMyOrderDetailFragment extends BaseFragment<FifthMyOrderDetailP
     String OrderCode;
     String Allprice;
     OrderInfo ordereDetail;
+    @BindView(R.id.toolbar)
+    Toolbar mToolBar;
 
-    public static FifthMyOrderDetailFragment newInstance() {
-
-        Bundle args = new Bundle();
-
+    public static FifthMyOrderDetailFragment newInstance(Bundle args) {
         FifthMyOrderDetailFragment fragment = new FifthMyOrderDetailFragment();
         fragment.setArguments(args);
         return fragment;
@@ -135,6 +131,7 @@ public class FifthMyOrderDetailFragment extends BaseFragment<FifthMyOrderDetailP
         lookProductList.setOnClickListener(this);
         toPayOrder.setOnClickListener(this);
         useCoupon.setOnClickListener(this);
+        initToolbar(mToolBar, getString(R.string.order_detail), true);
     }
 
     @Override
@@ -210,23 +207,23 @@ public class FifthMyOrderDetailFragment extends BaseFragment<FifthMyOrderDetailP
         }
         //订单标识，1=>可删除可修改 2=>不可修改 3=>已完成
         if ("2".equals(ordereDetail.getFlag())) {
-            orderDetail_cancel_TV.setClickable(false);
-            orderDetail_cancel_TV.setText("订单不可修改");
-            orderDetail_cancel_TV.setBackgroundResource(R.drawable.product_detail_shop_noselected);
+            useCoupon.setClickable(false);
+            useCoupon.setText("订单不可修改");
+            useCoupon.setBackgroundResource(R.drawable.product_detail_shop_noselected);
         } else if ("3".equals(ordereDetail.getFlag())) {
-            orderDetail_cancel_TV.setClickable(false);
-            orderDetail_cancel_TV.setText("订单已完成");
-            orderDetail_cancel_TV.setBackgroundResource(R.drawable.product_detail_shop_noselected);
+            useCoupon.setClickable(false);
+            useCoupon.setText("订单已完成");
+            useCoupon.setBackgroundResource(R.drawable.product_detail_shop_noselected);
         }
         if ("UnHandle".equals(ordereDetail.getStatus())) {
             // 可以支付的状态：Status=UnHandle, (payGateway != cod  &&   payGateway!=bank )
             if (!"cod".equals(ordereDetail.getPaygateway() + "") && !"bank".equals(ordereDetail.getPaygateway() + "")) {
-                toPayOrder_bottom_text.setVisibility(View.VISIBLE);
+                toPayOrder.setVisibility(View.VISIBLE);
             } else {
-                toPayOrder_bottom_text.setVisibility(View.GONE);
+                toPayOrder.setVisibility(View.GONE);
             }
         } else {
-            toPayOrder_bottom_text.setVisibility(View.GONE);
+            toPayOrder.setVisibility(View.GONE);
         }
     }
 
@@ -290,10 +287,10 @@ public class FifthMyOrderDetailFragment extends BaseFragment<FifthMyOrderDetailP
         if (result != null) {
             Boolean isSuccess = (Boolean) result;
             if (isSuccess) {
-                orderDetail_cancel_TV.setText("订单已取消");
-                orderDetail_cancel_TV.setBackgroundResource(R.drawable.product_detail_shop_noselected);
-                orderDetail_cancel_TV.setClickable(false);
-                toPayOrder_bottom_text.setVisibility(View.GONE);
+                useCoupon.setText("订单已取消");
+                useCoupon.setBackgroundResource(R.drawable.product_detail_shop_noselected);
+                useCoupon.setClickable(false);
+                toPayOrder.setVisibility(View.GONE);
             } else {
                 showToast("取消订单失败！！！");
             }

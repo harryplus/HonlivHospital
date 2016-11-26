@@ -1,4 +1,4 @@
-package com.honliv.honlivmall.activity;
+package com.honliv.honlivmall.base;
 
 import android.content.Context;
 

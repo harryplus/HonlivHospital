@@ -1,7 +1,7 @@
 package com.honliv.honlivmall.contract;
 
 
-import com.honliv.honlivmall.activity.CoreBaseView;
+import com.honliv.honlivmall.base.CoreBaseView;
 import com.honliv.honlivmall.bean.Category;
 import com.honliv.honlivmall.bean.ProductListFilter;
 import com.honliv.honlivmall.model.CoreBaseModel;

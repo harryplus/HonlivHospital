@@ -17,4 +17,10 @@ public class FifthMyOrderModel implements FifthContract.FifthMyOrderModel {
         Observable<List<OrderInfo>> result = OrderPostUtils.OrderList(userId,page,pageNum);
         return result;
     }
+
+    @Override
+    public Observable<Boolean> CancelOrder(int userid, int orderid) {
+        Observable<Boolean> result = OrderPostUtils.CancelOrder(userid,orderid);
+        return result;
+    }
 }

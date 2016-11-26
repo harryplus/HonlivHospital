@@ -266,6 +266,12 @@ public class FifthEditPersonInfoFragment extends BaseFragment<FifthEditPersonInf
 //        }.executeProxy(userId);
 //    }
 
+    @Override
+    public boolean onBackPressedSupport() {
+        pop();
+        return true;
+    }
+
     protected void updateDBuserIfno() {
         DbUtils db = DbUtils.create(getContext());
         try {

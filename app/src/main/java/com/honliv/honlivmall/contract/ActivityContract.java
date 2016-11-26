@@ -1,6 +1,6 @@
 package com.honliv.honlivmall.contract;
 
-import com.honliv.honlivmall.activity.CoreBaseView;
+import com.honliv.honlivmall.base.CoreBaseView;
 import com.honliv.honlivmall.bean.AddressInfo;
 import com.honliv.honlivmall.bean.DefaultParas;
 import com.honliv.honlivmall.bean.GifInfo;

@@ -22,7 +22,7 @@ import com.google.zxing.decoding.InactivityTimer;
 import com.google.zxing.view.ViewfinderView;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
-import com.honliv.honlivmall.activity.CoreBaseActivity;
+import com.honliv.honlivmall.base.CoreBaseActivity;
 import com.honliv.honlivmall.activity.MainActivity;
 import com.honliv.honlivmall.contract.ActivityContract;
 import com.honliv.honlivmall.fragment.fifth.child.FifthMyOrderDetailFragment;
