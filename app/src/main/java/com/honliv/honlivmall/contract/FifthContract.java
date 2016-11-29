@@ -25,9 +25,7 @@ public interface FifthContract {
     public interface FifthModel extends CoreBaseModel {
     }
 
-    public interface FifthAddressListModel extends CoreBaseModel {
-        Observable<List<AddressInfo>> addresslist(int userId, int pageIndex, int pageNum);
-    }
+
 
     public interface FifthMyOrderDetailModel extends CoreBaseModel {
         Observable<OrderInfo> OrderDetail(int userid, int orderId);
@@ -44,9 +42,7 @@ public interface FifthContract {
     interface FifthView extends CoreBaseView {
     }
 
-    interface FifthAddressListView extends CoreBaseView {
-        void updateServiceProductList(List<AddressInfo> result);
-    }
+
 
     interface FifthMyOrderDetailView extends CoreBaseView {
         void updateServiceOrderDetail(OrderInfo result);
@@ -87,7 +83,7 @@ public interface FifthContract {
     }
 
     public interface FifthAddressManageView extends CoreBaseView {
-        void updateProductList(List<AddressInfo> result);
+        void updateServiceAddressList(List<AddressInfo> result);
     }
 
     public interface FifthMyOrderView extends CoreBaseView {
@@ -99,7 +95,7 @@ public interface FifthContract {
     public interface FifthFavoriteView extends CoreBaseView {
         void updateServiceFavInfo(List<Product> result);
 
-        void updateServiceCancelFav(Boolean result);
+        void updateServiceCancelFav(Boolean result, int position);
     }
 
     public interface FifthMyCouponView extends CoreBaseView {
@@ -138,17 +134,7 @@ public interface FifthContract {
         void updateView(List<Help> result);
     }
 
-    public interface FifthAddAddressView extends CoreBaseView {
-        void updateView(List<AddressInfo> result);
 
-        void updateView2(List<AddressInfo> result);
-
-        void updateServiceProductList(List<AddressInfo> result, boolean b);
-
-        void updateServiceAddressName(String result);
-
-        void updateAddressDefault(Boolean result);
-    }
 
     public interface FifthEditPersonInfoModel extends CoreBaseModel {
         Observable<UserInfo> getServicePersonal(Context context);
@@ -174,11 +160,11 @@ public interface FifthContract {
     }
 
     public interface FifthAddressManageModel extends CoreBaseModel {
-        Observable<List<AddressInfo>> getServiceProductList();
+        Observable<List<AddressInfo>> getServiceAddressList();
     }
 
     public interface FifthFavoriteModel extends CoreBaseModel {
-        Observable<List<Product>> updateServicePassword(int userid, int start, int i);
+        Observable<List<Product>> updateServiceFavInfo(int userid, int start, int i);
 
         Observable<Boolean> CancelFav(int userid, int favId);
     }
@@ -214,17 +200,7 @@ public interface FifthContract {
         Observable<Boolean> LogOut();
     }
 
-    public interface FifthAddAddressModel extends CoreBaseModel {
-        Observable<List<AddressInfo>> initSpinner1(int i);
 
-        Observable<List<AddressInfo>> initSpinner2(int pcode);
-
-        Observable<List<AddressInfo>> getServiceProductList(AddressInfo addressPreInfo, AddressInfo addressInfo, boolean b);
-
-        Observable<String> getServiceAddressName(int regionId);
-
-        Observable<Boolean> SetAddressDefault(int userid, int id);
-    }
 
     abstract class FifthPresenter extends CoreBasePresenter<FifthModel, FifthView> {
     }
@@ -250,7 +226,6 @@ public interface FifthContract {
     }
 
     abstract class FifthAddressManagePresenter extends CoreBasePresenter<FifthAddressManageModel, FifthAddressManageView> {
-        public abstract void getServiceProductList();
     }
 
     abstract class FifthMyOrderPresenter extends CoreBasePresenter<FifthMyOrderModel, FifthMyOrderView> {
@@ -260,7 +235,7 @@ public interface FifthContract {
     }
 
     abstract class FifthFavoritePresenter extends CoreBasePresenter<FifthFavoriteModel, FifthFavoriteView> {
-        public abstract void getServiceCancelFav(int userid, int favId);
+        public abstract void getServiceCancelFav(int USERID, int userid, int favId);
 
         public abstract void getServiceFavInfo(int userid, int start, int i);
     }
@@ -277,17 +252,7 @@ public interface FifthContract {
         public abstract void getServiceLogOut(String s);
     }
 
-    abstract class FifthAddAddressPresenter extends CoreBasePresenter<FifthAddAddressModel, FifthAddAddressView> {
-        public abstract void initSpinner1(int i);
 
-        public abstract void initSpinner2(int pcode);
-
-        public abstract void getServiceProductList(AddressInfo addressPreInfo, AddressInfo addressInfo, boolean b);
-
-        public abstract void getServiceAddressName(int regionId);
-
-        public abstract void addressDefault(int userid, int id);
-    }
 
     abstract class FifthMyHxtPwdPresenter extends CoreBasePresenter<FifthMyHxtPwdModel, FifthMyHxtPwdView> {
     }
@@ -325,7 +290,5 @@ public interface FifthContract {
         public abstract void getServiceCancelOrder(int userid, int orderId);
     }
 
-    abstract class FifthAddressListPresenter extends CoreBasePresenter<FifthAddressListModel, FifthAddressListView> {
-        public abstract void getServiceProductList(int userId, int pageIndex, int pageNum);
-    }
+
 }

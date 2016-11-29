@@ -3,16 +3,19 @@ package com.honliv.honlivmall.engine;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.api.MainApi;
 import com.honliv.honlivmall.bean.Category;
+import com.honliv.honlivmall.bean.CouponInfo;
 import com.honliv.honlivmall.bean.GifInfo;
+import com.honliv.honlivmall.bean.OrderInfo;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.bean.ProductListFilter;
 import com.honliv.honlivmall.util.RxService;
 import com.honliv.honlivmall.util.RxUtil;
 import com.honliv.honlivmall.util.Utils;
 
-import org.json.JSONObject;
+import org.json.JSONArray;
 
 import java.util.HashMap;
 import java.util.List;
@@ -70,7 +73,7 @@ public class CategoryPostUtils {
     }
 
     public static Observable<Float> GetFreight(int userId, int shipId, int shipTypeId,
-                                               List<JSONObject> productList, float allCouponMoney) {
+                                               List<HashMap<String, Object>> productList, float allCouponMoney) {
         HashMap<String, Object> postMap = Utils.getBaseMap("GetFreight");
         HashMap<String, Object> parames = new HashMap<>();
         parames.put("userId", userId);
@@ -89,25 +92,41 @@ public class CategoryPostUtils {
 //        }).compose(RxUtil.rxSchedulerHelper());
     }
 
-    public static Observable<Float> GetTotalPrice(int userid, int proSaleId, int groupBuyId, List<JSONObject> productList) {
+    public static Observable<Float> GetTotalPrice(int userid, int proSaleId, int groupBuyId, List<HashMap<String, Object>> productList) {
         HashMap<String, Object> postMap = Utils.getBaseMap("GetTotalPrice");
         HashMap<String, Object> parames = new HashMap<>();
         parames.put("userId", userid);
         parames.put("groupBuyId", groupBuyId);
         parames.put("proSaleId", proSaleId);
+//        Log.i(TAG, productList.toString());
         parames.put("productList", productList);
+        Log.i(TAG, parames.toString());
         postMap.put("params", parames);
-        return RxService.createApi(MainApi.class).PaymentInfo(postMap).map(bean -> bean.getResult().getResult().getAllprice()).compose(RxUtil.rxSchedulerHelper());
-//        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
-//            Float result = null;
-//            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
-//                result = Float.valueOf(bean.getResult().getResult());
-//            }
-//            return result;
-//        }).compose(RxUtil.rxSchedulerHelper());
+
+//        Log.i(TAG, "---"+postMap.toString());
+        String str = new Gson().toJson(postMap).toString();
+////        str.replaceAll("\"\\[","[");
+////        str.replaceAll("]\"","]");
+//        Log.i(TAG,"---"+ str);
+//        BaseReq reqBean = new BaseReq();
+//        reqBean.id = UUID.randomUUID().hashCode();
+//        reqBean.jsonrpc = "2.0";
+//        reqBean.method = "GetTotalPrice";
+//        reqBean.params.groupBuyId = groupBuyId;
+//        reqBean.params.productList = productList;
+//        reqBean.params.userId = userid;
+//        reqBean.params.proSaleId = proSaleId;
+//        Log.i(TAG,"---"+  new Gson().toJson(reqBean).toString());
+
+        return RxService.createApi(MainApi.class).String(postMap).map(bean -> {
+            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
+                return Float.valueOf(bean.getResult().getResult());
+            }
+            return null;
+        }).compose(RxUtil.rxSchedulerHelper());
     }
 
-    public static Observable<GifInfo> GetGiftInfo(int userid, List<JSONObject> productList, float couponPrice) {
+    public static Observable<GifInfo> GetGiftInfo(int userid, List<HashMap<String, Object>> productList, float couponPrice) {
         HashMap<String, Object> postMap = Utils.getBaseMap("GetGiftInfo");
         HashMap<String, Object> parames = new HashMap<>();
         parames.put("userId", userid);
@@ -173,5 +192,31 @@ public class CategoryPostUtils {
         parames.put("pageNum", pageNum);
         postMap.put("params", parames);
         return RxService.createApi(MainApi.class).ProductListFilter(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+    }
+
+    public static Observable<CouponInfo> GetCunpons(int userid, List<HashMap<String, Object>> productJsobList) {
+        HashMap<String, Object> postMap = Utils.getBaseMap("GetCunpons");
+        HashMap<String, Object> parames = new HashMap<>();
+        parames.put("userId", userid);
+        parames.put("productList", productJsobList);
+        postMap.put("params", parames);
+        return RxService.createApi(MainApi.class).CouponInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
+    }
+
+    public static Observable<OrderInfo> SubmitOrder(int userId, int shipId, int regionId, int shipTypeId, int paymentId, float paymoney, List<HashMap<String, Object>> productList, String remark, String couponCode, int proSaleId, int groupBuyId) {
+        HashMap<String, Object> postMap = Utils.getBaseMap("SubmitOrder");
+        HashMap<String, Object> parames = new HashMap<>();
+        parames.put("userId", userId);
+        parames.put("shipId", shipId);
+        parames.put("regionId", regionId);
+        parames.put("shipTypeId", shipTypeId);
+        parames.put("paymentId", paymentId);
+        parames.put("proSaleId", proSaleId);
+        parames.put("groupBuyId", groupBuyId);
+        parames.put("productList", productList);
+        parames.put("remark", remark);
+        parames.put("couponCode", couponCode);
+        postMap.put("params", parames);
+        return RxService.createApi(MainApi.class).OrderInfo(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
     }
 }

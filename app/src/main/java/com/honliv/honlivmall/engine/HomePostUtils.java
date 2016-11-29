@@ -80,4 +80,12 @@ public class HomePostUtils {
         postMap.put("params", parames);
         return RxService.createApi(MainApi.class).Integer(postMap).map(bean -> bean.getResult().getResult()).compose(RxUtil.rxSchedulerHelper());
     }
+
+    public static Observable<List<Product>> ProductList(int brandId) {
+        HashMap<String, Object> postMap = Utils.getBaseMap("ProductList");
+        HashMap<Object, Object> parames = new HashMap<>();
+        parames.put("brandid", brandId);
+        postMap.put("params", parames);
+        return RxService.createApi(MainApi.class).ProductListFilter(postMap).map(bean -> bean.getResult().getResult().getProductlist()).compose(RxUtil.rxSchedulerHelper());
+    }
 }

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <TextView
+ <!--   <TextView
         android:id="@+id/describe"
         style="@style/text"
         android:layout_width="wrap_content"
@@ -17,5 +17,5 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:text="这是一个大饼" />
+        android:text="这是一个大饼" />-->
 </RelativeLayout>

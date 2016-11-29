@@ -82,7 +82,6 @@ public class CaptureActivity extends CoreBaseActivity<CapturePresenter, CaptureM
     @Override
     public void initView(Bundle savedInstanceState) {
         CameraManager.init(getApplication());
-
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
         txtResult = (TextView) findViewById(R.id.txtResult);
         hasSurface = false;

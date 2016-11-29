@@ -30,6 +30,7 @@ import com.honliv.honlivmall.activity.MainActivity;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.contract.FourthContract;
+import com.honliv.honlivmall.fragment.global.GlobalProductDetailFragment;
 import com.honliv.honlivmall.model.fourth.child.FourthMainModel;
 import com.honliv.honlivmall.presenter.fourth.child.FourthMainPresenter;
 import com.honliv.honlivmall.util.DelayTask;
@@ -48,7 +49,7 @@ import butterknife.BindView;
 /**
  * Created by Rodin on 2016/10/26.
  */
-public class FourthMainFragment extends BaseFragment<FourthMainPresenter, FourthMainModel> implements View.OnClickListener, FourthContract.FourthMainView {
+public class FourthMainFragment extends BaseFragment<FourthMainPresenter, FourthMainModel> implements View.OnClickListener, FourthContract.FourthMainView, AdapterView.OnItemClickListener {
     @BindView(R.id.shopcar_product_list)
     ListView shopcar_product_list;
     @BindView(R.id.shopcar_null_text)
@@ -89,12 +90,20 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
         productlist=new ArrayList<>();
         productAdapter = new ShopCartAdapter();
         shopcar_product_list.setAdapter(productAdapter);
-        shopcar_product_list.setOnItemClickListener(new ProductItemListener());
+        shopcar_product_list.setOnItemClickListener(this);
         shopcar_toBuy_text.setOnClickListener(this);
+        headDeleteTV.setOnClickListener(this);
 //        showToast(GloableParams.USERID+"--GloableParams.USERID");
 //        mPresenter.getNativeAllShopCart(GloableParams.USERID);
         initShopCarNumber();
+        setGone();
     }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        mPresenter.getNativeAllShopCart(GloableParams.USERID);
+//    }
 
     @Override
     public void onClick(View v) {
@@ -102,18 +111,49 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
             case R.id.shopcar_toBuy_text:
                 ((MainActivity)getActivity()).onBackToFirstFragment();
                 break;
+            case R.id.shopcar_delete_text:
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setOnCancelListener(new DialogInterface.OnCancelListener() {// 无法取消对话框
+                    public void onCancel(DialogInterface dialog) {
+                    }
+                });
+                builder.setMessage("您确定要清空购物车？");
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        DbUtils db = DbUtils.create(getContext());
+                        try {
+                            db.dropTable(Product.class);
+                            setGone();
+                        } catch (DbException e) {
+
+                            e.printStackTrace();
+                        }
+
+                        initShopCarNumber();
+                        initTotalPrice();
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                builder.show();
+                break;
         }
+    }
+
+    private void setGone() {
+        shopcarLayout.setVisibility(View.GONE);
+        shopcar_null_text.setVisibility(View.VISIBLE);
+        shopcar_toBuy_text.setVisibility(View.VISIBLE);
+        shopcar_default_img.setVisibility(View.VISIBLE);
+        headDeleteTV.setVisibility(View.GONE);
+        shopcarBottomRel.setVisibility(View.GONE);
     }
 
     @Override
     public void showError(String msg) {
         showToast(msg);
-    }
-
-
-    public void onResume() {
-        super.onResume();
-//        mPresenter.getNativeAllShopCart(userId);
     }
 
     /**
@@ -129,22 +169,18 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
 
     @Override
     public void initData() {
-
+        mPresenter.getNativeAllShopCart(GloableParams.USERID);
     }
     @Override
     public void updataAllShopCart(ArrayList<Product> result) {
         initShopCarNumber();
+        showToast("---"+(result==null)+"--"+result.size());
         if (result != null) {
-//            productlist.addAll(result);
-
+            productlist.clear();
+            productlist.addAll(result);
             if (productlist.size() == 0) {
                 //没有数据
-                shopcarLayout.setVisibility(View.GONE);
-                shopcar_null_text.setVisibility(View.VISIBLE);
-                shopcar_toBuy_text.setVisibility(View.VISIBLE);
-                shopcar_default_img.setVisibility(View.VISIBLE);
-                headDeleteTV.setVisibility(View.GONE);
-                shopcarBottomRel.setVisibility(View.GONE);
+                setGone();
             } else {
                 shopcarLayout.setVisibility(View.VISIBLE);
                 headDeleteTV.setVisibility(View.VISIBLE);
@@ -161,22 +197,21 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
                 initShopCarNumber();//初始化底部小球的数量
                 initTotalPrice();//初始化顶部的价格和积分
             }
+            productAdapter.notifyDataSetChanged();
         } else {
-            shopcarLayout.setVisibility(View.GONE);
-            shopcar_null_text.setVisibility(View.VISIBLE);
-            shopcar_toBuy_text.setVisibility(View.VISIBLE);
-            shopcar_default_img.setVisibility(View.VISIBLE);
-            headDeleteTV.setVisibility(View.GONE);
-            shopcarBottomRel.setVisibility(View.GONE);
+            setGone();
         }
     }
 
     @Override
-    public void updateStart() {
-
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        int pId = productlist.get(position).getId();
+        Bundle data=new Bundle();
+        data.putInt("pId", pId);
+        start(GlobalProductDetailFragment.newInstance(data));
     }
 
-    class ShopCartAdapter extends BaseAdapter {
+  private  class ShopCartAdapter extends BaseAdapter {
         public int getCount() {
             showLog("----"+productlist.size());
             return productlist.size();
@@ -251,12 +286,7 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
                         productlist.remove(position);
                         productAdapter.notifyDataSetChanged();
                         if (productlist.size() == 0) {
-                            shopcarLayout.setVisibility(View.GONE);
-                            shopcar_null_text.setVisibility(View.VISIBLE);
-                            shopcar_toBuy_text.setVisibility(View.VISIBLE);
-                            shopcar_default_img.setVisibility(View.VISIBLE);
-                            headDeleteTV.setVisibility(View.GONE);
-                            shopcarBottomRel.setVisibility(View.GONE);
+                            setGone();
                         }
 
                         initShopCarNumber();
@@ -486,56 +516,54 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
     Timer timer = new Timer();
 
 
-    class ProductItemListener implements AdapterView.OnItemClickListener {
+//    class ProductItemListener implements AdapterView.OnItemClickListener {
+//
+//        @Override
+//        public void onItemClick(AdapterView<?> parent, View view, final int position,
+//                                long id) {
+//
+////            Intent intent = new Intent(getContext(), ProductDetailActivity.class);
+////            intent.putExtra("pId", pId);
+////            GloableParams.PRODUCTID2 = pId;//为了第二次进商品详情有更新
+////            startActivity(intent);
+//        }
+//    }
 
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, final int position,
-                                long id) {
-            int pId = productlist.get(position).getId();
-
-//            Intent intent = new Intent(getContext(), ProductDetailActivity.class);
-//            intent.putExtra("pId", pId);
-//            GloableParams.PRODUCTID2 = pId;//为了第二次进商品详情有更新
-//            startActivity(intent);
-        }
-    }
-
-    /**
-     * 长按点击事件
-     *
-     * @author Administrator
-     */
-    class ProductItemLongListener implements AdapterView.OnItemLongClickListener {
-        @Override
-        public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                       final int position, long id) {
-            int index = position + 1;
-            String url = ConstantValue.HOST + "/MShop/ShoppingCart/RemoveItem";
-            String postDate = "ItemIds=" + index;
-
-            //这是点击item向右移动删除的正确代码，可使用。
-            TranslateAnimation ta = new TranslateAnimation(
-                    Animation.RELATIVE_TO_SELF, 0,
-                    Animation.RELATIVE_TO_SELF, 1.0f,
-                    Animation.RELATIVE_TO_SELF, 0,
-                    Animation.RELATIVE_TO_SELF, 0);
-            ta.setDuration(800);
-            view.startAnimation(ta);
-
-            DelayTask task = new DelayTask() {
-                @Override
-                protected void runOnUiThread() {
-                    for (int i = 0; i < flags.length; i++) {
-                        flags[i] = false;
-                    }
-                    flags[position] = true;
-                    deleteProduct();
-                }
-            };
-            task.execute(800);
-            return true;
-        }
-    }
+//    /**
+//     * 长按点击事件
+//     *
+//     * @author Administrator
+//     */
+//    class ProductItemLongListener implements AdapterView.OnItemLongClickListener {
+//        @Override
+//        public boolean onItemLongClick(AdapterView<?> parent, View view,
+//                                       final int position, long id) {
+//            int index = position + 1;
+//            String url = ConstantValue.HOST + "/MShop/ShoppingCart/RemoveItem";
+//            String postDate = "ItemIds=" + index;
+//
+//            //这是点击item向右移动删除的正确代码，可使用。
+//            TranslateAnimation ta = new TranslateAnimation(
+//                    Animation.RELATIVE_TO_SELF, 0,
+//                    Animation.RELATIVE_TO_SELF, 1.0f,
+//                    Animation.RELATIVE_TO_SELF, 0,
+//                    Animation.RELATIVE_TO_SELF, 0);
+//            ta.setDuration(800);
+//            view.startAnimation(ta);
+//
+//            DelayTask task = new DelayTask() {
+//                @Override
+//                protected void runOnUiThread() {
+//                    for (int i = 0; i < flags.length; i++) {
+//                        flags[i] = false;
+//                    }
+//                    flags[position] = true;
+//                }
+//            };
+//            task.execute(800);
+//            return true;
+//        }
+//    }
 
     void showLoginDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -601,52 +629,6 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
 ////        intent.putExtra("productlist", TempCI);
 ////        startActivity(intent);
 //    }
-
-    /**
-     * 删除清空商品
-     */
-    public void deleteProduct(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {// 无法取消对话框
-            public void onCancel(DialogInterface dialog) {
-                //loadHomeActivity();// 取消对话框，进入主界面
-                LogUtil.info(" 取消对话框");
-            }
-        });
-        builder.setMessage("您确定要清空购物车？");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                DbUtils db = DbUtils.create(getContext());
-                try {
-                    db.dropTable(Product.class);
-                    shopcarLayout.setVisibility(View.GONE);
-                    shopcar_null_text.setVisibility(View.VISIBLE);
-                    shopcar_toBuy_text.setVisibility(View.VISIBLE);
-                    shopcar_default_img.setVisibility(View.VISIBLE);
-                    headDeleteTV.setVisibility(View.GONE);
-                    shopcarBottomRel.setVisibility(View.GONE);
-                } catch (DbException e) {
-
-                    e.printStackTrace();
-                }
-
-                initShopCarNumber();
-                initTotalPrice();
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                LogUtil.info(" 回到界面");
-            }
-        });
-        builder.show();
-    }
-
-    /**
-     * 为了删除一个商品
-     */
-    public void deleteProduct() {
-    }
 
     @Override
     public boolean onBackPressedSupport() {

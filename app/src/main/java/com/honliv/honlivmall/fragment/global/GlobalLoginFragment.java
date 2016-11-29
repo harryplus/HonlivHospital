@@ -135,9 +135,9 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
 
     @Override
     public void updateView(UserInfo result) {
-        if (result != null && !TextUtils.isEmpty(result.getUserName())) {
+        if (result != null) {
             UserInfo userInfo2 = result;
-            showToast(userInfo2.toString());
+//            showToast(userInfo2.toString());
             GloableParams.USERID = userInfo2.getUserId();
             DbUtils db = DbUtils.create(getContext());
             try {
@@ -147,7 +147,7 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
                     Product dbproduct = null;
                     for (int i = 0; i < productlist.size(); i++) {
                         productlist.get(i).setUserId(GloableParams.USERID);
-                        //("openSkuStr","=",product.getOpenSkuStr())
+                        //("openSkuStr","=",product.getOpenSkuStr())     && !TextUtils.isEmpty(result.getUserName())
                         dbproduct = db.findFirst(Selector.from(Product.class).where("userId", "=", GloableParams.USERID).and("openSkuStr", "=", productlist.get(i).getOpenSkuStr()));
                         if (dbproduct != null) {
                             db.delete(dbproduct);
@@ -157,7 +157,8 @@ public class GlobalLoginFragment extends BaseFragment<GlobalLoginPresenter, Glob
                     }
                 }
                 if (fragment == null || position < 0) {
-                    ((MainActivity) getActivity()).onBackToFirstFragment();
+//                    ((MainActivity) getActivity()).onBackToFirstFragment();
+                    pop();
                 } else {
                     ((MainActivity) getActivity()).startAssignFragment(position, fragment);
                 }

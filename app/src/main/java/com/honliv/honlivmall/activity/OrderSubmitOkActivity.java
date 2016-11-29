@@ -4,6 +4,7 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -11,36 +12,117 @@ import android.widget.TextView;
 
 import com.gc.materialdesign.views.Button;
 import com.honliv.honlivmall.R;
+import com.honliv.honlivmall.base.CoreBaseActivity;
 import com.honliv.honlivmall.bean.OrderInfo;
 import com.honliv.honlivmall.task.UpdateOrderTask;
+
+import butterknife.BindView;
 
 /**
  * 订单提交成功
  *
  * @author Administrator
  */
-public class OrderSubmitOkActivity extends BaseActivity {
+public class OrderSubmitOkActivity extends CoreBaseActivity {
+    @BindView(R.id.orderid_value_text)
+     TextView orderIdTV;
+    @BindView(R.id.paymoney_value_text)
+     TextView paymoneyTV;
+    @BindView(R.id.paytype_value_text)
+     TextView payTypeTV;
+    @BindView(R.id.to_order_payment_text)
+     Button toPayTV;
+    @BindView(R.id.textOrderPhone)
+     TextView textOrderPhone;
+    @BindView(R.id.result)
+    TextView resultTV;
+    @BindView(R.id.result_detail)
+    TextView result_detail;
 
-    private static final String TAG = "OrderSubmitOkActivity";
-    private TextView orderIdTV;
-    private TextView paymoneyTV;
-    private TextView payTypeTV;
-    private Button toPayTV;
-    private TextView textOrderPhone;
-    private OrderInfo orderInfo;
-    private int result;
-    private TextView resultTV;
-    private TextView result_detail;
+    OrderInfo orderInfo;
+    int result;
 
-    @Override
-    protected void initCreate() {
-        setContentView(R.layout.activity_order_submit_ok);
-        initView();
 
-        initOrderInfo();
+    /**
+     * 继续购物
+     */
+    public void goShop(View view) {
+        Intent intent = new Intent(OrderSubmitOkActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.tran_pre_in, R.anim.tran_pre_out);// 上个
+        //overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);
     }
 
-    private void initOrderInfo() {
+    /**
+     * 查看订单
+     *
+     * @param view
+     */
+    public void watchOrder(View view) {
+//        Intent intent = new Intent(OrderSubmitOkActivity.this, MyOrderActivity.class);
+//        startActivity(intent);
+//        finish();
+//        overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);
+    }
+
+    /**
+     * 去支付
+     */
+    public void paymentOrder(View view) {
+        if (orderInfo == null) {
+            return;
+        }
+
+        showToPayDialog();
+    }
+
+     void showToPayDialog() {
+        Builder builder = new Builder(this);
+        builder.setOnCancelListener(new OnCancelListener() {// 无法取消对话框
+            public void onCancel(DialogInterface dialog) {
+                // loadHomeActivity();// 取消对话框，进入主界面
+//				LogUtil.info(" 取消对话框");
+            }
+        });
+        builder.setTitle("支付确定");
+        builder.setMessage("您确定要去支付吗？");
+        builder.setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+//                        WeiXinPayTask myTask = new WeiXinPayTask(OrderSubmitOkActivity.this, orderInfo);
+//                        myTask.execute();
+                        Intent intent = new Intent(OrderSubmitOkActivity.this, PayPassActivity.class);
+                        intent.putExtra("orderInfo", orderInfo);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);//下个
+                    }
+                });
+        builder.setNegativeButton("取消",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        builder.show();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Intent intent=new Intent(this,MainActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_order_submit_ok;
+    }
+
+    @Override
+    public void initView(Bundle savedInstanceState) {
         orderInfo = (OrderInfo) this.getIntent().getSerializableExtra("orderInfo");
         result = this.getIntent().getIntExtra("result", -100);
         if (orderInfo == null) {
@@ -82,91 +164,5 @@ public class OrderSubmitOkActivity extends BaseActivity {
         if (paymenttype.contains("货到") || all <= 0) {
             toPayTV.setVisibility(View.GONE);
         }
-    }
-
-    private void initView() {
-        // TODO Auto-generated method stub
-        orderIdTV = (TextView) findViewById(R.id.orderid_value_text);
-        paymoneyTV = (TextView) findViewById(R.id.paymoney_value_text);
-        payTypeTV = (TextView) findViewById(R.id.paytype_value_text);
-        resultTV = (TextView) findViewById(R.id.result);
-        result_detail = (TextView) findViewById(R.id.result_detail);
-
-        toPayTV = (Button) findViewById(R.id.to_order_payment_text);
-        toPayTV.setRippleSpeed(500);
-        textOrderPhone = (TextView) findViewById(R.id.textOrderPhone);
-    }
-
-    /**
-     * 继续购物
-     */
-    public void goShop(View view) {
-        Intent intent = new Intent(OrderSubmitOkActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-        overridePendingTransition(R.anim.tran_pre_in, R.anim.tran_pre_out);// 上个
-        //overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);
-    }
-
-    /**
-     * 查看订单
-     *
-     * @param view
-     */
-    public void watchOrder(View view) {
-//        Intent intent = new Intent(OrderSubmitOkActivity.this, MyOrderActivity.class);
-//        startActivity(intent);
-//        finish();
-//        overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);
-    }
-
-    /**
-     * 去支付
-     */
-    public void paymentOrder(View view) {
-        if (orderInfo == null) {
-            return;
-        }
-
-        showToPayDialog();
-    }
-
-    private void showToPayDialog() {
-        Builder builder = new Builder(this);
-        builder.setOnCancelListener(new OnCancelListener() {// 无法取消对话框
-            public void onCancel(DialogInterface dialog) {
-                // loadHomeActivity();// 取消对话框，进入主界面
-//				LogUtil.info(" 取消对话框");
-            }
-        });
-        builder.setTitle("支付确定");
-        builder.setMessage("您确定要去支付吗？");
-        builder.setPositiveButton("确定",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-//                        WeiXinPayTask myTask = new WeiXinPayTask(OrderSubmitOkActivity.this, orderInfo);
-//                        myTask.execute();
-                        intent = new Intent(OrderSubmitOkActivity.this, PayPassActivity.class);
-                        intent.putExtra("orderInfo", orderInfo);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.tran_next_in, R.anim.tran_next_out);//下个
-                    }
-                });
-        builder.setNegativeButton("取消",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-        builder.show();
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            Intent intent=new Intent(this,MainActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
     }
 }

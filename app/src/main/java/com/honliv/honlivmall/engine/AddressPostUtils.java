@@ -18,8 +18,8 @@ import rx.Observable;
  * Created by Rodin on 2016/11/22.
  */
 public class AddressPostUtils {
-    public static Observable<List<AddressInfo>> getServiceProductList() {
-        HashMap<String, Object> postMap = Utils.getBaseMap("ListAddressInfo");
+    public static Observable<List<AddressInfo>> addresslist() {
+        HashMap<String, Object> postMap = Utils.getBaseMap("addresslist");
         HashMap<String, Object> parames = new HashMap<>();
         parames.put("userId", GloableParams.USERID);
         parames.put("pageIndex", 1);
@@ -54,7 +54,7 @@ public class AddressPostUtils {
 //        }).compose(RxUtil.rxSchedulerHelper());
     }
 
-    public static Observable<List<AddressInfo>> getServiceSaveAddress(AddressInfo info) {
+    public static Observable<List<AddressInfo>> SaveAddress(AddressInfo info) {
         HashMap<String, Object> postMap = Utils.getBaseMap("SaveAddress");
         HashMap<String, Object> parames = new HashMap<>();
         parames.put("id", info.getId() + "");

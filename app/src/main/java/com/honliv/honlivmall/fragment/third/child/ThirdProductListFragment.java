@@ -89,6 +89,8 @@ public class ThirdProductListFragment extends BaseFragment<ThirdProductListPrese
         textRankPrice.setOnClickListener(this);
         textRankSale.setOnClickListener(this);
         backTv.setOnClickListener(this);
+
+        productList = new ArrayList<>();
     }
 
     @Override
@@ -101,7 +103,7 @@ public class ThirdProductListFragment extends BaseFragment<ThirdProductListPrese
         Bundle data = getArguments();
         cId = data.getInt("cId", -1);
         String cTitle = data.getString("cTitle");
-        currentProductList=new ArrayList<>();
+        currentProductList = new ArrayList<>();
 //       cId = this.getIntent().getIntExtra("cId", -1);
 //       String cTitle = this.getIntent().getStringExtra("cTitle");
         if (cTitle != null) {
@@ -145,14 +147,16 @@ public class ThirdProductListFragment extends BaseFragment<ThirdProductListPrese
     public void updateView(ProductListFilter result) {
         if (result != null) {
             ProductListFilter productLS = result;
-            productList = productLS.getProductlist();
-
+            productList=productLS.getProductlist();
+//            productList.clear();
+//            productList.addAll(productLS.getProductlist());
             if (isUpload) {
                 //加载更多
                 if (productList == null || productList.size() == 0) {
                     showToast("暂无更多内容");
                     mPullToRefreshView.setEnablePullLoadMoreDataStatus(false);
                 } else {
+                    currentProductList.clear();
                     currentProductList.addAll(productList);
                     adapter.notifyDataSetChanged();
                 }
@@ -163,7 +167,8 @@ public class ThirdProductListFragment extends BaseFragment<ThirdProductListPrese
                     mPullToRefreshView.setVisibility(View.GONE);
                 } else {
                     //有返回东西 ,解析出来数据，设置给屏幕
-                    currentProductList .addAll(productList);
+                    currentProductList.clear();
+                    currentProductList.addAll(productList);
                     mPullToRefreshView.setEnablePullLoadMoreDataStatus(true);
                     adapter.notifyDataSetChanged();
                     nData();

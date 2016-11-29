@@ -26,12 +26,12 @@ import me.yokeyword.fragmentation.SupportFragment;
 /**
  * Created by Rodin on 2016/10/26.
  */
-public class ThirdMainFragment extends BaseFragment<ThirdMainPresenter, ThirdMainModel> implements ThirdContract.ThirdMainView {
+public class ThirdMainFragment extends BaseFragment<ThirdMainPresenter, ThirdMainModel> implements ThirdContract.ThirdMainView, AdapterView.OnItemClickListener {
     @BindView(R.id.category1List)
     ListView category1List;
     ArrayList<Category> categorys;//一级分类.里面有所有的分类信息
     MyCategoryAdapter myCategoryAdapter;
-    MyCategoryItemClickListener myCategoryItemClickListener;
+//    MyCategoryItemClickListener myCategoryItemClickListener;
 
     public static ThirdMainFragment newInstance() {
         Bundle args = new Bundle();
@@ -61,33 +61,41 @@ public class ThirdMainFragment extends BaseFragment<ThirdMainPresenter, ThirdMai
     @Override
     public void updateView(List<Category> result) {
         if (result != null) {
+            category1List.setVisibility(View.VISIBLE);
             categorys.addAll(result);
             GloableParams.hasCategory = true;
             GloableParams.categoryInfos = categorys;
-            myCategoryItemClickListener.setData(categorys);
+//            myCategoryItemClickListener.setData(categorys);
             myCategoryAdapter.notifyDataSetChanged();
+        }else{
+
         }
     }
 
     // 初始化数据
     public void initData() {
-        if (GloableParams.hasCategory) {//已经联网访问过分类数据
-            categorys = GloableParams.categoryInfos;
-            if (categorys == null || categorys.size() == 0) {
-                mPresenter.getServiceCategoryList();
-            }
-        } else {
-            mPresenter.getServiceCategoryList();
-        }
-        if (myCategoryItemClickListener == null) {
-            myCategoryItemClickListener = new MyCategoryItemClickListener(this);
-        }
-        category1List.setOnItemClickListener(myCategoryItemClickListener);
+//        if (myCategoryItemClickListener == null) {
+//            myCategoryItemClickListener = new MyCategoryItemClickListener(this);
+//        }
+        category1List.setOnItemClickListener(this);
     }
 
     @Override
     public boolean onBackPressedSupport() {
         ((MainActivity) getActivity()).onBackToFirstFragment();
         return true;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Category category = categorys.get(position);
+        if (category.isHaschild()) {
+            Bundle data=new Bundle();
+            data.putSerializable("category", category);
+            start(ThirdCategoryFragment.newInstance(data));
+        } else {
+//            mContext.start(ThirdCategoryFragment.newInstance(data));
+//            intent = new Intent(mContext, ProductListActivity.class);
+        }
     }
 }

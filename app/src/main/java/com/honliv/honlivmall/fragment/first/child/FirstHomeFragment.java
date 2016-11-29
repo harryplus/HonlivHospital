@@ -1,5 +1,6 @@
 package com.honliv.honlivmall.fragment.first.child;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -7,26 +8,31 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.zxing.activity.CaptureActivity;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.activity.MainActivity;
 import com.honliv.honlivmall.adapter.BargainGridAdapter;
-import com.honliv.honlivmall.adapter.LikeGridAdapter;
+import com.honliv.honlivmall.adapter.BrandGridAdapter;
 import com.honliv.honlivmall.adapter.LimitGridAdapter;
 import com.honliv.honlivmall.adapter.MainPagerAdapter;
 import com.honliv.honlivmall.application.MyApplication;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.HomeBanner;
+import com.honliv.honlivmall.bean.HomeBrand;
 import com.honliv.honlivmall.bean.HomeInfo;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.contract.FirstContract;
 import com.honliv.honlivmall.fragment.second.child.SecondMainFragment;
+import com.honliv.honlivmall.listener.GVBrandItemListener;
 import com.honliv.honlivmall.listener.GVItemListener;
 import com.honliv.honlivmall.model.first.child.FirstHomeModel;
 import com.honliv.honlivmall.presenter.first.child.FirstHomePresenter;
 import com.honliv.honlivmall.util.ViewUtils;
 import com.honliv.honlivmall.view.MSGallery;
+import com.rd.PageIndicatorView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,31 +51,35 @@ import butterknife.BindView;
 public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHomeModel> implements View.OnClickListener, FirstContract.FirstHomeView {
     @BindView(R.id.viewPager)
     ViewPager viewPager;
+    @BindView(R.id.pageIndicatorView)
+    PageIndicatorView pageIndicatorView;
     @BindView(R.id.seach_keyword)
     Button seachkeywordET;
-    @BindView(R.id.limit)
-    MSGallery limit;
+    @BindView(R.id.marketing)
+    MSGallery marketing;
     @BindView(R.id.bargain)
     MSGallery bargain;
     @BindView(R.id.like)
     MSGallery like;
-    @BindView(R.id.more_limit)
-    TextView more_limit;
+    @BindView(R.id.more_marketing)
+    TextView more_marketing;
     @BindView(R.id.more_bargain)
     TextView more_bargain;
+    @BindView(R.id.searchImageButton)
+    ImageButton searchImageButton;
 
     private MainPagerAdapter viewPagerAdapter;
-    private LimitGridAdapter limitAdapter;
+    private LimitGridAdapter marketingAdapter;
     private BargainGridAdapter bargainAdapter;
-    private LikeGridAdapter likeAdapter;
-    private List<Product> limitproduct;
+    private BrandGridAdapter brandAdapter;
+    private List<Product> marketingProduct;
     private int currentItem = 0;
     private MyPagerTask myPagerTask;
     private Timer timer;
     private TimerTask task;
     private ScheduledExecutorService scheduledExecutor;
     private List<Product> bargainproduct;
-    private ArrayList<Product> likeProduct;
+    private ArrayList<HomeBrand> brandProduct;
     private long firstClick = 0;
 
     private Handler handler = new Handler() {
@@ -79,9 +89,9 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
             int resultNum = msg.what;
             if (resultNum == 20) {
                 try {
-                    for (int i = 0; i < limitproduct.size(); i++) {
-                        TextView timeTV = (TextView) limit.findViewWithTag(i);
-                        String dateStr = limitproduct.get(i).getLefttime();
+                    for (int i = 0; i < marketingProduct.size(); i++) {
+                        TextView timeTV = (TextView) marketing.findViewWithTag(i);
+                        String dateStr = marketingProduct.get(i).getLefttime();
                         if (timeTV != null) {
                             ViewUtils.updataTimeTV(timeTV, dateStr);
                         }
@@ -117,8 +127,10 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
         seachkeywordET.setOnClickListener(this);
-        more_limit.setOnClickListener(this);
+        more_marketing.setOnClickListener(this);
         more_bargain.setOnClickListener(this);
+        searchImageButton.setOnClickListener(this);
+        pageIndicatorView.setViewPager(viewPager);
     }
 
     @Override
@@ -129,7 +141,7 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
                 ((MainActivity)getActivity()).startAssignFragment(MainActivity.SECOND,SecondMainFragment.class);
                 break;
 
-            case R.id.more_limit:
+            case R.id.more_marketing:
                 FirstMarketingFragment marketingFragment = FirstMarketingFragment.newInstance();
                 start(marketingFragment);
                 break;
@@ -137,10 +149,10 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
                 FirstBargainFragment bargainFragment = FirstBargainFragment.newInstance();
                 start(bargainFragment);
                 break;
-//            case R.id.main_body_registrate_day:
-////                GlobalLoginFragment selectFragment1 = GlobalLoginFragment.newInstance();
-////                start(selectFragment1);
-//                break;
+            case R.id.searchImageButton:
+                Intent intent=new Intent(getActivity(), CaptureActivity.class);
+                startActivity(intent);
+                break;
 //            case R.id.main_body_registrate_recommend:
 ////                GlobalLoginFragment selectFragment2 = GlobalLoginFragment.newInstance();
 ////                start(selectFragment2);
@@ -184,24 +196,24 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
         scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
         viewPagerAdapter = new MainPagerAdapter(getContext());
         viewPager.setAdapter(viewPagerAdapter);
-        limitproduct = new ArrayList<>();
-        limitAdapter = new LimitGridAdapter(getContext(), limitproduct);
-        limit.setAdapter(limitAdapter);
+        marketingProduct = new ArrayList<>();
+        marketingAdapter = new LimitGridAdapter(getContext(), marketingProduct);
+        marketing.setAdapter(marketingAdapter);
         bargainproduct = new ArrayList<>();
         bargainAdapter = new BargainGridAdapter(getContext(), bargainproduct);
         bargain.setAdapter(bargainAdapter);
-        likeProduct = new ArrayList<>();
-        likeAdapter = new LikeGridAdapter(getContext(), likeProduct);
-        like.setAdapter(likeAdapter);
+        brandProduct = new ArrayList<>();
+        brandAdapter = new BrandGridAdapter(getContext(), brandProduct);
+        like.setAdapter(brandAdapter);
         mPresenter.getServiceHomeInfo("0");
         mPresenter.getServiceHomeMarketing();
 
         myPagerTask = new MyPagerTask();
         scheduledExecutor.scheduleAtFixedRate(myPagerTask, 5, 5,
                 TimeUnit.SECONDS);
-        limit.setOnItemClickListener(new GVItemListener(getContext(), this, mPresenter.mRxManager, limitproduct, true));
+        marketing.setOnItemClickListener(new GVItemListener(getContext(), this, mPresenter.mRxManager, marketingProduct, true));
         bargain.setOnItemClickListener(new GVItemListener(getContext(), this, mPresenter.mRxManager, bargainproduct, false));
-        like.setOnItemClickListener(new GVItemListener(getContext(), this, mPresenter.mRxManager, likeProduct, false));
+        like.setOnItemClickListener(new GVBrandItemListener(getContext(), this,  brandProduct, false));
     }
 
     @Override
@@ -216,9 +228,12 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
             if (cheapproductlist != null) {
                 bargainproduct.addAll(cheapproductlist);
                 bargainAdapter.notifyDataSetChanged();
-
-                likeAdapter.addAll(cheapproductlist);
-                likeAdapter.notifyDataSetChanged();
+                bargain.setSelection(100 * bargainproduct.size() + 1);
+            }
+            List<HomeBrand> brandlist = info.getBrandlist();
+            if (brandlist != null) {
+                brandAdapter.addAll(brandlist);
+                brandAdapter.notifyDataSetChanged();
             }
         }
     }
@@ -226,8 +241,9 @@ public class FirstHomeFragment extends BaseFragment<FirstHomePresenter, FirstHom
     @Override
     public void updataHomeMarketing(List<Product> result) {
         if (result != null) {
-            limitproduct.addAll(result);
-            limitAdapter.notifyDataSetChanged();
+            marketingProduct.addAll(result);
+            marketingAdapter.notifyDataSetChanged();
+            marketing.setSelection(100 * marketingProduct.size() + 1);
             initTimer();
         }
     }

@@ -5,14 +5,28 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-    <com.gc.materialdesign.views.ButtonRectangle
-        style="@style/buttom"
+    <!-- <com.gc.materialdesign.views.ButtonRectangle
+         android:id="@+id/btn_confirm_pay"
+         style="@style/buttom"
+         android:layout_alignParentBottom="true"
+         android:background="@color/button_blue"
+         android:padding="10dp"
+         android:text="确认"
+         android:textColor="#ffffff" />-->
+    <TextView
         android:id="@+id/btn_confirm_pay"
+        style="@style/style_17_FFFFFF_BOLD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/button_blue"
-        android:padding="10dp"
-        android:text="确认"
-        android:textColor="#ffffff" />
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button_long"
+        android:gravity="center"
+        android:text="确认" />
 
 
     <LinearLayout
@@ -64,6 +78,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:dividerPadding="10dp"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -88,13 +103,13 @@
 
                 <com.honliv.honlivmall.view.MyListView
                     android:id="@+id/gridview_paytype"
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
                     android:background="@color/background_line_gray" />
 
                 <RelativeLayout
@@ -129,40 +144,51 @@
                            android:numColumns="2"
                            android:padding="5dp"
                            android:verticalSpacing="5dp" />-->
-
-                <RelativeLayout
-                    android:id="@+id/layout_send"
+                <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/item_bg_dialog"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp"
+                    app:contentPadding="8dp">
 
-                    <ImageView
-                        android:id="@+id/icon"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:id="@+id/layout_send"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/icon_hlsend" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@id/icon"
-                        android:text="@string/text_hxt_send" />
+                        <ImageView
+                            android:id="@+id/icon"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/icon_hlsend" />
 
-                    <CheckBox
-                        android:id="@+id/radiobutton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:clickable="false"
-                        android:focusable="false"  />
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@id/icon"
+                            android:text="@string/text_hxt_send" />
+
+                        <CheckBox
+                            android:id="@+id/radiobutton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:clickable="false"
+                            android:focusable="false" />
+                    </RelativeLayout>
+                </android.support.v7.widget.CardView>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

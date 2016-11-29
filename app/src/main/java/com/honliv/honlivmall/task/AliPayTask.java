@@ -10,6 +10,7 @@ import com.alipay.sdk.app.PayTask;
 import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
+import com.honliv.honlivmall.activity.OrderSubmitOkActivity;
 import com.honliv.honlivmall.bean.OrderInfo;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.util.PayResult;
@@ -109,12 +110,12 @@ public class AliPayTask extends AsyncTask<OrderInfo, Void, String> {
             }
         }
         GloableParams.CurrentOrder = orderInfo;
-//        Intent intent = new Intent(mActivity, OrderSubmitOkActivity.class);
-//        intent.putExtra("orderInfo", orderInfo);
+        Intent intent = new Intent(mActivity, OrderSubmitOkActivity.class);
+        intent.putExtra("orderInfo", orderInfo);
 
-//        intent.putExtra("result", result);
-//        mActivity.startActivity(intent);
-//        mActivity.finish();
+        intent.putExtra("result", result);
+        mActivity.startActivity(intent);
+        mActivity.finish();
     }
 
     /**

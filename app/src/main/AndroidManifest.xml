@@ -74,11 +74,12 @@
             </intent-filter>
         </activity>
 
-
-        <activity android:name="com.honliv.honlivmall.activity.MainActivity" />
+        <activity
+            android:name="com.honliv.honlivmall.activity.MainActivity"
+            />
         <activity android:name="com.honliv.honlivmall.activity.OrderSubmitOkActivity" />
-        <activity android:name="com.honliv.honlivmall.activity.PaymentCenterActivity" />
         <activity android:name="com.honliv.honlivmall.activity.PayPassActivity" />
+        <activity android:name="com.google.zxing.activity.CaptureActivity" />
     </application>
 
     <!-- 支付结果页 -->

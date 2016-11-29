@@ -1,15 +1,20 @@
 package com.honliv.honlivmall.contract;
 
+import com.facebook.datasource.DataSource;
 import com.honliv.honlivmall.base.CoreBaseView;
 import com.honliv.honlivmall.bean.AddressInfo;
+import com.honliv.honlivmall.bean.CouponInfo;
 import com.honliv.honlivmall.bean.DefaultParas;
 import com.honliv.honlivmall.bean.GifInfo;
 import com.honliv.honlivmall.bean.PayShip;
+import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.model.CoreBaseModel;
 import com.honliv.honlivmall.presenter.CoreBasePresenter;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import rx.Observable;
@@ -28,15 +33,17 @@ public interface ActivityContract {
     }
 
     interface PaymentCenterModel extends CoreBaseModel {
-        Observable<Float> getServiceTotalPrice(int proSaleId, int groupBuyId, List<JSONObject> productList);
+        Observable<Float> getServiceTotalPrice(int proSaleId, int groupBuyId, List<HashMap<String,Object>> productList);
 
-        Observable<Float> getServiceFreight(int id, int shipId, List<JSONObject> productJsobList, float i);
+        Observable<Float> getServiceFreight(int id, int shipId, List<HashMap<String,Object>> productJsobList, float i);
 
-        Observable<GifInfo> getServiceGifInfo(List<JSONObject> productList, float couponPrice);
+        Observable<GifInfo> getServiceGifInfo(List<HashMap<String,Object>> productList, float couponPrice);
 
         Observable<List<AddressInfo>> getServiceAddressList(int arg, int arg2);
 
         Observable<List<PayShip>> getServicePayList();
+
+        Observable<CouponInfo> GetCunpons(int userid, List<HashMap<String,Object>> productJsobList);
     }
 
     interface FlashView extends CoreBaseView {
@@ -58,18 +65,22 @@ public interface ActivityContract {
         void updateServiceAddressList(List<AddressInfo> result);
 
         void updateServicePayList(List<PayShip> result);
+
+        void updateCunPonListInfos(CouponInfo result);
     }
 
     abstract class PaymentCenterPresenter extends CoreBasePresenter<PaymentCenterModel, PaymentCenterView> {
-        public abstract void getServiceTotalPrice(int proSaleId, int groupBuyId, List<JSONObject> productList);
+        public abstract void getServiceTotalPrice(int proSaleId, int groupBuyId, List<HashMap<String,Object>> productList);
 
-        public abstract void getServiceFreight(int id, int shipId, List<JSONObject> productJsobList, int i);
+        public abstract void getServiceFreight(int id, int shipId, List<HashMap<String,Object>> productJsobList, int i);
 
-        public abstract void getServiceGifInfo(List<JSONObject> productList, float couponPrice);
+        public abstract void getServiceGifInfo(List<HashMap<String,Object>> productList, float couponPrice);
 
         public abstract void getServiceAddressList(int arg, int arg2);
 
         public abstract void getServicePayList();
+
+        public abstract void getCunPonListInfos(int userid, List<HashMap<String,Object>> productJsobList, ArrayList<Product> currentProductList);
     }
 
     abstract class FlashPresenter extends CoreBasePresenter<FlashModel, FlashView> {

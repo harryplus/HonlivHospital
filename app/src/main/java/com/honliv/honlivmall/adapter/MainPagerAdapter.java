@@ -66,9 +66,9 @@ public class MainPagerAdapter extends PagerAdapter {
         View view = viewList.get(position);
         HomeBanner homeBanner = viewpaperData.get(position);
         ImageView imageview = (ImageView) view.findViewById(R.id.imageview);
-        TextView describe = (TextView) view.findViewById(R.id.describe);
+//        TextView describe = (TextView) view.findViewById(R.id.describe);
         Glide.with(mContext).load(ConstantValue.IMAGE_URL + homeBanner.getPic()).crossFade().placeholder(R.mipmap.picture_no).into(imageview);
-        describe.setText(homeBanner.getTitle());
+//        describe.setText(homeBanner.getTitle());
         container.addView(view);
         return view;
     }

@@ -90,9 +90,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/product_detail_shop_button"
-                android:clickable="true"
                 android:gravity="center"
-                android:onClick="buyItNow"
                 android:text="立即购买"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -430,13 +428,18 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp">
 
-                <TextView
+               <!-- <TextView
                     android:id="@+id/productHtmlTV"
                     style="@style/style_15_666666"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="详情加载中..." />
+                    android:text="详情加载中..." />-->
+
+                <im.delight.android.webview.AdvancedWebView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/webview"/>
             </RelativeLayout>
         </LinearLayout>
     </com.honliv.honlivmall.view.ScrollViewForViewPager>

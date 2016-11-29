@@ -1,10 +1,9 @@
 package com.honliv.honlivmall.fragment.global;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,9 +16,7 @@ import android.text.Selection;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,13 +28,11 @@ import android.widget.TextView;
 import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
-import com.honliv.honlivmall.activity.PaymentCenterActivity;
 import com.honliv.honlivmall.adapter.ProductViewPagerAdapter;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.Product;
 import com.honliv.honlivmall.bean.ProductProperty;
 import com.honliv.honlivmall.bean.SkuData;
-import com.honliv.honlivmall.contract.FirstContract;
 import com.honliv.honlivmall.contract.GlobalContract;
 import com.honliv.honlivmall.listener.ProductTextWatcher;
 import com.honliv.honlivmall.model.global.GlobalProductDetailModel;
@@ -53,7 +48,6 @@ import com.rd.PageIndicatorView;
 import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.XMLReader;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -63,27 +57,22 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import im.delight.android.webview.AdvancedWebView;
 
 /**
  * Created by Rodin on 2016/10/29.
  */
-public class GlobalProductDetailFragment extends BaseFragment<GlobalProductDetailPresenter, GlobalProductDetailModel> implements SwipeRefreshLayout.OnRefreshListener, GlobalContract.GlobalProductDetailView, View.OnClickListener {
+public class GlobalProductDetailFragment extends BaseFragment<GlobalProductDetailPresenter, GlobalProductDetailModel> implements SwipeRefreshLayout.OnRefreshListener, GlobalContract.GlobalProductDetailView, View.OnClickListener, AdvancedWebView.Listener {
     @BindView(R.id.prodNumValue)
     EditText prodNumValue;
     @BindView(R.id.viewPager)
     ViewPager productViewPager;
-    @BindView(R.id.productHtmlTV)
-    TextView productHtmlTV; //产品的html富文本描述
+    //    @BindView(R.id.productHtmlTV)
+//    TextView productHtmlTV; //产品的html富文本描述
+    @BindView(R.id.webview)
+    AdvancedWebView mWebView;
     @BindView(R.id.ProductHtmlRL)
     RelativeLayout productHtmlRL;//产品的html富文本描述
-    //    @BindView(R.id.textProductSize)
-//    TextView textProductSize;
-//    @BindView(R.id.clothesSizeValue)
-//    TextView clothesSizeValueTV;//产品尺寸
-//    @BindView(R.id.textProductColor)
-//    TextView textProductColor;
-//    @BindView(R.id.textProductColorValue)
-//    TextView clothesColorValueTV;//产品颜色
     @BindView(R.id.textProductNameValue)
     TextView textProductNameValue;//商品名字
     @BindView(R.id.textMarketPriceValue)
@@ -92,30 +81,18 @@ public class GlobalProductDetailFragment extends BaseFragment<GlobalProductDetai
     TextView textPriceValue;//售出价
     @BindView(R.id.textProductCommentNum)
     TextView textProductCommentNum; //评论数
-    //    @BindView(R.id.prod_property)
-//    RelativeLayout prod_property;//商品属性控件一
-//    @BindView(R.id.prod_property2)
-//    RelativeLayout prod_property2;//商品属性控件二
     @BindView(R.id.num_layout)
     LinearLayout num_layout;
     @BindView(R.id.priceLayout)
     RelativeLayout priceLayout;
     @BindView(R.id.marketing_product_time)
     TextView marketingProductTimeTV;//倒记时
-    //    @BindView(R.id.textProductProperty3Key)
-//    TextView textProductProperty3Key; //三个四个属性选择
-//    @BindView(R.id.textProductProperty3Value)
-//    TextView textProductProperty3Value;
-//    @BindView(R.id.textProductProperty4Key)
-//    TextView textProductProperty4Key;
     @BindView(R.id.textPrice)
     TextView textPrice;
     @BindView(R.id.subNum_BT)
     Button subNumBT;
     @BindView(R.id.add_Num_BT)
     Button addNumBT;
-    //    @BindView(R.id.textProductProperty4Value)
-//    TextView textProductProperty4Value;
     @BindView(R.id.shopcar_prdtoFav_text)
     TextView addFavTV;
     @BindView(R.id.textPutIntoShopcar)
@@ -195,7 +172,8 @@ public class GlobalProductDetailFragment extends BaseFragment<GlobalProductDetai
 
     @Override
     public void showError(String msg) {
-
+        showLog("---" + msg);
+//        showToast(msg);
     }
 
     @Override
@@ -208,6 +186,7 @@ public class GlobalProductDetailFragment extends BaseFragment<GlobalProductDetai
     public void initData() {
         Bundle bundle = getArguments();
         pId = bundle.getInt("pId", -1);
+//        showToast("pId--" + pId);
         scanning = bundle.getBoolean("scanning", false);
         privilegeProduct = (Product) bundle.getSerializable("privilegeProduct");
 //        pId = this.getIntent().getIntExtra("pId", -1);
@@ -277,7 +256,8 @@ public class GlobalProductDetailFragment extends BaseFragment<GlobalProductDetai
             initproductHtmlTV();
         } else {
             productHtmlRL.setVisibility(View.GONE);
-            productHtmlTV.setVisibility(View.GONE);
+            mWebView.setVisibility(View.GONE);
+//            productHtmlTV.setVisibility(View.GONE);
         }
         SharedPreferences.Editor editor = sp.edit();//初始化
         editor.putInt("clothesColorWhich", 0);
@@ -367,28 +347,9 @@ public class GlobalProductDetailFragment extends BaseFragment<GlobalProductDetai
         htmlStr = product.getXmltext();
         htmlStr = htmlStr.replaceAll("/Upload", ConstantValue.IMAGE_URL + "/Upload");
         htmlStr = htmlStr.replaceAll("/ueditor/net/upload", ConstantValue.IMAGE_URL + "/ueditor/net/upload");
-        new Thread() {
-            public void run() {
-                result = Html.fromHtml(htmlStr, imgGetter, tagHandler);//imgGetter  imageGetter
-                Message msg = Message.obtain();
-                msg.what = 20;
-                xmlHandler.sendMessage(msg);
-            }
-
-        }.start();
+        mWebView.setListener(getActivity(), this);
+        mWebView.loadHtml(htmlStr);
     }
-
-    Handler xmlHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 20) {
-                productHtmlTV.setMovementMethod(LinkMovementMethod.getInstance());
-                productHtmlTV.setText(result);
-            }
-        }
-    };
 
     //处理未知标签,通常是系统默认不能处理的标签
     final Html.TagHandler tagHandler = new Html.TagHandler() {
@@ -422,34 +383,6 @@ public class GlobalProductDetailFragment extends BaseFragment<GlobalProductDetai
             System.out.println("opening:" + opening + ",tag:" + tag + ",output:" + output);
         }
     };
-
-
-    Html.ImageGetter imgGetter = new Html.ImageGetter() {
-        public Drawable getDrawable(String source) {
-            Drawable drawable = null;
-            URL url;
-            try {
-                url = new URL(source);   //获取网路图片
-                drawable = Drawable.createFromStream(url.openStream(), "");
-            } catch (Exception e) {
-                return null;
-            }
-            if (drawable == null) { ///如果url没有图片资源，返回
-                return drawable;
-            }
-
-            int width = drawable.getIntrinsicWidth() * 6;
-            int height = drawable.getIntrinsicHeight() * 6;
-
-            if (width > GloableParams.WINDOW_WIDTH) {
-                height = (GloableParams.WINDOW_WIDTH * height) / width;
-                width = GloableParams.WINDOW_WIDTH;
-            }
-            drawable.setBounds(0, 0, width - 36, height);
-            return drawable;
-        }
-    };
-
 
     boolean CheckNum(DbUtils db, int productNumber) throws DbException {
         Product dbproduct = null;
@@ -645,9 +578,11 @@ public class GlobalProductDetailFragment extends BaseFragment<GlobalProductDetai
     @Override
     public void updateView(Product result) {
         if (result != null) {
-            product = (Product) result;
+            product = result;
             if (product != null) {
                 //有返回东西 ,解析出来数据，设置给屏幕
+//                showToast(new Gson().toJson(product).toString());
+//                showLog("-----" + new Gson().toJson(product).toString());
                 nDate();
             }
         } else {
@@ -874,15 +809,18 @@ public class GlobalProductDetailFragment extends BaseFragment<GlobalProductDetai
                 try {
                     if (CheckNum(db, productNumber)) return;
 
-                    Intent intent = new Intent();
                     ArrayList<Product> pds = new ArrayList<Product>();
                     product.setNumber(productNumber);
-
                     pds.add(product);
-                    intent.setClass(getContext(), PaymentCenterActivity.class);
-                    Log.i(TAG, pds.toString());
-                    intent.putExtra("productlist", pds);
-                    startActivity(intent);
+//                    Intent intent = new Intent();
+//
+//                    intent.setClass(getContext(), PaymentCenterActivity.class);
+//                    Log.i(TAG, pds.toString());
+//                    intent.putExtra("productlist", pds);
+//                    startActivity(intent);
+                    Bundle data=new Bundle();
+                    data.putSerializable("productlist", pds);
+                    start(GlobalPaymentCenterFragment.newInstance(data));
                 } catch (DbException e) {
                     e.printStackTrace();
                     try {
@@ -909,7 +847,8 @@ public class GlobalProductDetailFragment extends BaseFragment<GlobalProductDetai
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            productViewPager.setCurrentItem(currentItem);
+            if (productViewPager != null)
+                productViewPager.setCurrentItem(currentItem);
         }
     };
 
@@ -980,4 +919,25 @@ public class GlobalProductDetailFragment extends BaseFragment<GlobalProductDetai
         }
         super.onDestroy();
     }
+
+    @Override
+    public void onPageStarted(String url, Bitmap favicon) {
+    }
+
+    @Override
+    public void onPageFinished(String url) {
+    }
+
+    @Override
+    public void onPageError(int errorCode, String description, String failingUrl) {
+    }
+
+    @Override
+    public void onDownloadRequested(String url, String suggestedFilename, String mimeType, long contentLength, String contentDisposition, String userAgent) {
+    }
+
+    @Override
+    public void onExternalPageRequest(String url) {
+    }
+
 }

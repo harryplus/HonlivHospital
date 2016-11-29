@@ -13,7 +13,7 @@ import rx.Observable;
  */
 public class FifthFavoriteModel implements FifthContract.FifthFavoriteModel {
     @Override
-    public Observable<List<Product>> updateServicePassword(int userid, int start, int i) {
+    public Observable<List<Product>> updateServiceFavInfo(int userid, int start, int i) {
         Observable<List<Product>> result = UserPostUtils.MyFavorList(userid,start,i);
         return result;
     }

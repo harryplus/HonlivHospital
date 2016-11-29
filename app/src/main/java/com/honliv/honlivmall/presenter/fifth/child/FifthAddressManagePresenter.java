@@ -8,13 +8,8 @@ import com.honliv.honlivmall.contract.FifthContract;
 public class FifthAddressManagePresenter extends FifthContract.FifthAddressManagePresenter {
     @Override
     public void onStart() {
-
-    }
-
-    @Override
-    public void getServiceProductList() {
-        mRxManager.add(mModel.getServiceProductList().subscribe(result->{
-            mView.updateProductList(result);
+        mRxManager.add(mModel.getServiceAddressList().subscribe(result->{
+            mView.updateServiceAddressList(result);
         },e->mView.showError(e.toString())));
     }
 }

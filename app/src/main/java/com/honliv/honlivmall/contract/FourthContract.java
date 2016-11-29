@@ -25,8 +25,6 @@ public interface FourthContract {
 
     interface FourthMainView extends CoreBaseView {
         void updataAllShopCart(ArrayList<Product> result);
-
-        void updateStart();
     }
 
     interface FourthLoginView extends CoreBaseView {

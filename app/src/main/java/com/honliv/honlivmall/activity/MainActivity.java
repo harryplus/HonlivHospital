@@ -134,7 +134,6 @@ public class MainActivity extends CoreBaseActivity implements BaseLazyMainFragme
                     return;
                 }
 
-
                 // 这里推荐使用EventBus来实现 -> 解耦
 //                if (count == 1) {
 //                    // 在FirstPagerFragment中接收, 因为是嵌套的孙子Fragment 所以用EventBus比较方便
@@ -143,8 +142,14 @@ public class MainActivity extends CoreBaseActivity implements BaseLazyMainFragme
 //                }
             }
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
 
         Bundle bundle = getIntent().getExtras();
+        showToast("onRestart main  "+(bundle==null));
         if (bundle != null) {
             Class fragment = (Class) bundle.getSerializable("fragment");
             int position = bundle.getInt("position");
@@ -152,7 +157,7 @@ public class MainActivity extends CoreBaseActivity implements BaseLazyMainFragme
         }
     }
 
-    public void startAssignFragment(int position, Class<SecondMainFragment> fragmentClass) {
+    public void startAssignFragment(int position, Class fragmentClass) {
         mBottomBar.setCurrentItem(position);
         SupportFragment currentFragment = mFragments[position];
         currentFragment.popToChild(fragmentClass, false);

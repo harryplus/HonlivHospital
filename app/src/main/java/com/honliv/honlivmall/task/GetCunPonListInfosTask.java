@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,11 +18,11 @@ import java.util.List;
  */
 public class GetCunPonListInfosTask extends AsyncTask<Integer, Void, Object> {
 
-    private List<JSONObject> productJsobList;
+    private List<HashMap<String,Object>> productJsobList;
     private ArrayList<Product> currentProductList;
     private int userID;
 
-    public GetCunPonListInfosTask(int userID, List<JSONObject> productJsobList, ArrayList<Product> currentProductList) {
+    public GetCunPonListInfosTask(int userID, List<HashMap<String,Object>> productJsobList, ArrayList<Product> currentProductList) {
         this.userID = userID;
         this.productJsobList = productJsobList;
         this.currentProductList = currentProductList;

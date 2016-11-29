@@ -37,9 +37,9 @@ public abstract class BaseFragment<T extends CoreBasePresenter, E extends CoreBa
     protected Activity mActivity;
     Unbinder binder;
 
-    protected void initToolbar(Toolbar toolbar,String title,boolean flag) {
+    protected void initToolbar(Toolbar toolbar, String title, boolean flag) {
         toolbar.setTitle(title);
-        if(flag){
+        if (flag) {
             toolbar.setNavigationIcon(R.drawable.back_btn);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
@@ -47,6 +47,14 @@ public abstract class BaseFragment<T extends CoreBasePresenter, E extends CoreBa
                     pop();
                 }
             });
+        }
+    }
+
+    protected void setToolbarVisity(Toolbar toolbar, boolean flag) {
+        if (flag) {
+            toolbar.setVisibility(View.VISIBLE);
+        } else {
+            toolbar.setVisibility(View.GONE);
         }
     }
 
@@ -72,8 +80,10 @@ public abstract class BaseFragment<T extends CoreBasePresenter, E extends CoreBa
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        sp = getContext().getSharedPreferences("config", getContext().MODE_PRIVATE);
-
+        if (getContext() != null) {
+            sp = getContext().getSharedPreferences("config", getContext().MODE_PRIVATE);
+        }
+//        showToast("getContext--" + (getContext() == null));
         mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         TAG = getClass().getSimpleName();
         binder = ButterKnife.bind(this, view);

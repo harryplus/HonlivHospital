@@ -3,6 +3,7 @@ package com.honliv.honlivmall.presenter.third.child;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.contract.ThirdContract;
 
 /**
@@ -13,7 +14,19 @@ public class ThirdMainPresenter extends ThirdContract.ThirdMainPresenter {
 
     @Override
     public void onStart() {
-
+        Log.i(TAG,"onStart");
+        if (GloableParams.hasCategory) {//已经联网访问过分类数据
+            if (GloableParams.categoryInfos == null || GloableParams.categoryInfos.size() == 0) {
+               getServiceCategoryList();
+                Log.i(TAG,"已经但没有");
+            }else{
+                Log.i(TAG,"已经");
+                mView.updateView(GloableParams.categoryInfos);
+            }
+        } else {
+            Log.i(TAG,"没有");
+            getServiceCategoryList();
+        }
     }
 
     @Override

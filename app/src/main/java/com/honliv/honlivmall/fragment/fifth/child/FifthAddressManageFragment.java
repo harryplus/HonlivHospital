@@ -9,15 +9,15 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.AddressInfo;
 import com.honliv.honlivmall.contract.FifthContract;
+import com.honliv.honlivmall.fragment.global.GlobalAddAddressFragment;
 import com.honliv.honlivmall.model.fifth.child.FifthAddressManageModel;
 import com.honliv.honlivmall.presenter.fifth.child.FifthAddressManagePresenter;
-import com.honliv.honlivmall.util.LogUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,7 +25,7 @@ import butterknife.BindView;
 /**
  * Created by Rodin on 2016/11/16.
  */
-public class FifthAddressManageFragment extends BaseFragment<FifthAddressManagePresenter, FifthAddressManageModel> implements FifthContract.FifthAddressManageView, View.OnClickListener {
+public class FifthAddressManageFragment extends BaseFragment<FifthAddressManagePresenter, FifthAddressManageModel> implements FifthContract.FifthAddressManageView, View.OnClickListener, AdapterView.OnItemLongClickListener {
 
     List<AddressInfo> addressList;
     @BindView(R.id.address_manage_list)
@@ -62,8 +62,10 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
      */
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
+        addressList = new ArrayList<>();
         address_title2.setVisibility(View.GONE);
         head_back_text.setOnClickListener(this);
+        addressListAddTV.setOnClickListener(this);
     }
 
     @Override
@@ -82,6 +84,9 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
             case R.id.head_back_text:
                 pop();
                 break;
+            case R.id.address_list_add_text:
+                start(GlobalAddAddressFragment.newInstance(new Bundle()));
+                break;
         }
     }
 
@@ -94,15 +99,14 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
     public void initData() {
         addressAdapter = new AddressAdapter();
         addressLV.setAdapter(addressAdapter);
-//		addressLV.setOnItemLongClickListener(new AddressItemLongClickListener());
+        addressLV.setOnItemLongClickListener(this);
         addressLV.setOnItemClickListener(new AddressItemClickListener());
-        mPresenter.getServiceProductList();
     }
 
     AddressInfo addressInfo;
 
     @Override
-    public void updateProductList(List<AddressInfo> result) {
+    public void updateServiceAddressList(List<AddressInfo> result) {
         if (result != null) {
             addressList = result;
             if (addressList.size() == 0) {
@@ -116,6 +120,11 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
         } else {
             showToast("服务器忙，请稍后重试！！！");
         }
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        return false;
     }
 
     class AddressAdapter extends BaseAdapter {
@@ -173,9 +182,9 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-            Bundle data=new Bundle();
+            Bundle data = new Bundle();
             data.putSerializable("addressInfo", addressList.get(position));
-            start(FifthAddAddressFragment.newInstance(data));
+            start(GlobalAddAddressFragment.newInstance(data));
 //            intent = new Intent();
 //            intent.putExtra("addressInfo", addressList.get(position));
 //            LogUtil.info("addressInfo   返回前==="+addressList.get(position));
@@ -186,12 +195,12 @@ public class FifthAddressManageFragment extends BaseFragment<FifthAddressManageP
         }
     }
 
-    class AddressItemLongClickListener implements AdapterView.OnItemLongClickListener {
-
-        @Override
-        public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                       int position, long id) {
-            return true;
-        }
-    }
+//    class AddressItemLongClickListener implements AdapterView.OnItemLongClickListener {
+//
+//        @Override
+//        public boolean onItemLongClick(AdapterView<?> parent, View view,
+//                                       int position, long id) {
+//            return true;
+//        }
+//    }
 }

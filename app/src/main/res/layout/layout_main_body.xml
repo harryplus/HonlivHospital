@@ -24,8 +24,28 @@
                 android:textColor="@color/background_red"
                 android:textSize="25sp" />
 
+            <!--   <View
+                   android:layout_width="60dp"
+                   android:layout_height="1dp"
+                   android:layout_centerVertical="true"
+                   android:layout_marginEnd="20dp"
+                   android:layout_marginRight="20dp"
+                   android:layout_toLeftOf="@id/centerText1"
+                   android:layout_toStartOf="@id/centerText1"
+                   android:background="#90929E" />
+
+               <View
+                   android:layout_width="60dp"
+                   android:layout_height="1dp"
+                   android:layout_centerVertical="true"
+                   android:layout_marginLeft="20dp"
+                   android:layout_marginStart="20dp"
+                   android:layout_toEndOf="@id/centerText1"
+                   android:layout_toRightOf="@id/centerText1"
+                   android:background="#90929E" />-->
+
             <TextView
-                android:id="@+id/more_limit"
+                android:id="@+id/more_marketing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -37,11 +57,32 @@
         </RelativeLayout>
 
         <com.honliv.honlivmall.view.MSGallery
-            android:id="@+id/limit"
+            android:id="@+id/marketing"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:spacing="5dip" />
+        <!--
+                <com.honliv.honlivmall.view.MyGridView
+                    android:id="@+id/limit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:horizontalSpacing="8dp"
+                    android:numColumns="2"
+                    android:orientation="vertical"
+                    android:verticalSpacing="8dp" />
+        -->
     </LinearLayout>
+
+    <!--  <include
+          layout="@layout/activity_home_srcollview"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="8dp"
+          android:layout_marginRight="8dp"
+          android:cacheColorHint="#00000000"
+          android:fadingEdgeLength="1.0dip"
+          android:footerDividersEnabled="false"
+          android:headerDividersEnabled="true" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,6 +102,23 @@
                 android:text="@string/text_bargain"
                 android:textSize="25sp" />
 
+            <!--  <View
+                  android:layout_width="60dp"
+                  android:layout_height="1dp"
+                  android:layout_centerVertical="true"
+                  android:layout_marginEnd="20dp"
+                  android:layout_marginRight="20dp"
+                  android:layout_toLeftOf="@id/centerText2"
+                  android:background="#90929E" />
+
+              <View
+                  android:layout_width="60dp"
+                  android:layout_height="1dp"
+                  android:layout_centerVertical="true"
+                  android:layout_marginLeft="20dp"
+                  android:layout_toRightOf="@id/centerText2"
+                  android:background="#90929E" />-->
+
             <TextView
                 android:id="@+id/more_bargain"
                 android:layout_width="wrap_content"
@@ -76,6 +134,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:spacing="5dip" />
+        <!--  <com.honliv.honlivmall.view.MyGridView
+              android:id="@+id/bargain"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:horizontalSpacing="8dp"
+              android:numColumns="2"
+              android:orientation="vertical"
+              android:verticalSpacing="8dp" />-->
     </LinearLayout>
 
     <RelativeLayout
@@ -88,8 +154,24 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:text="@string/text_like"
+            android:text="@string/text_brand"
             android:textSize="25sp" />
+        <!--
+                <View
+                    android:layout_width="90dp"
+                    android:layout_height="1dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toLeftOf="@id/centerText3"
+                    android:background="#90929E" />
+
+                <View
+                    android:layout_width="90dp"
+                    android:layout_height="1dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/centerText3"
+                    android:background="#90929E" />-->
     </RelativeLayout>
 
     <com.honliv.honlivmall.view.MSGallery
@@ -97,4 +179,38 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:spacing="5dip" />
+    <!--    <com.honliv.honlivmall.view.MyGridView
+            android:id="@+id/like"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="8dp"
+            android:numColumns="2"
+            android:orientation="vertical"
+            android:verticalSpacing="8dp" />-->
+
+    <!-- <RelativeLayout
+         android:id="@+id/loadmorelayout"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="5.0dp"
+         android:gravity="center"
+         android:visibility="gone">
+
+         <ProgressBar
+             android:id="@+id/loadmore"
+             style="?android:attr/progressBarStyleLarge"
+             android:layout_width="23dp"
+             android:layout_height="23dp"
+             android:layout_marginRight="10dp"
+             android:indeterminate="false" />
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="5.0dp"
+             android:layout_toRightOf="@id/loadmore"
+             android:gravity="center_vertical"
+             android:text="@string/loadmore"
+             android:textSize="15.0dp" />
+     </RelativeLayout>-->
 </LinearLayout>

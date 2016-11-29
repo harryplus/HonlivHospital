@@ -51,6 +51,10 @@ public interface MainApi {
     @POST("shop.aspx")
     Observable<BaseBean<BaseInfo<Integer>>> Integer(@Body HashMap<String, Object> map);
 
+    @Headers("Content-Type: application/json")
+    @POST("shop.aspx")
+    Observable<BaseBean<BaseInfo<CouponInfo>>> CouponInfo(@Body HashMap<String, Object> map);
+
 //    @Headers("Content-Type: application/json")
 //    @POST("shop.aspx")
 //    Observable<BaseBean<BaseInfo<ProductListFilter>>> ProductListFilter(@Body HashMap<String, Object> map);
@@ -111,6 +115,9 @@ public interface MainApi {
 //    @POST("shop.aspx")
 //    Observable<BaseBean<BaseInfo<PaymentInfo>>> PaymentInfo(@Body HashMap<String, Object> postMap);
 
+    //    @Headers("Content-Type: application/json")
+//    @POST("shop.aspx")
+//    Observable<BaseBean<BaseInfo<PaymentInfo>>> PaymentInfo(@Body org.json.JSONObject postMap);
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
     Observable<BaseBean<BaseInfo<PaymentInfo>>> PaymentInfo(@Body HashMap<String, Object> postMap);
@@ -126,6 +133,10 @@ public interface MainApi {
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")
     Observable<BaseBean<BaseInfo<String>>> String(@Body HashMap<String, Object> postMap);
+
+    @Headers("Content-Type: application/json")
+    @POST("shop.aspx")
+    Observable<BaseBean<BaseInfo<String>>> String(@Body String postMap);
 
     @Headers("Content-Type: application/json")
     @POST("shop.aspx")

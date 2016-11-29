@@ -8,8 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.bean.Product;
+import com.honliv.honlivmall.util.Utils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -127,6 +129,7 @@ public class PaymentCenterAdapter extends BaseAdapter {
             } else {
                 holder.standardTV.setText("规格 ：无");
             }
+            Glide.with(mContext).load(Utils.checkImagUrl(Utils.checkImagUrl(currentProductList.get(position).getPic() + ""))).crossFade().placeholder(R.mipmap.picture_no).into(holder.productImg);
 
 //            imageLoader.displayImage(Utils.checkImagUrl(currentProductList.get(position).getPic() + ""), holder.productImg, ImageOptionsUtils.getMyOrderOptions(),
 //                    animateFirstListener);

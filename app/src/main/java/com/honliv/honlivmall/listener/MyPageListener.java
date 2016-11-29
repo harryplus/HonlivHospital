@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
+import com.honliv.honlivmall.application.MyApplication;
 
 /**
  * Created by Rodin on 2016/11/19.
@@ -20,14 +21,14 @@ public class MyPageListener implements ViewPager.OnPageChangeListener {
     private final TextView searchDelTV;
     private final ImageView selete;
     private final String[] historyNames;
-    private int currentPage=0;
+    private int currentPage = 0;
 
     public MyPageListener(TextView hotTitle, TextView historyTitle, TextView searchDelTV, ImageView selete, String[] historyNames) {
-        this.hotTitle=hotTitle;
-        this.historyTitle=historyTitle;
-        this.searchDelTV=searchDelTV;
-        this.selete=selete;
-        this.historyNames=historyNames;
+        this.hotTitle = hotTitle;
+        this.historyTitle = historyTitle;
+        this.searchDelTV = searchDelTV;
+        this.selete = selete;
+        this.historyNames = historyNames;
     }
 
     public void onPageScrollStateChanged(int position) {
@@ -57,7 +58,7 @@ public class MyPageListener implements ViewPager.OnPageChangeListener {
                 break;
         }
 
-        TranslateAnimation animation = new TranslateAnimation(currentPage * GloableParams.WINDOW_WIDTH / 2, position * GloableParams.WINDOW_WIDTH / 2, 0, 0);
+        TranslateAnimation animation = new TranslateAnimation(currentPage * MyApplication.getInstance().SCREEN_WIDTH / 2, position * MyApplication.getInstance().SCREEN_WIDTH / 2, 0, 0);
         animation.setFillAfter(true);
         animation.setDuration(300);
 

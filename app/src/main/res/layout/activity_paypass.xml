@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/home_backgroud"
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/fraHead"
+        android:id="@id/fraHead"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:background="@color/background_red">
@@ -42,9 +42,10 @@
             android:layout_width="290.0dip"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="40.0dip"
+            android:layout_marginTop="20.0dip"
             android:background="@drawable/shape_rounded_rectangle"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="12dp">
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -71,6 +72,7 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:padding="1.0dip">
 
                 <TextView
@@ -93,6 +95,7 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:padding="1.0dip">
 
                 <TextView
@@ -125,21 +128,42 @@
             android:layout_marginRight="30dp"
             android:orientation="vertical">
 
-            <com.gc.materialdesign.views.ButtonRectangle
+            <TextView
+                android:id="@+id/login_text"
+                style="@style/style_17_FFFFFF_BOLD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/button_long"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="goPay"
+                android:layout_weight="1.0"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="去支付" />
+            <!--<com.gc.materialdesign.views.ButtonRectangle
                 style="@style/buttom"
-                materialdesign:animate="false"
                 android:background="@color/background_red"
                 android:onClick="goPay"
-                android:text="去支付" />
+                android:text="去支付"
+                materialdesign:animate="false" />-->
 
         </LinearLayout>
     </LinearLayout>
 
     <ImageView
         android:id="@+id/payicon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_above="@id/bodylayout"
         android:layout_centerHorizontal="true"
         android:background="@drawable/icon_alipay" />
+
+
+    <!-- <include
+         android:id="@+id/bottomBar"
+         layout="@layout/bottombar" />-->
 </RelativeLayout>

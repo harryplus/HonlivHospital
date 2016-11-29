@@ -40,9 +40,7 @@
             android:layout_marginLeft="3.0dip"
             android:layout_marginRight="8.0dip"
             android:background="@drawable/red_but"
-            android:clickable="true"
             android:gravity="center"
-            android:onClick="addNewAddress"
             android:text="新增" />
     </RelativeLayout>
 

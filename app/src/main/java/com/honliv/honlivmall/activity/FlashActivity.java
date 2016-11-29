@@ -1,5 +1,6 @@
 package com.honliv.honlivmall.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,13 +19,18 @@ import com.honliv.honlivmall.base.CoreBaseActivity;
 import com.honliv.honlivmall.bean.DefaultParas;
 import com.honliv.honlivmall.bean.UserInfo;
 import com.honliv.honlivmall.contract.ActivityContract;
+import com.honliv.honlivmall.helper.RxPermissions;
 import com.honliv.honlivmall.model.activity.FlashModel;
 import com.honliv.honlivmall.presenter.activity.FlashPresenter;
+import com.honliv.honlivmall.util.RxUtil;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.exception.DbException;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
+
+import rx.Observable;
 
 /**
  * Created by rodin on 16/10/28.
@@ -50,17 +56,17 @@ public class FlashActivity extends CoreBaseActivity<FlashPresenter,FlashModel> i
 
         registerWeiXin();//注册微信
         getDbUserInfo();
-        startActivity(MainActivity.class);
-//        Observable.timer(2000, TimeUnit.MILLISECONDS)
-//                .compose(RxPermissions.getInstance(this).ensure(Manifest.permission.READ_PHONE_STATE))
-//                .compose(RxUtil.rxSchedulerHelper())
-//                .subscribe(granted -> {
-//                    if (granted) {
-//                        startActivity(MainActivity.class);
-//                        finish();
-//                    }
-//                    startActivity(MainActivity.class);
-//                });
+//        startActivity(MainActivity.class);
+        Observable.timer(2000, TimeUnit.MILLISECONDS)
+                .compose(RxPermissions.getInstance(this).ensure(Manifest.permission.READ_PHONE_STATE))
+                .compose(RxUtil.rxSchedulerHelper())
+                .subscribe(granted -> {
+                    if (granted) {
+                        startActivity(MainActivity.class);
+                        finish();
+                    }
+                    startActivity(MainActivity.class);
+                });
     }
 
     private void registerWeiXin() {

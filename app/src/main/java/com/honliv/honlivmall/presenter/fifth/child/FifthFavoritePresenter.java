@@ -12,15 +12,15 @@ public class FifthFavoritePresenter extends FifthContract.FifthFavoritePresenter
     }
 
     @Override
-    public void getServiceCancelFav(int userid, int favId) {
+    public void getServiceCancelFav(int userid, int favId, int position) {
         mRxManager.add(mModel.CancelFav(userid, favId).subscribe(result -> {
-            mView.updateServiceCancelFav(result);
+            mView.updateServiceCancelFav(result,position);
         }, e -> mView.showError(e.toString())));
     }
 
     @Override
     public void getServiceFavInfo(int userid, int start, int i) {
-        mRxManager.add(mModel.updateServicePassword(userid, start, i).subscribe(result -> {
+        mRxManager.add(mModel.updateServiceFavInfo(userid, start, i).subscribe(result -> {
             mView.updateServiceFavInfo(result);
         }, e -> mView.showError(e.toString())));
     }

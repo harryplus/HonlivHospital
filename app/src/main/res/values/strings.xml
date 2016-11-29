@@ -1,28 +1,12 @@
 <resources>
     <string name="app_name">A生活商城</string>
     <string name="bottom_layout_main">主页</string>
-    <string name="bottom_layout_message">消息</string>
-    <string name="bottom_layout_health">健康</string>
     <string name="bottom_layout_center">个人中心</string>
     <string name="disLogin">用户您好</string>
     <string name="text_login">请登录</string>
     <string name="setting_card">我的就诊卡</string>
-    <string name="setting_appoint">我的预约</string>
     <string name="setting_about">关于</string>
     <string name="setting_recommend">推荐好友</string>
-    <string name="main_detail">医院简介</string>
-    <string name="main_professor">专家医师</string>
-    <string name="main_guide">医院导航</string>
-    <string name="main_registrate_day">当日挂号</string>
-    <string name="main_registrate_day_detail">快速挂当日号</string>
-    <string name="main_registrate_recommend">预约挂号</string>
-    <string name="main_registrate_recommend_detail">预约未来7天号源</string>
-    <string name="main_physical">体检中心</string>
-    <string name="main_report">查看报告单</string>
-    <string name="main_cost">住院费用</string>
-    <string name="main_office">科室一览</string>
-    <string name="main_handbook">服务指南</string>
-    <string name="main_question">健康质询</string>
     <string name="hosipital_detail_short">河南省长垣县博爱路南段8号 邮编：453400</string>
     <string name="hosipital_detail_hotline">健康热线</string>
     <string name="hosipital_detail_text_hotline">037_8882618</string>
@@ -34,12 +18,6 @@
     <string name="hosipital_detail_text_fax">0337-55555</string>
     <string name="hosipital_detail_detail">医院简介</string>
     <string name="hosipital_detail_text_detail">hahahahhahahahah</string>
-    <string name="hosipital_guide_traffic">医院交通</string>
-    <string name="hosipital_guide_hotline">急诊热线</string>
-    <string name="hosipital_guide_guide_doctor">就诊导航</string>
-    <string name="hosipital_guide_guide_map">地图导航</string>
-    <string name="hosipital_guide_local">周边商户</string>
-    <string name="office_select">选择科室</string>
     <string name="text_cellphone">手 机</string>
     <string name="hint_cellphone">请输入手机号</string>
     <string name="hint_password">请输入密码</string>
@@ -92,7 +70,6 @@
     <string name="companyname">河南宏力一生活有限公司</string>
     <string name="companyyear">Copyright © 2014-2016</string>
 
-    <string name="is_positive">确定</string>
     <string name="english_name">Fashion</string>
     <string name="app_version_prefix">Maticsoft_Shop_</string>
     <string name="install_source_suffix">.apk</string>
@@ -115,10 +92,8 @@
     <string name="my_Inbox_lin">收件箱</string>
     <string name="text_limit">限时抢购</string>
     <string name="text_bargain">特价专区</string>
-    <string name="text_like">你可能喜欢</string>
     <string name="more"><![CDATA[更多>>]]></string>
     <string name="about_detail">   河南宏力一生活有限公司，是一家连锁超市为主，多业态发展的连锁社区超市，以自有产品为主，倡导绿色、安全、新鲜的产品理念，引导大众消费习惯，为大众提供环境优雅，产品安全，服务高端的购物体验。 “邻点”引用国外先进的运营理念，将信息技术深入运用于零售经营，借助数据分析实现精细化管理，提升经营管理绩效，打造高科技型零售企业。公司计划以长垣为中心，用5年时间在全省开设1000家，最终形成以连锁经营、物流配送、电子商务为一体的大型商业连锁集团。</string>
-    <string name="loadmore">加载更多....</string>
     <string name="order_num">订单编号：</string>
     <string name="order_money">订单总价：￥</string>
     <string name="order_day">订单日期：</string>
@@ -144,8 +119,6 @@
     <string name="text_pay">支付</string>
     <string name="hint_hxt_cardno">请输入卡号</string>
     <string name="hint_hxt_pwd">请输入密码</string>
-    <string name="my_hxt_tilte">我的宏信通</string>
-    <string name="my_hxt_select">选择宏信通卡</string>
     <string name="text_weixin_pay">微信支付</string>
     <string name="text_hxt_pay">宏信通</string>
     <string name="text_ali_pay">支付宝(手机版)</string>
@@ -157,11 +130,10 @@
     <string name="text_pay_send_type">支付配送方式</string>
     <string name="submit_order">提交订单</string>
     <string name="text_bargain_price">特价：</string>
-    <string name="text_price">价格：</string>
     <string name="bottom_layout_search">搜索</string>
     <string name="bottom_layout_class">分类</string>
     <string name="bottom_layout_shopping">购物车</string>
-    <string name="reLogin">登陆状态错误,请重新登录</string>
     <string name="login_error">用户名或密码错误</string>
     <string name="order_detail">订单详情</string>
+    <string name="text_brand">品牌</string>
 </resources>

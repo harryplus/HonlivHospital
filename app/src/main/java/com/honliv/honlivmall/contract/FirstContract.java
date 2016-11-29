@@ -17,8 +17,14 @@ import rx.Observable;
 public interface FirstContract {
     interface FirstModel extends CoreBaseModel {
     }
+    interface FirstBrandListModel extends CoreBaseModel {
+        Observable< List<Product>> ProductList(int brandId);
+    }
 
     interface FirstView extends CoreBaseView {
+    }
+    interface FirstBrandListView extends CoreBaseView {
+        void updateProductLS(List<Product> result);
     }
 
 
@@ -36,21 +42,18 @@ public interface FirstContract {
         void updateProductLS(List<Product> result);
     }
 
-    interface FirstSelectDoctorView extends CoreBaseView {
-    }
+
 
     interface FirstBargainModel extends CoreBaseModel {
         Observable<List<Product>> getServiceProductLS();
     }
 
 
-
     interface FirstMarketingModel extends CoreBaseModel {
         Observable<List<Product>> getServiceProductLS();
     }
 
-    interface FirstSelectDoctorModel extends CoreBaseModel {
-    }
+
 
     abstract class FirstPresenter extends CoreBasePresenter<FirstModel, FirstView> {
     }
@@ -60,7 +63,7 @@ public interface FirstContract {
     }
 
     abstract class FirstHomePresenter extends CoreBasePresenter<FirstHomeModel, FirstHomeView> {
-        public abstract void  getServiceHomeInfo(String s);
+        public abstract void getServiceHomeInfo(String s);
 
         public abstract void getServiceHomeMarketing();
     }
@@ -76,6 +79,8 @@ public interface FirstContract {
         public abstract void getServiceProductLS();
     }
 
-    abstract class FirstSelectDoctorPresenter extends CoreBasePresenter<FirstSelectDoctorModel, FirstSelectDoctorView> {
+
+    abstract class FirstBrandListPresenter  extends CoreBasePresenter<FirstBrandListModel, FirstBrandListView> {
+        public abstract void getServiceProductLS(int brandId);
     }
 }

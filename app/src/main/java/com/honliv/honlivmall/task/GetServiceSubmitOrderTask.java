@@ -10,6 +10,7 @@ import com.honliv.honlivmall.bean.Product;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public class GetServiceSubmitOrderTask extends AsyncTask<Integer, Void, Object> 
     private int regionId;
     private int shipId;
     private int payId;
-    private List<JSONObject> productJsobList;
+    private List<HashMap<String,Object>> productJsobList;
     private CouponInfo currentUseCouponInfo;
     private Product favorableProduct;
 
@@ -36,7 +37,7 @@ public class GetServiceSubmitOrderTask extends AsyncTask<Integer, Void, Object> 
         void motion(Object result);
     }
 
-    public GetServiceSubmitOrderTask(Context mContext, AddressInfo addressInfo, int regionId, int shipId, int payId, List<JSONObject> productJsobList, CouponInfo currentUseCouponInfo, Product favorableProduct) {
+    public GetServiceSubmitOrderTask(Context mContext, AddressInfo addressInfo, int regionId, int shipId, int payId, List<HashMap<String,Object>> productJsobList, CouponInfo currentUseCouponInfo, Product favorableProduct) {
         this.mContext = mContext;
         this.addressInfo = addressInfo;
         this.regionId = regionId;

@@ -8,36 +8,40 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.honliv.honlivmall.R;
+import com.honliv.honlivmall.base.CoreBaseActivity;
 import com.honliv.honlivmall.bean.OrderInfo;
 import com.honliv.honlivmall.task.AliPayTask;
 import com.honliv.honlivmall.task.WeiXinPayTask;
 
+import butterknife.BindView;
+
 /**
  * Created by Rodin on 2016/9/19.
  */
-public class PayPassActivity extends Activity {
-    private OrderInfo orderInfo;
-    private TextView orderIdTV;
-    private TextView paymoneyTV;
-    private TextView payTypeTV;
-    private String paymenttype;    //支付类型
-    private ImageView payicon;
+public class PayPassActivity extends CoreBaseActivity {
+     OrderInfo orderInfo;
+    @BindView(R.id.orderid_value_text)
+     TextView orderIdTV;
+    @BindView(R.id.paymoney_value_text)
+     TextView paymoneyTV;
+    @BindView(R.id.paytype_value_text)
+     TextView payTypeTV;
+     String paymenttype;    //支付类型
+    @BindView(R.id.payicon)
+     ImageView payicon;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_paypass);
+    public int getLayoutId() {
+        return R.layout.activity_paypass;
+    }
 
+    @Override
+    public void initView(Bundle savedInstanceState) {
         orderInfo = (OrderInfo) this.getIntent().getSerializableExtra("orderInfo");
-        orderIdTV = (TextView) findViewById(R.id.orderid_value_text);
-        paymoneyTV = (TextView) findViewById(R.id.paymoney_value_text);
-        payTypeTV = (TextView) findViewById(R.id.paytype_value_text);
-        payicon = (ImageView) findViewById(R.id.payicon);
-
         if (orderInfo != null) {
             orderIdTV.setText(orderInfo.getOrderCode() + "");
             paymoneyTV.setText("￥" + orderInfo.getAllprice() + "元");
-             paymenttype = orderInfo.getPaymenttype();
+            paymenttype = orderInfo.getPaymenttype();
             if (paymenttype == null) {
                 paymenttype = orderInfo.getPaytypename();
             }

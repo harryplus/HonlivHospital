@@ -6,5 +6,5 @@
     <im.delight.android.webview.AdvancedWebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/webview"></im.delight.android.webview.AdvancedWebView>
+        android:id="@+id/webview"/>
 </LinearLayout>
