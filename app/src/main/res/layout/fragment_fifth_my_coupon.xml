@@ -2,8 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <RelativeLayout
+<include
+    android:id="@+id/relTop"
+    layout="@layout/toolbar"/>
+<!--    <RelativeLayout
         android:id="@+id/relTop"
         android:layout_width="match_parent"
         android:layout_height="50.0dip"
@@ -38,7 +40,7 @@
             android:gravity="center"
             android:text="兑换"
             android:visibility="gone" />
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <LinearLayout
         android:layout_width="fill_parent"

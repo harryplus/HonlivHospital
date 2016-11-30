@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +45,8 @@ public class FifthMyOrderFragment extends BaseFragment<FifthMyOrderPresenter, Fi
     int userId = -1;
     @BindView(R.id.my_order_null_text)
     TextView orderNullTV;
-    @BindView(R.id.head_back_text)
-    TextView head_back_text;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     MyOrderAdapter orderAdapter;
     List<GalleryItem> galleryitemList = new ArrayList<GalleryItem>();
 
@@ -69,7 +70,8 @@ public class FifthMyOrderFragment extends BaseFragment<FifthMyOrderPresenter, Fi
      */
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
-        head_back_text.setOnClickListener(this);
+//        head_back_text.setOnClickListener(this);
+        initToolbar(toolbar,getString(R.string.text_my_order),true);
         mPullToRefreshView.setOnHeaderRefreshListener(this);
         mPullToRefreshView.setOnFooterRefreshListener(this);
         if (userId == -1) {
@@ -102,9 +104,6 @@ public class FifthMyOrderFragment extends BaseFragment<FifthMyOrderPresenter, Fi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.head_back_text:
-                pop();
-                break;
         }
     }
 

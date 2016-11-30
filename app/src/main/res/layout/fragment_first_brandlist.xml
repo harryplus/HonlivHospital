@@ -3,54 +3,56 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/home_backgroud" >
-    <!-- 商品列表         可以用其他的listitem,比如搜索商品-->
-    <FrameLayout
+    <include
         android:id="@+id/fraTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="50.0dip"
-        android:background="@color/background_red">
+        layout="@layout/toolbar"/>
+    <!--<FrameLayout-->
+        <!--android:id="@+id/fraTitle"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="50.0dip"-->
+        <!--android:background="@color/background_red">-->
 
-        <TextView
-            android:id="@+id/productlist_Title"
-            style="@style/style_18_BEBEBE_BOLD"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="品牌" />
+        <!--<TextView-->
+            <!--android:id="@+id/productlist_Title"-->
+            <!--style="@style/style_18_BEBEBE_BOLD"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:gravity="center"-->
+            <!--android:text="品牌" />-->
 
-        <TextView
-            android:id="@+id/head_goback"
-            style="@style/style_15_EBEBEB_BOLD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/back_btn"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="goBack"
-            />
+        <!--<TextView-->
+            <!--android:id="@+id/head_goback"-->
+            <!--style="@style/style_15_EBEBEB_BOLD"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/back_btn"-->
+            <!--android:clickable="true"-->
+            <!--android:gravity="center"-->
+            <!--android:onClick="goBack"-->
+            <!--/>-->
 
-        <!-- <TextView
-        android:id="@+id/filtTv"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        style="@style/style_15_EBEBEB_BOLD"
-        android:layout_marginRight="10.0dip"
-        android:layout_gravity="right"
-        android:background="@anim/head_button"
-        android:gravity="center"
-        android:clickable="true"
-        android:text="筛选" /> -->
-        <!--  <Button
-             android:id="@+id/productlist_sift"
-             android:layout_width="70.0dip"
-             android:layout_height="wrap_content"
-             android:layout_marginRight="10.0dip"
-             android:layout_gravity="right"
-             android:layout_marginTop="8.0dip"
-             android:background="@anim/head_button"/> -->
+        <!--&lt;!&ndash; <TextView-->
+        <!--android:id="@+id/filtTv"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--style="@style/style_15_EBEBEB_BOLD"-->
+        <!--android:layout_marginRight="10.0dip"-->
+        <!--android:layout_gravity="right"-->
+        <!--android:background="@anim/head_button"-->
+        <!--android:gravity="center"-->
+        <!--android:clickable="true"-->
+        <!--android:text="筛选" /> &ndash;&gt;-->
+        <!--&lt;!&ndash;  <Button-->
+             <!--android:id="@+id/productlist_sift"-->
+             <!--android:layout_width="70.0dip"-->
+             <!--android:layout_height="wrap_content"-->
+             <!--android:layout_marginRight="10.0dip"-->
+             <!--android:layout_gravity="right"-->
+             <!--android:layout_marginTop="8.0dip"-->
+             <!--android:background="@anim/head_button"/> &ndash;&gt;-->
 
-    </FrameLayout>
+    <!--</FrameLayout>-->
 
     <LinearLayout
         android:id="@+id/ll_content"

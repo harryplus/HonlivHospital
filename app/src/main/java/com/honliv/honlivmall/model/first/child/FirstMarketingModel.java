@@ -15,7 +15,7 @@ import rx.Observable;
 public class FirstMarketingModel implements FirstContract.FirstMarketingModel {
 
     @Override
-    public Observable<List<Product>> getServiceProductLS() {
+    public Observable<List<Product>> CountDownList() {
         Observable<List<Product>> result = HomePostUtils.CountDownList();
         return result;
     }

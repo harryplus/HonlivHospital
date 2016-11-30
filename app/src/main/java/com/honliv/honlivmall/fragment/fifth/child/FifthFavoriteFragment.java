@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -35,8 +36,8 @@ public class FifthFavoriteFragment extends BaseFragment<FifthFavoritePresenter, 
     TextView nullProductTV;
     @BindView(R.id.address_title)
     TextView address_title;//
-    @BindView(R.id.head_back_text)
-    TextView head_back_text;//
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;//
     @BindView(R.id.myfavorite_product_list)
     ListView productList;
 
@@ -73,7 +74,8 @@ public class FifthFavoriteFragment extends BaseFragment<FifthFavoritePresenter, 
         mPullToRefreshView.setOnFooterRefreshListener(this);
         productAdapter = new ProductListAdapter(getContext(), currentProductList, false);
         productList.setAdapter(productAdapter);
-        head_back_text.setOnClickListener(this);
+//        head_back_text.setOnClickListener(this);
+        initToolbar(toolbar,getString(R.string.text_favorite),true);
         productList.setOnItemLongClickListener(this);
         productList.setOnItemClickListener(this);
     }
@@ -92,9 +94,6 @@ public class FifthFavoriteFragment extends BaseFragment<FifthFavoritePresenter, 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.head_back_text:
-                pop();
-                break;
         }
     }
 

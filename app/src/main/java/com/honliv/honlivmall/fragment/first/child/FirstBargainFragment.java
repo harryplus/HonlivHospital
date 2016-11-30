@@ -2,6 +2,7 @@ package com.honliv.honlivmall.fragment.first.child;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -29,8 +30,8 @@ public class FirstBargainFragment extends BaseFragment<FirstBargainPresenter, Fi
     ListView marketing_productLV;
     @BindView(R.id.nullProductTV)
     TextView nullProductTV;
-    @BindView(R.id.head_goback)
-    TextView headGoback;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     List<Product> products;//返回的商品集合
     private ProductListAdapter adapter;
@@ -55,7 +56,8 @@ public class FirstBargainFragment extends BaseFragment<FirstBargainPresenter, Fi
         adapter = new ProductListAdapter(getContext(), products, true);
         marketing_productLV.setAdapter(adapter);
         marketing_productLV.setOnItemClickListener(new MarkingListListener());
-        headGoback.setOnClickListener(this);
+        initToolbar(toolbar,getString(R.string.text_bargain),true);
+//        headGoback.setOnClickListener(this);
     }
 
 
@@ -98,9 +100,6 @@ public class FirstBargainFragment extends BaseFragment<FirstBargainPresenter, Fi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.head_goback:
-                pop();
-                break;
         }
     }
 

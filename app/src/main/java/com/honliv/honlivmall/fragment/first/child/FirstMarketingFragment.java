@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -37,8 +38,8 @@ import butterknife.BindView;
 public class FirstMarketingFragment extends BaseFragment<FirstMarketingPresenter, FirstMarketingModel> implements SwipeRefreshLayout.OnRefreshListener, FirstContract.FirstMarketingView, View.OnClickListener {
     @BindView(R.id.nullProductTV)
     TextView nullProductTV;
-    @BindView(R.id.head_goback)
-    TextView headGoback;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     @BindView(R.id.marketing_productLV)
     ListView marketing_productLV;
     Timer timer;
@@ -82,7 +83,8 @@ public class FirstMarketingFragment extends BaseFragment<FirstMarketingPresenter
 
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
-        headGoback.setOnClickListener(this);
+        initToolbar(toolbar,getString(R.string.text_marketing),true);
+//        headGoback.setOnClickListener(this);
     }
 
     @Override
@@ -170,9 +172,6 @@ public class FirstMarketingFragment extends BaseFragment<FirstMarketingPresenter
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.head_goback:
-                pop();
-                break;
         }
     }
 

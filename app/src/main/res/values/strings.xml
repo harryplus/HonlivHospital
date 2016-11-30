@@ -90,7 +90,7 @@
     <string name="my_favorites_lin">我的收藏</string>
     <string name="my_address_manage">地址管理</string>
     <string name="my_Inbox_lin">收件箱</string>
-    <string name="text_limit">限时抢购</string>
+    <string name="text_marketing">限时抢购</string>
     <string name="text_bargain">特价专区</string>
     <string name="more"><![CDATA[更多>>]]></string>
     <string name="about_detail">   河南宏力一生活有限公司，是一家连锁超市为主，多业态发展的连锁社区超市，以自有产品为主，倡导绿色、安全、新鲜的产品理念，引导大众消费习惯，为大众提供环境优雅，产品安全，服务高端的购物体验。 “邻点”引用国外先进的运营理念，将信息技术深入运用于零售经营，借助数据分析实现精细化管理，提升经营管理绩效，打造高科技型零售企业。公司计划以长垣为中心，用5年时间在全省开设1000家，最终形成以连锁经营、物流配送、电子商务为一体的大型商业连锁集团。</string>
@@ -136,4 +136,7 @@
     <string name="login_error">用户名或密码错误</string>
     <string name="order_detail">订单详情</string>
     <string name="text_brand">品牌</string>
+    <string name="text_my_coupon">优惠券</string>
+    <string name="text_my_order">我的订单</string>
+    <string name="text_favorite">收藏夹</string>
 </resources>

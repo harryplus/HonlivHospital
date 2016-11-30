@@ -15,6 +15,6 @@ public class FirstBargainPresenter extends FirstContract.FirstBargainPresenter {
     public void getServiceProductLS() {
         mRxManager.add(mModel.getServiceProductLS().subscribe(result->{
             mView.updateProductLS(result);
-        }));
+        },e->mView.showError(e.toString())));
     }
 }

@@ -7,7 +7,6 @@ import android.view.View;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.base.BaseLazyMainFragment;
 import com.honliv.honlivmall.contract.FourthContract;
-import com.honliv.honlivmall.fragment.fourth.child.FourthMainFragment;
 import com.honliv.honlivmall.model.fourth.FourthModel;
 import com.honliv.honlivmall.presenter.fourth.FourthPresenter;
 
@@ -34,6 +33,13 @@ public class FourthFragment extends BaseLazyMainFragment<FourthPresenter, Fourth
 
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if(!hidden){
+            showToast("onHiddenChanged");
+        }
+        super.onHiddenChanged(hidden);
+    }
 
     @Override
     protected void initLazyView(@Nullable Bundle savedInstanceState) {

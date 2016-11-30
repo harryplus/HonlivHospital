@@ -1,4 +1,4 @@
-package com.honliv.honlivmall.fragment.fourth.child;
+package com.honliv.honlivmall.fragment.fourth;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -9,8 +9,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -23,7 +21,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.honliv.honlivmall.ConstantValue;
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.activity.MainActivity;
@@ -33,8 +30,6 @@ import com.honliv.honlivmall.contract.FourthContract;
 import com.honliv.honlivmall.fragment.global.GlobalProductDetailFragment;
 import com.honliv.honlivmall.model.fourth.child.FourthMainModel;
 import com.honliv.honlivmall.presenter.fourth.child.FourthMainPresenter;
-import com.honliv.honlivmall.util.DelayTask;
-import com.honliv.honlivmall.util.LogUtil;
 import com.honliv.honlivmall.util.MoneyUtils;
 import com.honliv.honlivmall.util.Utils;
 import com.lidroid.xutils.DbUtils;
@@ -169,12 +164,11 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
 
     @Override
     public void initData() {
-        mPresenter.getNativeAllShopCart(GloableParams.USERID);
+//        mPresenter.getNativeAllShopCart(GloableParams.USERID);
     }
     @Override
     public void updataAllShopCart(ArrayList<Product> result) {
         initShopCarNumber();
-        showToast("---"+(result==null)+"--"+result.size());
         if (result != null) {
             productlist.clear();
             productlist.addAll(result);
@@ -211,7 +205,16 @@ public class FourthMainFragment extends BaseFragment<FourthMainPresenter, Fourth
         start(GlobalProductDetailFragment.newInstance(data));
     }
 
-  private  class ShopCartAdapter extends BaseAdapter {
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if(!hidden){
+//            showToast("hhhhh");
+            mPresenter.getNativeAllShopCart(GloableParams.USERID);
+        }
+//        super.onHiddenChanged(hidden);
+    }
+
+    private  class ShopCartAdapter extends BaseAdapter {
         public int getCount() {
             showLog("----"+productlist.size());
             return productlist.size();

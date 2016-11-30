@@ -39,15 +39,13 @@ public class SearchPostUtils {
         map.put("page", start);
         map.put("pageNum", pageNum);
         postMap.put("params", map);
-        return RxService.createApi(MainApi.class).ProductListFilter(postMap).map(bean -> bean.getResult().getResult().getProductlist()).compose(RxUtil.rxSchedulerHelper());
-//        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
-//            Type type = new TypeToken<List<Product>>() {
-//            }.getType();
-//            List<Product> result = null;
-//            if (bean.getResult().getStatus().equals(ConstantValue.SUCCESS)) {
-//                result = new Gson().fromJson(bean.getResult().getResult(), type);
-//            }
-//            return result;
-//        }).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).ProductListFilter(postMap).map(bean -> {
+            try {
+                return bean.getResult().getResult().getProductlist();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }).compose(RxUtil.rxSchedulerHelper());
     }
 }

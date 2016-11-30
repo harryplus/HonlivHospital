@@ -15,6 +15,6 @@ public class FirstBrandListPresenter extends  FirstContract.FirstBrandListPresen
     public void getServiceProductLS(int brandId) {
         mRxManager.add(mModel.ProductList(brandId).subscribe(result->{
             mView.updateProductLS(result);
-        }));
+        },e->mView.showError(e.toString())));
     }
 }

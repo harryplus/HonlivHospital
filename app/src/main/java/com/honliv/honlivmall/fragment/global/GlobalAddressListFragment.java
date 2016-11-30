@@ -41,7 +41,6 @@ public class GlobalAddressListFragment extends BaseFragment<GlobalAddressListPre
     AddressInfo addressInfo;
     List<AddressInfo> addressList;
 
-
     public static GlobalAddressListFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -70,27 +69,17 @@ public class GlobalAddressListFragment extends BaseFragment<GlobalAddressListPre
 
 
     public void initData() {
-        mPresenter.getServiceProductList(GloableParams.USERID, 1, 50);
         addressList = new ArrayList<>();
         addressAdapter = new AddressAdapter();
         addressLV.setAdapter(addressAdapter);
         addressLV.setOnItemLongClickListener(new AddressItemLongClickListener());
         addressLV.setOnItemClickListener(new AddressItemClickListener());
+        mPresenter.getServiceProductList(GloableParams.USERID, 1, 50);
     }
 
     @Override
     public void updateServiceProductList(List<AddressInfo> result) {
         if (result != null) {
-                /*	if(isUpload){
-                        //加载更多
-						if(productlist.size()==0){
-							PromptManager.showMyToast(ProductListActivity.this, "暂无更多内容~");
-						}else{
-							currentProductList.addAll(productlist);
-							adapter.notifyDataSetChanged();
-						}
-						isUpload = false;
-					}else{*/
             if (result.size() == 0) {
                 nullProductTV.setVisibility(View.VISIBLE);
                 addressLV.setVisibility(View.GONE);
@@ -98,6 +87,7 @@ public class GlobalAddressListFragment extends BaseFragment<GlobalAddressListPre
             } else {
                 nullProductTV.setVisibility(View.GONE);
                 addressLV.setVisibility(View.VISIBLE);
+                addressList.clear();
                 addressList.addAll(result);
                 addressAdapter.notifyDataSetChanged();
             }
@@ -150,8 +140,6 @@ public class GlobalAddressListFragment extends BaseFragment<GlobalAddressListPre
             if (convertView == null) {
                 holder = new ViewHolder();
                 view = View.inflate(getContext(), R.layout.address_manage_listitem, null);
-                /*view = LayoutInflater.from(getApplicationContext()).inflate(
-                        R.layout.product_list_item, null);*/
                 holder.addressNameTV = (TextView) view.findViewById(R.id.addressnameTV);
                 holder.addressPhoneTV = (TextView) view.findViewById(R.id.addressphoneTV);
                 holder.addressDetailTV = (TextView) view.findViewById(R.id.addressdetailTV);
@@ -165,12 +153,6 @@ public class GlobalAddressListFragment extends BaseFragment<GlobalAddressListPre
             addressInfo = addressList.get(position);
             holder.addressNameTV.setText("收货人:  " + addressInfo.getName() + "");
             holder.addressPhoneTV.setText("手机号:  " + addressInfo.getPhone() + "");
-            /*holder.ProvinceTV.setText("北京市:  "+addressInfo.getAreaDetail().split(",")[0]+"");
-            if(addressInfo.getAreaDetail().split(",").length>1){
-				holder.addressDetailTV.setText("详细地址:  "+addressInfo.getAreaDetail().split(",")[1]+"");
-			}else{
-				holder.addressDetailTV.setText("详细地址:  "+addressInfo.getAreaDetail()+"");
-			}*/
             holder.ProvinceTV.setText("所在地区:  " + addressInfo.getAddressArea() + "");
             holder.addressDetailTV.setText("详细地址:  " + addressInfo.getAreaDetail() + "");
             return view;

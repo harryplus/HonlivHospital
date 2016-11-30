@@ -32,7 +32,7 @@ public class FirstHomePresenter extends FirstContract.FirstHomePresenter {
                 .subscribe(result -> {
                     if (result != null)
                         mView.updataHomeInfo(result);
-                }));
+                },e->mView.showError(e.toString())));
     }
 
     @Override
@@ -42,6 +42,6 @@ public class FirstHomePresenter extends FirstContract.FirstHomePresenter {
                 .subscribe(result -> {
                     if (result != null)
                         mView.updataHomeMarketing(result);
-                }));
+                },e->mView.showError(e.toString())));
     }
 }

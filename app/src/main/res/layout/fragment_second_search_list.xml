@@ -34,7 +34,7 @@
     <LinearLayout
         android:id="@+id/ll_content"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_above="@id/bottomBar"
         android:layout_below="@id/fraTitle"
         android:orientation="vertical">
@@ -89,6 +89,13 @@
         </LinearLayout>
 
 
+       <!-- <com.honliv.honlivmall.view.PullToRefreshView
+            android:id="@+id/main_pull_refresh_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@id/bottomBar"
+            android:layout_below="@id/linRank"
+            android:orientation="vertical">-->
         <com.honliv.honlivmall.view.PullToRefreshView
             android:id="@+id/main_pull_refresh_view"
             android:layout_width="fill_parent"
@@ -102,8 +109,16 @@
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:cacheColorHint="#00000000"
+                android:fadingEdge="none"
+                android:listSelector="@drawable/index_item_bg"
+                android:scrollingCache="false" />
+        <!--<GridView
+                android:id="@+id/productLv"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:cacheColorHint="#00000000"
                 android:divider="@drawable/listview_item_line"
-                android:listSelector="@drawable/index_item_bg" />
+                android:listSelector="@drawable/index_item_bg" />-->
         </com.honliv.honlivmall.view.PullToRefreshView>
 
         <TextView

@@ -2,10 +2,12 @@ package com.honliv.honlivmall.listener;
 
 import android.graphics.Color;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.honliv.honlivmall.GloableParams;
 import com.honliv.honlivmall.R;
@@ -14,8 +16,9 @@ import com.honliv.honlivmall.application.MyApplication;
 /**
  * Created by Rodin on 2016/11/19.
  */
-public class MyPageListener implements ViewPager.OnPageChangeListener {
+public class SearchPageListener implements ViewPager.OnPageChangeListener {
 
+    private static final String TAG = "SearchPageListener";
     private final TextView hotTitle;
     private final TextView historyTitle;
     private final TextView searchDelTV;
@@ -23,7 +26,7 @@ public class MyPageListener implements ViewPager.OnPageChangeListener {
     private final String[] historyNames;
     private int currentPage = 0;
 
-    public MyPageListener(TextView hotTitle, TextView historyTitle, TextView searchDelTV, ImageView selete, String[] historyNames) {
+    public SearchPageListener(TextView hotTitle, TextView historyTitle, TextView searchDelTV, ImageView selete, String[] historyNames) {
         this.hotTitle = hotTitle;
         this.historyTitle = historyTitle;
         this.searchDelTV = searchDelTV;
@@ -57,7 +60,6 @@ public class MyPageListener implements ViewPager.OnPageChangeListener {
                 }
                 break;
         }
-
         TranslateAnimation animation = new TranslateAnimation(currentPage * MyApplication.getInstance().SCREEN_WIDTH / 2, position * MyApplication.getInstance().SCREEN_WIDTH / 2, 0, 0);
         animation.setFillAfter(true);
         animation.setDuration(300);

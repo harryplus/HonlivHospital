@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,12 +48,12 @@ public class FifthMyCouponFragment extends BaseFragment<FifthMyCouponPresenter, 
     TextView categoryUnusedTV;
     @BindView(R.id.category_used_TV)
     TextView categoryUsedTV;
-    @BindView(R.id.titleBack)
-    TextView titleBack;
     @BindView(R.id.nullProductTV)
     TextView nullProductTV;
     @BindView(R.id.contentLV)
     TextView contentLV;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     int start = 1;
     int userId;
@@ -87,11 +88,12 @@ public class FifthMyCouponFragment extends BaseFragment<FifthMyCouponPresenter, 
      */
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
+        initToolbar(toolbar,getString(R.string.text_my_coupon),true);
         initImage();///处理标题下划线位置信息
         categoryUsedTV.setOnClickListener(this);
         categoryUnusedTV.setOnClickListener(this);
         categoryUnusedTV.setTextColor(Color.RED);
-        titleBack.setOnClickListener(this);
+//        titleBack.setOnClickListener(this);
     }
 
     @Override
@@ -110,11 +112,6 @@ public class FifthMyCouponFragment extends BaseFragment<FifthMyCouponPresenter, 
                 categoryUsedTV.setBackgroundResource(R.drawable.android_horizontal_button_4_selected);
                 categoryUnusedTV.setBackgroundResource(R.drawable.android_horizontal_button_4);
                 viewPager.setCurrentItem(1);
-                break;
-            case R.id.titleBack:
-                pop();
-                break;
-            default:
                 break;
         }
     }

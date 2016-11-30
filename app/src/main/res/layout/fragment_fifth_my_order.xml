@@ -3,30 +3,32 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/white">
-
-    <FrameLayout
+    <include
         android:id="@+id/my_order_head"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/background_red">
+        layout="@layout/toolbar"/>
+    <!--<FrameLayout-->
+        <!--android:id="@+id/my_order_head"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/background_red">-->
 
-        <TextView
-            android:id="@+id/my_order_head_title"
-            style="@style/style_18_BEBEBE_BOLD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="我的订单" />
+        <!--<TextView-->
+            <!--android:id="@+id/my_order_head_title"-->
+            <!--style="@style/style_18_BEBEBE_BOLD"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:text="我的订单" />-->
 
-        <TextView
-            android:id="@+id/head_back_text"
-            style="@style/style_15_EBEBEB_BOLD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/back_btn"
-            android:gravity="center"
-           />
-    </FrameLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/head_back_text"-->
+            <!--style="@style/style_15_EBEBEB_BOLD"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/back_btn"-->
+            <!--android:gravity="center"-->
+           <!--/>-->
+    <!--</FrameLayout>-->
 
     <com.honliv.honlivmall.view.PullToRefreshView
         android:id="@+id/main_pull_refresh_view"

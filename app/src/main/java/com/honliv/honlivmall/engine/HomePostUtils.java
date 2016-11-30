@@ -8,6 +8,7 @@ import com.honliv.honlivmall.util.RxService;
 import com.honliv.honlivmall.util.RxUtil;
 import com.honliv.honlivmall.util.Utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,7 +46,14 @@ public class HomePostUtils {
     public static Observable<List<Product>> CountDownList() {
         HashMap<String, Object> postMap = Utils.getBaseMap("CountDownList");
         postMap.put("params", new HashMap<>());
-        return RxService.createApi(MainApi.class).ProductListFilter(postMap).map(bean -> bean.getResult().getResult().getProductlist()).compose(RxUtil.rxSchedulerHelper());
+        return RxService.createApi(MainApi.class).ProductListFilter(postMap).map(bean ->{
+            try {
+                return bean.getResult().getResult().getProductlist();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return new ArrayList<Product>();
+        }).compose(RxUtil.rxSchedulerHelper());
 //        return RxService.createApi(MainApi.class).post(postMap).map(bean -> {
 //            Type type = new TypeToken<List<Product>>() {
 //            }.getType();

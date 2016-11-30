@@ -1,6 +1,5 @@
 package com.honliv.honlivmall.fragment.second.child;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -28,10 +26,11 @@ import com.honliv.honlivmall.R;
 import com.honliv.honlivmall.activity.MainActivity;
 import com.honliv.honlivmall.adapter.HistoryAdapter;
 import com.honliv.honlivmall.adapter.SearchAdapter;
+import com.honliv.honlivmall.adapter.SearchViewAdapter;
 import com.honliv.honlivmall.base.BaseFragment;
 import com.honliv.honlivmall.bean.SearchKey;
 import com.honliv.honlivmall.contract.SecondContract;
-import com.honliv.honlivmall.listener.MyPageListener;
+import com.honliv.honlivmall.listener.SearchPageListener;
 import com.honliv.honlivmall.model.second.child.SecondMainModel;
 import com.honliv.honlivmall.presenter.second.child.SecondMainPresenter;
 import com.honliv.honlivmall.util.DensityUtil;
@@ -43,8 +42,6 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 
@@ -104,13 +101,20 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
         search_x.setOnClickListener(this);
         historyTitle.setOnClickListener(this);
         imageView_ok.setOnClickListener(this);
+        searchDelTV.setOnClickListener(this);
+        historyTemp = new ArrayList<String>();
+        initPager();
+        initImage();///处理标题下划线位置信息
+        pagerAdapter = new SearchViewAdapter(pagers);
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.setCurrentItem(0);//初始化时显示哪个界面
+        hotTitle.setTextColor(Color.RED);
+
+        viewPager.setOnPageChangeListener(new SearchPageListener(hotTitle, historyTitle, searchDelTV, selete, historyNames));
+        seachkeywordET.requestFocus();
     }
 
     private void initView() {
-        historyTemp = new ArrayList<String>();
-        pagerAdapter = new ViewAdapter();
-        viewPager.setAdapter(pagerAdapter);
-
         DbUtils db = DbUtils.create(getContext());
         try {//通过类型查找
             keyHistoryList = db.findAll(SearchKey.class);
@@ -126,42 +130,17 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
         }
         Collections.reverse(historyTemp);
         historyNames = historyTemp.toArray(new String[]{});//历史
-
         initPager();
-
-        initImage();///处理标题下划线位置信息
-
-        viewPager.setCurrentItem(0);//初始化时显示哪个界面
-        hotTitle.setTextColor(Color.RED);
-
-        viewPager.setOnPageChangeListener(new MyPageListener(hotTitle, historyTitle, searchDelTV, selete, historyNames));
-
-        seachkeywordET.requestFocus();
-
-        timerET.schedule(new TimerTask() {
-            public void run() {
-                if (isHomeS) {
-                    InputMethodManager inputManager =
-                            (InputMethodManager) seachkeywordET.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-
-                    inputManager.showSoftInput(seachkeywordET, 0);
-                }
-            }
-        }, 350);
-        seachkeywordET.requestFocus();
     }
 
     @Override
     public void showError(String msg) {
-
+        showLog(msg);
     }
 
     @Override
     public void initData() {
         historyTemp = new ArrayList<String>();
-//        DisplayMetrics metrics = new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(metrics);//得到屏幕的宽度,设置到参数里面
-//        GloableParams.WINDOW_WIDTH = metrics.widthPixels;
         if (GloableParams.hasHotKey) {// true 为已经联网获取过关键词
             hotNames = GloableParams.hotKeys;
             initView();
@@ -171,7 +150,7 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
         }
     }
 
-    Timer timerET = new Timer();
+//    Timer timerET = new Timer();
 
     void initImage() {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.id_category_selector);
@@ -203,9 +182,6 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
             hotList = new GridView(getContext());
             hotList.setNumColumns(4);
             hotList.setVerticalSpacing(DensityUtil.dip2px(getContext(), 4L));
-            /*categoryList.setDivider(null);
-        categoryList.setFadingEdgeLength(0);*/
-
             hotAdapter = new SearchAdapter(getContext(), hotNames);
             hotList.setAdapter(hotAdapter);
             pagers.add(hotList);
@@ -253,27 +229,27 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
         }
     }
 
-    class ViewAdapter extends PagerAdapter {
-        public int getCount() {
-            return 2;
-        }
-
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        public Object instantiateItem(ViewGroup container, int position) {
-            View view = pagers.get(position);
-
-            container.addView(view);
-
-            return view;
-        }
-
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView(pagers.get(position));
-        }
-    }
+//    class SearchViewAdapter extends PagerAdapter {
+//        public int getCount() {
+//            return 2;
+//        }
+//
+//        public boolean isViewFromObject(View view, Object object) {
+//            return view == object;
+//        }
+//
+//        public Object instantiateItem(ViewGroup container, int position) {
+//            View view = pagers.get(position);
+//
+//            container.addView(view);
+//
+//            return view;
+//        }
+//
+//        public void destroyItem(ViewGroup container, int position, Object object) {
+//            container.removeView(pagers.get(position));
+//        }
+//    }
 
     @Override
     public void onClick(View v) {
@@ -308,31 +284,22 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
                 }
                 break;
             case R.id.searchImageButton:
-                //搜索被点了
-                //PromptManager.showToast(this, "正在搜索ok.........");
-//                showToast("正在搜索ok.........");
                 searchBTOK();
                 break;
-            default:
+            case R.id.search_del_TV:
+                DbUtils db = DbUtils.create(getContext());
+                try {
+                    db.deleteAll(SearchKey.class);
+                    historyNames = new String[]{};
+                    historyAdapter.notifyDataSetChanged();
+                    searchDelTV.setVisibility(View.GONE);
+                } catch (DbException e) {
+                    e.printStackTrace();
+                }
                 break;
 
         }
     }
-
-
-    //清空历史搜索
-
-    public void clearKey(View view) {
-        DbUtils db = DbUtils.create(getContext());
-        try {
-            db.deleteAll(SearchKey.class);
-            historyNames = new String[]{};
-            historyAdapter.notifyDataSetChanged();
-        } catch (DbException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     void searchBTOK() {//搜索被点了
         String seachkeywordStr = seachkeywordET.getText().toString().trim();
@@ -412,14 +379,8 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
         public void onItemClick(AdapterView<?> parent, View view,
                                 int position, long id) {
             //设置条目的摇动
-//            view.startAnimation(AnimationUtils.loadAnimation(SearchActivity.this, R.anim.ia_ball_shake));
-//            searchKey(hotNames[position]);
-
-				/*for(int i=0;i<hotNames.length;i++){
-                    if(position == i){
-						PromptManager.showToast(getContext(),hotNames[position] );
-					}
-				}*/
+            view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.ia_ball_shake));
+            searchKey(hotNames[position]);
         }
     }
 
@@ -429,13 +390,8 @@ public class SecondMainFragment extends BaseFragment<SecondMainPresenter, Second
                                 int position, long id) {
             // TODO Auto-generated method stub
             //设置条目的摇动
-//            view.startAnimation(AnimationUtils.loadAnimation(SearchActivity.this, R.anim.ia_ball_shake));
-//            searchKey(historyNames[position]);
-                /*for(int i=0;i<historyNames.length;i++){
-                    if(position == i){
-						PromptManager.showToast(getContext(),historyNames[position]+position );
-					}
-				}*/
+            view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.ia_ball_shake));
+            searchKey(historyNames[position]);
         }
     }
 

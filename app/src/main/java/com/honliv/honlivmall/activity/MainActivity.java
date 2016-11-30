@@ -10,7 +10,7 @@ import com.honliv.honlivmall.fragment.fifth.child.FifthHomeFragment;
 import com.honliv.honlivmall.fragment.first.FirstFragment;
 import com.honliv.honlivmall.fragment.first.child.FirstHomeFragment;
 import com.honliv.honlivmall.fragment.fourth.FourthFragment;
-import com.honliv.honlivmall.fragment.fourth.child.FourthMainFragment;
+import com.honliv.honlivmall.fragment.fourth.FourthMainFragment;
 import com.honliv.honlivmall.fragment.second.SecondFragment;
 import com.honliv.honlivmall.fragment.second.child.SecondMainFragment;
 import com.honliv.honlivmall.fragment.third.ThirdFragment;
@@ -78,7 +78,7 @@ public class MainActivity extends CoreBaseActivity implements BaseLazyMainFragme
             mFragments[FIRST] = FirstFragment.newInstance();
             mFragments[SECOND] = SecondFragment.newInstance();
             mFragments[THIRD] = ThirdFragment.newInstance();
-            mFragments[FOURTH] = FourthFragment.newInstance();
+            mFragments[FOURTH] = FourthMainFragment.newInstance();
             mFragments[FIFTH] = FifthFragment.newInstance();
 
             loadMultipleRootFragment(R.id.fl_container, FIRST,
@@ -94,7 +94,7 @@ public class MainActivity extends CoreBaseActivity implements BaseLazyMainFragme
             mFragments[FIRST] = findFragment(FirstFragment.class);
             mFragments[SECOND] = findFragment(SecondFragment.class);
             mFragments[THIRD] = findFragment(ThirdFragment.class);
-            mFragments[FOURTH] = findFragment(FourthFragment.class);
+            mFragments[FOURTH] = findFragment(FourthMainFragment.class);
             mFragments[FIFTH] = findFragment(FifthFragment.class);
         }
 
@@ -126,8 +126,8 @@ public class MainActivity extends CoreBaseActivity implements BaseLazyMainFragme
                         currentFragment.popToChild(SecondMainFragment.class, false);
                     } else if (currentFragment instanceof ThirdFragment) {
                         currentFragment.popToChild(ThirdMainFragment.class, false);
-                    } else if (currentFragment instanceof FourthFragment) {
-                        currentFragment.popToChild(FourthMainFragment.class, false);
+                    } else if (currentFragment instanceof FourthMainFragment) {
+//                        currentFragment.popToChild(FourthMainFragment.class, false);
                     } else if (currentFragment instanceof FifthFragment) {
                         currentFragment.popToChild(FifthHomeFragment.class, false);
                     }
@@ -149,7 +149,7 @@ public class MainActivity extends CoreBaseActivity implements BaseLazyMainFragme
         super.onRestart();
 
         Bundle bundle = getIntent().getExtras();
-        showToast("onRestart main  "+(bundle==null));
+//        showToast("onRestart main  "+(bundle==null));
         if (bundle != null) {
             Class fragment = (Class) bundle.getSerializable("fragment");
             int position = bundle.getInt("position");

@@ -2,6 +2,7 @@ package com.honliv.honlivmall.fragment.first.child;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -16,6 +17,7 @@ import com.honliv.honlivmall.fragment.global.GlobalProductDetailFragment;
 import com.honliv.honlivmall.model.first.child.FirstBrandListModel;
 import com.honliv.honlivmall.presenter.first.child.FirstBrandListPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,6 +32,8 @@ public class FirstBrandListFragment extends BaseFragment<FirstBrandListPresenter
     TextView nullProductTV;
     @BindView(R.id.marketing_productLV)
     ListView marketing_productLV;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     int start = 1;
     Timer timer;
     TimerTask task;
@@ -52,7 +56,7 @@ public class FirstBrandListFragment extends BaseFragment<FirstBrandListPresenter
 
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
-
+        products=new ArrayList<>();
     }
 
     @Override
@@ -62,6 +66,7 @@ public class FirstBrandListFragment extends BaseFragment<FirstBrandListPresenter
 
 
     public void initData() {
+        initToolbar(toolbar,getString(R.string.text_brand),true);
         brandId = getArguments().getInt("brandid", -1);
         marketing_productLV.setAdapter(new ProductListAdapter(getContext(), products, true));
         marketing_productLV.setOnItemClickListener(this);

@@ -3,30 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/home_backgroud">
+    <include
+        android:id="@+id/fraHead"
+        layout="@layout/toolbar"/>
+    <!--<FrameLayout-->
+        <!--android:id="@id/fraHead"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="50.0dip"-->
+        <!--android:background="@color/background_red">-->
 
-    <FrameLayout
-        android:id="@id/fraHead"
-        android:layout_width="fill_parent"
-        android:layout_height="50.0dip"
-        android:background="@color/background_red">
+        <!--<TextView-->
+            <!--android:id="@+id/head_back_text"-->
+            <!--style="@style/style_15_EBEBEB_BOLD"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/back_btn"-->
+            <!--android:gravity="center" />-->
 
-        <TextView
-            android:id="@+id/head_back_text"
-            style="@style/style_15_EBEBEB_BOLD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/back_btn"
-            android:gravity="center" />
-
-        <TextView
-            style="@style/style_18_BEBEBE_BOLD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:text="收藏夹" />
-    </FrameLayout>
+        <!--<TextView-->
+            <!--style="@style/style_18_BEBEBE_BOLD"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:ellipsize="marquee"-->
+            <!--android:singleLine="true"-->
+            <!--android:text="收藏夹" />-->
+    <!--</FrameLayout>-->
 
     <TextView
         android:id="@+id/address_title"

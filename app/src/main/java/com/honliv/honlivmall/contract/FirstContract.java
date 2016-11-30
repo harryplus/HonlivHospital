@@ -50,7 +50,7 @@ public interface FirstContract {
 
 
     interface FirstMarketingModel extends CoreBaseModel {
-        Observable<List<Product>> getServiceProductLS();
+        Observable<List<Product>> CountDownList();
     }
 
 

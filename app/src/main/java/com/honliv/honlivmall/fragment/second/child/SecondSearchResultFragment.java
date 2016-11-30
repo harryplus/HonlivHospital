@@ -160,7 +160,7 @@ public class SecondSearchResultFragment extends BaseFragment<SecondSearchResultP
 
     @Override
     public void showError(String msg) {
-        showToast(msg);
+//        showToast(msg);
     }
 
     @Override
